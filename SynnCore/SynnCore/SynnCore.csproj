@@ -88,7 +88,6 @@
     <Compile Include="Generics\GenericFormatter.cs" />
     <Compile Include="Generics\XmlHelper.cs" />
     <Compile Include="IGridCustom.cs" />
-    <Compile Include="Log\DbLogger.cs" />
     <Compile Include="Log\FileLogger.cs" />
     <Compile Include="DataAccess\MySQLBaseDataHelper.cs" />
     <Compile Include="Mail\MailHelper.cs" />
