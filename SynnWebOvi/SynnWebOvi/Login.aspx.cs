@@ -14,6 +14,14 @@ namespace SynnWebOvi
 
         }
 
+        protected override bool LoginProvider
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         protected void btnLogin_ServerClick(object sender, EventArgs e)
         {
 
@@ -27,12 +35,13 @@ namespace SynnWebOvi
                 AlertMessage("שם משתמש או סיסמה שגויים");
                 return;
             }
+            LoggedUser u = DBController.DbAuth.LoadUserSettings(txUname.Value, txPass.Value);
+            DBController.SetUser(u);
             SynNavigation.Redirect(SynNavigation.Pages.Main);
         }
 
         private bool Validate(string userName, string passwword)
         {
-
             return DBController.DbAuth.ValidateUserCredentials(userName, passwword);
         }
     }

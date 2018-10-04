@@ -79,7 +79,8 @@
     <Reference Include="MySql.Data">
       <HintPath>C:\Synn Data\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SynnCore">
+    <Reference Include="SynnCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Synn Data\SynnCore.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -102,6 +103,7 @@
   <ItemGroup>
     <Content Include="css\grayscale.css" />
     <Content Include="css\grayscale.min.css" />
+    <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="js\grayscale.js" />
     <Content Include="js\grayscale.min.js" />
@@ -234,7 +236,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProvider.cs" />
+    <Compile Include="CUser.cs" />
+    <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
+    <Compile Include="DataAccess\DataProvider.cs" />
+    <Compile Include="DataAccess\IDb.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -249,9 +257,9 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MySqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\MySqlDatabaseProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
     <Compile Include="SynNavigation.cs" />
     <Compile Include="SynnWebFormBase.cs">
       <SubType>ASPXCodeBehind</SubType>

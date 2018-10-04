@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SynnWebOvi
 {
-    public class DataProvider
+    public class SynnDataProvider
     {
         private static IDatabaseProvider dbc;
         public static IDatabaseProvider DbProvider
@@ -35,14 +35,18 @@ namespace SynnWebOvi
         {
             public static string UserDictionary = "UserDictionary";
             public static string Users = "Users";
+            public static string Log = "Log";
         }
     }
 
     public interface IDatabaseProvider
     {
          IDbAuth DbAuth { get; }
-         IDbLog DLog { get; }
+         IDbLog DbLog { get; }
          IDbUserDictionary DbUserDictionary { get; }
+        LoggedUser CurrentUser { get; }
+
+        void SetUser(LoggedUser u);
     }
 
     abstract class BaseDatabaseProvider : IDatabaseProvider
@@ -70,28 +74,27 @@ namespace SynnWebOvi
             }
         }
 
-        public virtual IDbLog DLog
+        public virtual IDbLog DbLog
         {
             get
             {
                 throw new NotImplementedException();
             }
         }
+
+        public virtual LoggedUser CurrentUser
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public virtual void SetUser(LoggedUser u)
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public interface IDbAuth
-    {
-        bool ValidateUserCredentials(string userName, string passwword);
-    }
-
-    public interface IDbLog
-    {
-
-    }
-
-    public interface IDbUserDictionary
-    {
-
-    }
-
+ 
 }

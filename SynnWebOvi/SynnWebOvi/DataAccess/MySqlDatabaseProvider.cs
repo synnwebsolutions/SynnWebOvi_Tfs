@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data;
+using System.Data.Common;
 
 namespace SynnWebOvi
 {
@@ -34,7 +36,7 @@ namespace SynnWebOvi
             }
         }
 
-        public IDbLog DLog
+        public IDbLog DbLog
         {
             get
             {
@@ -43,25 +45,30 @@ namespace SynnWebOvi
                 return IDbLog;
             }
         }
-    }
 
-    public class BaseMySqlDb
-    {
-        internal MySqlConnection conn = null;
-        internal MySqlDataReader rdr = null;
-        internal MySqlCommand cmd = null;
-        internal string _connectionString;
-
-        public BaseMySqlDb(string _connectionString)
+        public LoggedUser CurrentUser
         {
-            this._connectionString = _connectionString;
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void SetUser(LoggedUser u)
+        {
+            throw new NotImplementedException();
         }
     }
 
-    internal class MySqlDbAuth : BaseMySqlDb,IDbAuth
+    internal class MySqlDbAuth : BaseSqlDbExecuter,IDbAuth
     {
         public MySqlDbAuth(string _connectionString) : base(_connectionString)
         {
+        }
+
+        public LoggedUser LoadUserSettings(string userName, string passwword)
+        {
+            throw new NotImplementedException();
         }
 
         public bool ValidateUserCredentials(string userName, string passwword)
@@ -71,12 +78,12 @@ namespace SynnWebOvi
                 using (conn = new MySqlConnection(_connectionString))
                 {
                     conn.Open();
-                    string stm = string.Format("SELECT * FROM {0} where UserName=@Name and Password=@pass", DataProvider.TableNames.Users);
-                    using (MySqlCommand cmd = new MySqlCommand(stm, conn))
+                    string stm = string.Format("SELECT * FROM {0} where UserName=@Name and Password=@pass", SynnDataProvider.TableNames.Users);
+                    using (cmd = new MySqlCommand(stm, conn as MySqlConnection))
                     {
 
-                        cmd.Parameters.AddWithValue("@Name", userName);
-                        cmd.Parameters.AddWithValue("@pass", passwword);
+                        //cmd.Parameters.AddWithValue("@Name", userName);
+                        //cmd.Parameters.AddWithValue("@pass", passwword);
 
                         using (rdr = cmd.ExecuteReader())
                         {
@@ -110,17 +117,32 @@ namespace SynnWebOvi
         }
     }
 
-    public class MySqlDbLog : BaseMySqlDb, IDbLog
+    public class MySqlDbLog : BaseSqlDbExecuter, IDbLog
     {
         public MySqlDbLog(string _connectionString) : base(_connectionString)
         {
         }
+
+        public void AddLog(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string AddLog(Exception ex)
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class MySqlDbUserDictionary : BaseMySqlDb, IDbUserDictionary
+    public class MySqlDbUserDictionary : BaseSqlDbExecuter, IDbUserDictionary
     {
         public MySqlDbUserDictionary(string _connectionString) : base(_connectionString)
         {
+        }
+
+        public void Add(string key, string value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

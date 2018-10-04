@@ -29,12 +29,12 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="יש להזין שם משתמש">
-                        <input class="input100" type="text" name="username" placeholder="שם מתשמש" style="text-align:center;" id="txUname" runat="server"/>
+                        <input class="input100" type="text" name="username" placeholder="שם מתשמש" style="text-align:center;" id="txUname" runat="server" value="sami"/>
                         <span class="focus-input100" data-placeholder="&#xf207;" style="text-align:right;"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="יש להזין סיסמה" >
-                        <input class="input100" type="password" name="pass" placeholder="סיסמה" style="text-align:center;" id="txPass" runat="server"/>
+                        <input class="input100" type="password" name="pass" placeholder="סיסמה" style="text-align:center;" id="txPass" runat="server" />
                         <span class="focus-input100" data-placeholder="&#xf191;"  style="text-align:right;"></span>
                     </div>
 

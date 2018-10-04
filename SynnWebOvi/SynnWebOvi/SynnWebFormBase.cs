@@ -13,20 +13,19 @@ namespace SynnWebOvi
     public class SynnWebFormBase : System.Web.UI.Page
     {
 
-        internal IDatabaseProvider DBController = DataProvider.DbProvider;
+        internal IDatabaseProvider DBController = SynnDataProvider.DbProvider;
 
-
-        //public static LoggedUser CurrentUser
-        //{
-        //    get
-        //    {
-        //        return SessionManager.GetCurrentUser(HttpContext.Current.Session.SessionID);
-        //    }
-        //    set
-        //    {
-        //        SessionManager.SetCurrentUser(value);
-        //    }
-        //}
+        public LoggedUser CurrentUser
+        {
+            get
+            {
+                return (LoggedUser)GetFromSession("ssUser_*");
+            }
+            set
+            {
+                StoreInSession("ssUser_*",value);
+            }
+        }
 
         internal void FillEnum(DropDownList cmb, Type type, bool addSelectValue = true)
         {
@@ -35,6 +34,14 @@ namespace SynnWebOvi
             {
                 string description = GenericFormatter.GetEnumDescription(item);
                 cmb.Items.Add(new System.Web.UI.WebControls.ListItem { Text = description, Value = Convert.ToInt32(item).ToString() });
+            }
+        }
+
+        internal void ClearInputFields(List<HtmlInputControl> ctrs)
+        {
+            foreach (HtmlInputControl ctr in ctrs)
+            {
+                ctr.Value = string.Empty;
             }
         }
 
@@ -56,6 +63,14 @@ namespace SynnWebOvi
         //    }
         //}
 
+        protected virtual bool LoginProvider
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         //protected override void Render(HtmlTextWriter writer)
         //{
         //    StringBuilder sbOut = new StringBuilder();
@@ -65,32 +80,30 @@ namespace SynnWebOvi
         //    CurrentHtml = sbOut.ToString();
         //    writer.Write(CurrentHtml);
         //}
-        
-        //protected override void OnInit(EventArgs e)
-        //{
-        //    base.OnInit(e);
-        //    if (!IsPostBack)
-        //    {
-        //        if (HideReturnButton)
-        //        {
-        //            //Master.FindControl("btnBack").Visible = false;
-        //        }
-        //        if (HideMenuButtons)
-        //        {
-        //            var btnSOut = Master.FindControl("btnSOut");
-        //            Master.FindControl("btnTasks").Visible = btnSOut.Visible =
-        //            Master.FindControl("btnLogs").Visible = Master.FindControl("btnUsers").Visible = Master.FindControl("btnLoginAs").Visible = false;
-        //        }
-        //        else
-        //        {
-        //            Master.FindControl("btnTasks").Visible = CurrentUser.Logged;
-        //            Master.FindControl("btnSOut").Visible = CurrentUser.Logged;
-        //            Master.FindControl("btnLogs").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
-        //            Master.FindControl("btnUsers").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
-        //            Master.FindControl("btnLoginAs").Visible = CurrentUser.Logged && CurrentUser.IsAdmin;
-        //        }
-        //    }
-        //}
+
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            if (!IsPostBack)
+            {
+                //if (HideReturnButton)
+                //{
+                //    //Master.FindControl("btnBack").Visible = false;
+                //}
+                if (!LoginProvider)
+                {
+                    Master.FindControl("btnWed").Visible = false;
+                }
+                //else
+                //{
+                //    Master.FindControl("btnTasks").Visible = CurrentUser.Logged;
+                //    Master.FindControl("btnSOut").Visible = CurrentUser.Logged;
+                //    Master.FindControl("btnLogs").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
+                //    Master.FindControl("btnUsers").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
+                //    Master.FindControl("btnLoginAs").Visible = CurrentUser.Logged && CurrentUser.IsAdmin;
+                //}
+            }
+        }
 
         public void AlertMessage(string message)
         {
