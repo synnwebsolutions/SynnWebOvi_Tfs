@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Collections.Generic;
 
 namespace SynnWebOvi
 {
@@ -141,6 +142,11 @@ namespace SynnWebOvi
         }
 
         public void Add(string key, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DictionaryItem> PerformSearch(string searchText)
         {
             throw new NotImplementedException();
         }

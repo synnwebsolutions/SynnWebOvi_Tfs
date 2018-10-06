@@ -137,6 +137,19 @@ namespace SynnWebOvi
             SetInsertIntoSql(SynnDataProvider.TableNames.UserDictionary, sqlItems);
             ExecuteSql();
         }
+
+        public List<DictionaryItem> PerformSearch(string searchText)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserDictionary);
+            ClearParameters();
+            StartORGroup();
+            AddORLikeField("dKey", searchText,LikeSelectionStyle.CheckBoth);
+            AddORLikeField("Value", searchText,LikeSelectionStyle.CheckBoth);
+            EndORGroup();
+            var lst = new List<DictionaryItem>();
+            FillList(lst, typeof(DictionaryItem));
+            return lst;
+        }
     }
 
 }

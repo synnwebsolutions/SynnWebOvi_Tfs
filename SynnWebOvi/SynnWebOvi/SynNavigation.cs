@@ -13,7 +13,7 @@ namespace SynnWebOvi
             public const string Main = "Main.aspx";
             public const string Login = "Login.aspx";
             public const string ErrorPage = "Login.aspx";
-            //public const string NoPermissionPage = "~/NoPermission.htm";
+            public const string UserDictionaryPage = "UserDictionaryPage.aspx";
             //public const string PageExpiredPage = "~/PageExpired.htm";
             //public const string SupportRequestSubmitPage = "~/SupportRequestSubmitPage.aspx";
         }

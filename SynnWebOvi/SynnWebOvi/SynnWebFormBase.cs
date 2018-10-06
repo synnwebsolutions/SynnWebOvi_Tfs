@@ -92,7 +92,7 @@ namespace SynnWebOvi
                 //}
                 if (!LoginProvider)
                 {
-                    Master.FindControl("btnWed").Visible = false;
+                    //Master.FindControl("btnWed").Visible = false;
                 }
                 //else
                 //{

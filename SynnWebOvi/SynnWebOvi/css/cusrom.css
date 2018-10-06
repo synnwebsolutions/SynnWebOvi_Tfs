@@ -1,0 +1,134 @@
+﻿body {
+}
+
+.synn-text-area {
+    background: #fff;
+    padding: 10px 0 10px 0;
+}
+
+.synn-progress-table {
+    background: #f9f9ff;
+    padding: 15px 0px 30px 0px;
+    min-width: 70px;
+    color: #222222;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.synn-grid {
+    width: 100%;
+}
+
+    .synn-form-button,
+    .synn-grid tr {
+        text-align: center;
+        background-image: -webkit-linear-gradient(0deg, #e66587 0%, #f09458 100%);
+        border-width: 0;
+    }
+
+        .synn-grid tr:hover {
+            color: #e66587;
+            background-color: #000000;
+        }
+
+    .synn-grid th {
+        text-align: center;
+        /*background-image: -webkit-linear-gradient(0deg, #e66587 0%, #f09458 100%);*/
+        border-width: 0;
+    }
+
+    .synn-grid td {
+        text-align: center;
+        background-color: #F9F9FF;
+        text-align: center;
+    }
+
+.pagination-ys {
+    /*display: inline-block;*/
+    padding-right: 0;
+    margin: 10px 0;
+    border-radius: 0px;
+}
+    /*.pagination-ys table > tbody > tr > td > a:hover,
+.pagination-ys table > tbody > tr > td > span:hover,
+.pagination-ys table > tbody > tr > td > a:focus,*/
+    .pagination-ys tr :hover {
+        color: #ff0000;
+        background-color: #dddddd;
+        border-color: #fff;
+    }
+
+
+
+.rounded {
+    border-radius: 35px;
+    border: 1px solid transparent;
+}
+
+.synn-form-control {
+    border-style: none;
+    line-height: 40px;
+    background: #F9F9FF;
+    font: 400 13.3333px Arial;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+}
+
+.synn-input-text {
+    display: block;
+    outline: none;
+    background: #f9f9ff;
+    padding: 0 20px;
+    width: 100%;
+    line-height: 50px;
+    padding: 0 25px 0 25px;
+    border: none;
+    font-weight: 300;
+    border-radius: 25px;
+    background: #f9f9ff;
+}
+
+.synn-custom-btn {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #fff;
+    border: none;
+    box-shadow: 0px 0px 0px 0px #111;
+    border-radius: 20px;
+    outline: none;
+    color: #f09359;
+    font-weight: 700;
+    letter-spacing: 0.125em;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #f09359;
+}
+
+    .synn-custom-btn:hover {
+        background: #f09359;
+        color: #f9f9ff;
+    }
+
+    .synn-custom-btn:active {
+        background: #FACC2E;
+        color: #333;
+    }
+.synn-bg-gradient{
+    background-image: -webkit-linear-gradient(0deg, #e66587 0%, #f09458 100%);
+}
+.synnconfirmbutton{
+      border: solid 2px #ebebeb;
+    box-sizing: border-box;
+    width: 100%;
+        font-weight: 700;
+    font-size: 14px;
+    font-family: Poppins;
+    padding: 16px 16px 16px 30px;
+    text-align:center;
+   background-image: -webkit-linear-gradient(0deg, #EF8D5F 0%, #FFFFFF 100%);
+}
+    /*.synnconfirmbutton :hoover {
+        color:#fff;
+    }*/

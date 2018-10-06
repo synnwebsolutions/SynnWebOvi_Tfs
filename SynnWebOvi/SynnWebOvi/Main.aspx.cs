@@ -11,20 +11,22 @@ namespace SynnWebOvi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //BindData();
+        }
 
+        protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var d = (DictionaryItem)e.Row.DataItem;
+                ((Label)e.Row.FindControl("lblDicName")).Text = d.DictionaryKey;
+                ((Label)e.Row.FindControl("lblDicValue")).Text = d.DictionaryValue;
+            }
         }
 
         protected void btnAddToDict_ServerClick(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txDicKey.Value) || string.IsNullOrEmpty(txDicVal.Value))
-            {
-                AlertMessage("יש את כל השדות");
-                return;
-            }
-
-            DBController.DbUserDictionary.Add(txDicKey.Value, txDicVal.Value);
-            ClearInputFields(new List<System.Web.UI.HtmlControls.HtmlInputControl> {txDicKey });
-            txDicVal.Value = string.Empty;
+        
 
         }
 
@@ -37,5 +39,7 @@ namespace SynnWebOvi
         {
 
         }
+
+      
     }
 }

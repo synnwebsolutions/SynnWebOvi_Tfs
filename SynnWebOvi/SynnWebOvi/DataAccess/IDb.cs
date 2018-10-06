@@ -24,6 +24,7 @@ namespace SynnWebOvi
     public interface IDbUserDictionary
     {
         void Add(string key, string value);
+        List<DictionaryItem> PerformSearch(string searchText);
     }
 
 }

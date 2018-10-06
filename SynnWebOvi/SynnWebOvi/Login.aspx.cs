@@ -37,7 +37,7 @@ namespace SynnWebOvi
             }
             LoggedUser u = DBController.DbAuth.LoadUserSettings(txUname.Value, txPass.Value);
             DBController.SetUser(u);
-            SynNavigation.Redirect(SynNavigation.Pages.Main);
+            SynNavigation.Redirect(SynNavigation.Pages.UserDictionaryPage);
         }
 
         private bool Validate(string userName, string passwword)
