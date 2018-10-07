@@ -53,13 +53,8 @@ namespace SynnWebOvi
 
         protected void btnSrc_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txSearchTxt.Text))
-            {
-                gv.DataSource = new List<DictionaryItem>(); ;
-                gv.DataBind();
-                return;
-            }
-            BindData();
+
+           BindData();
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -68,9 +63,18 @@ namespace SynnWebOvi
         }
         private void BindData()
         {
+            if (string.IsNullOrEmpty(txSearchTxt.Text))
+            {
+                ttlResults.InnerText = "לא נמצאו התאמות";
+                gv.DataSource = new List<DictionaryItem>(); ;
+                gv.DataBind();
+                return;
+            }
+            ttlResults.InnerText = string.Format("תוצאות עבור :  '{0}'", txSearchTxt.Text);
             string searchText = txSearchTxt.Text;
             List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(searchText);
             gv.DataSource = items;
+            txSearchTxt.Text = string.Empty;
             gv.DataBind();
         }
 

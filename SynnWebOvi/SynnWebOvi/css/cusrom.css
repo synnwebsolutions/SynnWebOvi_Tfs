@@ -1,7 +1,4 @@
-﻿body {
-    background-image: -webkit-linear-gradient(50deg, #f09458 0%, #dddddd 100%);
-}
-
+﻿
 .synn-text-area {
     background: #fff;
     padding: 10px 0 10px 0;
@@ -29,8 +26,10 @@
     }
 
         .synn-grid tr:hover {
-            color: #e66587;
-            background-color: #000000;
+         background-color:white;
+    border : 1px solid #EF8E5E;
+    color:#EF8E5E;
+    text-shadow: 2px 2px 4px #EF8E5E;
         }
 
     .synn-grid th {
@@ -122,7 +121,7 @@
 }
 
 .synnconfirmbutton {
-    border: solid 2px #ebebeb;
+    border: solid 1px #fff;
     box-sizing: border-box;
     width: 100%;
     font-weight: 700;
@@ -130,7 +129,13 @@
     font-family: Poppins;
     padding: 16px 16px 16px 30px;
     text-align: center;
-    background-image: -webkit-linear-gradient(0deg, #EF8D5F 0%, #FFFFFF 100%);
+}
+
+ .synnconfirmbutton:hover{
+    background-color:white;
+    border : 1px solid #EF8E5E;
+    color:#EF8E5E;
+    text-shadow: 2px 2px 4px #EF8E5E;
 }
 
 .rounded-corners {
@@ -152,3 +157,12 @@
         text-align: center;
 font-size: 14px;
 }
+
+
+.synntextwhiteshaddow {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 16px;
+}
+
+

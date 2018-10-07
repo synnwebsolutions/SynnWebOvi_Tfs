@@ -47,8 +47,10 @@
    /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
 }
 .synngridstyled tr:hover{
-   color:black;
-   background-color:#EC7F6D;
+ background-color:white;
+    border : 1px solid #EF8E5E;
+    color:#EF8E5E;
+    text-shadow: 2px 2px 4px #777777;
 }
 .synngridstyled td{
   border:0;
@@ -88,6 +90,18 @@
     font-family: Poppins;
     padding: 42px 28px 160px 28px;
    overflow: hidden;
+}
+
+.synnheader{
+    color: #777777;
+
+font-family: "Poppins", sans-serif;
+
+font-size: 16px;
+
+font-weight: 600;
+
+line-height: 1.5em;
 }
 
 

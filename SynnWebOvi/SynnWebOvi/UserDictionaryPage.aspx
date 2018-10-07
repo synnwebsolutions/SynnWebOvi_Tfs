@@ -13,7 +13,7 @@
                 <div>
 
                     <div class="card text-center">
-                        <div class="card-header">
+                        <div class="card-header synnheader">
                             חיפוש ערך במילון
                         </div>
                         <div class="card-body">
@@ -25,11 +25,11 @@
                                 </div>
                             </div>
                             <div class="">
-                                <asp:Button class="synnconfirmbutton" ID="btnSrc" runat="server" OnClick="btnSrc_Click" Text="חפש" />
+                                <asp:Button class="synnconfirmbutton synntextwhiteshaddow" ID="btnSrc" runat="server" OnClick="btnSrc_Click" Text="חפש" />
                             </div>
 
-                                      <div class="card-header">
-                                תוצאות חיפוש
+                                      <div class="card-header" id="ttlResults" runat="server">
+                                
                             </div>
                             <asp:GridView ID="gv" runat="server" OnRowDataBound="gv_RowDataBound" AllowPaging="true" PageSize="4" CssClass="synngridstyled"
                                 PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false"
@@ -67,7 +67,7 @@
                 <div>
 
                     <div class="card text-center">
-                        <div class="card-header">
+                        <div class="card-header synnheader">
                             הוספת ערך למילון
                         </div>
                         <div class="card-body">
@@ -84,7 +84,7 @@
                                     <asp:TextBox type="text" name="name" ID="txNewValue" runat="server" TextMode="MultiLine" />
                                 </div>
                             </div>
-                            <asp:Button class="synnconfirmbutton" ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="הוספה" />
+                            <asp:Button class="synnconfirmbutton synntextwhiteshaddow" ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="הוספה" />
 
                         </div>
                         <div class="card-footer text-muted">
