@@ -62,5 +62,34 @@
        font-size: 12px;
 }
 
+.synn-textarea-with-label {
+    position: relative;
+}
+.synn-textarea-with-label label {
+   position: absolute;
+    right: 28px;
+    top: 28px;
+    transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    font-weight: 600;
+    color: #888;
+    font-size: 14px;
+}
+
+.synn-textarea-with-label textarea {
+    border: solid 2px #ebebeb;
+    box-sizing: border-box;
+    width: 100%;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: Poppins;
+    padding: 42px 28px 160px 28px;
+   overflow: hidden;
+}
+
+
 
 
