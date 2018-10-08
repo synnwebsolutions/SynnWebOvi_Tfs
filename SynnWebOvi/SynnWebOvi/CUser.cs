@@ -21,6 +21,13 @@ namespace SynnWebOvi
         public int Id { get; private set; }
         public string UserName { get; private set; }
 
+        public LoggedUser(string u, int i)
+        {
+            Id = i;
+            UserName  = u;
+        }
+
+
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");

@@ -19,12 +19,20 @@ namespace SynnWebOvi
     {
         string AddLog(Exception ex);
         void AddLog(string message);
+        List<LogItem> GetLogs(LogSearchParameters lsp);
     }
 
     public interface IDbUserDictionary
     {
         void Add(string key, string value);
         List<DictionaryItem> PerformSearch(string searchText);
+    }
+
+    public class LogSearchParameters
+    {
+        public string Text { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
     }
 
 }

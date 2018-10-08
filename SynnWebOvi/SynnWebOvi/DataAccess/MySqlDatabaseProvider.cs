@@ -133,6 +133,11 @@ namespace SynnWebOvi
         {
             throw new NotImplementedException();
         }
+
+        public List<LogItem> GetLogs(LogSearchParameters lsp)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class MySqlDbUserDictionary : BaseSqlDbExecuter, IDbUserDictionary

@@ -1,4 +1,12 @@
-﻿
+﻿body {
+    background-attachment: fixed;
+    background-image: url("../img/body-bg.jpeg");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
 .synn-text-area {
     background: #fff;
     padding: 10px 0 10px 0;
@@ -26,10 +34,10 @@
     }
 
         .synn-grid tr:hover {
-         background-color:white;
-    border : 1px solid #EF8E5E;
-    color:#EF8E5E;
-    text-shadow: 2px 2px 4px #EF8E5E;
+            background-color: white;
+            border: 1px solid #EF8E5E;
+            color: #EF8E5E;
+            text-shadow: 2px 2px 4px #EF8E5E;
         }
 
     .synn-grid th {
@@ -129,14 +137,15 @@
     font-family: Poppins;
     padding: 16px 16px 16px 30px;
     text-align: center;
+    background-color: transparent;
 }
 
- .synnconfirmbutton:hover{
-    background-color:white;
-    border : 1px solid #EF8E5E;
-    color:#EF8E5E;
-    text-shadow: 2px 2px 4px #EF8E5E;
-}
+    .synnconfirmbutton:hover {
+        background-color: white;
+        border: 1px solid #EF8E5E;
+        color: #EF8E5E;
+        text-shadow: 2px 2px 4px #EF8E5E;
+    }
 
 .rounded-corners {
     border: 3px solid #A1DCF2;
@@ -148,15 +157,13 @@
 
 .Grid {
     width: 100%;
-
-
 }
 
-.Grid td, .Grid th {
-    border: 1px solid #222222;
+    .Grid td, .Grid th {
+        border: 1px solid #222222;
         text-align: center;
-font-size: 14px;
-}
+        font-size: 14px;
+    }
 
 
 .synntextwhiteshaddow {
@@ -165,4 +172,84 @@ font-size: 14px;
     font-size: 16px;
 }
 
+.synnsecondarytitle {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 3px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 3px solid #FFFFFF;
+    border-top: 3px solid #FFFFFF;
+}
 
+.syncontainer {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: 1140px;
+    box-sizing: border-box;
+    background-color: rgba(247, 247, 247, 0.5);
+    justify-content: center;
+    padding: 15px 20px 30px 20px;
+}
+
+.synnnavcontainer {
+    padding: 5px 5px 0px 5px;
+    background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);
+    justify-content: center;
+}
+
+.synnmenuitem {
+    font-size: 20px;
+    font-family: Gill Sans Extrabold, sans-serif;
+}
+
+.synnmenucontainer {
+    padding: 55px 5px 0px 5px;
+}
+
+.synnmenuitem:hover {
+    background-color: #FACC2E;
+    color: #ff0000;
+}
+
+.synnav {
+    background-color: rgba(247, 247, 247, 0.5);
+}
+
+.synngridcontainer {
+    padding: 25px 25px 25px 25px;
+}
+
+.synngridheaderrow {
+}
+
+.synngridpagination {
+    padding-left: 0;
+    margin: 20px 20px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+    .synngridpagination tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    .synngridpagination table > tbody > tr > td > a, .synngridpagination table > tbody > tr > td > span {
+        margin: 2px 2px;
+        text-decoration: none;
+        padding: 10px 5px 10px 5px;
+        color: #111;
+        border-color: #ddd;
+        margin-left: -1px;
+    }
+
+.synnpanel {
+    padding: 25px 25px 25px 25px;
+}
+
+.synngridpagination table > tbody > tr > td:hover {
+    background-color: #ff0000;
+}

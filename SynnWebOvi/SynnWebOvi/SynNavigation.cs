@@ -14,13 +14,16 @@ namespace SynnWebOvi
             public const string Login = "Login.aspx";
             public const string ErrorPage = "Login.aspx";
             public const string UserDictionaryPage = "UserDictionaryPage.aspx";
-            //public const string PageExpiredPage = "~/PageExpired.htm";
-            //public const string SupportRequestSubmitPage = "~/SupportRequestSubmitPage.aspx";
+
+            public static string Log = "Log.aspx";
+            public static string AppSettingsPage = "AppSettingsPage.aspx";
+            public static string Wedding = "Wedding.aspx";
+            public static string Diary = "Diary.aspx";
         }
 
         public static void Goto(string url)
         {
-            HttpContext.Current.Server.Transfer(url);
+            HttpContext.Current.Response.Redirect(url);
         }
         public static void Redirect(string page)
         {

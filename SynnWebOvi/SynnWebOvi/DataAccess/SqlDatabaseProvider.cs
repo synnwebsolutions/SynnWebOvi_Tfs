@@ -120,6 +120,26 @@ namespace SynnWebOvi
             ExecuteSql();
             return GetMsSqlLastIdentityValue().ToString();
         }
+
+        public List<LogItem> GetLogs(LogSearchParameters lsp)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.Log);
+            ClearParameters();
+            if (!string.IsNullOrEmpty(lsp.Text))
+            {
+                StartORGroup();
+                AddORLikeField("Trace", lsp.Text, LikeSelectionStyle.CheckBoth);
+                AddORLikeField("Message", lsp.Text, LikeSelectionStyle.CheckBoth);
+                EndORGroup();
+            }
+            if (lsp.FromDate.HasValue)
+                AddSqlWhereField("Date", lsp.FromDate, ">=");
+            if (lsp.ToDate.HasValue)
+                AddSqlWhereField("Date", lsp.ToDate, "<");
+            var lst = new List<LogItem>();
+            FillList(lst, typeof(LogItem));
+            return lst;
+        }
     }
 
     internal class SqlDbUserDictionary : SqlDbController, IDbUserDictionary

@@ -4,106 +4,114 @@
 .synn-textbox-with-label {
     position: relative;
 }
-.synn-textbox-with-label label {
-    position: absolute;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    font-weight: 600;
-    color: #888;
-    font-size: 14px;
-}
 
-.synn-textbox-with-label input {
-    border: solid 2px #ebebeb;
-    box-sizing: border-box;
+    .synn-textbox-with-label label {
+        position: absolute;
+        right: 28px;
+        top: 50%;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        font-weight: 600;
+        color: #888;
+        font-size: 14px;
+    }
+
+    .synn-textbox-with-label input {
+        border: solid 2px #ebebeb;
+        box-sizing: border-box;
+        width: 100%;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: Poppins;
+        padding: 16px 140px 16px 30px;
+    }
+
+
+.synngridstyled {
     width: 100%;
-    font-weight: 700;
+    text-align: center;
     font-size: 14px;
-    font-family: Poppins;
-    padding: 16px 140px 16px 30px;
 }
 
+    .synngridstyled th {
+        text-align: center;
+        font-weight: 600;
+        padding: 8px 8px 8px 8px;
+        background: #F9F9FF;
+        border: 0;
+    }
 
-.synngridstyled{
+    .synngridstyled tr {
+        padding-top:40px;
+        /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
+    }
+
+        .synngridstyled tr:hover {
+            background-color: white;
+            border: 1px solid #ff0000;
+            color: #000000;
+            /*text-shadow: 1px 1px 1px #000000;*/
+        }
+
+    .synngridstyled td {
+        border: 0;
+    }
+
+.synngridpager {
+    background-color: #F9F9FF;
     width: 100%;
-         text-align: center;
-    font-size: 14px;
+}
 
-}
-.synngridstyled th{
-   text-align: center;
-   font-weight:600;
-   
-   background:#F9F9FF;
-   border:0;
-}
-.synngridstyled tr{
-   padding-top:200px;
-   /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
-}
-.synngridstyled tr:hover{
- background-color:white;
-    border : 1px solid #EF8E5E;
-    color:#EF8E5E;
-    text-shadow: 2px 2px 4px #777777;
-}
-.synngridstyled td{
-  border:0;
-}
-.synngridpager{
-       background-color:#F9F9FF;
-       width:100%;
-}
-.synngridpager table{
-      width: 40%;
-       font-size: 12px;
-}
+    .synngridpager table {
+        width: 40%;
+        font-size: 12px;
+    }
 
 .synn-textarea-with-label {
     position: relative;
 }
-.synn-textarea-with-label label {
-   position: absolute;
-    right: 28px;
-    top: 28px;
-    transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    font-weight: 600;
-    color: #888;
-    font-size: 14px;
-}
 
-.synn-textarea-with-label textarea {
-    border: solid 2px #ebebeb;
-    box-sizing: border-box;
-    width: 100%;
-    font-weight: 700;
-    font-size: 14px;
-    font-family: Poppins;
-    padding: 42px 28px 160px 28px;
-   overflow: hidden;
-}
+    .synn-textarea-with-label label {
+        position: absolute;
+        right: 28px;
+        top: 28px;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        font-weight: 600;
+        color: #888;
+        font-size: 14px;
+    }
 
-.synnheader{
+    .synn-textarea-with-label textarea {
+        border: solid 2px #ebebeb;
+        box-sizing: border-box;
+        width: 100%;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: Poppins;
+        padding: 42px 28px 160px 28px;
+        overflow: hidden;
+    }
+
+.synnheader {
     color: #777777;
-
-font-family: "Poppins", sans-serif;
-
-font-size: 16px;
-
-font-weight: 600;
-
-line-height: 1.5em;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5em;
 }
-
-
-
-
+.synnbgprimary{
+    background-color: #EB3939;
+}
+.synnbgsecondary{
+    background-color: #B47070;
+}
+.synnbggeneric{
+    background-color: rgba(247,247,247,0.5);
+}

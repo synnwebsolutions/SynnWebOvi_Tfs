@@ -102,10 +102,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
+    <Content Include="css\bootstrap.css" />
     <Content Include="css\cusrom.css" />
     <Content Include="css\vsynn.css" />
+    <Content Include="Diary.aspx" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
+    <Content Include="Log.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -117,6 +120,7 @@
     <Content Include="LICENSE" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
+    <Content Include="Wedding.aspx" />
     <None Include="Properties\PublishProfiles\SynnWebOvi.pubxml" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">
@@ -143,9 +147,23 @@
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
     <Compile Include="DataAccess\DataProvider.cs" />
     <Compile Include="DataAccess\IDb.cs" />
+    <Compile Include="Diary.aspx.cs">
+      <DependentUpon>Diary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Diary.aspx.designer.cs">
+      <DependentUpon>Diary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DictionaryItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -154,6 +172,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LogItem.cs" />
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -181,6 +200,13 @@
     </Compile>
     <Compile Include="UserDictionaryPage.aspx.designer.cs">
       <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Wedding.aspx.cs">
+      <DependentUpon>Wedding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Wedding.aspx.designer.cs">
+      <DependentUpon>Wedding.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -15,22 +15,29 @@
     <!--
 		CSS
 		============================================= -->
-    <link rel="stylesheet" href="css/linearicons.css" />
-    <link rel="stylesheet" href="css/owl.carousel.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link rel="stylesheet" href="css/nice-select.css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/main.css" />
+
+
     <link rel="stylesheet" href="css/cusrom.css" />
     <link rel="stylesheet" href="css/vsynn.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script type="text/javascript">
+        function changevisibility(ctrid) {
+            var x = document.getElementById(ctrid);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
 
-    <div class="main-wrapper-first">
-        <%--<header>
+
+    <%--<header>
             <div class="container">
                 <div class="header-wrap">
                     <div class="header-top d-flex justify-content-between align-items-center">
@@ -51,30 +58,50 @@
             </div>
         </header>--%>
 
-        <div class="banner-area">
-            <div class="container">
-                <div class="row justify-content-center generic-height align-items-center">
-                    <div class="col-lg-8">
-                        <div class="banner-content text-center">
-                        </div>
+    <div class="container syncontainer" dir="rtl">
+        <hr class="text-uppercase" />
+        <div class="synnnavcontainer">
+            <nav class="navbar navbar-dark navbar-expand-lg bg-transparent synnav" id="mainNav">
+                <div class="container">
+                    <div class="logo">
+                        <a href="#Home" id="lnkHome" runat="server" onserverclick="lnkHome_ServerClick">
+                            <img src="img/synnlg.png" alt="" /></a>
+                    </div>
+                    <button class="navbar-toggler navbar-toggler-left"
+                        data-toggle="collapse"
+                        data-target="#navbarResponsive"
+                        type="button"
+                        data-toogle="collapse"
+                        aria-controls="navbarResponsive"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="nav navbar-nav ml-auto text-uppercase synnmenucontainer">
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger synnmenuitem text-lg-center" href="#Dictionary" id="lnkDictionary" runat="server" onserverclick="lnkDictionary_ServerClick">מילון</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger synnmenuitem text-lg-center" href="#Diary"  id="lnkDiary" runat="server" onserverclick="lnkDiary_ServerClick">יומן</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger synnmenuitem" href="#Wedding" id="lnkWedding" runat="server" onserverclick="lnkWedding_ServerClick">חתונה</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger synnmenuitem" href="#SystemPreferences" id="lnkSystemPreferences" runat="server" onserverclick="lnkSystemPreferences_ServerClick">הגדרות מערכות</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger synnmenuitem" href="#Log" id="lnkLog" runat="server" onserverclick="lnkLog_ServerClick">Log</a></li>
+                        </ul>
                     </div>
                 </div>
-            </div>
+            </nav>
         </div>
-
-        <section class="synn-text-area">
-            <div class="container" dir="rtl">
-                <form id="form1" runat="server">
-                    <div>
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-
+        <div>
+            <form id="form1" runat="server">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </form>
+        </div>
+        <hr class="text-uppercase" />
     </div>
+
+
+
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>

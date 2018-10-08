@@ -1,8 +1,10 @@
 ﻿using SynnCore.Controls;
 using SynnCore.Generics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -90,6 +92,8 @@ namespace SynnWebOvi
                 //{
                 //    //Master.FindControl("btnBack").Visible = false;
                 //}
+                SynnDataProvider.DbProvider.SetUser(new LoggedUser("Smachew", 1));
+
                 if (!LoginProvider)
                 {
                     //Master.FindControl("btnWed").Visible = false;
@@ -142,6 +146,45 @@ namespace SynnWebOvi
                 AlertMessage(msg);
             else
                 AlertMessage("הפעולה בוצעה בהצלחה");
+        }
+
+        public void RefreshGrid(GridView gv)
+        {
+            string methodName = GetGridSourceMethodName(gv.ID);
+            gv.PageIndexChanging += Gv_PageIndexChanging;
+            MethodInfo m = Page.GetType().GetMethod(methodName, new Type[0]);
+            gv.DataSource = (IEnumerable)m.Invoke(Page, null);
+            gv.DataBind();            
+        }
+
+        private void Gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView g = sender as GridView;
+            g.PageIndex = e.NewPageIndex;
+            RefreshGrid(g);
+        }
+
+        internal virtual string GetGridSourceMethodName(string gridId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowUserNotification(string messageText)
+        {
+                    ClientScript.RegisterStartupScript(GetType(), "jNotify", string.Format(@"
+        jNotify(
+            '{0}',
+            {{
+                ShowOverlay: {1},
+                autoHide: true,
+                TimeShown: {3},
+                HorizontalPosition: 'right',
+                VerticalPosition: 'bottom',
+                LongTrip: 40,
+                MinWidth: {2}
+            }}
+          );", messageText.Replace("\n", "<br>"), "false", "200", "2500"),
+             true);
         }
     }
 

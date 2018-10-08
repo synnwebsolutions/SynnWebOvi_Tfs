@@ -10,7 +10,7 @@
 namespace SynnWebOvi {
     
     
-    public partial class UserDictionaryPage {
+    public partial class Log {
         
         /// <summary>
         /// txSearchTxt control.
@@ -47,32 +47,5 @@ namespace SynnWebOvi {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv;
-        
-        /// <summary>
-        /// txNewKey control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txNewKey;
-        
-        /// <summary>
-        /// txNewValue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txNewValue;
-        
-        /// <summary>
-        /// btnAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,31 +15,30 @@ namespace SynnWebOvi
         {
             if (!IsPostBack)
             {
-                BindData();
+                LoadSiteMap();
+                RefreshGrid(gv);
             }
         }
 
-        protected void btnAddDic_ServerClick(object sender, EventArgs e)
+        internal override string GetGridSourceMethodName(string gridId)
         {
-            //if (string.IsNullOrEmpty(txKey.Value) || string.IsNullOrEmpty(txVal.Value))
-            //{
-            //    AlertMessage("יש את כל השדות");
-            //    return;
-            //}
-
-            //DBController.DbUserDictionary.Add(txKey.Value, txVal.Value);
-            //ClearInputFields(new List<System.Web.UI.HtmlControls.HtmlInputControl> { txKey });
-            //txVal.Value = string.Empty;
+            if (gridId == gv.ID)
+                return "GetData";
+            return base.GetGridSourceMethodName(gridId);
         }
 
-        protected void btnSrc_ServerClick(object sender, EventArgs e)
+        public IEnumerable GetData()
         {
             if (string.IsNullOrEmpty(txSearchTxt.Text))
-                return;
-            string searchText = txSearchTxt.Text;
-            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(searchText);
-            gv.DataSource = items;
-            gv.DataBind();
+                return new List<DictionaryItem>();
+            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(txSearchTxt.Text);
+            return items;
+        }
+
+        private void LoadSiteMap()
+        {
+            //var lnk = Master.FindControl("lnk1");
+            //lnk.Visible = false;
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -53,35 +53,26 @@ namespace SynnWebOvi
 
         protected void btnSrc_Click(object sender, EventArgs e)
         {
-
-           BindData();
+            RefreshGrid(gv);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-
-        }
-        private void BindData()
-        {
-            if (string.IsNullOrEmpty(txSearchTxt.Text))
+            if (string.IsNullOrEmpty(txNewKey.Text) || string.IsNullOrEmpty(txNewValue.Text))
             {
-                ttlResults.InnerText = "לא נמצאו התאמות";
-                gv.DataSource = new List<DictionaryItem>(); ;
-                gv.DataBind();
+                AlertMessage("יש להזין את כל השדות");
                 return;
             }
-            ttlResults.InnerText = string.Format("תוצאות עבור :  '{0}'", txSearchTxt.Text);
-            string searchText = txSearchTxt.Text;
-            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(searchText);
-            gv.DataSource = items;
-            txSearchTxt.Text = string.Empty;
-            gv.DataBind();
+
+            DBController.DbUserDictionary.Add(txNewKey.Text, txNewValue.Text);
+            txNewKey.Text = txNewValue.Text = string.Empty;
+            ShowUserNotification("פעולה בוצעה בהצלחה");
         }
 
-        protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void btnClear_Click(object sender, EventArgs e)
         {
-            gv.PageIndex = e.NewPageIndex;
-            BindData();
+            txSearchTxt.Text = string.Empty;
+            RefreshGrid(gv);
         }
     }
 }
