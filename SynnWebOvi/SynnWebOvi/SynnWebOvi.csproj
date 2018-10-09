@@ -104,6 +104,8 @@
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\cusrom.css" />
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="js\fullcalendar.js" />
     <Content Include="css\vsynn.css" />
     <Content Include="Diary.aspx" />
     <Content Include="Global.asax" />
@@ -212,7 +214,6 @@
   <ItemGroup>
     <Folder Include="fonts\" />
     <Folder Include="img\" />
-    <Folder Include="js\" />
     <Folder Include="scss\" />
   </ItemGroup>
   <PropertyGroup>
