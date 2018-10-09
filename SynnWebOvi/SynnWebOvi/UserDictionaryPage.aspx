@@ -50,7 +50,7 @@
                 הוספת ערך למילון
             </div>
         </div>
-        <div class="card-body" id="divadd" style="visibility:collapse">
+        <div class="card-body" id="divadd">
 
             <div class="">
                 <div class="synn-textbox-with-label text-dark">
