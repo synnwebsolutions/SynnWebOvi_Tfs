@@ -12,6 +12,7 @@ namespace SynnWebOvi
         internal IDbAuth IDbAuth = null;
         internal IDbUserDictionary IDbUserDictionary = null;
         internal IDbLog IDbLog = null;
+        internal IDbWedd IDbWedd = null;
         public MySqlDatabaseProvider(string _connectionString)
         {
             this._connectionString = _connectionString;
@@ -24,6 +25,16 @@ namespace SynnWebOvi
                 if (IDbAuth == null)
                     IDbAuth = new MySqlDbAuth(_connectionString);
                 return IDbAuth;
+            }
+        }
+
+        public IDbWedd DbWedd
+        {
+            get
+            {
+                if (IDbWedd == null)
+                    IDbWedd = new MySqlDbWedd(_connectionString);
+                return IDbWedd;
             }
         }
 

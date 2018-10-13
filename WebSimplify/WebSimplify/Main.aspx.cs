@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,41 +17,34 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                //LoadSiteMap();
-                RefreshGrid(gv);
+                
             }
         }
 
-    
-
-        internal override string GetGridSourceMethodName(string gridId)
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<DictionaryItem> GetDictionaryItems(string searchtext)
         {
-            if (gridId == gv.ID)
-                return "GetData";
-            return base.GetGridSourceMethodName(gridId);
-        }
-
-        public IEnumerable GetData()
-        {
-            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch("");
+            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(searchtext);
             return items;
         }
 
-        protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<LogItem> GetLogItems(string searchtext)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                var d = (DictionaryItem)e.Row.DataItem;
-                ((Label)e.Row.FindControl("lblDicName")).Text = d.DictionaryKey;
-                ((Label)e.Row.FindControl("lblDicValue")).Text = d.DictionaryValue;
-            }
+            var lp = new LogSearchParameters() { Text = searchtext };
+            List<LogItem> items = DBController.DbLog.GetLogs(lp);
+            return items;
         }
 
-        protected void gv_PageIndexChanging1(object sender, GridViewPageEventArgs e)
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<WeddingGuest> GetWeddingItems(string guesttext)
         {
-            GridView g = sender as GridView;
-            g.PageIndex = e.NewPageIndex;
-            RefreshGrid(g);
+            List<WeddingGuest> items = DBController.DbWedd.GetGuests(guesttext);
+            return items;
         }
+
     }
 }

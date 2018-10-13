@@ -114,7 +114,10 @@
     <Compile Include="DataAccess\DataProvider.cs" />
     <Compile Include="DataAccess\IDb.cs" />
     <Compile Include="DataAccess\MySqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\MySqlDbWedd.cs" />
     <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\SqlDbWedd.cs" />
+    <Compile Include="DataAccess\WeddingGuest.cs" />
     <Compile Include="Diary.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

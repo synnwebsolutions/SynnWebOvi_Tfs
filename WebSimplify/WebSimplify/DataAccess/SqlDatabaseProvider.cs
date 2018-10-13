@@ -11,6 +11,7 @@ namespace SynnWebOvi
         internal IDbAuth IDbAuth = null;
         internal IDbUserDictionary IDbUserDictionary = null;
         internal IDbLog IDbLog = null;
+        internal IDbWedd IDbWedd = null;
         internal LoggedUser LoggedUser = null;
 
         public SqlDatabaseProvider(string _connectionString)
@@ -55,6 +56,16 @@ namespace SynnWebOvi
                 if (LoggedUser == null)
                     return null;
                 return LoggedUser;
+            }
+        }
+
+        public IDbWedd DbWedd
+        {
+            get
+            {
+                if (IDbWedd == null)
+                    IDbWedd = new SqlDbWedd(_connectionString);
+                return IDbWedd;
             }
         }
 

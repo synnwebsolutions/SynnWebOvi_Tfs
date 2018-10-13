@@ -14,43 +14,21 @@
         <div class="synnbggenericsecond row">
             <div class="col-lg-8">
                 <div class="synn-textbox-with-label">
-                    <label for="txnewkey">ערך לחיפוש</label>
-                    <input type="text" name="name" id="txnewkey" />
+                    <label for="txsearchkey">ערך לחיפוש</label>
+                    <input type="text" name="name" id="txsearchkey" />
                 </div>
             </div>
             <div class="col-lg-2">
-                <button class="sbutton"  type="button" id="btnSrc">חפש</button>
+                <button class="sbutton"  type="button" id="btnSrc" onclick="GetDictionaryData()">חפש</button>
             </div>
             <div class="col-lg-2">
-                <button class="sbutton ssecondary" type="button" id="btnClr">נקה</button>
+                <button class="sbutton ssecondary" type="button" id="btnClr" onclick="ClearDictionaryData()">נקה</button>
             </div>
         </div>
 
         <div class="synnbggenericsecond row" id="gridcontainer">
             <div class="col-lg-12">
-                <asp:GridView ID="gv" runat="server" OnRowDataBound="gv_RowDataBound" AllowPaging="true" PageSize="10" CssClass="sgridstyled"
-                    PagerSettings-Mode="NextPreviousFirstLast" AutoGenerateColumns="false" OnPageIndexChanging="gv_PageIndexChanging1"
-                    PagerSettings-FirstPageText="ראשון"
-                    PagerSettings-NextPageText=">"
-                    PagerSettings-LastPageText="אחרון"
-                    PagerSettings-PreviousPageText="<">
-                    <PagerStyle CssClass="synngridpagination" />
-                    <RowStyle CssClass="gridrow gridevenrow" />
-                    <AlternatingRowStyle CssClass="gridrow gridoddrow" />
-                    <PagerStyle CssClass="gridfooterrow" />
-                    <Columns>
-                        <asp:TemplateField HeaderText="שם">
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lblDicName"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="ערך">
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lblDicValue"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div id="DictionaryDataPanel"></div>
             </div>
         </div>
 
@@ -62,6 +40,27 @@
     <!-- Third Section -->
     <section id="weddinglog" class="">
         <div class="sectionheader">איתור אורחי חתונה</div>
+                <div class="synnbggenericsecond row">
+            <div class="col-lg-8">
+                <div class="synn-textbox-with-label">
+                    <label for="txwedsearchkey">ערך לחיפוש</label>
+                    <input type="text" name="name" id="txwedsearchkey" />
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button class="sbutton"  type="button" id="btnweddSrc" onclick="GetWeddingData()">חפש</button>
+            </div>
+            <div class="col-lg-2">
+                <button class="sbutton ssecondary" type="button" id="btnweddClr" onclick="ClearWeddingData()">נקה</button>
+            </div>
+        </div>
+
+        <div class="synnbggenericsecond row" id="weddgridcontainer">
+            <div class="col-lg-12">
+                <div id="WeddingDataPanel"></div>
+            </div>
+        </div>
+
     </section>
 
     <section id="diary" class="">
@@ -69,7 +68,29 @@
     </section>
 
     <section id="sys" class="">
-        <div class="sectionheader">הגדרות מערכת</div>
+        <div class="sectionheader"> מערכת</div>
+        <div class="synnbggenericsecond row">
+            <div class="col-lg-8">
+                <div class="synn-textbox-with-label">
+                    <label for="txlogsearchkey">ערך לחיפוש</label>
+                    <input type="text" name="name" id="txlogsearchkey" />
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button class="sbutton"  type="button" id="btnlogSrc" onclick="GetLogData()">חפש</button>
+            </div>
+            <div class="col-lg-2">
+                <button class="sbutton ssecondary" type="button" id="btnlogClr" onclick="ClearLogData()">נקה</button>
+            </div>
+        </div>
+
+        <div class="synnbggenericsecond row" id="loggridcontainer">
+            <div class="col-lg-12">
+                <div id="logDataPanel"></div>
+            </div>
+        </div>
+
+
     </section>
 
 

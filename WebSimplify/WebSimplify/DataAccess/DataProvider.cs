@@ -36,6 +36,7 @@ namespace SynnWebOvi
             public static string UserDictionary = "UserDictionary";
             public static string Users = "Users";
             public static string Log = "Log";
+            public static string WeddingItems = "WeddingItems";
         }
     }
 
@@ -43,7 +44,8 @@ namespace SynnWebOvi
     {
          IDbAuth DbAuth { get; }
          IDbLog DbLog { get; }
-         IDbUserDictionary DbUserDictionary { get; }
+        IDbWedd DbWedd { get; }
+        IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; }
 
         void SetUser(LoggedUser u);
@@ -83,6 +85,14 @@ namespace SynnWebOvi
         }
 
         public virtual LoggedUser CurrentUser
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbWedd DbWedd
         {
             get
             {

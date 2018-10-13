@@ -136,4 +136,17 @@ line-height: 1.8;
 text-align:center;
 height : 60px;
 }
+.salert{
+    margin-top:10px;
+margin-bottom:10px;
+ background-color: rgba(247,247,247,0.3);
+ width:100%;
+font-weight: 600;
+color: #CB5858;
+font-size: 18px;
+text-align:center;
+padding:20px;
+text-shadow: 2px 2px 4px #ffffff;
+border: solid 1px rgb(255, 255, 255);
+}
 

@@ -55,7 +55,7 @@
                                     <a class="nav-link js-scroll-trigger text-center" href="#diary" name="navdiary">יומן</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link js-scroll-trigger text-center" href="#sys" name="navsys">הגדרות מערכת</a>
+                                    <a class="nav-link js-scroll-trigger text-center" href="#sys" name="navsys"> מערכת</a>
                                 </li>
                             </ul>
                         </div>
@@ -80,7 +80,7 @@
     <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu-2.js"></script>
     <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.js"></script>
     <script src="NavData/assets/js/synnmain.js"></script>
-
+    <script src="NavData/assets/js/synngeneric.js"></script>
 
 </body>
 </html>

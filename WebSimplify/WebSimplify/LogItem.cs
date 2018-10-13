@@ -19,6 +19,7 @@ namespace SynnWebOvi
             Load(data);
         }
 
+        public string DateString { get { return Date.ToString(); } }
         public DateTime Date { get;  set; }
         public int Id { get; set; }
         public string Trace { get;  set; }

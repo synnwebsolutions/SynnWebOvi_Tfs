@@ -22,6 +22,11 @@ namespace SynnWebOvi
         List<LogItem> GetLogs(LogSearchParameters lsp);
     }
 
+    public interface IDbWedd
+    {
+        List<WeddingGuest> GetGuests(string searchText);
+    }
+
     public interface IDbUserDictionary
     {
         void Add(string key, string value);

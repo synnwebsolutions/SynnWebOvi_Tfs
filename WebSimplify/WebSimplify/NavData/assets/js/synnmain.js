@@ -8,5 +8,4 @@ $(document).ready(function ()
 	$('section').css('min-height','100vh').css('width', '100%').css('margin','20px').addClass('synnbggeneric');
 	$('.row').css('padding-top', '30px').css('width', '80%').css('margin','auto');
 	$('.gridfooterrow a').css('color', '#E24242');	
-	$('#dictionary button').on('click', function(){ alert("ajax in work");});
 });
