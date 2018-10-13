@@ -65,6 +65,7 @@
 
     <section id="diary" class="">
         <div class="sectionheader">יומן</div>
+        <div id="calendarmaincontainer"></div>
     </section>
 
     <section id="sys" class="">

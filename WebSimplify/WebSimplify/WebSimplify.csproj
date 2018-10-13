@@ -86,6 +86,7 @@
     <Content Include="App_Data\JqueryDb_log.ldf">
       <DependentUpon>JqueryDb.mdf</DependentUpon>
     </Content>
+    <Content Include="css\scalendar.css" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
@@ -109,6 +110,7 @@
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarItem.cs" />
     <Compile Include="CUser.cs" />
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
     <Compile Include="DataAccess\DataProvider.cs" />

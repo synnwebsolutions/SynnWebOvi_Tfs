@@ -81,6 +81,7 @@
     <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.js"></script>
     <script src="NavData/assets/js/synnmain.js"></script>
     <script src="NavData/assets/js/synngeneric.js"></script>
+    <script src="NavData/assets/js/scalendar.js"></script>
 
 </body>
 </html>

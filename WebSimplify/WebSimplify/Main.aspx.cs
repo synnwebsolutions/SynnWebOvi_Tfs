@@ -46,5 +46,13 @@ namespace WebSimplify
             return items;
         }
 
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static CalendarMonthlyData GetCalendarItem()
+        {
+            return new  CalendarMonthlyData();
+        }
+
     }
 }

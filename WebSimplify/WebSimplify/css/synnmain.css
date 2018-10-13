@@ -9,7 +9,8 @@
 
 }
 .synnbggeneric{
-    background-color: rgba(247,247,247,0.3);
+    /*background-color: rgba(247,247,247,0.3);*/
+    background-color:transparent;
 }
 .synnbggenericsecond{
     background-color: rgba(240,240,240,0.3);
