@@ -43,11 +43,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>C:\Synn Data\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SynnCore">
+      <HintPath>C:\Synn Data\SynnCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,31 +82,83 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\JqueryDb.mdf" />
+    <Content Include="App_Data\JqueryDb_log.ldf">
+      <DependentUpon>JqueryDb.mdf</DependentUpon>
+    </Content>
+    <Content Include="Img\body-bg.jpeg" />
+    <Content Include="Img\synnlg.png" />
+    <Content Include="Img\synnlg1.png" />
+    <Content Include="Main.aspx" />
+    <Content Include="MyProducts.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyProducts.edmx</DependentUpon>
+      <LastGenOutput>MyProducts.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MyProducts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyProducts.edmx</DependentUpon>
+      <LastGenOutput>MyProducts.cs</LastGenOutput>
+    </Content>
     <Content Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="css\synnmain.css" />
+    <Content Include="TestPage.aspx" />
     <Content Include="WebSimplify.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="UDictionaryPage.aspx" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CUser.cs" />
+    <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
+    <Compile Include="DataAccess\DataProvider.cs" />
+    <Compile Include="DataAccess\IDb.cs" />
+    <Compile Include="DataAccess\MySqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
+    <Compile Include="Diary.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DictionaryItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UDictionaryPage.aspx.cs">
-      <DependentUpon>UDictionaryPage.aspx</DependentUpon>
+    <Compile Include="LogItem.cs" />
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UDictionaryPage.aspx.designer.cs">
-      <DependentUpon>UDictionaryPage.aspx</DependentUpon>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyProducts.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProducts.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyProducts.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProducts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyProducts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyProducts.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>MyProducts.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynNavigation.cs" />
+    <Compile Include="SynnWebFormBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPage.aspx.cs">
+      <DependentUpon>TestPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPage.aspx.designer.cs">
+      <DependentUpon>TestPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebSimplify.Master.cs">
       <DependentUpon>WebSimplify.Master</DependentUpon>
@@ -101,8 +169,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="NavData\assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <EntityDeploy Include="MyProducts.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyProducts.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MyProducts.edmx.diagram">
+      <DependentUpon>MyProducts.edmx</DependentUpon>
+    </Content>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

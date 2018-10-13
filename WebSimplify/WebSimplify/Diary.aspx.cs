@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebSimplify
+namespace SynnWebOvi
 {
-    public partial class UDictionaryPage : System.Web.UI.Page
+    public partial class Diary : SynnWebFormBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

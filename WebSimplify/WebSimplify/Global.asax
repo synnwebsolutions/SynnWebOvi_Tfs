@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="WebSimplify.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="SynnWebOvi.Global" Language="C#" %>

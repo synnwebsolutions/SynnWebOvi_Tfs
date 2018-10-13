@@ -7,16 +7,17 @@
     <title>WebSimplify - Smach IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- CDN's-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
     <!-- End of CDN's-->
 
     <!-- Enxternal File's-->
-    <link rel="stylesheet" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled-4.5.12.min.css?ver=4.5.12" />
-    <script src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/4.5.12/compiled.min.js?ver=4.5.12"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="NavData/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="NavData/assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="NavData/assets/css/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.css" />
+    <link rel="stylesheet" href="NavData/assets/css/styles.css" />
+    <link rel="stylesheet" href="css/synnmain.css" />
+
     <!-- Enxternal File's-->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -24,114 +25,45 @@
 
 
 </head>
-<body dir="rtl">
+<body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-xl-12 py-3">
-                <ul class="nav md-tabs nav-justified purple-gradient lighten-2 mx-0 mb-0 mt-1">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#!">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">Link 1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">Link 2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">Link 3</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- accordion row -->
-        <div class="row accordion-gradient-bcg d-flex justify-content-center">
-            <div class="col-md-10 col-xl-6 py-5">
-                <div class="accordion md-accordion accordion-2" id="accordionEx7" role="tablist" aria-multiselectable="true">
-                    <div class="card">
+        <div class="row navbar-area">
+                <!-- Navigation Bar with Logo, Brand and Menu -->
+                <nav id="siteNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+                    <div class="container">
+                        <!-- Logo -->
+                        <img  class="logo-white" href="#header"  />
 
-                        <!-- Card header -->
-                        <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading1">
-                            <a data-toggle="collapse" data-parent="#accordionEx7" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                <h5 class="mb-0 white-text text-uppercase font-thin">חיפוש <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
-                            </a>
-                        </div>
-
-                        <!-- Card body -->
-                        <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordionEx7">
-                            <div class="card-body mb-1 rgba-grey-light white-text">
-                                <div class="row">
-                                    <div = class="col-6">
-                                        <div class="md-form">
-                                        <input type="text"  id="cx" class="form-control"/>
-                                        <label for="cx" class="">Basic example</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <button type="button" class="btn btn-outline-secondary waves-effect">Secondary</button>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <table class="table">
-                                        <caption>List of users</caption>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <!-- Menu -->
+                        <button onclick="change_icon(this);" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-collapse" id="navbar-toggler">
+                            <i class="fa fa-bars"></i>
+                            Menu 
+							
+                        </button>
+                        <div id="navbar-collapse" class="collapse navbar-collapse">
+                            <ul class="navbar-nav text-uppercase ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger text-center active" href="#main" name="navmain">בית</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger text-center" href="#dictionary"  name="navdic">מילון</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger text-center" href="#weddinglog" name="navwed">חתונה</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger text-center" href="#diary" name="navdiary">יומן</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger text-center" href="#sys" name="navsys">הגדרות מערכת</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="card">
-
-                        <!-- Card header -->
-                        <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading2">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                <h5 class="mb-0 white-text text-uppercase font-thin">הוספה  <i class="fa fa-angle-down rotate-icon"></i>
-                                </h5>
-                            </a>
-                        </div>
-
-                        <!-- Card body -->
-                        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordionEx7">
-                            <div class="card-body mb-1 rgba-grey-light white-text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                </nav>
         </div>
         <div class="row">
-            <div class="col-md-10 col-xl-6 py-5">
+            <div class="col-md-12">
                 <form id="form1" runat="server">
                     <div>
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -141,5 +73,14 @@
             </div>
         </div>
     </div>
+
+    <%--<script src="NavData/assets/js/jquery.min.js"></script>--%>
+    <script src="NavData/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu-1.js"></script>
+    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu-2.js"></script>
+    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.js"></script>
+    <script src="NavData/assets/js/synnmain.js"></script>
+
+
 </body>
 </html>
