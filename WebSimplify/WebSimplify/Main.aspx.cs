@@ -46,6 +46,13 @@ namespace WebSimplify
             return items;
         }
 
+        [WebMethod]
+        [ScriptMethod()]
+        public static void AddToDictionary(string key, string value)
+        {
+            DBController.DbUserDictionary.Add(key, value);
+        }
+        
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

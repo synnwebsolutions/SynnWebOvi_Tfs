@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="sbutton" type="button" id="btnadddic" onclick="">הוסף</button>
+                        <button class="sbutton" type="button" id="btnadddic" >הוסף</button>
                     </div>
                 </div>
             </div>

@@ -60,6 +60,7 @@
     padding-bottom: 2%;
     padding-left: 2%;
     padding-right: 20%;
+    text-align:center;
 }
 
 .sectionheader {
@@ -184,4 +185,31 @@
     padding: 20px;
     text-shadow: 2px 2px 4px #ffffff;
     border: solid 1px rgb(255, 255, 255);
+}
+
+.sdialog{
+      margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(247,247,247,0.9);
+    /*height:120px;*/
+     border: solid 1px #FD2727;
+    z-index:3;
+}
+.sdialog p{
+            color: #000000;
+        font-size: 12px;
+        text-align: center;
+        padding: 10px;
+       
+}
+.sdialog h3{
+            color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(94,94,94,0.7);
+}
+.sdialog butt{
+     height:6px;
+       
 }
