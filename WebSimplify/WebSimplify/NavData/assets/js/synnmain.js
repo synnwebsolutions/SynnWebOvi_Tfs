@@ -7,30 +7,22 @@ $(document).ready(function ()
 	$('.nav-link').css('font-family', 'Impact');
 	$('section').css('min-height','100vh').css('width', '100%').css('margin','20px').addClass('synnbggeneric');
 	$('.row').css('padding-top', '30px').css('width', '80%').css('margin','auto');
-	$('.gridfooterrow a').css('color', '#E24242');	
-	function GetCalendarData() {
+	$('.gridfooterrow a').css('color', '#E24242');
+    $(".synn-textbox-with-label input").focus(function () { OnInputFocuses($(this).parent());});
+	$(".synn-textbox-with-label input").blur(function () { OnInputFocusesOut($(this).parent());});
+    $("i").css('left', '15px');
 	
-	alert("GetCalendarData Start");
-	$.ajax({
-		type: "POST",
-		url: "Main.aspx/GetCalendarItem",
-		data: "{}",
-		dataType: "json",
-		contentType: "application/json; charset=utf-8",
-		success: OnCalendarSuccess,
-		error: OnCalendarError
-	});
-}
-
-function OnCalendarSuccess(data) {
-	
-	var TableContent = data.d.CalendarHtml;
-	alert(TableContent);
-	$("#calendarmaincontainer").html(TableContent);
-}
 
 
-function OnCalendarError(data) {
-alert("GetCalendarData Error");
-}
+
+
+
+/* end of jquery	 */
 });
+
+function OnInputFocuses(sender) {
+	sender.find("label").hide();
+}
+function OnInputFocusesOut(sender) {
+	sender.find("label").show();
+}

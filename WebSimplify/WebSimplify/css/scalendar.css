@@ -1,22 +1,68 @@
 ﻿.calendarmaincontainer{
 
 }
-.calendarrow{
-    line-height: 1.5;
+.calendartable{
+    width:100%;
+    margin:auto;
 }
-.calendarcell{
+.calendartable th{
+    margin-top:10px;
+margin-bottom:10px;
+ background-color: rgba(247,247,247,0.3);
+ text-align:center;
+font-weight: 600;
+color: #ffffff;
+text-shadow: 2px 2px 4px #000000;
+   line-height: 1.8;
+}
+.calendarrow{
+    line-height: 1.8;
+    border: solid 1px #ffffff;
+        margin-top:10px;
+margin-bottom:10px;
 
 }
-.validdate{
-    background-color: #00ff21;
-       border: solid 2px #ffffff;
+.calendarcellcontainer{
+       background-color: rgba(64,64,64,0.9);
+        margin-top:2px;
     box-sizing: border-box;
-    width: 100%;
+    
     font-weight: 700;
-    font-size: 14px;
+    font-size: 12px;
     font-family: Poppins;
-    padding: 16px 140px 16px 30px;
+    padding: 24px;
+    color:white;
+    position: relative;
+     border: solid 1px rgba(247,247,247,0.3);
 }
-.invaliddate{
-        background-color: #808080;
+.calendarinnercell{
+     align-content:flex-start;
+    
+}
+.calendardayinfo{
+       
+}
+.calendardayinfo ul{
+         top: 2px;
+    padding-right: 2px;
+}
+.calendardayidf{
+     background-color:transparent;   
+     border:none;
+
+    color:#E24242;
+   position: absolute;
+    top: 2px;
+    right: 2px;
+
+}
+.calendardaydata{
+             text-align:right;
+    white-space: nowrap;
+    color:#ffffff;
+     
+}
+.calendarinactivecell{
+    border:none;
+    border-color: transparent;
 }

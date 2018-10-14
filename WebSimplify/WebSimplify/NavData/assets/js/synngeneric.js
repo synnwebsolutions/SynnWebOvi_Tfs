@@ -178,3 +178,6 @@ function DisplayNoneDics()
 	$("#DictionaryDataPanel").html("<div class='salert'>לא נמצאו תוצאות !</div>");
 }
 /* End Dictionary */
+
+
+

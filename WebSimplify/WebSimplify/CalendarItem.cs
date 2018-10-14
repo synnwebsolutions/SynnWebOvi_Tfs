@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebSimplify
 {
-    public class CalendarItem
+    public class CalendarHtmlItem
     {
         public int Day { get; set; }
         public int Month { get; set; }
@@ -16,34 +16,55 @@ namespace WebSimplify
 
         public DateTime Date { get; set; }
 
-        public string DateString { get { return Date.ToString(); } }
+        public List<MemoItem> mItems { get; set; }
+
+        public string DateString { get { return Date.ToShortDateString(); } }
 
         public DayOfWeek DayOfWeek { get;  set; }
 
-        public CalendarItem(DateTime d, Dictionary<int, List<CalendarItem>> wd)
+        public CalendarHtmlItem(DateTime d, Dictionary<int, List<CalendarHtmlItem>> wd, List<MemoItem> memos)
         {
             Date = d;
             IsCurrent = Date.Date == DateTime.Now.Date;
             WeekNumber = d.Day / 7;
             DayOfWeek = d.DayOfWeek;
+            mItems = memos.Where(x => x.Date.Date == d.Date).ToList();
             wd[WeekNumber].Add(this);
+        }
+
+        internal string GenerateHtml()
+        {
+            var sb = new StringBuilder("<td class='calendarcellcontainer'>");
+            sb.Append("<table class='calendardaydata '>");
+            sb.AppendFormat("<tr><td class='calendarinnercell calendardayidf'>{0}</td></tr>", Date.Day);
+
+            sb.Append("<tr>");
+            string rowFormat = "<tr><td class='calendarinnercell calendardayinfo'><ul class='a'>{0}</ul></td></tr>";
+            string ls = string.Empty;
+            foreach (var item in mItems)
+                ls += string.Format("<li>{0}</li>", item.Header);
+            sb.AppendFormat(rowFormat,ls);
+
+            sb.Append("</table>");
+            sb.Append("</td>");
+            return sb.ToString();
         }
     }
 
     public class CalendarMonthlyData
     {
         public string CalendarHtml { get; set; }
-        Dictionary<int, List<CalendarItem>> WeeklyData;
+        Dictionary<int, List<CalendarHtmlItem>> WeeklyData;
 
-        public CalendarMonthlyData()
-        {
-            WeeklyData = new Dictionary<int, List<CalendarItem>>();
+        public CalendarMonthlyData(List<MemoItem> mls)
+        {            
+            WeeklyData = new Dictionary<int, List<CalendarHtmlItem>>();
             for (int i = 0; i < 6; i++)
-                WeeklyData[i] = new List<CalendarItem>();
-            GenerateHtml();
+                WeeklyData[i] = new List<CalendarHtmlItem>();
+            GenerateHtml(mls);
         }
 
-        private void GenerateHtml()
+        private void GenerateHtml(List<MemoItem> mls)
         {
             var now = DateTime.Now;
             
@@ -51,7 +72,7 @@ namespace WebSimplify
             var dDay = new DateTime(now.Year, now.Month, 1);
             for (int i = 0; i < days; i++)
             {
-                CalendarItem c = new CalendarItem(dDay, WeeklyData);
+                CalendarHtmlItem c = new CalendarHtmlItem(dDay, WeeklyData, mls);
                 dDay = dDay.AddDays(1);
             }
 
@@ -59,16 +80,24 @@ namespace WebSimplify
             AppendHeaders(sb);
             foreach (var week in WeeklyData)
             {
-                sb.Append("<tr class='calendarrow'>");
-                for (int i = 0; i < 7; i++)
+                
+                if (week.Value != null && week.Value.Count > 0)
                 {
-                    var vDay = week.Value.FirstOrDefault(x => x.DayOfWeek == (DayOfWeek)i);
-                    if (vDay != null)
-                        sb.AppendFormat("<td class='validdate'>{0}</td>", vDay.DateString);
-                    else
-                        sb.AppendFormat("<td class='invaliddate'>{0}</td>", "");// new DateTime(now.Year, now.Month, i).ToShortDateString());
+                    sb.Append("<tr class='calendarrow'>");
+                    for (int i = 0; i < 7; i++)
+                    {
+                        var vDay = week.Value.FirstOrDefault(x => x.DayOfWeek == (DayOfWeek)i);
+                        if (vDay != null)
+                        {
+                            string dayHtml = vDay.GenerateHtml();
+                            sb.Append(dayHtml);
+                        }
+                        else
+                            sb.AppendFormat("<td class='calendarcell calendarinactivecell'>{0}</td>", "");// new DateTime(now.Year, now.Month, i).ToShortDateString());
+                    }
+                    sb.Append("</tr>");
                 }
-                sb.Append("</tr>");
+               
             }
             sb.Append("</table>");
             CalendarHtml = sb.ToString();
@@ -76,7 +105,7 @@ namespace WebSimplify
 
         private void AppendHeaders(StringBuilder sb)
         {
-            sb.Append("<table class='sgridstyled'><tr>");
+            sb.Append("<table class='calendartable'><tr>");
             sb.Append("<th>ראשון</th>");
             sb.Append("<th>שני</th>");
             sb.Append("<th>שלישי</th>");

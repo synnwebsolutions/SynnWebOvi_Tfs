@@ -135,6 +135,7 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MemoItem.cs" />
     <Compile Include="MyProducts.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

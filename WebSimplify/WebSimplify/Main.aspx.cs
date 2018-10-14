@@ -51,7 +51,21 @@ namespace WebSimplify
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static CalendarMonthlyData GetCalendarItem()
         {
-            return new  CalendarMonthlyData();
+            var mls = new List<MemoItem>();
+            mls.Add(new MemoItem { Date = new DateTime(2018,10,3), Description = "תיאור ", Header = "חיפוש עורך דין" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 5), Description = "תיאור", Header = "טסט לאוטו" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 8), Description = "תיאור", Header = "רשימת קניות" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 14), Description = "תיאור", Header = "לטייל עם אבא" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 17), Description = "תיאור", Header = "אוכל לילדים" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 13), Description = "תיאור", Header = "בגדים לילדים" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 16), Description = "תיאור", Header = "ביקור במילאנו" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 21), Description = "תיאור", Header = "נסיעה לאילת" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 24), Description = "תיאור", Header = "ביקור אצל אסף" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 25), Description = "תיאור", Header = "לקבוע עם רותי" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 27), Description = "תיאור", Header = "להתקשר לסיסי" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 13), Description = "תיאור", Header = "למצוא נעל" });
+            mls.Add(new MemoItem { Date = new DateTime(2018, 10, 22), Description = "תיאור", Header = "לקנות מעיל" });
+            return new  CalendarMonthlyData(mls);
         }
 
     }
