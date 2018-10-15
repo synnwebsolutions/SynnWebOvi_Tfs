@@ -36,7 +36,7 @@ namespace SynnWebOvi
 
     public interface IDbUserDictionary
     {
-        void Add(string key, string value);
+        void Add(string key, string value, int userId);
         List<DictionaryItem> PerformSearch(string searchText);
     }
 

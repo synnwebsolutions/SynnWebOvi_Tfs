@@ -5,47 +5,36 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <!-- First Section -->
-    <section id="main" class="">
-        <div class="sectionheader" id="acc">בית</div>
-        <div class="row ">
-            <div class="col-12">
-                <div class="sectionsubheader">הוספה למילון  <i class="fa fa-address-book"></i>
-                    <button class="btn accordionbutton bg-transparent text-white" type="button" onclick="PerformAccordion('adddic')"><i class="fa fa-angle-down"></i></button>
-                </div>
-                <div class="synnbggenericsecond row accordionitem" id="adddic">
-                    <div class="col-lg-12">
-                        <div class="synn-textbox-with-label">
-                            <label for="txadddickey">שם להוספה</label>
-                            <input type="text" name="name" id="txadddickey" />
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="synn-textbox-with-label">
-                            <label for="txadddicval">ערך להוספה</label>
-                            <input type="text" name="name" id="txadddicval" />
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button class="sbutton  sbutton-sm" type="button" id="btnadddic">הוסף</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="sectionsubheader">הוספה לרשימת קניות    <i class="fa fa-credit-card"></i>
-                    <button class="btn accordionbutton bg-transparent text-white"  type="button" onclick="PerformAccordion('addshop')"><i class="fa fa-angle-down"></i></button>
-                </div>
+    <section class="" id="main" style="width: 400px;">
+         <div class="sectionheader" id="acc">בית</div>
+        <div id="dvaccordion">
+            <h3 class="sectionsubheader">הוספה למילון  <i class="fa fa-address-book"></i></h3>
+            <div class="synnbggenericsecond row">
 
-            </div>
-        </div>
-        <div class="row ">
-            <div class="col-12">
-                <div class="sectionsubheader">הוספה ליומן   <i class="fa fa-address-card"></i>
-                    <button class="btn accordionbutton bg-transparent text-white"  type="button" onclick="PerformAccordion('addia')"><i class="fa fa-angle-down"></i></button>
+                <div class="col-lg-12">
+                    <div class="synn-textbox-with-label">
+                        <label for="txadddickey">שם להוספה</label>
+                        <input type="text" name="name" id="txadddickey" />
+                    </div>
                 </div>
-                <div class="synnbggenericsecond row accordionitem" id="addia">
-                    <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="synn-textbox-with-label">
+                        <label for="txadddicval">ערך להוספה</label>
+                        <input type="text" name="name" id="txadddicval" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="sbutton  sbutton-sm" type="button" id="btnadddic">הוסף</button>
+                </div>
+            </div>
+
+            <h3 class="sectionsubheader">הוספה לרשימת קניות    <i class="fa fa-credit-card"></i></h3>
+            <div class="synnbggenericsecond row">
+            </div>
+
+            <h3 class="sectionsubheader">הוספה ליומן   <i class="fa fa-address-card"></i></h3>
+            <div class="synnbggenericsecond row">
+                            <div class="col-lg-12">
                         <div class="synn-textbox-with-label">
                             <label for="txadddiaryname">שם להצגה</label>
                             <input type="text" name="name" id="txadddiaryname" />
@@ -66,11 +55,10 @@
                     <div class="col-12">
                         <button class="sbutton sbutton-sm" type="button" id="btnadddiary" onclick="">הוסף</button>
                     </div>
-                </div>
-
             </div>
         </div>
     </section>
+
 
     <section id="dictionary" class="">
         <div class="sectionheader">מילון</div>

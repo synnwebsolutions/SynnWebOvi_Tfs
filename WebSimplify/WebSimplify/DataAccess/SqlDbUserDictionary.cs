@@ -13,7 +13,7 @@ namespace WebSimplify
         {
         }
 
-        public void Add(string key, string value)
+        public void Add(string key, string value,int userId)
         {
             var sqlItems = new SqlItemList();
             sqlItems.Add(new SqlItem("UserId", SynnDataProvider.DbProvider.CurrentUser.Id));

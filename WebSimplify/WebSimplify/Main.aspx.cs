@@ -55,7 +55,7 @@ namespace WebSimplify
         [ScriptMethod()]
         public static void AddToDictionary(string key, string value)
         {
-            DBController.DbUserDictionary.Add(key, value);
+            DBController.DbUserDictionary.Add(key, value,1 );
         }
 
         [WebMethod]

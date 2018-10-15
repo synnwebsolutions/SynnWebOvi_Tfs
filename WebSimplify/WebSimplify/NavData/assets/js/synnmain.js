@@ -12,8 +12,7 @@ $(document).ready(function ()
 	$(".synn-textbox-with-label input").blur(function () { OnInputFocusesOut($(this).parent());});
     $("i").css('left', '15px');
 	$("#btnadddic").click(function () {AddToDictionary();});
-	$(".accordionitem").hide();
-	
+	$("#dvaccordion").accordion();
 	/* DialogAlert("Done Loading", "Test Header"); */
 
 
@@ -82,10 +81,4 @@ function OnAddError(xhr, ajaxOptions, thrownError) {
 	  if(xhr.status==404) 
         alert(thrownError);
 	DialogAlert("תקלה - פעולה לא בוצעה בהצלחה", "הוספה");
-}
-
-function PerformAccordion(idtodisplay) {
-	var idselector = '#' + idtodisplay;
-	$(".accordionitem").hide();
-	$(idselector).show();
 }
