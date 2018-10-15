@@ -74,10 +74,7 @@
             </div>
         </div>
 
-        <div id="dialog" title="" class="sdialog" >
-            <h3></h3>
-            <p></p>
-        </div>
+        <div id="dialog" title="" class="sdialog" ><h3></h3><p></p></div>
     </div>
 
     <%--<script src="NavData/assets/js/jquery.min.js"></script>--%>
