@@ -24,8 +24,6 @@ namespace SynnWebOvi
 
                     if (ConfigurationSettings.AppSettings["dbtype"] == "sql")
                         dbc = new SqlDatabaseProvider(_connectionString);
-                    else
-                        dbc = new MySqlDatabaseProvider(_connectionString);
                 }
                 return dbc;
             }
@@ -46,9 +44,8 @@ namespace SynnWebOvi
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
         IDbUserDictionary DbUserDictionary { get; }
-        LoggedUser CurrentUser { get; }
-
-        void SetUser(LoggedUser u);
+        LoggedUser CurrentUser { get; set; }
+        
     }
 
     abstract class BaseDatabaseProvider : IDatabaseProvider
@@ -100,9 +97,17 @@ namespace SynnWebOvi
             }
         }
 
-        public virtual void SetUser(LoggedUser u)
+        LoggedUser IDatabaseProvider.CurrentUser
         {
-            throw new NotImplementedException();
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 

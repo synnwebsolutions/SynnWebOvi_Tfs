@@ -21,6 +21,11 @@ namespace WebSimplify
             }
         }
 
+        protected override void OnInit(EventArgs e)
+        {
+            
+        }
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static List<DictionaryItem> GetDictionaryItems(string searchtext)

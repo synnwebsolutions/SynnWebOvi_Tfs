@@ -57,6 +57,10 @@ namespace SynnWebOvi
                     return null;
                 return LoggedUser;
             }
+            set
+            {
+                CurrentUser = value;
+            }
         }
 
         public IDbWedd DbWedd
@@ -100,6 +104,8 @@ namespace SynnWebOvi
 
         public bool ValidateUserCredentials(string userName, string passwword)
         {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwword))
+                return false;
             List<LoggedUser> lst = GetUsersEx(userName, passwword);
             return lst.Count == 1;
         }

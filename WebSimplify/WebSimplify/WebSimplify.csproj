@@ -90,6 +90,7 @@
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="MyProducts.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -115,8 +116,6 @@
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
     <Compile Include="DataAccess\DataProvider.cs" />
     <Compile Include="DataAccess\IDb.cs" />
-    <Compile Include="DataAccess\MySqlDatabaseProvider.cs" />
-    <Compile Include="DataAccess\MySqlDbWedd.cs" />
     <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
     <Compile Include="DataAccess\WeddingGuest.cs" />
@@ -126,6 +125,13 @@
     <Compile Include="DictionaryItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogItem.cs" />
     <Compile Include="Main.aspx.cs">
@@ -175,6 +181,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Login\css\" />
+    <Folder Include="Login\fonts\" />
+    <Folder Include="Login\images\" />
+    <Folder Include="Login\js\" />
+    <Folder Include="Login\vendor\" />
     <Folder Include="Models\" />
     <Folder Include="NavData\assets\" />
   </ItemGroup>

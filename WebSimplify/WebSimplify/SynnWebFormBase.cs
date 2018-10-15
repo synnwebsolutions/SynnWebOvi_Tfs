@@ -25,7 +25,7 @@ namespace SynnWebOvi
             }
             set
             {
-                StoreInSession("ssUser_*",value);
+                StoreInSession("ssUser_*", value);
             }
         }
 
@@ -86,13 +86,11 @@ namespace SynnWebOvi
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+            if (!LoginProvider && DBController.CurrentUser == null)
+                SynNavigation.Goto(SynNavigation.Pages.Login);
             if (!IsPostBack)
             {
-                //if (HideReturnButton)
-                //{
-                //    //Master.FindControl("btnBack").Visible = false;
-                //}
-                SynnDataProvider.DbProvider.SetUser(new LoggedUser("Smachew", 1));
+                
 
                 if (!LoginProvider)
                 {
