@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebSimplify;
 
 namespace SynnWebOvi
 {
@@ -25,6 +26,12 @@ namespace SynnWebOvi
     public interface IDbWedd
     {
         List<WeddingGuest> GetGuests(string searchText);
+    }
+
+    public interface IDbShop
+    {
+        ShoppingData GetData();
+        void Update(ShoppingData sd);
     }
 
     public interface IDbUserDictionary

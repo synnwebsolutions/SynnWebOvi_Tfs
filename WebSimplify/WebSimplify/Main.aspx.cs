@@ -57,7 +57,16 @@ namespace WebSimplify
         {
             DBController.DbUserDictionary.Add(key, value);
         }
-        
+
+        [WebMethod]
+        [ScriptMethod()]
+        public static void AddToShopList(string productName)
+        {
+            ShoppingData sd = DBController.DbShop.GetData();
+            sd.AddToShoplist(productName);
+            DBController.DbShop.Update(sd);
+        }
+
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

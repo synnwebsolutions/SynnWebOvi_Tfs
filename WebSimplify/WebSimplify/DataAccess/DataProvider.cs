@@ -35,6 +35,7 @@ namespace SynnWebOvi
             public static string Users = "Users";
             public static string Log = "Log";
             public static string WeddingItems = "WeddingItems";
+            public static string ShoppingData = "ShoppingData";
         }
     }
 
@@ -43,6 +44,8 @@ namespace SynnWebOvi
          IDbAuth DbAuth { get; }
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
+
+        IDbShop DbShop { get; }
         IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; set; }
         
@@ -105,6 +108,14 @@ namespace SynnWebOvi
             }
 
             set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbShop DbShop
+        {
+            get
             {
                 throw new NotImplementedException();
             }

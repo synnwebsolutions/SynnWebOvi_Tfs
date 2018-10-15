@@ -111,18 +111,23 @@
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarItem.cs" />
-    <Compile Include="CUser.cs" />
+    <Compile Include="Data\CalendarItem.cs" />
+    <Compile Include="Data\CUser.cs" />
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
     <Compile Include="DataAccess\DataProvider.cs" />
     <Compile Include="DataAccess\IDb.cs" />
     <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
+    <Compile Include="DataAccess\SqlDbAuth.cs" />
+    <Compile Include="DataAccess\SqlDbLog.cs" />
+    <Compile Include="DataAccess\SqlDbShop.cs" />
+    <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
     <Compile Include="DataAccess\WeddingGuest.cs" />
-    <Compile Include="Diary.aspx.cs">
+    <Compile Include="Data\Diary.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DictionaryItem.cs" />
+    <Compile Include="Data\DictionaryItem.cs" />
+    <Compile Include="Data\ShoppingData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,7 +138,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogItem.cs" />
+    <Compile Include="Data\LogItem.cs" />
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -141,7 +146,7 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MemoItem.cs" />
+    <Compile Include="Data\MemoItem.cs" />
     <Compile Include="MyProducts.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
