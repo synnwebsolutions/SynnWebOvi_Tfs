@@ -18,6 +18,7 @@ $(document).ready(function ()
 	$('#ddlWed').multiselect({columns: 1,placeholder: 'בחר משהו',search: true,selectAll: true});
 	$(".ms-search input").attr("placeholder", "חיפוש");
 	$(".ddltran").html("בחר הכל");
+	$(".ms-options").css('overflow','').css("'overflow-x','hidden'").css("'overflow-y','auto'");
 	
 /* DialogAlert("Done Loading", "Test Header"); */
 
