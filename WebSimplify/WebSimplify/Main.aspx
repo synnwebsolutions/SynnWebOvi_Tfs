@@ -30,9 +30,9 @@
 
             <h3 class="sectionsubheader">הוספה לרשימת קניות    <i class="fa fa-credit-card"></i></h3>
             <div class="synnbggenericsecond row">
-                <div class="col-lg-12">
-                    <h2>כותרת אפשרי לקומבו</h2>
-                    <select name="langOpt3[]" multiple id="ddlWed">
+                <div class="col-lg-6">
+                    <h2>כל הפריטים לבחירה</h2>
+                    <select name="langOpt3[]" multiple id="ddlShopItems">
                         <option value="C++">C++</option>
                         <option value="C#">C#</option>
                         <option value="Java">Java</option>
@@ -77,91 +77,6 @@
     </section>
 
 
-    <section id="dictionary" class="">
-        <div class="sectionheader">מילון</div>
-        <div class="synnbggenericsecond row">
-            <div class="col-lg-8">
-                <div class="synn-textbox-with-label">
-                    <label for="txsearchkey">ערך לחיפוש</label>
-                    <input type="text" name="name" id="txsearchkey" />
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton sbutton-lg" type="button" id="btnSrc" onclick="GetDictionaryData()">חפש</button>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton ssecondary sbutton-lg" type="button" id="btnClr" onclick="ClearDictionaryData()">נקה</button>
-            </div>
-        </div>
-
-        <div class="synnbggenericsecond row" id="gridcontainer">
-            <div class="col-lg-12">
-                <div id="DictionaryDataPanel"></div>
-            </div>
-        </div>
-
-
-
-    </section>
-    <!-- Second Section -->
-
-    <!-- Third Section -->
-    <section id="weddinglog" class="">
-        <div class="sectionheader">איתור אורחי חתונה</div>
-        <div class="synnbggenericsecond row">
-            <div class="col-lg-8">
-                <div class="synn-textbox-with-label">
-                    <label for="txwedsearchkey">ערך לחיפוש</label>
-                    <input type="text" name="name" id="txwedsearchkey" />
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton  sbutton-lg" type="button" id="btnweddSrc" onclick="GetWeddingData()">חפש</button>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton ssecondary  sbutton-lg" type="button" id="btnweddClr" onclick="ClearWeddingData()">נקה</button>
-            </div>
-        </div>
-
-        <div class="synnbggenericsecond row" id="weddgridcontainer">
-            <div class="col-lg-12">
-                <div id="WeddingDataPanel"></div>
-            </div>
-        </div>
-
-    </section>
-
-    <section id="diary" class="">
-        <div class="sectionheader">יומן</div>
-        <div id="calendarmaincontainer"></div>
-    </section>
-
-    <section id="sys" class="">
-        <div class="sectionheader">מערכת</div>
-        <div class="synnbggenericsecond row">
-            <div class="col-lg-8">
-                <div class="synn-textbox-with-label">
-                    <label for="txlogsearchkey">ערך לחיפוש</label>
-                    <input type="text" name="name" id="txlogsearchkey" />
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton sbutton-lg" type="button" id="btnlogSrc" onclick="GetLogData()">חפש</button>
-            </div>
-            <div class="col-lg-2">
-                <button class="sbutton ssecondary sbutton-lg" type="button" id="btnlogClr" onclick="ClearLogData()">נקה</button>
-            </div>
-        </div>
-
-        <div class="synnbggenericsecond row" id="loggridcontainer">
-            <div class="col-lg-12">
-                <div id="logDataPanel"></div>
-            </div>
-        </div>
-
-
-    </section>
-
-
+  
 
 </asp:Content>

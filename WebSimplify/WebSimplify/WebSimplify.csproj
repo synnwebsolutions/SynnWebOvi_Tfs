@@ -82,6 +82,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppSettingsPage.aspx" />
     <Content Include="App_Data\JqueryDb.mdf" />
     <Content Include="App_Data\JqueryDb_log.ldf">
       <DependentUpon>JqueryDb.mdf</DependentUpon>
@@ -89,30 +90,32 @@
     <Content Include="css\scalendar.css" />
     <Content Include="Ddl\jquery.multiselect.css" />
     <Content Include="Ddl\jquery.multiselect.js" />
+    <Content Include="Diary.aspx" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
+    <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
-    <Content Include="MyProducts.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyProducts.edmx</DependentUpon>
-      <LastGenOutput>MyProducts.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MyProducts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyProducts.edmx</DependentUpon>
-      <LastGenOutput>MyProducts.cs</LastGenOutput>
-    </Content>
     <Content Include="packages.config" />
     <Content Include="css\synnmain.css" />
-    <Content Include="TestPage.aspx" />
+    <Content Include="Shifts.aspx" />
+    <Content Include="Shopping.aspx" />
+    <Content Include="UserDictionaryPage.aspx" />
     <Content Include="WebSimplify.Master" />
+    <Content Include="Wedding.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingsPage.aspx.cs">
+      <DependentUpon>AppSettingsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppSettingsPage.aspx.designer.cs">
+      <DependentUpon>AppSettingsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Data\CalendarItem.cs" />
     <Compile Include="Data\CUser.cs" />
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
@@ -130,8 +133,22 @@
     </Compile>
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
+    <Compile Include="Diary.aspx.cs">
+      <DependentUpon>Diary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Diary.aspx.designer.cs">
+      <DependentUpon>Diary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -149,35 +166,31 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\MemoItem.cs" />
-    <Compile Include="MyProducts.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyProducts.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyProducts.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyProducts.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyProducts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyProducts.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Products.cs">
-      <DependentUpon>MyProducts.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shifts.aspx.cs">
+      <DependentUpon>Shifts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shifts.aspx.designer.cs">
+      <DependentUpon>Shifts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping.aspx.cs">
+      <DependentUpon>Shopping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping.aspx.designer.cs">
+      <DependentUpon>Shopping.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SynNavigation.cs" />
     <Compile Include="SynnWebFormBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TestPage.aspx.cs">
-      <DependentUpon>TestPage.aspx</DependentUpon>
+    <Compile Include="UserDictionaryPage.aspx.cs">
+      <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TestPage.aspx.designer.cs">
-      <DependentUpon>TestPage.aspx</DependentUpon>
+    <Compile Include="UserDictionaryPage.aspx.designer.cs">
+      <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebSimplify.Master.cs">
       <DependentUpon>WebSimplify.Master</DependentUpon>
@@ -185,6 +198,13 @@
     </Compile>
     <Compile Include="WebSimplify.Master.designer.cs">
       <DependentUpon>WebSimplify.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Wedding.aspx.cs">
+      <DependentUpon>Wedding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Wedding.aspx.designer.cs">
+      <DependentUpon>Wedding.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,13 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
-    <EntityDeploy Include="MyProducts.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyProducts.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="MyProducts.edmx.diagram">
-      <DependentUpon>MyProducts.edmx</DependentUpon>
-    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

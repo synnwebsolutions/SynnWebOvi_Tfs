@@ -7,7 +7,7 @@
     <title>WebSimplify - Smach IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- CDN's-->
-<%--    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <%--    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
     <!-- End of CDN's-->
 
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/synnmain.css" />
     <link rel="stylesheet" href="css/scalendar.css" />
     <link rel="stylesheet" href="Ddl/jquery.multiselect.css" />
-        <script src="NavData/genericJs/jquery-3.1.0.min.js"></script>
+    <script src="NavData/genericJs/jquery-3.1.0.min.js"></script>
     <script src="NavData/genericJs/jquery-ui.js"></script>
     <!-- Enxternal File's-->
 
@@ -34,7 +34,7 @@
             <!-- Navigation Bar with Logo, Brand and Menu -->
             <nav id="siteNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
                 <div class="container">
-        <%--            <div class="logo">
+                    <%--            <div class="logo">
                         <a href="#Home" id="lnkHome" >
                             <img src="img/synnlg.png" alt="" /></a>
                     </div>--%>
@@ -47,19 +47,25 @@
                     <div id="navbar-collapse" class="collapse navbar-collapse">
                         <ul class="navbar-nav text-uppercase ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center active" href="#main" name="navmain">בית</a>
+                                <a class="nav-link js-scroll-trigger text-center active" href="Main.aspx" name="navmain">בית</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="#dictionary" name="navdic">מילון</a>
+                                <a class="nav-link js-scroll-trigger text-center" href="UserDictionaryPage.aspx" name="navdic">מילון</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="#weddinglog" name="navwed">חתונה</a>
+                                <a class="nav-link js-scroll-trigger text-center" href="Wedding.aspx" name="navwed">חתונה</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="#diary" name="navdiary">יומן</a>
+                                <a class="nav-link js-scroll-trigger text-center" href="Diary.aspx" name="navdiary">יומן</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="#sys" name="navsys">מערכת</a>
+                                <a class="nav-link js-scroll-trigger text-center" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger text-center" href="Shifts.aspx" name="navshifts">משמרות</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger text-center" href="Log.aspx" name="navlog">יומן מערכת</a>
                             </li>
                         </ul>
                     </div>

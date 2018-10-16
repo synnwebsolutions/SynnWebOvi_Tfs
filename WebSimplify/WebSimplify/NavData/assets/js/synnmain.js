@@ -12,13 +12,15 @@ $(document).ready(function ()
 	$(".synn-textbox-with-label input").blur(function () { OnInputFocusesOut($(this).parent());});
     $("i").css('left', '15px');
 	$("#btnadddic").click(function () {AddToDictionary();});
+	$(".nav-link").click(function () {Nav($(this).attr('href'));});
 	$("#dvaccordion").accordion();
 	
 	
-	$('#ddlWed').multiselect({columns: 1,placeholder: 'בחר משהו',search: true,selectAll: true});
+	$('#ddlShopItems').multiselect({columns: 1,placeholder: 'בחר מוצר להוספה',search: true,selectAll: true});
 	$(".ms-search input").attr("placeholder", "חיפוש");
 	$(".ddltran").html("בחר הכל");
 	$(".ms-options").css('overflow','').css("'overflow-x','hidden'").css("'overflow-y','auto'");
+	$(".container").css('max-width','');
 	
 /* DialogAlert("Done Loading", "Test Header"); */
 
@@ -86,4 +88,9 @@ function OnAddError(xhr, ajaxOptions, thrownError) {
 	  if(xhr.status==404) 
         alert(thrownError);
 	DialogAlert("תקלה - פעולה לא בוצעה בהצלחה", "הוספה");
+}
+function Nav(destination)
+{
+	/* alert(destination); */
+	/* window.location.replace(destination); */
 }

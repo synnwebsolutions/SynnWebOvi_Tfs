@@ -36,6 +36,9 @@ namespace SynnWebOvi
             public static string Log = "Log";
             public static string WeddingItems = "WeddingItems";
             public static string ShoppingData = "ShoppingData";
+            public static string ShiftsData = "ShiftsData";
+            public static string AppSettings = "ShiftsData";
+            public static string DiaryData = "ShiftsData";
         }
     }
 

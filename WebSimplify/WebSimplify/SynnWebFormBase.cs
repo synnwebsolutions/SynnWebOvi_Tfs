@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -86,8 +88,8 @@ namespace SynnWebOvi
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            if (!LoginProvider && DBController.CurrentUser == null)
-                SynNavigation.Goto(SynNavigation.Pages.Login);
+            if (!LoginProvider && CurrentUser == null)
+                SynNavigation.Goto(Pages.Login);
             if (!IsPostBack)
             {
                 
@@ -178,6 +180,15 @@ namespace SynnWebOvi
             }}
           );", messageText.Replace("\n", "<br>"), "false", "200", "2500"),
              true);
+        }
+
+        [WebMethod]
+        [ScriptMethod()]
+        public static void Navigate(string destinationpage)
+        {
+            string url = string.Empty;
+
+            SynNavigation.Goto(url);
         }
     }
 

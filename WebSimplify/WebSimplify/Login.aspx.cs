@@ -41,7 +41,7 @@ namespace WebSimplify
                 }
             }
             if (CurrentUser != null)
-                SynNavigation.Goto(SynNavigation.Pages.Main);
+                SynNavigation.Goto(Pages.Main);
         }
     }
 }

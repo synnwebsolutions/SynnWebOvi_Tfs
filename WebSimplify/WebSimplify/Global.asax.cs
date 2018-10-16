@@ -40,7 +40,7 @@ namespace SynnWebOvi
         {
             var lastExc =  Server.GetLastError();
             var errcode = Dbl.AddLog(lastExc);
-            var url = string.Format("{0}?errcode={1}", SynNavigation.Pages.ErrorPage, errcode);
+            var url = string.Format("{0}?errcode={1}", Pages.ErrorPage, errcode);
             SynNavigation.Goto(url);
         }
 
