@@ -7,8 +7,8 @@
     <title>WebSimplify - Smach IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- CDN's-->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
     <!-- End of CDN's-->
 
     <!-- Enxternal File's-->
@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="NavData/assets/css/styles.css" />
     <link rel="stylesheet" href="css/synnmain.css" />
     <link rel="stylesheet" href="css/scalendar.css" />
-
+    <link rel="stylesheet" href="Ddl/jquery.multiselect.css" />
+        <script src="NavData/genericJs/jquery-3.1.0.min.js"></script>
+    <script src="NavData/genericJs/jquery-ui.js"></script>
     <!-- Enxternal File's-->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -92,6 +94,6 @@
     <script src="NavData/assets/js/synnmain.js"></script>
     <script src="NavData/assets/js/synngeneric.js"></script>
     <script src="NavData/assets/js/scalendar.js"></script>
-
+    <script src="Ddl/jquery.multiselect.js"></script>
 </body>
 </html>

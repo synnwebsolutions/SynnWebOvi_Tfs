@@ -87,6 +87,8 @@
       <DependentUpon>JqueryDb.mdf</DependentUpon>
     </Content>
     <Content Include="css\scalendar.css" />
+    <Content Include="Ddl\jquery.multiselect.css" />
+    <Content Include="Ddl\jquery.multiselect.js" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
@@ -193,6 +195,7 @@
     <Folder Include="Login\vendor\" />
     <Folder Include="Models\" />
     <Folder Include="NavData\assets\" />
+    <Folder Include="NavData\genericJs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />

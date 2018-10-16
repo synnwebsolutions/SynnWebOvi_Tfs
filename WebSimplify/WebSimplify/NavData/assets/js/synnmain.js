@@ -13,9 +13,13 @@ $(document).ready(function ()
     $("i").css('left', '15px');
 	$("#btnadddic").click(function () {AddToDictionary();});
 	$("#dvaccordion").accordion();
-	/* DialogAlert("Done Loading", "Test Header"); */
-
-
+	
+	
+	$('#ddlWed').multiselect({columns: 1,placeholder: 'בחר משהו',search: true,selectAll: true});
+	$(".ms-search input").attr("placeholder", "חיפוש");
+	$(".ddltran").html("בחר הכל");
+	
+/* DialogAlert("Done Loading", "Test Header"); */
 
 
 
