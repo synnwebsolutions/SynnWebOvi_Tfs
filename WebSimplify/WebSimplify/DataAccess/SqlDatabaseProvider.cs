@@ -14,6 +14,8 @@ namespace SynnWebOvi
         internal IDbLog IDbLog = null;
         internal IDbWedd IDbWedd = null;
         internal IDbShop IDbShop = null;
+        internal IDbCalendar IDbCalendar = null;
+        
 
         internal LoggedUser LoggedUser = null;
 
@@ -83,6 +85,16 @@ namespace SynnWebOvi
                 if (IDbShop == null)
                     IDbShop = new SqlDbShop(_connectionString);
                 return IDbShop;
+            }
+        }
+
+        public IDbCalendar DbCalendar
+        {
+            get
+            {
+                if (IDbCalendar == null)
+                    IDbCalendar = new SqlDbCalendar(_connectionString);
+                return IDbCalendar;
             }
         }
 

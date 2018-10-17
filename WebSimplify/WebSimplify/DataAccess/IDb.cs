@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebSimplify;
+using WebSimplify.Data;
 
 namespace SynnWebOvi
 {
@@ -34,17 +35,59 @@ namespace SynnWebOvi
         void Update(ShoppingData sd);
     }
 
-    public interface IDbUserDictionary
+    public interface IDbCalendar
     {
-        void Add(string key, string value, int userId);
-        List<DictionaryItem> PerformSearch(string searchText);
+        void Add(CalendarSearchParameters sp);
+        List<MemoItem> Get(CalendarSearchParameters sp);
     }
 
-    public class LogSearchParameters
+    public interface IDbUserDictionary
     {
+        void Add(DictionarySearchParameters p);
+        List<DictionaryItem> PerformSearch(DictionarySearchParameters p);
+    }
+
+    public class BaseSearchParameters
+    {
+        public LoggedUser CurrentUser { get; set; }
+        public int UserGroupId { get; set; }
+        public BaseSearchParameters()
+        {
+            CurrentUser = AccountData.GetCurrentUser();
+            UserGroupId = CurrentUser.UserGroupId;
+        }
+    }
+    public class LogSearchParameters: BaseSearchParameters
+    {
+        public LogSearchParameters() : base()
+        {
+        }
+
         public string Text { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+    }
+
+    public class DictionarySearchParameters : BaseSearchParameters
+    {
+        public DictionarySearchParameters() : base()
+        {
+        }
+
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public string SearchText { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+    }
+
+    public class CalendarSearchParameters : BaseSearchParameters
+    {
+        public CalendarSearchParameters() : base()
+        {
+        }
+
+        internal MemoItem InsertItem { get; set; }
     }
 
 }

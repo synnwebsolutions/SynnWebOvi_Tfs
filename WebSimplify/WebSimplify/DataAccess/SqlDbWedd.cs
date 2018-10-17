@@ -6,7 +6,6 @@ namespace SynnWebOvi
 {
     internal class SqlDbWedd : SqlDbController, IDbWedd
     {
-        private string _connectionString;
 
         public SqlDbWedd(string _connectionString) : base(new SynnSqlDataProvider(_connectionString))
         {

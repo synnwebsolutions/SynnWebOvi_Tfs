@@ -11,7 +11,7 @@ namespace SynnWebOvi
     {
         internal IDatabaseProvider DBController = SynnDataProvider.DbProvider;
         public static string PassPhrase = "682";
-        internal IDbLog Dbl;
+        internal static IDbLog Dbl;
 
         public static string AdminUserName = "sami";
         public static string AdminPass = "1x";

@@ -7,9 +7,9 @@ function GetCalendarData() {
 	
 	$.ajax({
 		type: "POST",
-		url: "Main.aspx/GetCalendarItem",
+		url: "Diary.aspx/GetCalendarItem",
 		data: "{}",
-		dataType: "json",
+		dataType: "Json",
 		contentType: "application/json; charset=utf-8",
 		success: OnCalendarSuccess,
 		error: OnCalendarError
@@ -23,6 +23,9 @@ function OnCalendarSuccess(data) {
 }
 
 
-function OnCalendarError(data) {
-alert("GetCalendarData Error");
+function OnCalendarError(xhr, ajaxOptions, thrownError)
+{
+    if (xhr.status == 404)
+        alert(thrownError);
+    alert("GetCalendarData Error lsa" );
 }

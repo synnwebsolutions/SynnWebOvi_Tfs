@@ -12,7 +12,7 @@ namespace SynnWebOvi
         public string DictionaryKey { get;  set; }
         public string DictionaryValue { get;  set; }
         public int Id { get;  set; }
-        public int UserId { get;  set; }
+        public int UserGroupId { get;  set; }
         public DictionaryItem()
         {
 
@@ -24,7 +24,7 @@ namespace SynnWebOvi
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
-            UserId = DataAccessUtility.LoadInt32(reader, "UserId");
+            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
             DictionaryKey = DataAccessUtility.LoadNullable<string>(reader, "dKey");
             DictionaryValue = DataAccessUtility.LoadNullable<string>(reader, "Value");
         }

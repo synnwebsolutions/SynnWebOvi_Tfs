@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SynnCore.DataAccess;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -42,7 +44,7 @@ namespace WebSimplify
             string rowFormat = "<tr><td class='calendarinnercell calendardayinfo'><ul class='a'>{0}</ul></td></tr>";
             string ls = string.Empty;
             foreach (var item in mItems)
-                ls += string.Format("<li>{0}</li>", item.Header);
+                ls += string.Format("<li>{0}</li>", item.title);
             sb.AppendFormat(rowFormat,ls);
 
             sb.Append("</table>");
@@ -116,4 +118,31 @@ namespace WebSimplify
             sb.Append("</tr>");
         }
     }
+
+    public class MemoItem : IDbLoadable
+    {
+        public MemoItem()
+        {
+
+        }
+        public MemoItem(IDataReader data)
+        {
+            Load(data);
+        }
+
+
+        public DateTime Date { get; set; }
+        public string Description { get; set; }
+        public int Id { get;  set; }
+        public string title { get; set; }
+
+        public void Load(IDataReader reader)
+        {
+            Id = DataAccessUtility.LoadInt32(reader, "Id");
+            Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
+            Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
+            title = DataAccessUtility.LoadNullable<string>(reader, "title");
+        }
+    }
+
 }
