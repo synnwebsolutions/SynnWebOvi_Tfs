@@ -98,6 +98,7 @@
     <Content Include="Shifts.aspx" />
     <Content Include="Shopping.aspx" />
     <Content Include="UserDictionaryPage.aspx" />
+    <Content Include="WebSimpl.asmx" />
     <Content Include="WebSimplify.Master" />
     <Content Include="Wedding.aspx" />
   </ItemGroup>
@@ -190,6 +191,10 @@
     </Compile>
     <Compile Include="UserDictionaryPage.aspx.designer.cs">
       <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebSimpl.asmx.cs">
+      <DependentUpon>WebSimpl.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebSimplify.Master.cs">
       <DependentUpon>WebSimplify.Master</DependentUpon>
