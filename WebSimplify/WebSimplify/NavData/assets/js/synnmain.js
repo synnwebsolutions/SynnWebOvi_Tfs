@@ -1,7 +1,7 @@
 $(document).ready(function ()
 {
     $('.container').css('width', '100%').css('margin', 'auto').addClass('synnbggeneric');
-	$('#siteNavbar').css('background-color', '#007BFF').css('width', '80%').css('margin','auto').addClass('synnbggradient')
+	$('#siteNavbar').css('background-color', '#007BFF').css('width', '100%').css('margin','auto').addClass('synnbggradient')
 	.css('top', '15px');
 	$('#siteNavbar .container').css('background', 'transparent');
 	$('.nav-link').css('font-family', 'Impact');
@@ -15,9 +15,9 @@ $(document).ready(function ()
     $("i").css('left', '15px');
     $("#btnadddic").click(function () { AddToDictionary(); });
     $("#btnadddiary").click(function () { AddToDiary(); });
-	$(".nav-link").click(function () {Nav($(this).attr('href'));});
+	$(".nav-link").click(function () {Nav($(this));});
 	$("#dvaccordion").accordion();
-	
+
 	
 	$('#ddlShopItems').multiselect({columns: 1,placeholder: 'בחר מוצר להוספה',search: true,selectAll: true});
 	$(".ms-search input").attr("placeholder", "חיפוש");
@@ -122,6 +122,11 @@ function OnAddError(xhr, ajaxOptions, thrownError) {
 }
 function Nav(destination)
 {
-	/* alert(destination); */
+    //var currentactive = $('nav').find('active').attr('name');
+    //alert(currentactive);
+    //$('nav').find('active').removeClass('active');
+    //destination.addClass('active');
+    //$('nav').find('a[href="#' + $(this).attr('id') + '"]').addClass('active');
+    //alert(destination.attr('name'));
 	/* window.location.replace(destination); */
 }

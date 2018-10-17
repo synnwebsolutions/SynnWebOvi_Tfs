@@ -47,7 +47,7 @@
                     <div id="navbar-collapse" class="collapse navbar-collapse">
                         <ul class="navbar-nav text-uppercase ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center active" href="Main.aspx" name="navmain">בית</a>
+                                <a class="nav-link js-scroll-trigger text-center " href="Main.aspx" name="navmain">בית</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link js-scroll-trigger text-center" href="UserDictionaryPage.aspx" name="navdic">מילון</a>
