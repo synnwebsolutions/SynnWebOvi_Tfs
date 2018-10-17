@@ -10,7 +10,7 @@ function GetWeddingData() {
 
 	$.ajax({
 		type: "POST",
-		url: "Main.aspx/GetWeddingItems",
+		url: "Wedding.aspx/GetWeddingItems",
 		data: "{'guesttext': '" + val + "'}",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
@@ -74,7 +74,7 @@ function GetLogData() {
 	}
 	$.ajax({
 		type: "POST",
-		url: "Main.aspx/GetLogItems",
+		url: "Log.aspx/GetLogItems",
 		data: "{'searchtext': '" + val + "'}",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
@@ -124,6 +124,7 @@ function DisplayNoneLogs()
 /* Start Dictionary */
 function GetDictionaryData() {
 	
+
 	var val =$("#txsearchkey").val();
 	if(val == '')
 	{
@@ -132,7 +133,7 @@ function GetDictionaryData() {
 	}
 	$.ajax({
 		type: "POST",
-		url: "Main.aspx/GetDictionaryItems",
+		url: "UserDictionaryPage.aspx/GetDictionaryItems",
 		data: "{'searchtext': '" + val + "'}",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
@@ -164,7 +165,10 @@ function OnDicSuccess(data) {
 
 	$("#DictionaryDataPanel").html(TableContent);
 }
-function OnDicError(data) {
+
+function OnDicError(xhr, ajaxOptions, thrownError) {
+    if (xhr.status == 404)
+        alert(thrownError);
 alert("GetDictionaryItems Error");
 }
 

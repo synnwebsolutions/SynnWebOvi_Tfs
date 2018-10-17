@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="sbutton sbutton-sm" type="button" id="btnadddiary" onclick="">הוסף</button>
+                    <button class="sbutton sbutton-sm" type="button" id="btnadddiary" >הוסף</button>
                 </div>
             </div>
         </div>

@@ -13,25 +13,26 @@ namespace WebSimplify
         {
         }
 
-        public void Add(string key, string value,int userId)
+        public void Add(DictionarySearchParameters p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserId", SynnDataProvider.DbProvider.CurrentUser.Id));
-            sqlItems.Add(new SqlItem("dKey", key));
-            sqlItems.Add(new SqlItem("Value", value));
+            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
+            sqlItems.Add(new SqlItem("dKey", p.Key));
+            sqlItems.Add(new SqlItem("Value", p.Value));
             SetInsertIntoSql(SynnDataProvider.TableNames.UserDictionary, sqlItems);
             ExecuteSql();
         }
 
-        public List<DictionaryItem> PerformSearch(string searchText)
+        public List<DictionaryItem> PerformSearch(DictionarySearchParameters p)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserDictionary);
             ClearParameters();
-            if (!string.IsNullOrEmpty(searchText))
+            AddSqlWhereField("UserGroupId", p.UserGroupId);
+            if (!string.IsNullOrEmpty(p.SearchText))
             {
                 StartORGroup();
-                AddORLikeField("dKey", searchText, LikeSelectionStyle.CheckBoth);
-                AddORLikeField("Value", searchText, LikeSelectionStyle.CheckBoth);
+                AddORLikeField("dKey", p.SearchText, LikeSelectionStyle.CheckBoth);
+                AddORLikeField("Value", p.SearchText, LikeSelectionStyle.CheckBoth);
                 EndORGroup();
             }
             var lst = new List<DictionaryItem>();

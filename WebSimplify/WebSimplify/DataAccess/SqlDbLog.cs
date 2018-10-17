@@ -31,7 +31,7 @@ namespace WebSimplify
             sqlItems.Add(new SqlItem("Message", l.Message));
             SetInsertIntoSql(SynnDataProvider.TableNames.Log, sqlItems);
             ExecuteSql();
-            return GetMsSqlLastIdentityValue().ToString();
+            return "GetMsSqlLastIdentityValue()".ToString();
         }
 
         public List<LogItem> GetLogs(LogSearchParameters lsp)

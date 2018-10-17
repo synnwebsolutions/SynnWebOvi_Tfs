@@ -37,8 +37,8 @@ namespace SynnWebOvi
             public static string WeddingItems = "WeddingItems";
             public static string ShoppingData = "ShoppingData";
             public static string ShiftsData = "ShiftsData";
-            public static string AppSettings = "ShiftsData";
-            public static string DiaryData = "ShiftsData";
+            public static string AppSettings = "AppSettings";
+            public static string DiaryData = "DiaryData";
         }
     }
 
@@ -51,7 +51,9 @@ namespace SynnWebOvi
         IDbShop DbShop { get; }
         IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; set; }
-        
+
+        IDbCalendar DbCalendar { get;}
+
     }
 
     abstract class BaseDatabaseProvider : IDatabaseProvider
@@ -117,6 +119,14 @@ namespace SynnWebOvi
         }
 
         public IDbShop DbShop
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbCalendar DbCalendar
         {
             get
             {

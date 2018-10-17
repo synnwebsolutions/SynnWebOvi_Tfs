@@ -20,6 +20,7 @@ namespace SynnWebOvi
         }
         public int Id { get; private set; }
         public string UserName { get; private set; }
+        public int UserGroupId { get; internal set; }
 
         public LoggedUser(string u, int i)
         {

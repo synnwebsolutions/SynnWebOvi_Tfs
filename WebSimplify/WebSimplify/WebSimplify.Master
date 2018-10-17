@@ -70,7 +70,7 @@
                         </ul>
                     </div>
                     <div>
-                        <button class="btn ssignout bg-transparent" type="button"><i class="fa fa-sign-out">יציאה  </i></button>
+                        <button class="btn ssignout bg-transparent" type="button" ><i class="fa fa-sign-out">יציאה  </i></button>
                     </div>
                 </div>
             </nav>
