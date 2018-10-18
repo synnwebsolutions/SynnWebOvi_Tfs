@@ -80,7 +80,7 @@
     background-color: rgba(51, 47, 31, 0.5);
     margin-top: 5px;
     padding: 12px;
-        color: white;
+    color: white;
 }
 
     .spanel .spanelHeader {
@@ -130,7 +130,7 @@
     }
 
     .synngridstyled tr {
-        padding-top:40px;
+        padding-top: 40px;
         /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
     }
 
@@ -144,11 +144,11 @@
     .synngridstyled td {
         border: 0;
     }
+
 .synngridpagination {
-  
     padding: 20px 20px;
     border-radius: 4px;
-    background: #8080FF; 
+    background: #8080FF;
 }
 
     .synngridpagination tr {
@@ -165,33 +165,30 @@
         border-color: #ddd;
         margin-left: -1px;
     }
-.sgridcontainer{
-    
-    
-}
-.calendarmaincontainer{
 
+.sgridcontainer {
 }
-.gridcalendar
-{
-        width: 100%;
+
+.calendarmaincontainer {
+}
+
+.gridcalendar {
+    width: 100%;
     text-align: center;
     font-size: 14px;
 }
-.gridcalendar table > tbody > tr >td
-{
-    
-        
-}
-.gridcalendar td
-{
-    max-width: 15%;
-    min-width: 15%;
-       max-height: 15%;
-    min-height: 15%;
+
+    .gridcalendar table > tbody > tr > td {
+    }
+
+    .gridcalendar td {
+        max-width: 15%;
+        min-width: 15%;
+        max-height: 15%;
+        min-height: 15%;
         overflow: hidden;
-        
-}
+    }
+
     .gridcalendar th {
         text-align: center;
         font-weight: 600;
@@ -202,46 +199,89 @@
     }
 
     .gridcalendar tr {
-        padding-top:40px;
+        padding-top: 40px;
         /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
     }
 
-        .gridcalendar td:hover {
-            background-color: white;
-            color: #000000;
-            /*text-shadow: 1px 1px 1px #000000;*/
-        }
-.calendarheader
-{
-    float:right;
-    padding:10px;
-}
-.spnaneltopactions
-{
-    width:100%;
-}
-.siconbutton{
-    background-color:transparent;
-    border:none;
-    padding:10px;
-    color:white;
-
-}
-.left{
-      float:left;
-    padding:10px;
-}
-.right{
-          float:right;
-    padding:10px;
-}
-
-@media only screen and (max-width: 800px)
- {
-    body {
-         /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+    .gridcalendar td:hover {
+        background-color: white;
+        color: #000000;
+        /*text-shadow: 1px 1px 1px #000000;*/
     }
+
+.calendarheader {
+    float: right;
+    padding: 10px;
+}
+
+.spnaneltopactions {
+    width: 100%;
+}
+
+.siconbutton {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: white;
+}
+
+.left {
+    float: left;
+    padding: 10px;
+}
+
+.right {
+    float: right;
+    padding: 10px;
+}
+
+.collapsible {
+    display: none;
+       width: 100%;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 14px;
+        background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+}
+
+.content {
+    
+}
+
+@media only screen and (min-width: 801px) {
+    body {
+        /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+    }
+
     .snav li {
-         float: none;
+        float: right;
+    }
+
+    .collapsible {
+        display: none;
+    }
+
+    .content {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+    }
+
+    .snav li {
+        float: none;
+    }
+
+    .collapsible {
+        display: block;
+    }
+
+    .content {
+        display: none;
     }
 }

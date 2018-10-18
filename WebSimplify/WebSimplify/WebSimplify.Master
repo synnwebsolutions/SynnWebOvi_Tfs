@@ -13,23 +13,23 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
-
 </head>
 <body>
-    <div class="snav ">
-        <ul>
-            <li><a class="active " href="Main.aspx" name="navmain">בית</a></li>
-            <li><a class="" href="UserDictionaryPage.aspx" name="navdic">מילון</a></li>
-            <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
-            <li><a class="" href="Diary.aspx" name="navdiary">יומן</a></li>
-            <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
-            <li><a class="" href="Shifts.aspx" name="navshifts">משמרות</a></li>
-            <li><a class="" href="Log.aspx" name="navlog">יומן מערכת</a></li>
-            <li><a href="Login.aspx?so=1">יציאה </a></li>
-        </ul>
+    <div class="snav">
+        <button class="collapsible"><i class="fa  fa-w-12 fa-bars fa-2x"></i></button>
+        <div class="content">
+            <ul>
+                <li><a class="active " href="Main.aspx" name="navmain">בית</a></li>
+                <li><a class="" href="UserDictionaryPage.aspx" name="navdic">מילון</a></li>
+                <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
+                <li><a class="" href="Diary.aspx" name="navdiary">יומן</a></li>
+                <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
+                <li><a class="" href="Shifts.aspx" name="navshifts">משמרות</a></li>
+                <li><a class="" href="Log.aspx" name="navlog">יומן מערכת</a></li>
+                <li><a href="Login.aspx?so=1">יציאה </a></li>
+            </ul>
+        </div>
     </div>
-
     <div class="scontainer">
 
         <div class="srow">
@@ -41,12 +41,29 @@
             </form>
         </div>
 
-        <div id="dialog" title="" class="srow" style="visibility:hidden;">
+        <div id="dialog" title="" class="srow" style="visibility: hidden;">
             <h3></h3>
             <p></p>
         </div>
     </div>
 
 
+    <%--Nav Responsivity Script--%>
+    <script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>
