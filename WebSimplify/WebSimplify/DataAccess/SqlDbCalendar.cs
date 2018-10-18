@@ -23,12 +23,15 @@ namespace SynnWebOvi
             ExecuteSql();
         }
 
-        public List<MemoItem> Get(CalendarSearchParameters sp)
+        public List<MemoItem> Get(CalendarSearchParameters lsp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.DiaryData);
             ClearParameters();
-            AddSqlWhereField("UserGroupId", sp.UserGroupId);
-     
+            AddSqlWhereField("UserGroupId", lsp.UserGroupId);
+            if (lsp.FromDate.HasValue)
+                AddSqlWhereField("Date", lsp.FromDate, ">=");
+            if (lsp.ToDate.HasValue)
+                AddSqlWhereField("Date", lsp.ToDate, "<");
             var lst = new List<MemoItem>();
             FillList(lst, typeof(MemoItem));
             return lst;

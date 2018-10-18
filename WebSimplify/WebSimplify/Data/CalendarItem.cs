@@ -36,19 +36,15 @@ namespace WebSimplify
 
         internal string GenerateHtml()
         {
-            var sb = new StringBuilder("<td class='calendarcellcontainer'>");
-            sb.Append("<table class='calendardaydata '>");
-            sb.AppendFormat("<tr><td class='calendarinnercell calendardayidf'>{0}</td></tr>", Date.Day);
+            var sb = new StringBuilder("<table>");
+            string hrowFormat = "<tr><td class=\"calendarheader\">{0}</td></tr>";
+            sb.AppendFormat(hrowFormat, Date.Day);
 
-            sb.Append("<tr>");
-            string rowFormat = "<tr><td class='calendarinnercell calendardayinfo'><ul class='a'>{0}</ul></td></tr>";
-            string ls = string.Empty;
+            string rowFormat = "<tr><td>{0}</td></tr>";
             foreach (var item in mItems)
-                ls += string.Format("<li>{0}</li>", item.title);
-            sb.AppendFormat(rowFormat,ls);
+                sb.AppendFormat(rowFormat, item.title);
 
             sb.Append("</table>");
-            sb.Append("</td>");
             return sb.ToString();
         }
     }
@@ -56,7 +52,7 @@ namespace WebSimplify
     public class CalendarMonthlyData
     {
         public string CalendarHtml { get; set; }
-        Dictionary<int, List<CalendarHtmlItem>> WeeklyData;
+        public Dictionary<int, List<CalendarHtmlItem>> WeeklyData;
 
         public CalendarMonthlyData(List<MemoItem> mls)
         {            

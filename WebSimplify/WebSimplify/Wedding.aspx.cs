@@ -1,5 +1,6 @@
 ﻿using SynnWebOvi;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,15 +15,39 @@ namespace WebSimplify
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                RefreshGrid(gv);
+            }
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<WeddingGuest> GetWeddingItems(string guesttext)
+        internal override string GetGridSourceMethodName(string gridId)
         {
-            List<WeddingGuest> items = DBController.DbWedd.GetGuests(guesttext);
+            if (gridId == gv.ID)
+                return "GetData";
+            return base.GetGridSourceMethodName(gridId);
+        }
+
+        public IEnumerable GetData()
+        {
+            List<WeddingGuest> items = DBController.DbWedd.GetGuests(string.Empty);
             return items;
+        }
+
+        protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var d = (WeddingGuest)e.Row.DataItem;
+                ((Label)e.Row.FindControl("lblGuestName")).Text = d.Name;
+                ((Label)e.Row.FindControl("lblGuestValue")).Text = d.Amount.ToString();
+            }
+        }
+
+        protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gv.PageIndex = e.NewPageIndex;
+            RefreshGrid(gv);
         }
     }
 }

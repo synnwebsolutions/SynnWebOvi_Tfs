@@ -86,6 +86,29 @@ namespace SynnWebOvi
         //    writer.Write(CurrentHtml);
         //}
 
+        protected void ClearInputs(params HtmlControl[] p)
+        {
+            foreach (var input in p)
+            {
+                if (input is HtmlInputText)
+                {
+                    (input as HtmlInputText).Value = string.Empty;
+                }
+            }
+        }
+
+        protected bool ValidateInputs(params HtmlControl[] p)
+        {
+            foreach (var input in p)
+            {
+                if (input is HtmlInputText)
+                    if (string.IsNullOrEmpty((input as HtmlInputText).Value))
+                        return false;
+            }
+            return true;
+        }
+
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -152,13 +175,11 @@ namespace SynnWebOvi
         public void RefreshGrid(GridView gv)
         {
             string methodName = GetGridSourceMethodName(gv.ID);
-            
             MethodInfo m = Page.GetType().GetMethod(methodName, new Type[0]);
             gv.DataSource = (IEnumerable)m.Invoke(Page, null);
             gv.DataBind();            
         }
-
-
+        
 
         internal virtual string GetGridSourceMethodName(string gridId)
         {

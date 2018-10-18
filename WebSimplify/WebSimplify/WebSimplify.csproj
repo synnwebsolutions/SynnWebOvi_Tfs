@@ -83,18 +83,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
-    <Content Include="css\scalendar.css" />
-    <Content Include="Ddl\jquery.multiselect.css" />
-    <Content Include="Ddl\jquery.multiselect.js" />
+    <Content Include="css\style1.css" />
     <Content Include="Diary.aspx" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
+    <Content Include="js\synnJavaScripts.js" />
     <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="packages.config" />
-    <Content Include="css\synnmain.css" />
     <Content Include="Shifts.aspx" />
     <Content Include="Shopping.aspx" />
     <Content Include="UserDictionaryPage.aspx" />
@@ -213,20 +211,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Ddl\" />
     <Folder Include="Login\css\" />
     <Folder Include="Login\fonts\" />
     <Folder Include="Login\images\" />
     <Folder Include="Login\js\" />
     <Folder Include="Login\vendor\" />
     <Folder Include="Models\" />
-    <Folder Include="NavData\assets\" />
-    <Folder Include="NavData\genericJs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Properties\PublishProfiles\WebSimpl_Dep_BI.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

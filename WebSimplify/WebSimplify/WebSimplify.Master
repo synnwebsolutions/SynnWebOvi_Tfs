@@ -6,21 +6,9 @@
 <head runat="server">
     <title>WebSimplify - Smach IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- CDN's-->
-    <%--    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
-    <!-- End of CDN's-->
-
-    <!-- Enxternal File's-->
-    <link rel="stylesheet" href="NavData/assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="NavData/assets/fonts/font-awesome.min.css" />
-    <link rel="stylesheet" href="NavData/assets/css/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.css" />
-    <link rel="stylesheet" href="NavData/assets/css/styles.css" />
-    <link rel="stylesheet" href="css/synnmain.css" />
-    <link rel="stylesheet" href="css/scalendar.css" />
-    <link rel="stylesheet" href="Ddl/jquery.multiselect.css" />
-    <script src="NavData/genericJs/jquery-3.1.0.min.js"></script>
-    <script src="NavData/genericJs/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/style1.css" />
+    <%--<script src="js/jquery-3.1.0.min.js"></script>--%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <!-- Enxternal File's-->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -29,77 +17,36 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="row navbar-area">
-            <!-- Navigation Bar with Logo, Brand and Menu -->
-            <nav id="siteNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-                <div class="container">
-                    <%--            <div class="logo">
-                        <a href="#Home" id="lnkHome" >
-                            <img src="img/synnlg.png" alt="" /></a>
-                    </div>--%>
-                    <!-- Menu -->
-                    <button onclick="change_icon(this);" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-collapse" id="navbar-toggler">
-                        <i class="fa fa-bars"></i>
-                        Menu 
-							
-                    </button>
-                    <div id="navbar-collapse" class="collapse navbar-collapse">
-                        <ul class="navbar-nav text-uppercase ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center " href="Main.aspx" name="navmain">בית</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="UserDictionaryPage.aspx" name="navdic">מילון</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="Wedding.aspx" name="navwed">חתונה</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="Diary.aspx" name="navdiary">יומן</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="Shifts.aspx" name="navshifts">משמרות</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger text-center" href="Log.aspx" name="navlog">יומן מערכת</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <button class="btn ssignout bg-transparent" type="button" ><i class="fa fa-sign-out">יציאה  </i></button>
-                    </div>
+    <div class="snav ">
+        <ul>
+            <li><a class="active " href="Main.aspx" name="navmain">בית</a></li>
+            <li><a class="" href="UserDictionaryPage.aspx" name="navdic">מילון</a></li>
+            <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
+            <li><a class="" href="Diary.aspx" name="navdiary">יומן</a></li>
+            <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
+            <li><a class="" href="Shifts.aspx" name="navshifts">משמרות</a></li>
+            <li><a class="" href="Log.aspx" name="navlog">יומן מערכת</a></li>
+            <li><a href="Login.aspx?so=1">יציאה </a></li>
+        </ul>
+    </div>
+
+    <div class="scontainer">
+
+        <div class="srow">
+            <form id="form1" runat="server">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
-            </nav>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <form id="form1" runat="server">
-                    <div>
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
 
-        <div id="dialog" title="" class="sdialog">
+        <div id="dialog" title="" class="srow" style="visibility:hidden;">
             <h3></h3>
             <p></p>
         </div>
     </div>
 
-    <%--<script src="NavData/assets/js/jquery.min.js"></script>--%>
-    <script src="NavData/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu-1.js"></script>
-    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu-2.js"></script>
-    <script src="NavData/assets/js/Bootstrap-4-Navbar-with-Logo-Image-Brand-Name-and-Responsive-Menu.js"></script>
-    <script src="NavData/assets/js/synnmain.js"></script>
-    <script src="NavData/assets/js/synngeneric.js"></script>
-    <script src="NavData/assets/js/scalendar.js"></script>
-    <script src="Ddl/jquery.multiselect.js"></script>
+
 </body>
 </html>

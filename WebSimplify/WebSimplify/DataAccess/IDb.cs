@@ -87,6 +87,9 @@ namespace SynnWebOvi
         {
         }
 
+        public DateTime? FromDate { get;  set; }
+        public DateTime? ToDate { get; set; }
+        
         internal MemoItem InsertItem { get; set; }
     }
 

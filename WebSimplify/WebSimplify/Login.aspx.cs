@@ -28,6 +28,10 @@ namespace WebSimplify
         {
             string xu = txUname.Value;
             string xp = txPass.Value;
+#if DEBUG
+            xu = Global.AdminUserName;
+            xp = Global.AdminPass;
+#endif
             if (xu == Global.AdminUserName && xp == Global.AdminPass)
                 CurrentUser = new LoggedUser("Smachew", 1);
             else
@@ -36,6 +40,7 @@ namespace WebSimplify
                     CurrentUser = DBController.DbAuth.LoadUserSettings(xu, xp);
                 else
                 {
+
                     AlertMessage("שם משתמש או סיסמה לא נכונים");
                     return;
                 }

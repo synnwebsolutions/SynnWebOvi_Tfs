@@ -1,0 +1,247 @@
+﻿body {
+    background-color: rgba(119, 136, 153, 0.9);
+    width: 100%;
+    direction: rtl;
+    background-attachment: fixed;
+    background-image: url("../img/body-bg.jpeg");
+    /*background-image: url("https://images.pexels.com/photos/289586/pexels-photo-289586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*opacity: 0.8;*/
+}
+
+.scontainer {
+    width: 80%;
+    border: 1px solid #9999ff;
+    background-color: rgba(204, 204, 255, 0.5);
+    margin: auto;
+}
+
+.srow {
+    line-height: 1.6;
+    background-color: rgba(151, 151, 252, 0);
+    margin: 15px;
+    padding: 5%;
+    border: 1px solid #9999ff;
+}
+
+.snav {
+    margin: auto;
+    margin-bottom: 10px;
+    width: 80%;
+    align-content: center;
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+}
+
+    .snav ul {
+        list-style-type: none;
+        margin: 0;
+        overflow: hidden;
+        position: sticky;
+    }
+
+    .snav li {
+        float: right;
+    }
+
+        .snav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            .snav li a:hover:not(.active) {
+                background-color: #707099;
+            }
+
+.active {
+    background-color: #8080ff;
+}
+
+.spageheader {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5em;
+    background-color: #9797FB;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px #1D1D1D;
+}
+
+
+.spanel {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: rgba(51, 47, 31, 0.5);
+    margin-top: 5px;
+    padding: 12px;
+        color: white;
+}
+
+    .spanel .spanelHeader {
+        text-align: center;
+        top: 0;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px;
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px #1D1D1D;
+    }
+
+    .spanel input[type=text], input[type=date], select {
+        width: 100%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .spanel .sbutton {
+        width: 100%;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 12px;
+    }
+
+        .spanel .sbutton:hover {
+            background-color: #9797FC;
+            color: white;
+        }
+
+.synngridstyled {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
+
+    .synngridstyled th {
+        text-align: center;
+        font-weight: 600;
+        padding: 8px 8px 8px 8px;
+        background: #8080FF;
+        color: white;
+        border: 0;
+    }
+
+    .synngridstyled tr {
+        padding-top:40px;
+        /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
+    }
+
+        .synngridstyled tr:hover {
+            background-color: white;
+            border: 1px solid rgba(204, 204, 255, 0.9);
+            color: #000000;
+            /*text-shadow: 1px 1px 1px #000000;*/
+        }
+
+    .synngridstyled td {
+        border: 0;
+    }
+.synngridpagination {
+  
+    padding: 20px 20px;
+    border-radius: 4px;
+    background: #8080FF; 
+}
+
+    .synngridpagination tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    .synngridpagination table > tbody > tr > td > a, .synngridpagination table > tbody > tr > td > span {
+        margin: 2px 2px;
+        text-decoration: none;
+        padding: 10px 5px 10px 5px;
+        color: #111;
+        border-color: #ddd;
+        margin-left: -1px;
+    }
+.sgridcontainer{
+    
+    
+}
+.calendarmaincontainer{
+
+}
+.gridcalendar
+{
+        width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
+.gridcalendar table > tbody > tr >td
+{
+    
+        
+}
+.gridcalendar td
+{
+    max-width: 15%;
+    min-width: 15%;
+       max-height: 15%;
+    min-height: 15%;
+        overflow: hidden;
+        
+}
+    .gridcalendar th {
+        text-align: center;
+        font-weight: 600;
+        padding: 8px 8px 8px 8px;
+        background: #8080FF;
+        color: white;
+        border: 0;
+    }
+
+    .gridcalendar tr {
+        padding-top:40px;
+        /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
+    }
+
+        .gridcalendar td:hover {
+            background-color: white;
+            color: #000000;
+            /*text-shadow: 1px 1px 1px #000000;*/
+        }
+.calendarheader
+{
+    float:right;
+    padding:10px;
+}
+.spnaneltopactions
+{
+    width:100%;
+}
+.siconbutton{
+    background-color:transparent;
+    border:none;
+    padding:10px;
+    color:white;
+
+}
+.left{
+      float:left;
+    padding:10px;
+}
+.right{
+          float:right;
+    padding:10px;
+}
+
+@media only screen and (max-width: 800px)
+ {
+    body {
+         /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+    }
+    .snav li {
+         float: none;
+    }
+}
