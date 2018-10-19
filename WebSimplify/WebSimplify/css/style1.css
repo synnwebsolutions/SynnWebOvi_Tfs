@@ -167,7 +167,7 @@
     }
 
 .sgridcontainer {
-    width:100%;
+    width: 100%;
     /*overflow:auto;*/
 }
 
@@ -251,6 +251,10 @@
 .content {
 }
 
+.min-grid {
+    display: none;
+}
+
 @media only screen and (min-width: 801px) {
     body {
         /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
@@ -285,10 +289,16 @@
     .content {
         display: none;
     }
+
+    .gridcalendar {
+        display: none;
+    }
+
     .synngridstyled {
-    text-align: center;
-    font-size: 10px;
-}
+        text-align: center;
+        font-size: 10px;
+    }
+
     .synngridpagination {
         border-radius: 4px;
         background: #8080FF;
@@ -308,4 +318,17 @@
             margin-left: 0;
             padding: 0 0 0 0;
         }
+
+    .min-grid {
+        display: block;
+        text-overflow:clip;
+        font-size:8px;
+    }
+     .synngridstyled th {
+        text-align: center;
+        font-weight: 600;
+        background: #8080FF;
+        color: white;
+        border: 0;
+    }
 }

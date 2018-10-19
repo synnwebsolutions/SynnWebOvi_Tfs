@@ -32,6 +32,7 @@ namespace WebSimplify
             {
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 RefreshGrid(gv);
+                RefreshGrid(gvMin);
             }
         }
 
@@ -39,7 +40,18 @@ namespace WebSimplify
         {
             if (gridId == gv.ID)
                 return "GetData";
+            if (gridId == gvMin.ID)
+                return "GetCalendarItems";
             return base.GetGridSourceMethodName(gridId);
+        }
+
+        public IEnumerable GetCalendarItems()
+        {
+            monthTitle.InnerText = string.Format("{0} - {1}", ActionMonth.ToString("MMMM"), ActionMonth.Year.ToString());
+
+            var sp = new CalendarSearchParameters { FromDate = ActionMonth };
+            sp.ToDate = sp.FromDate.Value.AddMonths(1).AddDays(-1);
+            return DBController.DbCalendar.Get(sp).OrderByDescending(x => x.Date).ToList();
         }
 
         public IEnumerable GetData()
@@ -49,7 +61,7 @@ namespace WebSimplify
             var sp = new CalendarSearchParameters { FromDate = ActionMonth };
             sp.ToDate = sp.FromDate.Value.AddMonths(1).AddDays(-1);
             List<MemoItem> mls = DBController.DbCalendar.Get(sp);
-            var mm =  new CalendarMonthlyData(mls);
+            var mm = new CalendarMonthlyData(mls);
             return mm.WeeklyData.Where(x => x.Value.Count > 0).ToList();
         }
 
@@ -106,20 +118,34 @@ namespace WebSimplify
 
         protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gv.PageIndex = e.NewPageIndex;
-            RefreshGrid(gv);
+            var g = sender as GridView;
+            g.PageIndex = e.NewPageIndex;
+            RefreshGrid(g);
         }
 
         protected void btnPrevMonth_ServerClick(object sender, EventArgs e)
         {
             ActionMonth = ActionMonth.AddMonths(-1);
             RefreshGrid(gv);
+            RefreshGrid(gvMin);
         }
 
         protected void btnNextMonth_ServerClick(object sender, EventArgs e)
         {
             ActionMonth = ActionMonth.AddMonths(1);
             RefreshGrid(gv);
+            RefreshGrid(gvMin);
+        }
+
+        protected void gvMin_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var d = (MemoItem)e.Row.DataItem;
+                ((Label)e.Row.FindControl("lblDate")).Text = d.Date.ToShortDateString();
+                ((Label)e.Row.FindControl("LblName")).Text = d.title;
+                ((Label)e.Row.FindControl("lblDesc")).Text = d.Description;
+            }
         }
     }
 }
