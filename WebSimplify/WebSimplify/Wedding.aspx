@@ -16,7 +16,7 @@
         <div class="sgridcontainer">
             <asp:GridView ID="gv" runat="server" 
                 OnRowDataBound="gv_RowDataBound" OnPageIndexChanging="gv_PageIndexChanging"
-                AllowPaging="true" PageSize="8" CssClass="synngridstyled"
+                AllowPaging="true" PageSize="8" CssClass="synngridstyled" ItemStyle-Width="100%" ControlStyle-Width="100%"
                 PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false"
                 PagerSettings-FirstPageText="ראשון"
                 PagerSettings-NextPageText=">"

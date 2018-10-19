@@ -167,6 +167,8 @@
     }
 
 .sgridcontainer {
+    width:100%;
+    /*overflow:auto;*/
 }
 
 .calendarmaincontainer {
@@ -237,17 +239,16 @@
 
 .collapsible {
     display: none;
-       width: 100%;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 14px;
-        background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
 }
 
 .content {
-    
 }
 
 @media only screen and (min-width: 801px) {
@@ -284,4 +285,27 @@
     .content {
         display: none;
     }
+    .synngridstyled {
+    text-align: center;
+    font-size: 10px;
+}
+    .synngridpagination {
+        border-radius: 4px;
+        background: #8080FF;
+    }
+
+        .synngridpagination tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+
+        .synngridpagination table > tbody > tr > td > a, .synngridpagination table > tbody > tr > td > span {
+            text-decoration: none;
+            color: #111;
+            border-color: #ddd;
+            margin: 0 0;
+            margin-left: 0;
+            padding: 0 0 0 0;
+        }
 }
