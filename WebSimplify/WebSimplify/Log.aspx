@@ -7,10 +7,33 @@
     <div class="spageheader">יומן מערכת</div>
     <div class="spanel">
         <div>
-            <input type="text" name="name" id="txlogsearchkey" placeholder="Search Text"/>
+            <input type="text" name="name" id="txlogsearchkey" placeholder="Search Text"  class="tablefilter" />
         </div>
-    <button class="sbutton sbutton-lg" type="button" id="btnlogSrc" onclick="GetLogData()">חפש</button>
-    <button class="sbutton ssecondary sbutton-lg" type="button" id="btnlogClr" onclick="ClearLogData()">נקה</button>
     </div>
-
+    <div class="spanel">
+        <div class="sgridcontainer">
+            <asp:GridView ID="gv" runat="server"
+                OnRowDataBound="gv_RowDataBound" AllowPaging="False"
+                CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                AutoGenerateColumns="false" >
+                <Columns>
+                    <asp:TemplateField HeaderText="Date">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblDate"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Message" ControlStyle-CssClass="textverrysamll">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblMessage"  ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Trace ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblTrace" CssClass="textverrysamll"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    </div>
 </asp:Content>

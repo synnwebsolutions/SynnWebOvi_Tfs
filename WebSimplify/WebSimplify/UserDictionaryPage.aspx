@@ -7,13 +7,12 @@
     <div class="spanel">
         <div class="spanelHeader">חיפוש</div>
         <div class="">
-            <input type="text" name="name" id="txsearchkey" placeholder="ערך לחיפוש" />
+            <input type="text" class="tablefilter" name="name" id="txsearchkey" placeholder="ערך לחיפוש" />
         </div>
-        <button class="sbutton " type="button" id="btnSrc">חפש</button>
     </div>
     <div class="spanel">
         <div class="sgridcontainer">
-            <asp:GridView ID="gv" runat="server" OnRowDataBound="gv_RowDataBound" AllowPaging="true" PageSize="4" CssClass="synngridstyled"
+            <asp:GridView ID="gv" runat="server" OnRowDataBound="gv_RowDataBound" CssClass="synngridstyled tabletofilter"
                 PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false"
                 PagerSettings-FirstPageText="ראשון"
                 PagerSettings-NextPageText=">"

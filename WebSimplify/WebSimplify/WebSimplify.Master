@@ -7,10 +7,10 @@
     <title>WebSimplify - Smach IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="css/style1.css" />
-    <%--<script src="js/jquery-3.1.0.min.js"></script>--%>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
     <!-- Enxternal File's-->
-
+    <script src="js/synnJavaScripts.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -21,10 +21,10 @@
             <ul>
                 <li><a class="active " href="Main.aspx" name="navmain">בית</a></li>
                 <li><a class="" href="UserDictionaryPage.aspx" name="navdic">מילון</a></li>
-                <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
                 <li><a class="" href="Diary.aspx" name="navdiary">יומן</a></li>
-                <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
                 <li><a class="" href="Shifts.aspx" name="navshifts">משמרות</a></li>
+                <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
+                <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
                 <li><a class="" href="Log.aspx" name="navlog">יומן מערכת</a></li>
                 <li><a href="Login.aspx?so=1">יציאה </a></li>
             </ul>

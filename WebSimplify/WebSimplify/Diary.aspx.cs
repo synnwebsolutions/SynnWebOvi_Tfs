@@ -51,7 +51,7 @@ namespace WebSimplify
 
             var sp = new CalendarSearchParameters { FromDate = ActionMonth };
             sp.ToDate = sp.FromDate.Value.AddMonths(1).AddDays(-1);
-            return DBController.DbCalendar.Get(sp).OrderByDescending(x => x.Date).ToList();
+            return DBController.DbCalendar.Get(sp).OrderBy(x => x.Date).ToList();
         }
 
         public IEnumerable GetData()

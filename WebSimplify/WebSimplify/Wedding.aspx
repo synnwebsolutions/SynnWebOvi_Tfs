@@ -8,15 +8,14 @@
     <div class="spanel">
          <div class="spanelHeader">חיפוש</div>
         <div >
-            <input type="text" name="name" id="txwedsearchkey" placeholder="הזן שם אורח לחיפוש"/>
+            <input type="text" name="name" id="txwedsearchkey" class="tablefilter" placeholder="הזן שם אורח לחיפוש"/>
         </div>
-        <button class="sbutton  " type="button" id="btnweddSrc" >חפש</button>
     </div>
      <div class="spanel">
         <div class="sgridcontainer">
             <asp:GridView ID="gv" runat="server" 
-                OnRowDataBound="gv_RowDataBound" OnPageIndexChanging="gv_PageIndexChanging"
-                AllowPaging="true" PageSize="8" CssClass="synngridstyled" ItemStyle-Width="100%" ControlStyle-Width="100%"
+                OnRowDataBound="gv_RowDataBound" AllowPaging="False"
+                CssClass="synngridstyled tabletofilter" ItemStyle-Width="100%" ControlStyle-Width="100%"
                 PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false"
                 PagerSettings-FirstPageText="ראשון"
                 PagerSettings-NextPageText=">"
