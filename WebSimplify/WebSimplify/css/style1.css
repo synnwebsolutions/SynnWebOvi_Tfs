@@ -93,7 +93,7 @@
         text-shadow: 2px 2px 4px #1D1D1D;
     }
 
-    .spanel input[type=text], input[type=date], select {
+    .spanel input[type=text], input[type=date], input[type=password], select {
         width: 100%;
         display: inline-block;
         border: 1px solid #ccc;
@@ -254,7 +254,12 @@
 .min-grid {
     display: none;
 }
-
+.loginpanel
+{
+      padding-top: 15%;
+      padding-left: 15%;
+      padding-right: 15%;
+}
 @media only screen and (min-width: 801px) {
     body {
         /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
