@@ -10,42 +10,33 @@
 namespace WebSimplify {
     
     
-    public partial class Shifts {
+    public partial class UsersManagment {
         
         /// <summary>
-        /// txadddiarydate control.
+        /// txNewUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txNewUserName;
         
         /// <summary>
-        /// cmbShifts control.
+        /// txNewFirstPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbShifts;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txNewFirstPassword;
         
         /// <summary>
-        /// btnAddShift control.
+        /// btnAddUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddShift;
-        
-        /// <summary>
-        /// cdr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar cdr;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddUser;
     }
 }

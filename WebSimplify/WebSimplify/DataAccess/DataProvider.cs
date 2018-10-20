@@ -47,8 +47,8 @@ namespace SynnWebOvi
          IDbAuth DbAuth { get; }
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
-
         IDbShop DbShop { get; }
+        IDbShifts DbShifts { get; }
         IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; set; }
 
@@ -127,6 +127,14 @@ namespace SynnWebOvi
         }
 
         public IDbCalendar DbCalendar
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbShifts DbShifts
         {
             get
             {

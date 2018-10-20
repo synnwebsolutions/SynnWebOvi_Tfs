@@ -96,6 +96,7 @@
     <Content Include="Shifts.aspx" />
     <Content Include="Shopping.aspx" />
     <Content Include="UserDictionaryPage.aspx" />
+    <Content Include="UsersManagment.aspx" />
     <Content Include="WebSimpl.asmx" />
     <Content Include="WebSimplify.Master" />
     <Content Include="Wedding.aspx" />
@@ -126,6 +127,9 @@
     <Compile Include="DataAccess\SqlDbShop.cs" />
     <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
+    <Compile Include="Data\Permissions.cs" />
+    <Compile Include="Data\ShiftData.cs" />
+    <Compile Include="DataAccess\SqlDbShifts.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\Diary.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -189,6 +193,13 @@
     </Compile>
     <Compile Include="UserDictionaryPage.aspx.designer.cs">
       <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UsersManagment.aspx.cs">
+      <DependentUpon>UsersManagment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsersManagment.aspx.designer.cs">
+      <DependentUpon>UsersManagment.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebSimpl.asmx.cs">
       <DependentUpon>WebSimpl.asmx</DependentUpon>

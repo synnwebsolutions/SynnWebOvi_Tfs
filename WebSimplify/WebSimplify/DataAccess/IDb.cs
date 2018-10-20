@@ -35,6 +35,13 @@ namespace SynnWebOvi
         void Update(ShoppingData sd);
     }
 
+    public interface IDbShifts
+    {
+        UserShiftsContainer GetShiftsData(ShiftsSearchParameters shiftsSearchParameters);
+        void Save(UserShiftsContainer currentData);
+    }
+
+
     public interface IDbCalendar
     {
         void Add(CalendarSearchParameters sp);
@@ -64,6 +71,16 @@ namespace SynnWebOvi
         }
 
         public string Text { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+    }
+
+    public class ShiftsSearchParameters : BaseSearchParameters
+    {
+        public ShiftsSearchParameters() : base()
+        {
+        }
+
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
     }

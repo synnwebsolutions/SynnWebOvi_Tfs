@@ -25,6 +25,7 @@
                 <li><a class="" href="Shifts.aspx" name="navshifts">משמרות</a></li>
                 <li><a class="" href="Wedding.aspx" name="navwed">חתונה</a></li>
                 <li><a class="" href="AppSettingsPage.aspx" name="navsys">הגדרות מערכת</a></li>
+                <li><a class="" href="UsersManagment.aspx" name="navsys">הגדרות משתמשים</a></li>
                 <li><a class="" href="Log.aspx" name="navlog">יומן מערכת</a></li>
                 <li><a href="Login.aspx?so=1">יציאה </a></li>
             </ul>
