@@ -38,7 +38,7 @@ namespace SynnWebOvi
     public interface IDbShifts
     {
         UserShiftsContainer GetShiftsData(ShiftsSearchParameters shiftsSearchParameters);
-        void Save(UserShiftsContainer currentData);
+        void Save(ShiftsSearchParameters sp);
     }
 
 
@@ -57,6 +57,8 @@ namespace SynnWebOvi
     public class BaseSearchParameters
     {
         public LoggedUser CurrentUser { get; set; }
+
+        public bool RequirePrivateKeyOnly { get; set; }
         public int UserGroupId { get; set; }
         public BaseSearchParameters()
         {
@@ -83,6 +85,8 @@ namespace SynnWebOvi
 
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+
+        public UserShiftsContainer ItemForAction { get; set; }
     }
 
     public class DictionarySearchParameters : BaseSearchParameters

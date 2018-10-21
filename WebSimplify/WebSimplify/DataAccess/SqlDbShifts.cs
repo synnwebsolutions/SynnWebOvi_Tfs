@@ -1,7 +1,9 @@
 ﻿using SynnCore.DataAccess;
+using SynnCore.Generics;
 using SynnWebOvi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using WebSimplify.Data;
@@ -15,14 +17,46 @@ namespace WebSimplify
 
         }
 
-        public UserShiftsContainer GetShiftsData(ShiftsSearchParameters shiftsSearchParameters)
+        public UserShiftsContainer GetShiftsData(ShiftsSearchParameters sp)
         {
-            throw new NotImplementedException();
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShiftsData);
+            ClearParameters();
+            
+            SetPermissions(sp);
+
+            UserShiftsContainer prefs = new UserShiftsContainer();
+            using (IDataReader data = DoSelect())
+            {
+                if (data.Read())
+                    prefs = XmlHelper.CreateFromXml<UserShiftsContainer>(data["ShiftData"].ToString());
+                return prefs;
+            }
         }
 
-        public void Save(UserShiftsContainer currentData)
+        private void SetPermissions(ShiftsSearchParameters sp)
         {
-            throw new NotImplementedException();
+            if (sp.RequirePrivateKeyOnly)
+                AddSqlWhereField("UserId", sp.CurrentUser.Id.ToString());
+            else
+                AddSqlWhereField("UserGroupId", sp.UserGroupId.ToString());
+        }
+
+        public void Save(ShiftsSearchParameters sp)
+        {
+            string prefs = XmlHelper.ToXml(sp.ItemForAction);
+            DeleteExsisting(sp);
+            SetSqlFormat("insert  into {0} ( ShiftData, UserId,UserGroupId) values ( ?,?,? )", SynnDataProvider.TableNames.ShiftsData);
+            ClearParameters();
+            SetParameters(prefs, sp.CurrentUser.Id.ToString(), sp.UserGroupId.ToString());
+            ExecuteSql();
+        }
+
+        private void DeleteExsisting(ShiftsSearchParameters sp)
+        {
+            SetSqlFormat("delete {0}", SynnDataProvider.TableNames.ShiftsData);
+            ClearParameters();
+            SetPermissions(sp);
+            ExecuteSql();
         }
     }
 }

@@ -10,33 +10,33 @@ namespace WebSimplify.Data
 
     public class UserShiftsContainer
     {
-        private LoggedUser currentUser;
+        public LoggedUser currentUser { get; set; }
 
         public List<ShiftDayData> CrrentUserShifts { get; set; }
         public UserShiftsContainer()
         {
-            
+            CrrentUserShifts = new List<ShiftDayData>();
         }
 
         public UserShiftsContainer(LoggedUser currentUser)
         {
             this.currentUser = currentUser;
             CrrentUserShifts = new List<ShiftDayData>();
-            var dt = DateTime.Now;
-            var lst = new List<ShiftDayData>();
-            var s1 = new ShiftDayData { Date = dt };
-            s1.DaylyShifts.Add(ShiftTime.Morning);
-            s1.DaylyShifts.Add(ShiftTime.Night);
-            lst.Add(s1);
+            //var dt = DateTime.Now;
+            //var lst = new List<ShiftDayData>();
+            //var s1 = new ShiftDayData { Date = dt };
+            //s1.DaylyShifts.Add(ShiftTime.Morning);
+            //s1.DaylyShifts.Add(ShiftTime.Night);
+            //lst.Add(s1);
 
-            var s2 = new ShiftDayData { Date = dt.AddDays(2) };
-            s2.DaylyShifts.Add(ShiftTime.Night);
-            lst.Add(s2);
+            //var s2 = new ShiftDayData { Date = dt.AddDays(2) };
+            //s2.DaylyShifts.Add(ShiftTime.Night);
+            //lst.Add(s2);
 
 
-            var s3 = new ShiftDayData { Date = dt.AddDays(3) };
-            s3.DaylyShifts.Add(ShiftTime.Noon);
-            lst.Add(s3);
+            //var s3 = new ShiftDayData { Date = dt.AddDays(3) };
+            //s3.DaylyShifts.Add(ShiftTime.Noon);
+            //lst.Add(s3);
         }
     }
 

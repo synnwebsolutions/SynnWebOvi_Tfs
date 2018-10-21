@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="spageheader" id="acc">בית</div>
     <div class="srow">
-        <div class="spanel">
+        <div class="spanel spaneltwoinrow">
             <div class="spanelHeader">הוספת משתמש  <i class="fa fa-address-book"></i></div>
             <div>
                 <input type="text" name="name" id="txNewUserName" placeholder="שם משתמש" runat="server" />

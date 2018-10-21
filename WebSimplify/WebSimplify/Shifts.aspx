@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="spageheader">יומן משמרות</div>
-    <div class="spanel">
+    <div class="spanel spanelmin" >
         <div class="spanelHeader"> הוספת משמרת   <i class="fa fa-address-card"></i></div>
 
         <div >
@@ -16,6 +16,6 @@
         <button class="sbutton sbutton-sm" type="button" id="btnAddShift" runat="server" onserverclick="btnAddShift_ServerClick">הוסף</button>
     </div>
     <div class="spanel">
-        <asp:Calendar ID="cdr" runat="server" FirstDayOfWeek="Sunday" Width="100%" OnDayRender="Calendar1_DayRender"></asp:Calendar>
+        <asp:Calendar ID="cdr" runat="server" FirstDayOfWeek="Sunday" Width="100%" OnDayRender="Calendar1_DayRender" CssClass="aspcalendar"></asp:Calendar>
     </div>
 </asp:Content>

@@ -1,8 +1,8 @@
 ﻿$(document).ready(function ()
 {
-    $(".tabletofilter").find("tbody").addClass('datatofilter');
+    ArrangeTableFilters();
     ClearTableData();
-    //ArrangeRows();
+    ArrangeASPcalendar();
     $(".tablefilter").on("keyup", function () {
         var value = $(this).val().toLowerCase();
             $(".datatofilter tr").filter(function () {
@@ -11,20 +11,18 @@
     });
 
 });
+function ArrangeTableFilters() {
+    $(".tabletofilter").find("tbody").addClass('datatofilter');
+}
 function ClearTableData() {
     $(".datatofilter tr").filter(function () {
         $(this).toggle("false")
     });
 }
 
-function ArrangeRows()
+function ArrangeASPcalendar()
 {
-    var totalwidth = $(".srow").width();
-    var elementsCount = $(".srow").children(".spanel").length;
-    var singleItemWidth = parseInt(totalwidth) / parseInt(elementsCount);
-
-    $(".srow").children(".spanel").each(function () {
-        $(this).css('width', singleItemWidth);
-    });
-   
+    var headersTable = $(".aspcalendar").find("tbody").find("tbody");
+    headersTable.css('background-color', '#9797FB');
+    headersTable.find('a').parent().addClass("aspcalendarheaderactions");
 }

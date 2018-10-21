@@ -90,7 +90,11 @@ namespace SynnWebOvi
         {
             foreach (var input in p)
             {
-                if (input is HtmlInputText)
+                if (input is HtmlInputGenericControl)
+                {
+                    (input as HtmlInputGenericControl).Value = string.Empty;
+                }
+                else if (input is HtmlInputText)
                 {
                     (input as HtmlInputText).Value = string.Empty;
                 }

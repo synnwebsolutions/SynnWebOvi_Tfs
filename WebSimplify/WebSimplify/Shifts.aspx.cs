@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Data;
+using WebSimplify.Helpers;
 
 namespace WebSimplify
 {
@@ -57,7 +58,7 @@ namespace WebSimplify
             {
                 e.Cell.Text = GetShiftsForDate(e.Day.Date);
                 if(string.IsNullOrEmpty(e.Cell.Text))
-                    e.Cell.CssClass = "shiftactivecell";
+                    e.Cell.CssClass = "shiftcell shiftcellactive";
                 else
                     e.Cell.CssClass = "shiftcell";
             }
@@ -67,14 +68,15 @@ namespace WebSimplify
 
         private string GetShiftsForDate(DateTime date)
         {
-            UserShiftsContainer currentData = DBController.DbShifts.GetShiftsData(new ShiftsSearchParameters());
+            UserShiftsContainer currentData = DBController.DbShifts.GetShiftsData(new ShiftsSearchParameters {FromDate = date, ToDate = date });
             StringBuilder sb = new StringBuilder();
             var s = currentData.CrrentUserShifts.FirstOrDefault(x => x.Date.Date == date);
             if (s != null)
             {
-                foreach (var si in s.DaylyShifts)
+                foreach (var si in s.DaylyShifts.OrderBy( x => Convert.ToInt32(x)).ToList())
                 {
-                    sb.AppendLine(GenericFormatter.GetEnumDescription(si));
+                    sb.Append(GenericFormatter.GetEnumDescription(si));
+                    sb.Append(HtmlStringHelper.LineBreak);
                 }
             }
             return sb.ToString();
@@ -100,7 +102,8 @@ namespace WebSimplify
             else
                 existing.DaylyShifts.AddRange(d.DaylyShifts);
 
-            DBController.DbShifts.Save(currentData);
+            DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = currentData });
+            ClearInputs(txadddiarydate);
         }
     }
 }

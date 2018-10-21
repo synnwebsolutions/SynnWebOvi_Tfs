@@ -83,6 +83,11 @@
     color: white;
 }
 
+.spanelmin {
+   width:50%;
+   margin: 5px auto;
+}
+
     .spanel .spanelHeader {
         text-align: center;
         top: 0;
@@ -273,13 +278,27 @@
 .shiftcell
 {
 border: 2px solid #FFFFFF;
+height:45px;
 }
-.shiftactivecell{
+.shiftcellactive{
 border: 2px solid #FFFFFF;
 background-color: rgba(119, 136, 153, 0.5);
 }
+.aspcalendarheaderactions{
+     width: 15%;
+
+}
+.aspcalendarheaderactions a{
+   margin: auto;
+    padding-left: 48%;
+    padding-right: 48%;
+    color:white;
+}
 
 
+.spaneltwoinrow{
+
+}
 
 
 
@@ -368,4 +387,8 @@ background-color: rgba(119, 136, 153, 0.5);
         color: white;
         border: 0;
     }
+
+     .spanelmin , aspcalendar {
+   width: unset;
+}
 }

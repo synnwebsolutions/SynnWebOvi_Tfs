@@ -20,9 +20,9 @@ namespace SynnWebOvi
         {
             Load(data);
         }
-        public int Id { get; private set; }
-        public string UserName { get; private set; }
-        public int UserGroupId { get; internal set; }
+        public int Id { get;  set; }
+        public string UserName { get;  set; }
+        public int UserGroupId { get;  set; }
 
         public List<ClientPagePermissions> AllowedClientPagePermissions { get; set; }
         public List<UserSharedGroupPermissions> AllowedSharedPermissions { get; set; }
