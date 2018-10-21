@@ -19,18 +19,5 @@ namespace WebSimplify
         [Description("קניות")]
         Shopping
     }
-    [Serializable]
-    public class UserSharedGroupPermissions
-    {
-        // client shared data
-        public int PermissionId { get; set; }
-        public int UserId { get; set; }
-        public bool MainPermission { get; set; }
-        public UserSharedGroupPermissions()
-        {
-
-        }
-    }
-
     
 }

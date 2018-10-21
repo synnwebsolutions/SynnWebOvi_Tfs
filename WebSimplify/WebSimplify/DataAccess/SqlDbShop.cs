@@ -12,9 +12,12 @@ namespace SynnWebOvi
         {
         }
 
-        public ShoppingData GetData()
+        public ShoppingData GetData(ShopSearchParameters sp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShoppingData);
+            ClearParameters();
+
+            SetPermissions(sp);
             ShoppingData prefs = new ShoppingData();
             using (IDataReader data = DoSelect())
             {
@@ -23,20 +26,29 @@ namespace SynnWebOvi
                 return prefs;
             }
         }
-
-        public void Update(ShoppingData sd)
+        private void SetPermissions(ShopSearchParameters sp)
         {
-            string prefs = XmlHelper.ToXml(sd);
-            DeleteExsisting();
-            SetSqlFormat("insert  into {0} ( ShopingData ) values ( ? )", SynnDataProvider.TableNames.ShoppingData);
-            SetParameters(prefs);
-            ExecuteSql();
-            Commit();
+            StartORGroup();
+            foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
+                AddOREqualField("UserGroupId", gid);
+            EndORGroup();
         }
 
-        private void DeleteExsisting()
+        public void Update(ShopSearchParameters sp)
+        {
+            string prefs = XmlHelper.ToXml(sp.ItemForAction);
+            DeleteExsisting(sp);
+            SetSqlFormat("insert  into {0} ( ShopingData,UserGroupId) values ( ?,? )", SynnDataProvider.TableNames.ShoppingData);
+            ClearParameters();
+            SetParameters(prefs, sp.CurrentUser.AllowedSharedPermissions[0].ToString());
+            ExecuteSql();
+        }
+
+        private void DeleteExsisting(ShopSearchParameters sp)
         {
             SetSqlFormat("delete {0}", SynnDataProvider.TableNames.ShoppingData);
+            ClearParameters();
+            SetPermissions(sp);
             ExecuteSql();
         }
     }

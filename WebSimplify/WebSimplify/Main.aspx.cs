@@ -19,13 +19,10 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                
+                trdiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
+                trdic.Visible = CurrentUser.Allowed(ClientPagePermissions.Dictionary);
+                trshop.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
             }
-        }
-
-        protected override void OnInit(EventArgs e)
-        {
-            
         }
 
         [WebMethod]
@@ -73,6 +70,22 @@ namespace WebSimplify
                 DBController.DbCalendar.Add(sp);
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 ClearInputs(txadddiaryname, txadddiarydesc, txadddiarydate);
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
+
+        protected void btnAddShopItem_ServerClick(object sender, EventArgs e)
+        {
+            if (ValidateInputs(txShopItemToAdd))
+            {
+                ShoppingData d = DBController.DbShop.GetData(new ShopSearchParameters());
+                d.AddToShoplist(txShopItemToAdd.Value);
+                DBController.DbShop.Update(new ShopSearchParameters { ItemForAction = d });
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                ClearInputs(txShopItemToAdd);
             }
             else
             {

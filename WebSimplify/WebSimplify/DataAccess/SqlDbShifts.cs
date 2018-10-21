@@ -35,19 +35,22 @@ namespace WebSimplify
 
         private void SetPermissions(ShiftsSearchParameters sp)
         {
-            if (sp.RequirePrivateKeyOnly)
-                AddSqlWhereField("UserId", sp.CurrentUser.Id.ToString());
-            else
-                AddSqlWhereField("UserGroupId", sp.UserGroupId.ToString());
+            if (!sp.CurrentUser.IsAdmin)
+            {
+                StartORGroup();
+                foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
+                    AddOREqualField("UserGroupId", gid);
+                EndORGroup();
+            }
         }
 
         public void Save(ShiftsSearchParameters sp)
         {
             string prefs = XmlHelper.ToXml(sp.ItemForAction);
             DeleteExsisting(sp);
-            SetSqlFormat("insert  into {0} ( ShiftData, UserId,UserGroupId) values ( ?,?,? )", SynnDataProvider.TableNames.ShiftsData);
+            SetSqlFormat("insert  into {0} ( ShiftData,UserGroupId) values ( ?,? )", SynnDataProvider.TableNames.ShiftsData);
             ClearParameters();
-            SetParameters(prefs, sp.CurrentUser.Id.ToString(), sp.UserGroupId.ToString());
+            SetParameters(prefs, sp.CurrentUser.AllowedSharedPermissions[0].ToString());
             ExecuteSql();
         }
 

@@ -11,6 +11,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using WebSimplify;
 using WebSimplify.Data;
 
 namespace SynnWebOvi
@@ -60,13 +61,13 @@ namespace SynnWebOvi
         //    return true;
         //}
 
-        //protected virtual PermissionsEnumList RequiredPermissions
-        //{
-        //    get
-        //    {
-        //        return InternalRequiredPermissions;
-        //    }
-        //}
+        protected virtual List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                return new List<ClientPagePermissions>();
+            }
+        }
 
         protected virtual bool LoginProvider
         {
@@ -120,20 +121,24 @@ namespace SynnWebOvi
                 SynNavigation.Goto(Pages.Login);
             if (!IsPostBack)
             {
-                
-
                 if (!LoginProvider)
                 {
-                    //Master.FindControl("btnWed").Visible = false;
+                    Master.FindControl("navdiary").Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
+                    Master.FindControl("navdic").Visible = CurrentUser.Allowed(ClientPagePermissions.Dictionary);
+                    Master.FindControl("navshifts").Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
+                    Master.FindControl("navshop").Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
+                    Master.FindControl("navwed").Visible = CurrentUser.Allowed(ClientPagePermissions.Wedding);
+
+                    Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
+                    Master.FindControl("navusers").Visible = CurrentUser.IsAdmin;
+                    Master.FindControl("navlog").Visible = CurrentUser.IsAdmin;
                 }
-                //else
-                //{
-                //    Master.FindControl("btnTasks").Visible = CurrentUser.Logged;
-                //    Master.FindControl("btnSOut").Visible = CurrentUser.Logged;
-                //    Master.FindControl("btnLogs").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
-                //    Master.FindControl("btnUsers").Visible = CurrentUser.Logged && (CurrentUser.IsAdmin || CurrentUser.IsManager);
-                //    Master.FindControl("btnLoginAs").Visible = CurrentUser.Logged && CurrentUser.IsAdmin;
-                //}
+
+                foreach (ClientPagePermissions en in RequiredPermissions)
+                {
+                    if (!CurrentUser.Allowed(en))
+                        SynNavigation.Goto(Pages.Main);
+                }
             }
         }
 
@@ -146,7 +151,7 @@ namespace SynnWebOvi
 
         protected void AddSelectItemForCombo(DropDownList cmb)
         {
-            cmb.Items.Add(new System.Web.UI.WebControls.ListItem { Text = "בחר", Value = "-1" });
+            cmb.Items.Add(new System.Web.UI.WebControls.ListItem { Text = "בחר", Value = "-1" , Selected = true});
         }
 
 

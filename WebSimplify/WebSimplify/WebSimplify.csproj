@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="css\style1.css" />
+    <Content Include="css\Style1resp.css" />
     <Content Include="Diary.aspx" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
@@ -127,6 +128,7 @@
     <Compile Include="DataAccess\SqlDbShop.cs" />
     <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
+    <Compile Include="Data\PermissionGroup.cs" />
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />
     <Compile Include="DataAccess\SqlDbShifts.cs" />

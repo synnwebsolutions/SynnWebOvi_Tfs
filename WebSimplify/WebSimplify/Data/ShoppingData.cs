@@ -23,9 +23,11 @@ namespace WebSimplify
             if (cus == null)
             {
                 cus = new ShopItem { Name = productName };
-                AllShopItems.Add(cus);
+                if(AllShopItems.Any(x => x.Name == productName))
+                    AllShopItems.Add(cus);
             }
-            CurrentToBuy.Add(cus);
+            if (CurrentToBuy.Any(x => x.Name == productName))
+                CurrentToBuy.Add(cus);
         }
     }
 

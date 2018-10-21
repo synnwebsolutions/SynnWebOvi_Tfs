@@ -13,6 +13,15 @@ namespace WebSimplify {
     public partial class UsersManagment {
         
         /// <summary>
+        /// cmbusers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbusers;
+        
+        /// <summary>
         /// txNewUserName control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,24 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txNewFirstPassword;
         
         /// <summary>
+        /// gvClientPagePermissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvClientPagePermissions;
+        
+        /// <summary>
+        /// gvGroupPermissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGroupPermissions;
+        
+        /// <summary>
         /// btnAddUser control.
         /// </summary>
         /// <remarks>
@@ -38,5 +65,23 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddUser;
+        
+        /// <summary>
+        /// txNewGroupName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txNewGroupName;
+        
+        /// <summary>
+        /// abtnAddGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton abtnAddGroup;
     }
 }

@@ -11,14 +11,16 @@ namespace SynnWebOvi
         {
         }
 
-        public List<WeddingGuest> GetGuests(string searchText)
+        public List<WeddingGuest> GetGuests(WeddSearchParameters sp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.WeddingItems);
             ClearParameters();
-            if (!string.IsNullOrEmpty(searchText))
+            AddSqlWhereField("UserGroupId", sp.CurrentUser.Id.ToString());
+
+            if (!string.IsNullOrEmpty(sp.SearchText))
             {
                 StartORGroup();
-                AddORLikeField("GuestName", searchText, LikeSelectionStyle.CheckBoth);
+                AddORLikeField("GuestName", sp.SearchText, LikeSelectionStyle.CheckBoth);
                 EndORGroup();
             }
             var lst = new List<WeddingGuest>();

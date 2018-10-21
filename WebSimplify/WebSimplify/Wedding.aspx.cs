@@ -30,7 +30,7 @@ namespace WebSimplify
 
         public IEnumerable GetData()
         {
-            List<WeddingGuest> items = DBController.DbWedd.GetGuests(string.Empty);
+            List<WeddingGuest> items = DBController.DbWedd.GetGuests(new WeddSearchParameters());
             return items;
         }
 

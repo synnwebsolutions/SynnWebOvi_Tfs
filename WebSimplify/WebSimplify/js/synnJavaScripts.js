@@ -3,6 +3,7 @@
     ArrangeTableFilters();
     ClearTableData();
     ArrangeASPcalendar();
+
     $(".tablefilter").on("keyup", function () {
         var value = $(this).val().toLowerCase();
             $(".datatofilter tr").filter(function () {

@@ -15,6 +15,10 @@ namespace SynnWebOvi
     {
         bool ValidateUserCredentials(string userName, string passwword);
         LoggedUser LoadUserSettings(string userName, string passwword);
+        List<PermissionGroup> GetPermissionGroup();
+        void Add(PermissionGroup g);
+        void Add(LoggedUser u);
+        List<LoggedUser> GetUsers(UserSearchParameters lp);
     }
 
     public interface IDbLog
@@ -26,13 +30,13 @@ namespace SynnWebOvi
 
     public interface IDbWedd
     {
-        List<WeddingGuest> GetGuests(string searchText);
+        List<WeddingGuest> GetGuests(WeddSearchParameters sp);
     }
 
     public interface IDbShop
     {
-        ShoppingData GetData();
-        void Update(ShoppingData sd);
+        ShoppingData GetData(ShopSearchParameters sp);
+        void Update(ShopSearchParameters sp);
     }
 
     public interface IDbShifts
@@ -59,11 +63,9 @@ namespace SynnWebOvi
         public LoggedUser CurrentUser { get; set; }
 
         public bool RequirePrivateKeyOnly { get; set; }
-        public int UserGroupId { get; set; }
         public BaseSearchParameters()
         {
             CurrentUser = AccountData.GetCurrentUser();
-            UserGroupId = CurrentUser.UserGroupId;
         }
     }
     public class LogSearchParameters: BaseSearchParameters
@@ -87,6 +89,35 @@ namespace SynnWebOvi
         public DateTime? ToDate { get; set; }
 
         public UserShiftsContainer ItemForAction { get; set; }
+    }
+
+    public class ShopSearchParameters : BaseSearchParameters
+    {
+        public ShopSearchParameters() : base()
+        {
+        }
+
+        public ShoppingData ItemForAction { get; set; }
+    }
+
+    public class WeddSearchParameters : BaseSearchParameters
+    {
+        public WeddSearchParameters() : base()
+        {
+        }
+
+        public string SearchText { get; set; }
+    }
+
+    public class UserSearchParameters : BaseSearchParameters
+    {
+        public UserSearchParameters() : base()
+        {
+        }
+
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public int? Id { get; set; }
     }
 
     public class DictionarySearchParameters : BaseSearchParameters

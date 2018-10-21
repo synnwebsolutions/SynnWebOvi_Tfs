@@ -31,14 +31,16 @@ namespace SynnWebOvi
 
         public static class TableNames
         {
-            public static string UserDictionary = "UserDictionary";
+            public static string UserDictionary = "UserDictionary"; // user only
             public static string Users = "Users";
             public static string Log = "Log";
-            public static string WeddingItems = "WeddingItems";
-            public static string ShoppingData = "ShoppingData";
-            public static string ShiftsData = "ShiftsData";
+            public static string WeddingItems = "WeddingItems"; // group
+            public static string ShoppingData = "ShopingData";  // group
+            public static string ShiftsData = "ShiftsData"; // group
             public static string AppSettings = "AppSettings";
-            public static string DiaryData = "DiaryData";
+            public static string DiaryData = "DiaryData";// group
+            public static string PermissionGroups = "PermissionGroups";
+            public static string User_PermissionGroups = "User_PermissionGroups";
         }
     }
 

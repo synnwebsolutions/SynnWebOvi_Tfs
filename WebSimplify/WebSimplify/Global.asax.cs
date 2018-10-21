@@ -14,7 +14,8 @@ namespace SynnWebOvi
         internal static IDbLog Dbl;
 
         public static string AdminUserName = "sami";
-        public static string AdminPass = "1x";
+        public static string AdminPass = "1xfdahshbdjh]_7gdks";
+        public static string FirstLoginPass = "1x2w3e4z";
 
         protected void Application_Start(object sender, EventArgs e)
         {

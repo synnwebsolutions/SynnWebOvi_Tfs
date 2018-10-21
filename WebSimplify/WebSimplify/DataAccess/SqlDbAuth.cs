@@ -1,4 +1,5 @@
 ﻿using SynnCore.DataAccess;
+using SynnCore.Generics;
 using SynnWebOvi;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,20 @@ namespace WebSimplify
 
         public LoggedUser LoadUserSettings(string userName, string passwword)
         {
-            List<LoggedUser> lst = GetUsersEx(userName, passwword);
+            List<LoggedUser> lst = GetUsersEx(new UserSearchParameters { UserName = userName, Password = passwword });
             return lst.FirstOrDefault();
         }
 
-        private List<LoggedUser> GetUsersEx(string userName, string passwword)
+        private List<LoggedUser> GetUsersEx(UserSearchParameters lp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.Users);
             ClearParameters();
-            AddSqlWhereLikeField("UserName", userName);
-            AddSqlWhereLikeField("Password", passwword);
+            if (!string.IsNullOrEmpty(lp.UserName))
+                AddSqlWhereLikeField("UserName", lp.UserName);
+            if (!string.IsNullOrEmpty(lp.Password))
+                AddSqlWhereLikeField("Password", lp.Password);
+            if (lp.Id.HasValue)
+                AddSqlWhereLikeField("Id", lp.Id.ToString());
             var lst = new List<LoggedUser>();
             FillList(lst, typeof(LoggedUser));
             return lst;
@@ -35,8 +40,41 @@ namespace WebSimplify
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwword))
                 return false;
-            List<LoggedUser> lst = GetUsersEx(userName, passwword);
+            List<LoggedUser> lst = GetUsersEx(new UserSearchParameters { UserName = userName, Password = passwword });
             return lst.Count == 1;
+        }
+
+        public List<PermissionGroup> GetPermissionGroup()
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.PermissionGroups);
+            ClearParameters();
+            var lst = new List<PermissionGroup>();
+            FillList(lst, typeof(PermissionGroup));
+            return lst;
+        }
+
+        public void Add(PermissionGroup g)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("Name", g.Name));
+            SetInsertIntoSql(SynnDataProvider.TableNames.PermissionGroups, sqlItems);
+            ExecuteSql();
+        }
+
+        public void Add(LoggedUser u)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserName", u.UserName));
+            sqlItems.Add(new SqlItem("Password", u.Password));
+            sqlItems.Add(new SqlItem("AllowedClientPagePermissions", XmlHelper.ToXml(u.AllowedClientPagePermissions)));
+            sqlItems.Add(new SqlItem("AllowedSharedPermissions", XmlHelper.ToXml(u.AllowedSharedPermissions)));
+            SetInsertIntoSql(SynnDataProvider.TableNames.Users, sqlItems);
+            ExecuteSql();
+        }
+
+        public List<LoggedUser> GetUsers(UserSearchParameters lp)
+        {
+            return GetUsersEx(lp);
         }
     }
 
