@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -64,6 +65,13 @@ namespace WebSimplify
             if (ActionMonth.Year == e.Day.Date.Year && ActionMonth.Month == e.Day.Date.Month)
             {
                 bool hasVal = false;
+                DateTime Today = DateTime.Today;
+
+                var HebCal = new HebrewCalendar();
+                //int curYear = HebCal.GetYear(Today);    //current numeric hebrew year
+                //int curMonth = HebCal.GetMonth(Today);
+
+                e.Cell.ToolTip = e.Day.Date.ToJewishDateString("MMMM dd, yyyy");
                 e.Cell.Text = GetDiaryForDate(e.Day.Date, ref hasVal);
                 e.Cell.CssClass = "shiftcell ";
                 if (hasVal)

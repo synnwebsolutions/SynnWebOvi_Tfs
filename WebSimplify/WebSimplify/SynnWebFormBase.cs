@@ -3,6 +3,7 @@ using SynnCore.Generics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -50,6 +51,9 @@ namespace SynnWebOvi
                 ctr.Value = string.Empty;
             }
         }
+
+
+
 
         //public bool UserAllowed(LoggedUser user)
         //{

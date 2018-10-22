@@ -113,6 +113,7 @@
     <Compile Include="AppSettingsPage.aspx.designer.cs">
       <DependentUpon>AppSettingsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CultureHelper.cs" />
     <Compile Include="DataAccess\SqlDbCalendar.cs" />
     <Compile Include="Data\AccountData.cs">
       <SubType>ASPXCodeBehind</SubType>

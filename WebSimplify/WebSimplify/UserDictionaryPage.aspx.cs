@@ -30,17 +30,9 @@ namespace WebSimplify
 
         public IEnumerable GetData()
         {
-            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(new DictionarySearchParameters());
+            List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(new DictionarySearchParameters { SearchText = txsearchkey.Value });
             return items;
         }
-
-        //[WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public static List<DictionaryItem> GetDictionaryItems(string searchtext)
-        //{
-        //    List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(new DictionarySearchParameters() { SearchText = searchtext });
-        //    return items;
-        //}
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -50,6 +42,11 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lblDicName")).Text = d.DictionaryKey;
                 ((Label)e.Row.FindControl("lblDicValue")).Text = d.DictionaryValue;
             }
+        }
+
+        protected void btnSearch_ServerClick(object sender, EventArgs e)
+        {
+            RefreshGrid(gv);
         }
     }
 }

@@ -46,25 +46,5 @@ namespace WebSimplify.Data
         Night
     }
 
-    public static class DateTimeExtensions
-    {
-        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
-        {
-            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
-            return dt.AddDays(-1 * diff).Date;
-        }
 
-        public static bool InTwoWeekPeriod(this DateTime periodStart , DateTime dateToCheck)
-        {
-            if (dateToCheck.Date >= periodStart.Date)
-                return (dateToCheck.Date - periodStart.Date).TotalDays < 15;
-
-            return false;
-        }
-
-        public static bool InCurrentMonth(this DateTime actualMonth, DateTime dateToCheck)
-        {
-            return actualMonth.Year == dateToCheck.Year && dateToCheck.Month == dateToCheck.Month;
-        }
-    }
 }
