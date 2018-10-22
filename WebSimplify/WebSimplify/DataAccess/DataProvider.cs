@@ -35,7 +35,8 @@ namespace SynnWebOvi
             public static string Users = "Users";
             public static string Log = "Log";
             public static string WeddingItems = "WeddingItems"; // group
-            public static string ShoppingData = "ShopingData";  // group
+            public static string ShoppingItems = "ShoppingItems";  // group
+            public static string User_ShoppingItems = "User_ShoppingItems";  // group
             public static string ShiftsData = "ShiftsData"; // group
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group

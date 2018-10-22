@@ -37,8 +37,10 @@ namespace SynnWebOvi
 
     public interface IDbShop
     {
-        ShoppingData GetData(ShopSearchParameters sp);
-        void Update(ShopSearchParameters sp);
+        List<ShopItem> Get(ShopSearchParameters shopSearchParameters);
+        void ActivateShopItem(ShopSearchParameters shopSearchParameters);
+        void DeActivateShopItem(ShopSearchParameters shopSearchParameters);
+        void AddNewShopItem(ShopItem n);
     }
 
     public interface IDbShifts
@@ -100,7 +102,10 @@ namespace SynnWebOvi
         {
         }
 
-        public ShoppingData ItemForAction { get; set; }
+        public bool? Active { get; internal set; }
+        public int? IdToActivate { get; internal set; }
+        public int? IdToDeactivate { get; internal set; }
+        public string ItemName { get; internal set; }
     }
 
     public class WeddSearchParameters : BaseSearchParameters

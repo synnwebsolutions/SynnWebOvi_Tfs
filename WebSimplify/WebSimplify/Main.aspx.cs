@@ -81,9 +81,17 @@ namespace WebSimplify
         {
             if (ValidateInputs(txShopItemToAdd))
             {
-                ShoppingData d = DBController.DbShop.GetData(new ShopSearchParameters());
-                d.AddToShoplist(txShopItemToAdd.Value);
-                DBController.DbShop.Update(new ShopSearchParameters { ItemForAction = d });
+                ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                if(ul == null)
+                {
+                    ShopItem n = new ShopItem
+                    {
+                        Name = txShopItemToAdd.Value
+                    };
+                    DBController.DbShop.AddNewShopItem(n);
+                }
+                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 ClearInputs(txShopItemToAdd);
             }
