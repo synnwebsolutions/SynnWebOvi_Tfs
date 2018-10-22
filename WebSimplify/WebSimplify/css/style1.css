@@ -111,6 +111,7 @@ select {
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
+    -moz-appearance:none;
 }
 
 myselect::-ms-expand {

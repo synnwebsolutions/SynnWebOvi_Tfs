@@ -21,6 +21,18 @@ namespace WebSimplify
             }
         }
 
+        public LoggedUser EditedUser
+        {
+            get
+            {
+                return (LoggedUser)GetFromSession("edt*");
+            }
+            set
+            {
+                StoreInSession("edt*", value);
+            }
+        }
+
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gvClientPagePermissions.ID)
@@ -72,8 +84,11 @@ namespace WebSimplify
                     AlertMessage("יותר מדי קבוצות הרשאה");
                     return;
                 }
-                DBController.DbAuth.Add(u);
-                SetInputs(null);
+                if(EditedUser == null)
+                    DBController.DbAuth.Add(u);
+                else
+                    DBController.DbAuth.Add(u); // edit !!!!!!
+                SetInputs();
                 AlertMessage("פעולה זו בוצעה בהצלחה");
             }
             else
@@ -134,28 +149,29 @@ namespace WebSimplify
 
         protected void cmbusers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoggedUser u = null;
+            EditedUser = null;
             if (cmbusers.SelectedIndex > 0)
             {
-                u = DBController.DbAuth.GetUsers(new UserSearchParameters { Id = Convert.ToInt32(cmbusers.SelectedValue) }).First() ;
+                EditedUser = DBController.DbAuth.GetUsers(new UserSearchParameters { Id = Convert.ToInt32(cmbusers.SelectedValue) }).First() ;
             }
-            SetInputs(u);
+            SetInputs();
         }
 
-        private void SetInputs(LoggedUser user)
+        private void SetInputs()
         {
-            txNewFirstPassword.Value = user != null ? user.Password : string.Empty;
-            txNewUserName.Value = user != null ? user.UserName : string.Empty;
+            txNewFirstPassword.Value = EditedUser != null ? EditedUser.Password : string.Empty;
+            txNewUserName.Value = EditedUser != null ? EditedUser.UserName : string.Empty;
             foreach (GridViewRow gvr in gvGroupPermissions.Rows)
             {
                 int grouppId = int.Parse(((HiddenField)gvr.FindControl("hfgid")).Value);
-                ((CheckBox)gvr.FindControl("chkGroup")).Checked = user != null && user.AllowedSharedPermissions.Contains(grouppId);
+                ((CheckBox)gvr.FindControl("chkGroup")).Checked = EditedUser != null && EditedUser.AllowedSharedPermissions.Contains(grouppId);
             }
             foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
             {
                 int pageid = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);
-                ((CheckBox)gvr.FindControl("chk")).Checked = user != null && user.AllowedClientPagePermissions.Contains((ClientPagePermissions)pageid);
+                ((CheckBox)gvr.FindControl("chk")).Checked = EditedUser != null && EditedUser.AllowedClientPagePermissions.Contains((ClientPagePermissions)pageid);
             }
+            btnAddUser.InnerText = EditedUser != null ? "עדכן" : "הוסף";
         }
     }
 }
