@@ -61,5 +61,10 @@ namespace WebSimplify.Data
 
             return false;
         }
+
+        public static bool InCurrentMonth(this DateTime actualMonth, DateTime dateToCheck)
+        {
+            return actualMonth.Year == dateToCheck.Year && dateToCheck.Month == dateToCheck.Month;
+        }
     }
 }

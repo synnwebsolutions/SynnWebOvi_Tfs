@@ -57,13 +57,16 @@ namespace WebSimplify
             if (inPeriod)
             {
                 e.Cell.Text = GetShiftsForDate(e.Day.Date);
-                if(string.IsNullOrEmpty(e.Cell.Text))
-                    e.Cell.CssClass = "shiftcell shiftcellactive";
+                if (!string.IsNullOrEmpty(e.Cell.Text))
+                    e.Cell.CssClass = "shiftcellbase shiftcellactive";
                 else
-                    e.Cell.CssClass = "shiftcell";
+                    e.Cell.CssClass = "shiftcellbase shiftcellvalid";
             }
             else
+            {
                 e.Cell.Visible = false;
+                e.Cell.CssClass = "shiftcellbase";
+            }
         }
 
         private string GetShiftsForDate(DateTime date)

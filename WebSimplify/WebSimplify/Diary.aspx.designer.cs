@@ -13,48 +13,48 @@ namespace WebSimplify {
     public partial class Diary {
         
         /// <summary>
-        /// monthTitle control.
+        /// txadddiarydate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl monthTitle;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
         
         /// <summary>
-        /// btnNextMonth control.
+        /// txadddiaryname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnNextMonth;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiaryname;
         
         /// <summary>
-        /// btnPrevMonth control.
+        /// txadddiarydesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnPrevMonth;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiarydesc;
         
         /// <summary>
-        /// gv control.
+        /// btnadddiary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnadddiary;
         
         /// <summary>
-        /// gvMin control.
+        /// cdr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMin;
+        protected global::System.Web.UI.WebControls.Calendar cdr;
     }
 }

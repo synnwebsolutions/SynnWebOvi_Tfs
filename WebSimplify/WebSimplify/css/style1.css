@@ -369,14 +369,20 @@ myselect::-ms-expand {
     padding-right: 15%;
 }
 
-.shiftcell {
+.shiftcellbase {
     border: 2px solid #FFFFFF;
-    height: 45px;
+   
 }
-
+.shiftcellvalid {
+    /*height: 80px;*/
+    border: 1px solid #FFFFFF;
+    background-color:rgba(255, 255, 255, 0.4);
+     height: 75px;
+     color: rgba(41, 57, 85, 0.5);
+}
 .shiftcellactive {
-    border: 2px solid #FFFFFF;
-    background-color: rgba(119, 136, 153, 0.5);
+    border: 2px solid #292929;
+    background-color: rgba(41, 57, 85, 0.5);
 }
 
 .aspcalendarheaderactions {
