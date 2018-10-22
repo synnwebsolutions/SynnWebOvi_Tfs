@@ -31,6 +31,8 @@ namespace WebSimplify
 #if DEBUG
             if (string.IsNullOrEmpty(txUname.Value))
             {
+                //xu = "avr";
+                //xp = "avr";
                 xu = Global.AdminUserName;
                 xp = Global.AdminPass;
             }

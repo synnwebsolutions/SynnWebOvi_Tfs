@@ -30,7 +30,9 @@ namespace WebSimplify
 
         public IEnumerable GetData()
         {
-            List<WeddingGuest> items = DBController.DbWedd.GetGuests(new WeddSearchParameters());
+            if (string.IsNullOrEmpty(txwedsearchkey.Value))
+                return new List<WeddingGuest>();
+            List<WeddingGuest> items = DBController.DbWedd.GetGuests(new WeddSearchParameters { SearchText = txwedsearchkey.Value });
             return items;
         }
 
@@ -47,6 +49,11 @@ namespace WebSimplify
         protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gv.PageIndex = e.NewPageIndex;
+            RefreshGrid(gv);
+        }
+
+        protected void btnSearch_ServerClick(object sender, EventArgs e)
+        {
             RefreshGrid(gv);
         }
     }
