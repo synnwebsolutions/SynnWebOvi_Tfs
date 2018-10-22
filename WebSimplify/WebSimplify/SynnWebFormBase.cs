@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -32,6 +33,13 @@ namespace SynnWebOvi
             {
                 StoreInSession("ssUser_*", value);
             }
+        }
+
+        protected override void InitializeCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("he-IL");
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            base.InitializeCulture();
         }
 
         internal void FillEnum(DropDownList cmb, Type type, bool addSelectValue = true)
