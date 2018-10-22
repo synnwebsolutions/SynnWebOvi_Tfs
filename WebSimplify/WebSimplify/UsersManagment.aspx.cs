@@ -61,7 +61,7 @@ namespace WebSimplify
                 LoggedUser u = new LoggedUser();
                 u.UserName = txNewUserName.Value;
                 u.Password = txNewFirstPassword.Value;
-               
+                u.DisplayName = txDisplay.Value;
                 foreach (GridViewRow gvr in gvGroupPermissions.Rows)
                 {
                     if (((CheckBox)gvr.FindControl("chkGroup")).Checked)
@@ -79,15 +79,19 @@ namespace WebSimplify
                         u.AllowedClientPagePermissions.Add((ClientPagePermissions)pageid);
                     }
                 }
-                if (u.AllowedSharedPermissions.Count > 1)
+                if (u.AllowedSharedPermissions.Count > 2)
                 {
                     AlertMessage("יותר מדי קבוצות הרשאה");
                     return;
                 }
-                if(EditedUser == null)
+                if (EditedUser == null)
                     DBController.DbAuth.Add(u);
                 else
-                    DBController.DbAuth.Add(u); // edit !!!!!!
+                {
+                    u.Id = EditedUser.Id;
+                    DBController.DbAuth.Update(u); // edit !!!!!!
+                    EditedUser = null;
+                }
                 SetInputs();
                 AlertMessage("פעולה זו בוצעה בהצלחה");
             }
@@ -161,6 +165,7 @@ namespace WebSimplify
         {
             txNewFirstPassword.Value = EditedUser != null ? EditedUser.Password : string.Empty;
             txNewUserName.Value = EditedUser != null ? EditedUser.UserName : string.Empty;
+            txDisplay.Value = EditedUser != null ? EditedUser.DisplayName : string.Empty;
             foreach (GridViewRow gvr in gvGroupPermissions.Rows)
             {
                 int grouppId = int.Parse(((HiddenField)gvr.FindControl("hfgid")).Value);
@@ -172,6 +177,7 @@ namespace WebSimplify
                 ((CheckBox)gvr.FindControl("chk")).Checked = EditedUser != null && EditedUser.AllowedClientPagePermissions.Contains((ClientPagePermissions)pageid);
             }
             btnAddUser.InnerText = EditedUser != null ? "עדכן" : "הוסף";
+            cmbusers.SelectedValue = EditedUser != null ? EditedUser.Id.ToString() : "-1";
         }
     }
 }

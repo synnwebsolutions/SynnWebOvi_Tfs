@@ -29,8 +29,11 @@ namespace WebSimplify
             string xu = txUname.Value;
             string xp = txPass.Value;
 #if DEBUG
-            //xu = Global.AdminUserName;
-            //xp = Global.AdminPass;
+            if (string.IsNullOrEmpty(txUname.Value))
+            {
+                xu = Global.AdminUserName;
+                xp = Global.AdminPass;
+            }
 #endif
             if (xu == Global.AdminUserName && xp == Global.AdminPass)
                 CurrentUser = new LoggedUser("Smachew", 1);

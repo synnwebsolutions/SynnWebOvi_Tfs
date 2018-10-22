@@ -19,6 +19,8 @@ namespace SynnWebOvi
         void Add(PermissionGroup g);
         void Add(LoggedUser u);
         List<LoggedUser> GetUsers(UserSearchParameters lp);
+        void Update(LoggedUser u);
+        LoggedUser GetUser(int ownerId);
     }
 
     public interface IDbLog
@@ -41,8 +43,8 @@ namespace SynnWebOvi
 
     public interface IDbShifts
     {
-        UserShiftsContainer GetShiftsData(ShiftsSearchParameters shiftsSearchParameters);
         void Save(ShiftsSearchParameters sp);
+        List<ShiftDayData> GetShifts(ShiftsSearchParameters shiftsSearchParameters);
     }
 
 
@@ -88,7 +90,8 @@ namespace SynnWebOvi
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
 
-        public UserShiftsContainer ItemForAction { get; set; }
+        public ShiftDayData ItemForAction { get; set; }
+
     }
 
     public class ShopSearchParameters : BaseSearchParameters

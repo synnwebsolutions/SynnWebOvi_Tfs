@@ -68,14 +68,15 @@ namespace WebSimplify
 
         private string GetShiftsForDate(DateTime date)
         {
-            UserShiftsContainer currentData = DBController.DbShifts.GetShiftsData(new ShiftsSearchParameters {FromDate = date, ToDate = date });
+            List<ShiftDayData> currentData = DBController.DbShifts.GetShifts(new ShiftsSearchParameters {FromDate = date, ToDate = date.AddHours(23).AddMinutes(59) });
             StringBuilder sb = new StringBuilder();
-            var s = currentData.CrrentUserShifts.FirstOrDefault(x => x.Date.Date == date);
-            if (s != null)
+            if (currentData != null)
             {
-                foreach (var si in s.DaylyShifts.OrderBy( x => Convert.ToInt32(x)).ToList())
+                foreach (var si in currentData.OrderBy( x => Convert.ToInt32(x.DaylyShift)).ToList())
                 {
-                    sb.Append(GenericFormatter.GetEnumDescription(si));
+                    // add shift owner name
+                    LoggedUser owner = DBController.DbAuth.GetUser(si.OwnerId);
+                    sb.AppendFormat("{0} - {1}",owner.DisplayName, GenericFormatter.GetEnumDescription(si.DaylyShift));
                     sb.Append(HtmlStringHelper.LineBreak);
                 }
             }
@@ -94,15 +95,11 @@ namespace WebSimplify
             d.Date = Convert.ToDateTime(txadddiarydate.Value);
             ShiftTime es;
             Enum.TryParse(cmbShifts.SelectedValue, out es);
-            d.DaylyShifts.Add(es);
-            UserShiftsContainer currentData = DBController.DbShifts.GetShiftsData(new ShiftsSearchParameters());
-            var existing = currentData.CrrentUserShifts.FirstOrDefault(x => x.Date.Date == d.Date.Date);
-            if (existing == null)
-                currentData.CrrentUserShifts.Add(d);
-            else
-                existing.DaylyShifts.AddRange(d.DaylyShifts);
+            d.DaylyShift = es;
+            d.OwnerId = CurrentUser.Id;
+            d.UserGroupId = CurrentUser.AllowedSharedPermissions[0];
 
-            DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = currentData });
+            DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
             ClearInputs(txadddiarydate);
         }
     }

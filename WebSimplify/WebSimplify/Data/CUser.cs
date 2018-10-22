@@ -25,6 +25,7 @@ namespace SynnWebOvi
         public string UserName { get;  set; }
         public string Password { get; set; }
         public int UserGroupId { get;  set; }
+        public string DisplayName { get; set; }
 
         public List<ClientPagePermissions> AllowedClientPagePermissions { get; set; }
         public List<int> AllowedSharedPermissions { get; set; }
@@ -43,7 +44,7 @@ namespace SynnWebOvi
             Id = DataAccessUtility.LoadInt32(reader, "Id");
             UserName = DataAccessUtility.LoadNullable<string>(reader, "UserName");
             Password = DataAccessUtility.LoadNullable<string>(reader, "Password");
-
+            DisplayName = DataAccessUtility.LoadNullable<string>(reader, "DisplayName");
             string cper = DataAccessUtility.LoadNullable<string>(reader, "AllowedClientPagePermissions");
             if (string.IsNullOrEmpty(cper))
                 AllowedClientPagePermissions = new List<ClientPagePermissions>();

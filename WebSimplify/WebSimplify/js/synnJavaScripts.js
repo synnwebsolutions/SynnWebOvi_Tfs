@@ -1,15 +1,15 @@
 ﻿$(document).ready(function ()
 {
-    ArrangeTableFilters();
-    ClearTableData();
+    //ArrangeTableFilters();
+    //ClearTableData();
     ArrangeASPcalendar();
 
-    $(".tablefilter").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-            $(".datatofilter tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-    });
+    //$(".tablefilter").on("keyup", function () {
+    //    var value = $(this).val().toLowerCase();
+    //        $(".datatofilter tr").filter(function () {
+    //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //        });
+    //});
 
 });
 function ArrangeTableFilters() {

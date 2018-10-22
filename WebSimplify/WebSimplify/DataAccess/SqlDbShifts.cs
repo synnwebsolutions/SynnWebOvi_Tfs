@@ -17,22 +17,6 @@ namespace WebSimplify
 
         }
 
-        public UserShiftsContainer GetShiftsData(ShiftsSearchParameters sp)
-        {
-            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShiftsData);
-            ClearParameters();
-            
-            SetPermissions(sp);
-
-            UserShiftsContainer prefs = new UserShiftsContainer();
-            using (IDataReader data = DoSelect())
-            {
-                if (data.Read())
-                    prefs = XmlHelper.CreateFromXml<UserShiftsContainer>(data["ShiftData"].ToString());
-                return prefs;
-            }
-        }
-
         private void SetPermissions(ShiftsSearchParameters sp)
         {
             if (!sp.CurrentUser.IsAdmin)
@@ -46,20 +30,29 @@ namespace WebSimplify
 
         public void Save(ShiftsSearchParameters sp)
         {
-            string prefs = XmlHelper.ToXml(sp.ItemForAction);
-            DeleteExsisting(sp);
-            SetSqlFormat("insert  into {0} ( ShiftData,UserGroupId) values ( ?,? )", SynnDataProvider.TableNames.ShiftsData);
-            ClearParameters();
-            SetParameters(prefs, sp.CurrentUser.AllowedSharedPermissions[0].ToString());
+            var i = sp.ItemForAction;
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("Date",i.Date));
+            sqlItems.Add(new SqlItem("UserGroupId", sp.CurrentUser.AllowedSharedPermissions[0]));
+            sqlItems.Add(new SqlItem("OwnerId", sp.CurrentUser.Id));
+            sqlItems.Add(new SqlItem("DaylyShift", (int)i.DaylyShift));
+            SetInsertIntoSql(SynnDataProvider.TableNames.ShiftsData, sqlItems);
             ExecuteSql();
         }
+        
 
-        private void DeleteExsisting(ShiftsSearchParameters sp)
+        public List<ShiftDayData> GetShifts(ShiftsSearchParameters lsp)
         {
-            SetSqlFormat("delete {0}", SynnDataProvider.TableNames.ShiftsData);
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShiftsData);
             ClearParameters();
-            SetPermissions(sp);
-            ExecuteSql();
+            SetPermissions(lsp);
+            if (lsp.FromDate.HasValue)
+                AddSqlWhereField("Date", lsp.FromDate, ">=");
+            if (lsp.ToDate.HasValue)
+                AddSqlWhereField("Date", lsp.ToDate, "<");
+            var lst = new List<ShiftDayData>();
+            FillList(lst, typeof(ShiftDayData));
+            return lst;
         }
     }
 }

@@ -4,50 +4,35 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using SynnWebOvi;
+using SynnCore.DataAccess;
+using System.Data;
 
 namespace WebSimplify.Data
 {
-
-    public class UserShiftsContainer
-    {
-        public LoggedUser currentUser { get; set; }
-
-        public List<ShiftDayData> CrrentUserShifts { get; set; }
-        public UserShiftsContainer()
-        {
-            CrrentUserShifts = new List<ShiftDayData>();
-        }
-
-        public UserShiftsContainer(LoggedUser currentUser)
-        {
-            this.currentUser = currentUser;
-            CrrentUserShifts = new List<ShiftDayData>();
-            //var dt = DateTime.Now;
-            //var lst = new List<ShiftDayData>();
-            //var s1 = new ShiftDayData { Date = dt };
-            //s1.DaylyShifts.Add(ShiftTime.Morning);
-            //s1.DaylyShifts.Add(ShiftTime.Night);
-            //lst.Add(s1);
-
-            //var s2 = new ShiftDayData { Date = dt.AddDays(2) };
-            //s2.DaylyShifts.Add(ShiftTime.Night);
-            //lst.Add(s2);
-
-
-            //var s3 = new ShiftDayData { Date = dt.AddDays(3) };
-            //s3.DaylyShifts.Add(ShiftTime.Noon);
-            //lst.Add(s3);
-        }
-    }
-
     [Serializable]
-    public class ShiftDayData
+    public class ShiftDayData : IDbLoadable
     {
         public DateTime Date { get; set; }
-        public List<ShiftTime> DaylyShifts { get; set; }
+        public ShiftTime DaylyShift { get; set; }
+        public int Id { get;  set; }
+        public int UserGroupId { get; set; }
+        public int OwnerId { get;  set; }
+
         public ShiftDayData()
         {
-            DaylyShifts = new List<ShiftTime>();
+        }
+        public ShiftDayData(IDataReader data)
+        {
+            Load(data);
+        }
+
+        public void Load(IDataReader reader)
+        {
+            Id = DataAccessUtility.LoadInt32(reader, "Id");
+            Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
+            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
+            OwnerId = DataAccessUtility.LoadInt32(reader, "OwnerId");
+            DaylyShift = (ShiftTime)DataAccessUtility.LoadInt32(reader, "DaylyShift");
         }
     }
 

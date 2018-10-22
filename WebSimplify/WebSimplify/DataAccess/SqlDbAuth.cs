@@ -63,11 +63,7 @@ namespace WebSimplify
 
         public void Add(LoggedUser u)
         {
-            var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserName", u.UserName));
-            sqlItems.Add(new SqlItem("Password", u.Password));
-            sqlItems.Add(new SqlItem("AllowedClientPagePermissions", XmlHelper.ToXml(u.AllowedClientPagePermissions)));
-            sqlItems.Add(new SqlItem("AllowedSharedPermissions", XmlHelper.ToXml(u.AllowedSharedPermissions)));
+            SqlItemList sqlItems = Get(u);
             SetInsertIntoSql(SynnDataProvider.TableNames.Users, sqlItems);
             ExecuteSql();
         }
@@ -75,6 +71,30 @@ namespace WebSimplify
         public List<LoggedUser> GetUsers(UserSearchParameters lp)
         {
             return GetUsersEx(lp);
+        }
+
+        public void Update(LoggedUser u)
+        {
+            SqlItemList sqlItems = Get(u);
+            var wItems = new SqlItemList { new SqlItem("Id", u.Id) };
+            SetUpdateSql(SynnDataProvider.TableNames.Users, sqlItems, wItems);
+            ExecuteSql();
+        }
+
+        private static SqlItemList Get(LoggedUser u)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserName", u.UserName));
+            sqlItems.Add(new SqlItem("Password", u.Password));
+            sqlItems.Add(new SqlItem("DisplayName", u.DisplayName));
+            sqlItems.Add(new SqlItem("AllowedClientPagePermissions", XmlHelper.ToXml(u.AllowedClientPagePermissions)));
+            sqlItems.Add(new SqlItem("AllowedSharedPermissions", XmlHelper.ToXml(u.AllowedSharedPermissions)));
+            return sqlItems;
+        }
+
+        public LoggedUser GetUser(int uId)
+        {
+            return GetUsersEx(new UserSearchParameters { Id = uId }).First();
         }
     }
 
