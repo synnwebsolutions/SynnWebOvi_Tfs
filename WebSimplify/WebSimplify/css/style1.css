@@ -1,4 +1,4 @@
-* {
+﻿* {
     box-sizing: border-box;
 }
 
@@ -135,7 +135,6 @@ myselect::-ms-expand {
 
     .snav li {
         float: right;
-         
     }
 
         .snav li a {
@@ -153,11 +152,14 @@ myselect::-ms-expand {
 .active {
     background-color: #292929;
 }
-
-textarea{
-    width:100%;
-    height:350px;
+.mactive, .mcollapsible:hover {
+  background-color: #fff;
 }
+textarea {
+    width: 100%;
+    height: 350px;
+}
+
 .spageheader {
     text-align: center;
     font-family: "Poppins", sans-serif;
@@ -395,4 +397,12 @@ textarea{
 
 
 .spaneltwoinrow {
+}
+
+.mcontent {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
 }
