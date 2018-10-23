@@ -21,7 +21,7 @@
         <button class="collapsible"><i class="fa  fa-w-12 fa-bars fa-2x"></i></button>
         <div class="content">
             <ul>
-                <li><a class="active xpage" href="Main.aspx" id="navmain" runat="server">בית</a></li>
+                <li><a class="xpage" href="Main.aspx" id="navmain" runat="server">בית</a></li>
                 <li><a class="xpage" href="UserDictionaryPage.aspx" runat="server" id="navdic">מילון</a></li>
                 <li><a class="xpage" href="Diary.aspx" id="navdiary" runat="server">יומן</a></li>
                 <li><a class="xpage" href="Shifts.aspx" id="navshifts" runat="server">משמרות</a></li>

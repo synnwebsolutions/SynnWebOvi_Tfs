@@ -20,7 +20,13 @@ namespace WebSimplify
                 RefreshGridPageGrids();
             }
         }
-
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navusers";
+            }
+        }
         public LoggedUser EditedUser
         {
             get

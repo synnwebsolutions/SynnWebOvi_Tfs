@@ -21,6 +21,14 @@ namespace WebSimplify
             }
         }
 
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navwed";
+            }
+        }
+
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)

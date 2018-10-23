@@ -14,5 +14,13 @@ namespace WebSimplify
         {
 
         }
+
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navsys";
+            }
+        }
     }
 }

@@ -27,7 +27,13 @@ namespace WebSimplify
                 StoreInSession("CurrentPeriodStart*", value);
             }
         }
-
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navshifts";
+            }
+        }
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

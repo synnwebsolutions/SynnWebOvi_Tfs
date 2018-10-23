@@ -25,6 +25,14 @@ namespace WebSimplify
             }
         }
 
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navmain";
+            }
+        }
+
         [WebMethod]
         [ScriptMethod()]
         public static void AddToDictionary(string key, string value)

@@ -19,6 +19,13 @@ namespace WebSimplify
             }
         }
 
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navshop";
+            }
+        }
         private void RefreshView()
         {
             List<ShopItem> ul = DBController.DbShop.Get(new ShopSearchParameters());

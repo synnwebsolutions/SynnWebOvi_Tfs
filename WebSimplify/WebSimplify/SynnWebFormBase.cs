@@ -72,7 +72,7 @@ namespace SynnWebOvi
         //    //}
         //    return true;
         //}
-
+        protected virtual string NavIdentifier { get;}
         protected virtual List<ClientPagePermissions> RequiredPermissions
         {
             get
@@ -144,6 +144,8 @@ namespace SynnWebOvi
                     Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
                     Master.FindControl("navusers").Visible = CurrentUser.IsAdmin;
                     Master.FindControl("navlog").Visible = CurrentUser.IsAdmin;
+
+                    ((HtmlAnchor)Master.FindControl(NavIdentifier)).Attributes.Add("class", "active");
                 }
 
                 foreach (ClientPagePermissions en in RequiredPermissions)
@@ -151,7 +153,14 @@ namespace SynnWebOvi
                     if (!CurrentUser.Allowed(en))
                         SynNavigation.Goto(Pages.Main);
                 }
+
+                
             }
+            //if (Master != null)
+            //{
+            //    ((HtmlAnchor)Master.FindControl("navdiary")).Attributes["class"].Replace("active",  "");
+            //    //var clss = ((HtmlAnchor)Master.FindControl("navmain")).Attributes["class"];
+            //}
         }
 
         public void AlertMessage(string message)

@@ -111,7 +111,7 @@ select {
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
-    -moz-appearance:none;
+    -moz-appearance: none;
 }
 
 myselect::-ms-expand {
@@ -135,6 +135,7 @@ myselect::-ms-expand {
 
     .snav li {
         float: right;
+         
     }
 
         .snav li a {
@@ -150,7 +151,7 @@ myselect::-ms-expand {
             }
 
 .active {
-    background-color: #8080ff;
+    background-color: #292929;
 }
 
 .spageheader {
@@ -356,21 +357,22 @@ myselect::-ms-expand {
 }
 
 
-.centerinpage{
-padding-top:15%;
+.centerinpage {
+    padding-top: 15%;
 }
 
 .shiftcellbase {
     border: 2px solid #FFFFFF;
-   
 }
+
 .shiftcellvalid {
     /*height: 80px;*/
     border: 1px solid #FFFFFF;
-    background-color:rgba(255, 255, 255, 0.4);
-     height: 75px;
-     color: rgba(41, 57, 85, 0.5);
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 75px;
+    color: rgba(41, 57, 85, 0.5);
 }
+
 .shiftcellactive {
     border: 2px solid #292929;
     background-color: rgba(41, 57, 85, 0.5);

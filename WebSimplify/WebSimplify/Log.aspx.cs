@@ -20,7 +20,13 @@ namespace WebSimplify
                 RefreshGrid(gv);
             }
         }
-
+        protected override string NavIdentifier
+        {
+            get
+            {
+                return "navlog";
+            }
+        }
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)
