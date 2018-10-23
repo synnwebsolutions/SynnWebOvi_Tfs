@@ -86,6 +86,7 @@
     <Content Include="css\style1.css" />
     <Content Include="css\Style1resp.css" />
     <Content Include="Diary.aspx" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="Diary.aspx.designer.cs">
       <DependentUpon>Diary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

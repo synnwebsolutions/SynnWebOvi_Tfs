@@ -39,10 +39,25 @@ namespace SynnWebOvi
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            var lastExc =  Server.GetLastError();
-            var errcode = Dbl.AddLog(lastExc);
-            var url = string.Format("{0}?errcode={1}", Pages.ErrorPage, errcode);
-            SynNavigation.Goto(url);
+            try
+            {
+                var lastExc = Server.GetLastError();
+                var errcode = Dbl.AddLog(lastExc);
+                StoreEx(lastExc);
+            }
+            catch (Exception ex)
+            {
+                StoreEx(ex);
+            }
+            SynNavigation.Goto(Pages.ErrorPage);
+        }
+
+        private static void StoreEx(Exception lastExc)
+        {
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Session["ex"] = lastExc;
+            }
         }
 
         protected void Session_End(object sender, EventArgs e)

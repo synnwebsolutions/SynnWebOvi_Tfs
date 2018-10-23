@@ -25,7 +25,7 @@ namespace SynnWebOvi
     {
         public const string Main = "Main.aspx";
         public const string Login = "Login.aspx";
-        public const string ErrorPage = "Login.aspx";
+        public const string ErrorPage = "ErrorPage.aspx";
         public const string UserDictionaryPage = "UserDictionaryPage.aspx";
 
         public static string Log = "Log.aspx";
