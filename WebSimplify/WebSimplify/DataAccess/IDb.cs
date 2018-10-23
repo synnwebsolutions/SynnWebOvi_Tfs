@@ -28,6 +28,8 @@ namespace SynnWebOvi
         string AddLog(Exception ex);
         void AddLog(string message);
         List<LogItem> GetLogs(LogSearchParameters lsp);
+        void AddThemeLog(ThemeLog tl);
+        ThemeLog GetLastItem();
     }
 
     public interface IDbWedd

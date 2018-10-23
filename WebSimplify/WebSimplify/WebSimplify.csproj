@@ -133,6 +133,7 @@
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />
     <Compile Include="DataAccess\SqlDbShifts.cs" />
+    <Compile Include="Data\UiTemplate.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\Diary.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>

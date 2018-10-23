@@ -111,6 +111,10 @@ namespace SynnWebOvi
                 {
                     (input as HtmlInputText).Value = string.Empty;
                 }
+                else if (input is HtmlTextArea)
+                {
+                    (input as HtmlTextArea).Value = string.Empty;
+                }
             }
         }
 

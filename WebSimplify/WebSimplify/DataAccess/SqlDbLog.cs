@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
@@ -32,6 +33,32 @@ namespace WebSimplify
             SetInsertIntoSql(SynnDataProvider.TableNames.Log, sqlItems);
             ExecuteSql();
             return "GetMsSqlLastIdentityValue()".ToString();
+        }
+
+        public void AddThemeLog(ThemeLog l)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("Date", DateTime.Now));
+            sqlItems.Add(new SqlItem("DestinationPath", l.DestinationPath));
+            sqlItems.Add(new SqlItem("NewText", l.NewText));
+            sqlItems.Add(new SqlItem("PrevText", l.PrevText));
+            sqlItems.Add(new SqlItem("XuiFile", (int)l.XiFile));
+            SetInsertIntoSql(SynnDataProvider.TableNames.ThemeLog, sqlItems);
+            ExecuteSql();
+        }
+
+        public ThemeLog GetLastItem()
+        {
+            return GetThemeLogs().OrderByDescending(x => x.Id).First();
+        }
+
+        public List<ThemeLog> GetThemeLogs()
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ThemeLog);
+            ClearParameters();
+            var lst = new List<ThemeLog>();
+            FillList(lst, typeof(ThemeLog));
+            return lst;
         }
 
         public List<LogItem> GetLogs(LogSearchParameters lsp)
