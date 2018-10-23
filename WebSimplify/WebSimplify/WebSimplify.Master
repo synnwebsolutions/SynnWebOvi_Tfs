@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="css/style1.css" />
     <link href="css/Style1resp.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
     <!-- Enxternal File's-->
     <script src="js/synnJavaScripts.js"></script>
-    
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -26,7 +26,7 @@
                 <li><a class="xpage" href="Diary.aspx" id="navdiary" runat="server">יומן</a></li>
                 <li><a class="xpage" href="Shifts.aspx" id="navshifts" runat="server">משמרות</a></li>
                 <li><a class="xpage" href="Wedding.aspx" id="navwed" runat="server">חתונה</a></li>
-                <li><a class="xpage" href="Shopping.aspx" id="navshop" runat="server"> קניות</a></li>
+                <li><a class="xpage" href="Shopping.aspx" id="navshop" runat="server">קניות</a></li>
                 <li><a class="xpage" href="AppSettingsPage.aspx" id="navsys" runat="server">הגדרות מערכת</a></li>
                 <li><a class="xpage" href="UsersManagment.aspx" id="navusers" runat="server">הגדרות משתמשים</a></li>
                 <li><a class="xpage" href="Log.aspx" id="navlog" runat="server">יומן מערכת</a></li>
@@ -36,16 +36,19 @@
     </div>
     <div class="scontainer">
 
-        <div class="srow">
-            <form id="form1" runat="server">
-                <div>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <form id="form1" runat="server">
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div id="dialog" title="" class="srow" style="visibility: hidden;">
+        <div class="col-2"></div>
+        <div id="dialog" title="" class="row" style="visibility: hidden;">
             <h3></h3>
             <p></p>
         </div>
@@ -54,20 +57,20 @@
 
     <%--Nav Responsivity Script--%>
     <script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
-</script>
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

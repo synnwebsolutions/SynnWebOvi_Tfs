@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="spageheader" id="acc">ניהול משתמשים</div>
-    <div class="spanel srow">
+    <div class="spanel">
 
         <div class="spanel">
             <div class=" row">

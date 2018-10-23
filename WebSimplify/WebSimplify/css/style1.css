@@ -118,14 +118,6 @@ myselect::-ms-expand {
     display: none;
 }
 
-.srow {
-    line-height: 1.6;
-    background-color: rgba(151, 151, 252, 0);
-    margin: 15px;
-    padding: 5%;
-    border: 1px solid #9999ff;
-}
-
 .snav {
     margin: auto;
     margin-bottom: 10px;
@@ -363,10 +355,9 @@ myselect::-ms-expand {
     font-size: 8px;
 }
 
-.loginpanel {
-    padding-top: 15%;
-    padding-left: 15%;
-    padding-right: 15%;
+
+.centerinpage{
+padding-top:15%;
 }
 
 .shiftcellbase {

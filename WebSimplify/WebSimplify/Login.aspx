@@ -11,29 +11,27 @@
 </head>
 <body>
 
-    <div class="loginpanel">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <div class="spageheader">כניסה</div>
-
-                <div class="spanel">
-                    <form id="form1" class="login100-form validate-form" runat="server" dir="rtl">
-                        <div>
-                            <input type="text" name="username" placeholder="שם משתמש" id="txUname" runat="server" />
-                        </div>
-
-                        <div>
-                            <input type="password" name="pass" placeholder="סיסמה" id="txPass" runat="server" />
-                        </div>
-                        <button class="sbutton" id="btnLogin" runat="server" onserverclick="btnLogin_ServerClick">
-                            כניסה
-                        </button>
-                    </form>
-                </div>
-            </div>
+    <div class="row centerinpage">
         <div class="col-2"></div>
+        <div class="col-8">
+            <div class="spageheader">כניסה</div>
+
+            <div class="spanel">
+                <form id="form1" class="login100-form validate-form" runat="server" dir="rtl">
+                    <div>
+                        <input type="text" name="username" placeholder="שם משתמש" id="txUname" runat="server" />
+                    </div>
+
+                    <div>
+                        <input type="password" name="pass" placeholder="סיסמה" id="txPass" runat="server" />
+                    </div>
+                    <button class="sbutton" id="btnLogin" runat="server" onserverclick="btnLogin_ServerClick">
+                        כניסה
+                    </button>
+                </form>
+            </div>
         </div>
+        <div class="col-2"></div>
     </div>
 </body>
 </html>

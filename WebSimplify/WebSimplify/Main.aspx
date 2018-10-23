@@ -5,7 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader" id="acc">בית</div>
-    <div id="srow">
         <div class="row" id="trdic" runat="server">
             <div class=" col-2">
             </div>
@@ -56,7 +55,6 @@
             <div class=" col-2">
             </div>
         </div>
-    </div>
 
 
 

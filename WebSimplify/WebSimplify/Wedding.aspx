@@ -12,7 +12,7 @@
             <div>
                 <input type="text" name="name" id="txwedsearchkey" class="tablefilter" placeholder="הזן שם אורח לחיפוש" runat="server"/>
             </div>
-            <button class="sbutton sbutton-sm" type="button" id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick">חפש</button>
+            <button class="sbutton sbutton-sm" type="button" id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick" style="visibility:hidden;">חפש</button>
         </div>
         <div class=" col-3"></div>
     </div>

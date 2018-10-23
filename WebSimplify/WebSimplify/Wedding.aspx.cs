@@ -30,8 +30,8 @@ namespace WebSimplify
 
         public IEnumerable GetData()
         {
-            if (string.IsNullOrEmpty(txwedsearchkey.Value))
-                return new List<WeddingGuest>();
+            //if (string.IsNullOrEmpty(txwedsearchkey.Value))
+            //    return new List<WeddingGuest>();
             List<WeddingGuest> items = DBController.DbWedd.GetGuests(new WeddSearchParameters { SearchText = txwedsearchkey.Value });
             return items;
         }
