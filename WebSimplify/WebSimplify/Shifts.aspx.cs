@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Data;
@@ -84,8 +86,10 @@ namespace WebSimplify
                 foreach (var si in currentData.OrderBy( x => Convert.ToInt32(x.DaylyShift)).ToList())
                 {
                     // add shift owner name
+                    //string jsEditButton = string.Format("<button class=\"btnedt\" id=\"btnedt{0}\"><i class=\"fas fa-pencil-alt\"></i></button>", si.Id.ToString());
+                    string jsDeleteButton = string.Format("<button class=\"btndlt\" id=\"btndlt{0}\"><i class=\"far fa-trash-alt\"></i></button>", si.Id.ToString());
                     LoggedUser owner = DBController.DbAuth.GetUser(si.OwnerId);
-                    sb.AppendFormat("{0} - {1}",owner.DisplayName, GenericFormatter.GetEnumDescription(si.DaylyShift));
+                    sb.AppendFormat("{0}{1} - {2}", jsDeleteButton, owner.DisplayName, GenericFormatter.GetEnumDescription(si.DaylyShift));
                     sb.Append(HtmlStringHelper.LineBreak);
                 }
             }
@@ -110,6 +114,21 @@ namespace WebSimplify
 
             DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
             ClearInputs(txadddiarydate);
+        }
+
+        [WebMethod]
+        [ScriptMethod()]
+        public static void PerformDelete(string btnidentifier)
+        {
+            try
+            {
+                var id = Convert.ToInt32(btnidentifier.Replace("btndlt", string.Empty));
+                DBController.DbShifts.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
         }
     }
 }

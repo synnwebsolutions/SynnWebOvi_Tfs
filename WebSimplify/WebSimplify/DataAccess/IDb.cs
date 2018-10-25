@@ -49,6 +49,7 @@ namespace SynnWebOvi
     {
         void Save(ShiftsSearchParameters sp);
         List<ShiftDayData> GetShifts(ShiftsSearchParameters shiftsSearchParameters);
+        void Delete(int id);
     }
 
 

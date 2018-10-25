@@ -54,5 +54,13 @@ namespace WebSimplify
             FillList(lst, typeof(ShiftDayData));
             return lst;
         }
+
+        public void Delete(int id)
+        {
+            SetSqlFormat("delete {0}", SynnDataProvider.TableNames.ShiftsData);
+            ClearParameters();
+            AddSqlWhereField("Id", id);
+            ExecuteSql();
+        }
     }
 }

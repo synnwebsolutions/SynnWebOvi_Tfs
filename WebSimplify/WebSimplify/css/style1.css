@@ -152,9 +152,24 @@ myselect::-ms-expand {
 .active {
     background-color: #292929;
 }
+
 .mactive, .mcollapsible:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
+
+.btnedt {
+    background-color: transparent;
+    color: white;
+    border: none;
+    width: 3px;
+}
+
+.btndlt {
+    background-color: transparent;
+    color: ThreeDLightShadow;
+    border: none;
+}
+
 textarea {
     width: 100%;
     height: 350px;
