@@ -97,6 +97,10 @@
     <Content Include="packages.config" />
     <Content Include="Shifts.aspx" />
     <Content Include="Shopping.aspx" />
+    <Content Include="Themes\Desert\body-bg.jpeg" />
+    <Content Include="Themes\Desert\style1.css" />
+    <Content Include="Themes\Desert\Style1resp.css" />
+    <Content Include="Themes\Desert\synnJavaScripts.js" />
     <Content Include="UserDictionaryPage.aspx" />
     <Content Include="UsersManagment.aspx" />
     <Content Include="WebSimpl.asmx" />

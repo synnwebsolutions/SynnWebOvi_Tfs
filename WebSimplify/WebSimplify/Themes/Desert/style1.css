@@ -67,8 +67,8 @@ body {
     width: 100%;
     direction: rtl;
     background-attachment: fixed;
-    background-image: url("../img/body-bg.jpeg");
-    /*background-image: url("https://images.pexels.com/photos/289586/pexels-photo-289586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
+    /*background-image: url("../img/body-bg.jpeg");*/
+    background-image: url("https://images.pexels.com/photos/339144/pexels-photo-339144.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,11 +90,12 @@ body {
 :-ms-input-placeholder {
     text-align: center;
 }
+
 /*theme*/
 .scontainer {
     width: 80%;
-    border: 1px solid #9999ff;
-    background-color: rgba(204, 204, 255, 0.5);
+    border: 1px solid #FFFFFF;
+    background-color: rgba(29, 8, 5, 0.6);
     margin: auto;
 }
 
@@ -124,7 +125,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(202,81,0,0.5) 100%);
 }
 
     .snav ul {
@@ -183,7 +184,7 @@ textarea {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5em;
-    background-color: #9797FB;
+    background-color: #CA5100;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #1D1D1D;
 }
@@ -193,7 +194,7 @@ textarea {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    background-color: rgba(51, 47, 31, 0.5);
+    background-color: rgba(202, 81, 0, 0.5);
     margin-top: 5px;
     padding: 12px;
     color: white;
@@ -227,7 +228,7 @@ textarea {
 }
 /*theme*/
     .sbutton:hover {
-        background-color: #9797FC;
+        background-color: #CA5100;
         color: white;
     }
 
@@ -241,7 +242,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #8080FF;
+        background: #CA5100;
         color: white;
         border: 0;
     }
@@ -353,7 +354,7 @@ textarea {
     float: right;
     padding: 10px;
 }
-/*theme*/
+    /*theme*/
 .collapsible {
     display: none;
     width: 100%;
@@ -362,7 +363,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(202,81,0,0.5) 100%);
 }
 
 .content {

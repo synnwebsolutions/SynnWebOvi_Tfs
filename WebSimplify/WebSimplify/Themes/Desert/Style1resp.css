@@ -24,10 +24,11 @@
         height: 100%;
         margin: auto;
     }
-      /*theme*/
+
+    /*theme*/
     .scontainer {
         width: 100%;
-        border: 1px solid #9999ff;
+        border: 1px solid white;
         margin: auto;
     }
 
@@ -69,7 +70,7 @@
         text-align: center;
         font-size: 10px;
     }
-      /*theme*/
+    /*theme*/
     .synngridpagination {
         border-radius: 4px;
         background: #8080FF;
@@ -95,11 +96,11 @@
         text-overflow: clip;
         font-size: 8px;
     }
-      /*theme*/
+    /*theme*/
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
-        background: #8080FF;
+        background: #CA5100;
         color: white;
         border: 0;
     }
