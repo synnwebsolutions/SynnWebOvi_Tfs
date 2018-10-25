@@ -101,6 +101,9 @@
     <Content Include="Themes\Desert\style1.css" />
     <Content Include="Themes\Desert\Style1resp.css" />
     <Content Include="Themes\Desert\synnJavaScripts.js" />
+    <Content Include="Themes\GeneralFirst\style1.css" />
+    <Content Include="Themes\GeneralFirst\Style1resp.css" />
+    <Content Include="Themes\GeneralFirst\synnJavaScripts.js" />
     <Content Include="UserDictionaryPage.aspx" />
     <Content Include="UsersManagment.aspx" />
     <Content Include="WebSimpl.asmx" />
@@ -247,7 +250,6 @@
     <Folder Include="Login\vendor\" />
     <Folder Include="Models\" />
     <Folder Include="Themes\DarkYellow\" />
-    <Folder Include="Themes\GeneralFirst\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config">
