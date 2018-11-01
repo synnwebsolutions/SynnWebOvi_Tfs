@@ -144,9 +144,6 @@
     <Compile Include="DataAccess\SqlDbShifts.cs" />
     <Compile Include="Data\UiTemplate.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
-    <Compile Include="Data\Diary.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
     <Compile Include="Diary.aspx.cs">

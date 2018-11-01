@@ -79,7 +79,7 @@ namespace WebSimplify
                 //int curYear = HebCal.GetYear(Today);    //current numeric hebrew year
                 //int curMonth = HebCal.GetMonth(Today);
 
-                e.Cell.ToolTip = e.Day.Date.ToJewishDateString("MMMM dd, yyyy");
+                e.Cell.ToolTip = e.Day.Date.ToString("MMMM dd, yyyy");
                 e.Cell.Text = GetDiaryForDate(e.Day.Date, ref hasVal);
                 e.Cell.CssClass = "shiftcell ";
                 if (hasVal)

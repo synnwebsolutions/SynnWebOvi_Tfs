@@ -5,10 +5,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader">ניהול רשימת קניות</div>
-    <div class="row">
+    <div class="menubuttoncontainer">
+        <button class="menubutton" type="button" id="btnGenerate" runat="server" onserverclick="btnGenerate_ServerClick"> הפק רשימת קניות</button>
+    </div>
+    <div class="row" id="trAdd" runat="server">
         <div class=" col-1"></div>
         <div class="spanel col-10">
-            <div class="row">
+            <div class="row" >
                 <div class="spanelHeader">הוספה</div>
                 <div class="col-7">
                     <div>
@@ -36,20 +39,19 @@
                     PagerSettings-PreviousPageText="<">
                     <PagerStyle CssClass="synngridpagination" />
                     <Columns>
-                        <asp:TemplateField HeaderText="הסר פריט">
-                            <ItemTemplate>
-                                <asp:CheckBox runat="server" ID="chkRemove" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"></asp:CheckBox>
-                                <asp:HiddenField ID="hfpid" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="שם פריט">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblItemName"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="נקנה לאחרונה ">
+                        <asp:TemplateField HeaderText="נקנה לאחרונה " AccessibleHeaderText="lb">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblLastValue"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="הסר פריט">
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ID="btnClose" OnCommand="btnClose_Command" CssClass="gridbutton" ImageUrl="Img/dlt.png"></asp:ImageButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

@@ -64,6 +64,7 @@ namespace WebSimplify
             var inPeriod = CurrentPeriodStart.InTwoWeekPeriod(e.Day.Date);
             if (inPeriod)
             {
+                e.Cell.ToolTip = e.Day.Date.ToString("MMMM dd, yyyy");
                 e.Cell.Text = GetShiftsForDate(e.Day.Date);
                 if (!string.IsNullOrEmpty(e.Cell.Text))
                     e.Cell.CssClass = "shiftcellbase shiftcellactive";

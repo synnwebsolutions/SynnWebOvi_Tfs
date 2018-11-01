@@ -435,3 +435,18 @@ textarea {
     border: 2px solid white;
     padding: 2%;
 }
+.menubuttoncontainer{
+      background-color: rgba(151, 151, 251, 0.5);
+      padding:4px;
+ margin: 2px 0px 2px;
+ text-align:left;
+}
+.menubutton{
+    color: white;
+    padding: 7px 7px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    background-color:transparent;
+    border: 1px solid white;
+}

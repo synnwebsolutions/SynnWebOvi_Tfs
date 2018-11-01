@@ -19,6 +19,26 @@ namespace WebSimplify
             }
         }
 
+        public bool GMode
+        {
+            get
+            {
+                var g = (bool?)GetFromSession("gMode");
+                return g.HasValue && g.Value;
+            }
+            set
+            {
+                StoreInSession("gMode", value);
+            }
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            gv.Columns[1].Visible = trAdd.Visible = !GMode;
+            btnGenerate.InnerText = GMode ?  "סגור" : "הפק רשימת קניות";
+        }
+
         protected override string NavIdentifier
         {
             get
@@ -53,10 +73,9 @@ namespace WebSimplify
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var d = (ShopItem)e.Row.DataItem;
-                ((CheckBox)e.Row.FindControl("chkRemove")).Checked = true;
                 ((Label)e.Row.FindControl("lblItemName")).Text = d.Name;
                 ((Label)e.Row.FindControl("lblLastValue")).Text = d.LastBought.HasValue ? d.LastBought.Value.ToShortDateString() : string.Empty;
-                ((HiddenField)e.Row.FindControl("hfpid")).Value = d.Id.ToString();
+                ((ImageButton)e.Row.FindControl("btnClose")).CommandArgument = d.Id.ToString();
             }
         }
 
@@ -68,23 +87,21 @@ namespace WebSimplify
             RefreshView();
         }
 
-        protected void chkRemove_CheckedChanged(object sender, EventArgs e)
-        {
-            foreach (GridViewRow gvr in gv.Rows)
-            {
-                if (!((CheckBox)gvr.FindControl("chkRemove")).Checked)
-                {
-                    int idToDeactivate = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);
-                    DBController.DbShop.DeActivateShopItem(new ShopSearchParameters { IdToDeactivate = idToDeactivate });
-                    break;
-                }
-            }
-            RefreshView();
-        }
-
         protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gv.PageIndex = e.NewPageIndex;
+            RefreshGrid(gv);
+        }
+
+        protected void btnClose_Command(object sender, CommandEventArgs e)
+        {
+            DBController.DbShop.DeActivateShopItem(new ShopSearchParameters { IdToDeactivate = Convert.ToInt32(e.CommandArgument) });
+            RefreshGrid(gv);
+        }
+
+        protected void btnGenerate_ServerClick(object sender, EventArgs e)
+        {
+            GMode = !GMode;
             RefreshGrid(gv);
         }
     }
