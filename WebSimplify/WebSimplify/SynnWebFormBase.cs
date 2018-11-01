@@ -144,6 +144,8 @@ namespace SynnWebOvi
                     Master.FindControl("navshifts").Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                     Master.FindControl("navshop").Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
                     Master.FindControl("navwed").Visible = CurrentUser.Allowed(ClientPagePermissions.Wedding);
+                    Master.FindControl("navtask").Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
+                    
 
                     Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
                     Master.FindControl("navusers").Visible = CurrentUser.IsAdmin;

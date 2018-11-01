@@ -22,6 +22,7 @@ namespace WebSimplify
                 trdiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 trdic.Visible = CurrentUser.Allowed(ClientPagePermissions.Dictionary);
                 trshop.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
+                dvQtasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
             }
         }
 
@@ -102,6 +103,28 @@ namespace WebSimplify
                 DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 ClearInputs(txShopItemToAdd);
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
+
+        protected void btnAddQuickTask_ServerClick(object sender, EventArgs e)
+        {
+            if (ValidateInputs(txTaskname, txTaskDesc))
+            {
+                QuickTask t = new QuickTask
+                {
+                    Name = txTaskname.Value,
+                    Description = txTaskDesc.Value,
+                    Active  = true,
+                    CreationDate = DateTime.Now,
+                    UserGroupId = CurrentUser.Id
+                };
+                DBController.DbCalendar.Add(t);
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                ClearInputs(txTaskname, txTaskDesc);
             }
             else
             {

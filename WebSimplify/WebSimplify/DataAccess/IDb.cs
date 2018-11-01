@@ -56,7 +56,10 @@ namespace SynnWebOvi
     public interface IDbCalendar
     {
         void Add(CalendarSearchParameters sp);
+        List<QuickTask> Get(QuickTasksSearchParameters quickTasksSearchParameters);
         List<MemoItem> Get(CalendarSearchParameters sp);
+        void Update(QuickTask item);
+        void Add(QuickTask t);
     }
 
     public interface IDbUserDictionary
@@ -142,6 +145,17 @@ namespace SynnWebOvi
         public string SearchText { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+    }
+
+    public class QuickTasksSearchParameters : BaseSearchParameters
+    {
+        public QuickTasksSearchParameters() : base()
+        {
+        }
+
+        public string SearchText { get; set; }
+        public bool? Active { get; set; }
+        public int? Id { get; internal set; }
     }
 
     public class CalendarSearchParameters : BaseSearchParameters

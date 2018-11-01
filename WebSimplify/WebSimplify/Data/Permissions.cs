@@ -17,7 +17,9 @@ namespace WebSimplify
         [Description("חתונה")]
         Wedding,
         [Description("קניות")]
-        Shopping
+        Shopping,
+        [Description("משימות")]
+        QuickTasks
     }
     
 }

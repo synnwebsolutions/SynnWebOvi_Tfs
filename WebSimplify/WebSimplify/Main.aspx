@@ -24,6 +24,24 @@
         </div>
 
     </div>
+       <div class="row" id="dvQtasks" runat="server">
+        <div class=" col-2">
+        </div>
+        <div class="spanel col-8">
+            <div class="spanelHeader mcollapsible">הוספה למשימות     <i class="fa fa-book-open"></i></div>
+            <div class="mcontent">
+                  <div class="">
+                <input type="text" class="" name="name" id="txTaskname" placeholder=" שם משימה" runat="server" />
+            </div>
+            <div class="">
+                <input type="text" class="" name="name" id="txTaskDesc" placeholder=" תיאור משימה" runat="server" />
+            </div>
+            <button class="sbutton sbutton-sm" type="button" id="btnAddQuickTask" runat="server" onserverclick="btnAddQuickTask_ServerClick">הוספה</button>
+            </div>
+        </div>
+        <div class=" col-2">
+        </div>
+    </div>
     <div class="row" id="trshop" runat="server">
         <div class=" col-2">
         </div>

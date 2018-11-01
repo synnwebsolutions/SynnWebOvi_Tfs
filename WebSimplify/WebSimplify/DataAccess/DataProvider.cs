@@ -41,6 +41,7 @@ namespace SynnWebOvi
             public static string ShiftsData = "ShiftsData"; // group
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
+            public static string QuickTasks = "QuickTasks";
             public static string PermissionGroups = "PermissionGroups";
             public static string User_PermissionGroups = "User_PermissionGroups";
         }

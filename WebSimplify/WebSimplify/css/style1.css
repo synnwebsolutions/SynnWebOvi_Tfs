@@ -158,6 +158,11 @@ myselect::-ms-expand {
     background-color: #fff;
 }
 
+.gridbutton {
+    height: 25px;
+    color: white;
+}
+
 .btnedt {
     background-color: transparent;
     color: white;
@@ -219,13 +224,14 @@ textarea {
         text-align: center;
     }
 
+
 .sbutton {
     width: 100%;
     font-size: 12px;
     font-weight: 600;
     padding: 12px;
 }
-/*theme*/
+    /*theme*/
     .sbutton:hover {
         background-color: #9797FC;
         color: white;
@@ -236,7 +242,7 @@ textarea {
     text-align: center;
     font-size: 14px;
 }
-/*theme*/
+    /*theme*/
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
@@ -422,4 +428,10 @@ textarea {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
+}
+
+.chkactivecontainer {
+    width: 30%;
+    border: 2px solid white;
+    padding: 2%;
 }

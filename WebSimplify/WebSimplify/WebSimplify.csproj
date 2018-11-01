@@ -95,6 +95,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="packages.config" />
+    <Content Include="QuickTasks.aspx" />
     <Content Include="Shifts.aspx" />
     <Content Include="Shopping.aspx" />
     <Content Include="Themes\Desert\body-bg.jpeg" />
@@ -189,6 +190,14 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickTask.cs" />
+    <Compile Include="QuickTasks.aspx.cs">
+      <DependentUpon>QuickTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuickTasks.aspx.designer.cs">
+      <DependentUpon>QuickTasks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Shifts.aspx.cs">
       <DependentUpon>Shifts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
