@@ -13,6 +13,14 @@ namespace WebSimplify
 {
     public partial class Wedding : SynnWebFormBase
     {
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.Wedding };
+                return l;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

@@ -8,12 +8,12 @@ using System.Data;
 namespace WebSimplify
 {
     [Serializable]
-    public class ShopItem : IDbLoadable
+    public class ShopItem : IDbLoadable 
     {
         public string Name { get; set; }
         public DateTime? LastBought { get; set; }
-        public int Id { get; internal set; }
-        public int? CategoryId { get; private set; }
+        public int Id { get;  set; }
+        public int? CategoryId { get;  set; }
 
         public ShopItem()
         {

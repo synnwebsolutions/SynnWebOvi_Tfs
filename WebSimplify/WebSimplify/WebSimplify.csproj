@@ -83,11 +83,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
+    <Content Include="CreditStats.aspx" />
     <Content Include="css\style1.css" />
     <Content Include="css\Style1resp.css" />
     <Content Include="Diary.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Img\body-bg.jpeg" />
+    <Content Include="Img\exchange.png" />
+    <Content Include="Img\locked.png" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
     <Content Include="js\synnJavaScripts.js" />
@@ -122,12 +125,21 @@
     <Compile Include="AppSettingsPage.aspx.designer.cs">
       <DependentUpon>AppSettingsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreditStats.aspx.cs">
+      <DependentUpon>CreditStats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreditStats.aspx.designer.cs">
+      <DependentUpon>CreditStats.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CultureHelper.cs" />
     <Compile Include="DataAccess\SqlDbCalendar.cs" />
+    <Compile Include="DataAccess\SqlDbCredit.cs" />
     <Compile Include="Data\AccountData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Data\CalendarItem.cs" />
+    <Compile Include="Data\CreditCardMonthlyData.cs" />
     <Compile Include="Data\CUser.cs" />
     <Compile Include="DataAccess\BaseSqlDbExecuter.cs" />
     <Compile Include="DataAccess\DataProvider.cs" />
@@ -143,6 +155,7 @@
     <Compile Include="Data\ShiftData.cs" />
     <Compile Include="DataAccess\SqlDbShifts.cs" />
     <Compile Include="Data\UiTemplate.cs" />
+    <Compile Include="Data\UserPreferences.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
@@ -209,6 +222,7 @@
     <Compile Include="Shopping.aspx.designer.cs">
       <DependentUpon>Shopping.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StartUpManager.cs" />
     <Compile Include="SynNavigation.cs" />
     <Compile Include="SynnWebFormBase.cs">
       <SubType>ASPXCodeBehind</SubType>

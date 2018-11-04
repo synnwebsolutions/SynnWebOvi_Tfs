@@ -210,7 +210,7 @@ textarea {
         text-shadow: 2px 2px 4px #1D1D1D;
     }
 
-    .spanel input[type=text], input[type=date], input[type=password], select {
+    .spanel input[type=text], input[type=date], input[type=number], input[type=password], select {
         width: 100%;
         display: inline-block;
         border: 1px solid #ccc;
@@ -225,7 +225,7 @@ textarea {
     font-weight: 600;
     padding: 12px;
 }
-/*theme*/
+    /*theme*/
     .sbutton:hover {
         background-color: #9797FC;
         color: white;
@@ -236,7 +236,7 @@ textarea {
     text-align: center;
     font-size: 14px;
 }
-/*theme*/
+    /*theme*/
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
@@ -422,4 +422,45 @@ textarea {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
+}
+
+.gridtextinput {
+    border: none;
+    background-color: red;
+}
+
+.sinputwlabel {
+    position: relative;
+    text-align: center;
+}
+
+    .sinputwlabel label {
+        top: 50%;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        font-weight: 600;
+        color: #888;
+        font-size: 14px;
+    }
+
+    .sinputwlabel input {
+        border: solid 2px #ebebeb;
+        box-sizing: border-box;
+        width: 100%;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: Poppins;
+        padding: 16px 140px 16px 30px;
+    }
+
+.sinputnumber {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 12px;
+    text-align: center;
 }

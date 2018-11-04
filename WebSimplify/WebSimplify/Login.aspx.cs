@@ -45,7 +45,10 @@ namespace WebSimplify
             else
             {
                 if (DBController.DbAuth.ValidateUserCredentials(xu, xp))
+                {
                     CurrentUser = DBController.DbAuth.LoadUserSettings(xu, xp);
+                    StartUpManager.PerformUserStartUp(CurrentUser);
+                }
                 else
                 {
 

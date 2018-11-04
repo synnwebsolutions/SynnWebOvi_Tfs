@@ -10,42 +10,42 @@
 namespace WebSimplify {
     
     
-    public partial class AppSettingsPage {
+    public partial class CreditStats {
         
         /// <summary>
-        /// btnSaveSettings control.
+        /// txp1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaveSettings;
+        protected global::System.Web.UI.WebControls.TextBox txp1;
         
         /// <summary>
-        /// dvcredit control.
+        /// txp2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvcredit;
+        protected global::System.Web.UI.WebControls.TextBox txp2;
         
         /// <summary>
-        /// txCreditStartDate control.
+        /// txp3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txCreditStartDate;
+        protected global::System.Web.UI.WebControls.TextBox txp3;
         
         /// <summary>
-        /// txCreditDayOfMonth control.
+        /// gv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txCreditDayOfMonth;
+        protected global::System.Web.UI.WebControls.GridView gv;
     }
 }

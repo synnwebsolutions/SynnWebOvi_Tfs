@@ -17,7 +17,14 @@ namespace WebSimplify
 {
     public partial class Shifts : SynnWebFormBase
     {
-
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.Shifts };
+                return l;
+            }
+        }
         public DateTime CurrentPeriodStart
         {
             get

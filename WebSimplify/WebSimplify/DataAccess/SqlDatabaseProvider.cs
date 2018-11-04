@@ -15,6 +15,9 @@ namespace SynnWebOvi
         internal IDbWedd IDbWedd = null;
         internal IDbShop IDbShop = null;
         internal IDbShifts IDbShifts = null;
+        internal IDbCredit IDbCredit = null;
+        
+
         internal IDbCalendar IDbCalendar = null;
         
 
@@ -106,6 +109,16 @@ namespace SynnWebOvi
                 if (IDbShifts == null)
                     IDbShifts = new SqlDbShifts(_connectionString);
                 return IDbShifts;
+            }
+        }
+
+        public IDbCredit DbCredit
+        {
+            get
+            {
+                if (IDbCredit == null)
+                    IDbCredit = new SqlDbCredit(_connectionString);
+                return IDbCredit;
             }
         }
 

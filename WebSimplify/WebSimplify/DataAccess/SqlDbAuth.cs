@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
@@ -18,7 +19,12 @@ namespace WebSimplify
         public LoggedUser LoadUserSettings(string userName, string passwword)
         {
             List<LoggedUser> lst = GetUsersEx(new UserSearchParameters { UserName = userName, Password = passwword });
-            return lst.FirstOrDefault();
+            var u = lst.FirstOrDefault();
+            if (u != null)
+            {
+                u.Preferences = GetPreferences(u.Id);
+            }
+            return u;
         }
 
         private List<LoggedUser> GetUsersEx(UserSearchParameters lp)
@@ -95,6 +101,46 @@ namespace WebSimplify
         public LoggedUser GetUser(int uId)
         {
             return GetUsersEx(new UserSearchParameters { Id = uId }).First();
+        }
+
+        public void UpdatePreferences(LoggedUser u)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserId", u.Id));
+            sqlItems.Add(new SqlItem("pdata", XmlHelper.ToXml(u.Preferences)));
+
+            var wItems = new SqlItemList { new SqlItem("UserId", u.Id) };
+            SetUpdateSql(SynnDataProvider.TableNames.UserPreferences, sqlItems, wItems);
+            ExecuteSql();
+        }
+
+        private UserAppPreferences GetPreferences(int userid)
+        {
+            UserAppPreferences p = new UserAppPreferences();
+
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserPreferences);
+            ClearParameters();
+            AddSqlWhereField("UserId", userid);
+            var lst = new List<UserAppPreferencesContainer>();
+            FillList(lst, typeof(UserAppPreferencesContainer));
+            if (lst.NotEmpty())
+                p = lst.First().Value ;
+            else
+            {
+                AddPreferences(userid, p);
+                return GetPreferences(userid);
+            }
+            return p;
+        }
+
+        private void AddPreferences(int userid, UserAppPreferences p)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserId", userid));
+            sqlItems.Add(new SqlItem("pdata", XmlHelper.ToXml(p)));
+
+            SetInsertIntoSql(SynnDataProvider.TableNames.UserPreferences, sqlItems);
+            ExecuteSql();
         }
     }
 

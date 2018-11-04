@@ -19,7 +19,11 @@ namespace WebSimplify
         [Description("קניות")]
         Shopping,
         [Description("משימות")]
-        QuickTasks
+        QuickTasks,
+        [Description("אשראי")]
+        CreditData,
+        [Description("מנהל מערכת")]
+        SysAdmin
     }
     
 }

@@ -11,6 +11,14 @@ namespace WebSimplify
 {
     public partial class Shopping : SynnWebFormBase
     {
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.Shopping };
+                return l;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

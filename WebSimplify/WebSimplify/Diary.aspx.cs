@@ -16,7 +16,14 @@ namespace WebSimplify
 {
     public partial class Diary : SynnWebFormBase
     {
-
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.Diary };
+                return l;
+            }
+        }
         public DateTime ActionMonth
         {
             get

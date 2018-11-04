@@ -15,9 +15,21 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                AddSelectItemForCombo(cmbFileTypes);
-                foreach (XuiFile u in Enum.GetValues(typeof(XuiFile)))
-                    cmbFileTypes.Items.Add(new ListItem { Text = u.ToString(), Value = ((int)u).ToString() });
+                dvcredit.Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
+                FillSettings();
+            }
+        }
+
+        private void FillSettings()
+        {
+            if (!CurrentUser.IsAdmin)
+            {
+                if (CurrentUser.Allowed(ClientPagePermissions.CreditData))
+                {
+                    var p = CurrentUser.Preferences;
+                    txCreditDayOfMonth.Value = p.CreditCardPaymentDay.ToString();
+                    txCreditStartDate.Text = p.CreditLogStartDate != DateTime.MinValue ?  p.CreditLogStartDate.ToInputFormat() : DateTime.Now.ToInputFormat();
+                }
             }
         }
 
@@ -28,28 +40,38 @@ namespace WebSimplify
                 return "navsys";
             }
         }
-
-        protected void btnGenerateTheme_ServerClick(object sender, EventArgs e)
-        {
-            if (cmbFileTypes.SelectedIndex > 0 &&  ValidateInputs(txdata))
-            {
-                XuiFile xi = (XuiFile)Convert.ToInt32(cmbFileTypes.SelectedValue);
-                UiManager.Apply(xi, txdata.Value);
-
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txdata);
-                
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
-            }
-        }
+        
 
         protected void btnReverse_ServerClick(object sender, EventArgs e)
         {
             UiManager.ReverseStyle();
             AlertMessage("פעולה זו בוצעה בהצלחה");
+        }
+
+        protected void btnSaveSettings_ServerClick(object sender, EventArgs e)
+        {
+            if (!CurrentUser.IsAdmin)
+            {
+                try
+                {
+                    if (CurrentUser.Allowed(ClientPagePermissions.CreditData))
+                    {
+                        var p = CurrentUser.Preferences;
+                        p.CreditCardPaymentDay = txCreditDayOfMonth.Value.ToInteger();
+                        p.CreditLogStartDate = txCreditStartDate.Text.ToDateTime();
+                    }
+
+
+
+
+                    DBController.DbAuth.UpdatePreferences(CurrentUser);
+                }
+                catch (Exception ex)
+                {
+                    AlertMessage("אחד או יותר מהנתונים שהוזנו אינו תקין");
+                    return;
+                }
+            }
         }
     }
 }

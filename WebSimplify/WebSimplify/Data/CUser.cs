@@ -7,6 +7,7 @@ using SynnCore.DataAccess;
 using System.Data;
 using WebSimplify;
 using SynnCore.Generics;
+using WebSimplify.Data;
 
 namespace SynnWebOvi
 {
@@ -27,6 +28,7 @@ namespace SynnWebOvi
         public int UserGroupId { get;  set; }
         public string DisplayName { get; set; }
 
+        public UserAppPreferences Preferences { get; set; }
         public List<ClientPagePermissions> AllowedClientPagePermissions { get; set; }
         public List<int> AllowedSharedPermissions { get; set; }
         public bool IsAdmin { get; set; }

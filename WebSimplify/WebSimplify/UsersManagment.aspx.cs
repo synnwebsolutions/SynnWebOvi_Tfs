@@ -20,6 +20,16 @@ namespace WebSimplify
                 RefreshGridPageGrids();
             }
         }
+
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.SysAdmin };
+                return l;
+            }
+        }
+
         protected override string NavIdentifier
         {
             get

@@ -13,6 +13,14 @@ namespace WebSimplify
 {
     public partial class UserDictionaryPage : SynnWebFormBase
     {
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.Dictionary };
+                return l;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

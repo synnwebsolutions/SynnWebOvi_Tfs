@@ -18,7 +18,14 @@ namespace WebSimplify
                 RefreshGrid(gv);
             }
         }
-
+        protected override List<ClientPagePermissions> RequiredPermissions
+        {
+            get
+            {
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.QuickTasks };
+                return l;
+            }
+        }
         protected override string NavIdentifier
         {
             get

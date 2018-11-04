@@ -22,7 +22,7 @@ namespace SynnWebOvi
     {
 
         internal static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
-
+        internal const string DecimalFormat = "#.#";
         public LoggedUser CurrentUser
         {
             get
@@ -145,11 +145,11 @@ namespace SynnWebOvi
                     Master.FindControl("navshop").Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
                     Master.FindControl("navwed").Visible = CurrentUser.Allowed(ClientPagePermissions.Wedding);
                     Master.FindControl("navtask").Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
-                    
+                    Master.FindControl("navcredit").Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
 
-                    Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
-                    Master.FindControl("navusers").Visible = CurrentUser.IsAdmin;
-                    Master.FindControl("navlog").Visible = CurrentUser.IsAdmin;
+                    //Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
+                    Master.FindControl("navusers").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
+                    Master.FindControl("navlog").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
 
                     ((HtmlAnchor)Master.FindControl(NavIdentifier)).Attributes.Add("class", "active");
                 }
@@ -159,14 +159,7 @@ namespace SynnWebOvi
                     if (!CurrentUser.Allowed(en))
                         SynNavigation.Goto(Pages.Main);
                 }
-
-                
             }
-            //if (Master != null)
-            //{
-            //    ((HtmlAnchor)Master.FindControl("navdiary")).Attributes["class"].Replace("active",  "");
-            //    //var clss = ((HtmlAnchor)Master.FindControl("navmain")).Attributes["class"];
-            //}
         }
 
         public void AlertMessage(string message)

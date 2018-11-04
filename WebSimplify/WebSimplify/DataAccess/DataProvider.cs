@@ -33,12 +33,14 @@ namespace SynnWebOvi
         {
             public static string UserDictionary = "UserDictionary"; // user only
             public static string Users = "Users";
+            public static string UserPreferences = "UserPreferences";
             public static string Log = "Log";
             public static string ThemeLog = "ThemeLog";
             public static string WeddingItems = "WeddingItems"; // group
             public static string ShoppingItems = "ShoppingItems";  // group
             public static string User_ShoppingItems = "User_ShoppingItems";  // group
             public static string ShiftsData = "ShiftsData"; // group
+            public static string CreditData = "CreditData"; // group
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
             public static string QuickTasks = "QuickTasks";
@@ -53,6 +55,7 @@ namespace SynnWebOvi
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
         IDbShop DbShop { get; }
+        IDbCredit DbCredit { get; }
         IDbShifts DbShifts { get; }
         IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; set; }
@@ -140,6 +143,14 @@ namespace SynnWebOvi
         }
 
         public IDbShifts DbShifts
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbCredit DbCredit
         {
             get
             {

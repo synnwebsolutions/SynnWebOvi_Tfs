@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,13 +9,18 @@ namespace WebSimplify
 {
     public static  class CultureHelper
     {
+        public static CultureInfo HebrewCulture =  CultureInfo.CreateSpecificCulture("he-IL");
         public static string ToJewishDateString(this DateTime value, string format)
         {
-            var ci = CultureInfo.CreateSpecificCulture("he-IL");
-            ci.DateTimeFormat.Calendar = new HebrewCalendar();
-            return value.ToString(format, ci);
+            HebrewCulture.DateTimeFormat.Calendar = new HebrewCalendar();
+            return value.ToString(format, HebrewCulture);
         }
 
+
+    }
+
+    public static class ExtensionsHelper
+    {
         public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
         {
             int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
@@ -33,5 +39,96 @@ namespace WebSimplify
         {
             return actualMonth.Year == dateToCheck.Year && dateToCheck.Month == dateToCheck.Month;
         }
+
+        public static string HebrewMonthName(this DateTime cMonth)
+        {
+            return cMonth.ToString("MMMM", CultureHelper.HebrewCulture) + " " + cMonth.Year.ToString();
+        }
+
+        public static string ToInputFormat(this DateTime cMonth)
+        {
+            return cMonth.ToString("yyyy-MM-dd");
+        }
+
+        public static bool Empty(this DateTime cMonth)
+        {
+            return cMonth == null || cMonth == DateTime.MinValue;
+        }
+
+        public static bool NotEmpty(this DateTime cMonth)
+        {
+            return cMonth != null && cMonth != DateTime.MinValue;
+        }
+
+        public static int NumberOfDays(this DateTime cMonth)
+        {
+            var tmpm = new DateTime(cMonth.Year, cMonth.Month, 1);
+            var tmpmEnd = tmpm.AddMonths(1).AddDays(-1);
+            var span = tmpmEnd - tmpm;
+            return Convert.ToInt32(span.TotalDays);
+        }
+
+        public static string FormattedString(this int integer)
+        {
+            return string.Format("{0:n0}", integer);
+        }
+
+        public static int ToInteger(this double d)
+        {
+            return Convert.ToInt32(d);
+        }
+
+        public static int ToInteger(this string d)
+        {
+            return Convert.ToInt32(d);
+        }
+        
+        public static int ToInteger(this decimal d)
+        {
+            return Convert.ToInt32(d);
+        }
+
+        public static bool IsEmpty(this IEnumerable d)
+        {
+            if (d == null)
+                return true;
+            bool any = true;
+            foreach (var e in d)
+            {
+                any = false;
+                break;
+            }
+            return any;
+        }
+
+        public static bool IsEmpty(this string d)
+        {
+            return string.IsNullOrEmpty(d);
+        }
+
+        public static bool NotEmpty(this string d)
+        {
+            return !string.IsNullOrEmpty(d);
+        }
+
+        public static DateTime ToDateTime(this string d) 
+        {
+            return Convert.ToDateTime(d);
+        }
+
+        
+        public static bool NotEmpty(this IEnumerable d)
+        {
+            if (d == null)
+                return false;
+            bool any = false;
+            foreach (var e in d)
+            {
+                any = true;
+                break;
+            }
+            return any;
+        }
+
     }
 }

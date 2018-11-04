@@ -21,6 +21,7 @@ namespace SynnWebOvi
         List<LoggedUser> GetUsers(UserSearchParameters lp);
         void Update(LoggedUser u);
         LoggedUser GetUser(int ownerId);
+        void UpdatePreferences(LoggedUser u);
     }
 
     public interface IDbLog
@@ -43,6 +44,13 @@ namespace SynnWebOvi
         void ActivateShopItem(ShopSearchParameters shopSearchParameters);
         void DeActivateShopItem(ShopSearchParameters shopSearchParameters);
         void AddNewShopItem(ShopItem n);
+    }
+
+    public interface IDbCredit
+    {
+        void Add(CreditCardMonthlyData i);
+        List<CreditCardMonthlyData> Get(CreditSearchParameters creditSearchParameters);
+        void Update(CreditCardMonthlyData i);
     }
 
     public interface IDbShifts
@@ -112,6 +120,17 @@ namespace SynnWebOvi
         public int? IdToActivate { get; internal set; }
         public int? IdToDeactivate { get; internal set; }
         public string ItemName { get; internal set; }
+    }
+
+    public class CreditSearchParameters : BaseSearchParameters
+    {
+        public CreditSearchParameters() : base()
+        {
+        }
+
+        public bool? Active { get;  set; }
+        public int? Id { get;  set; }
+        public DateTime? Month { get;  set; }
     }
 
     public class WeddSearchParameters : BaseSearchParameters
