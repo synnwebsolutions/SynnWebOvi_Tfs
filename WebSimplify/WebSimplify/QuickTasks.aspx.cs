@@ -26,6 +26,29 @@ namespace WebSimplify
                 return l;
             }
         }
+
+        protected void btnAddQuickTask_ServerClick(object sender, EventArgs e)
+        {
+            if (ValidateInputs(txTaskname, txTaskDesc))
+            {
+                QuickTask t = new QuickTask
+                {
+                    Name = txTaskname.Value,
+                    Description = txTaskDesc.Value,
+                    Active = true,
+                    CreationDate = DateTime.Now,
+                    UserGroupId = CurrentUser.Id
+                };
+                DBController.DbCalendar.Add(t);
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                ClearInputs(txTaskname, txTaskDesc);
+                RefreshGrid(gv);
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
         protected override string NavIdentifier
         {
             get
@@ -45,11 +68,6 @@ namespace WebSimplify
         {
             List<QuickTask> items = DBController.DbCalendar.Get(new QuickTasksSearchParameters { SearchText = txwedsearchkey.Value, Active = chkActive.Checked });
             return items;
-        }
-
-        protected void btnAddQuickTask_ServerClick(object sender, EventArgs e)
-        {
-
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)

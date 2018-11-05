@@ -19,10 +19,33 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                trdiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
-                trdic.Visible = CurrentUser.Allowed(ClientPagePermissions.Dictionary);
-                trshop.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
-                dvQtasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
+                dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
+                dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
+                dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
+                FillData();
+            }
+        }
+
+        private void FillData()
+        {
+            var startOfWeek = DateTime.Now.StartOfWeek();
+            if (CurrentUser.Allowed(ClientPagePermissions.Diary))
+            {
+                rpCalendar.DataSource =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = startOfWeek, ToDate = DateTime.Now.EndOfWeek() });
+                rpCalendar.DataBind();
+            }
+            if (CurrentUser.Allowed(ClientPagePermissions.Shifts))
+            {
+                var nextShift = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { FromDate = DateTime.Now, ToDate = DateTime.Now.EndOfWeek() }).OrderBy(x => x.Date)
+                    .Take(1).ToList();
+                rpShift.DataSource = nextShift;
+                rpShift.DataBind();
+            }
+            if (CurrentUser.Allowed( ClientPagePermissions.QuickTasks))
+            {
+                List<QuickTask> items = DBController.DbCalendar.Get(new QuickTasksSearchParameters {Active = true});
+                rpTasks.DataSource = items;
+                rpTasks.DataBind();
             }
         }
 
@@ -34,102 +57,44 @@ namespace WebSimplify
             }
         }
 
-        [WebMethod]
-        [ScriptMethod()]
-        public static void AddToDictionary(string key, string value)
+        protected void rpTasks_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            
-        }
-
-        //[WebMethod]
-        //[ScriptMethod()]
-        //public static void AddToShopList(string productName)
-        //{
-        //    ShoppingData sd = DBController.DbShop.GetData();
-        //    sd.AddToShoplist(productName);
-        //    DBController.DbShop.Update(sd);
-        //}
-
-        protected void btnadddic_ServerClick(object sender, EventArgs e)
-        {
-            if (ValidateInputs(txadddickey, txadddicval))
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                DBController.DbUserDictionary.Add(new DictionarySearchParameters { Key = txadddickey.Value, Value = txadddicval.Value });
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txadddickey, txadddicval);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
+                QuickTask im = (QuickTask)e.Item.DataItem;
+                //Label lblName = (Label)e.Item.FindControl("lblName");
+                Label lblDesc = (Label)e.Item.FindControl("lblDesc");
+
+                //lblName.Text = im.CreationDate.HebrewDayName();
+                lblDesc.Text = string.Format("{0} -  {1}", im.MarkableName, im.MarkableDescription);
             }
         }
 
-
-        protected void btnadddiary_ServerClick(object sender, EventArgs e)
+        protected void rpCalendar_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (ValidateInputs(txadddiaryname, txadddiarydesc, txadddiarydate))
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                var c = new MemoItem
-                {
-                    title = txadddiaryname.Value,
-                    Description = txadddiarydesc.Value,
-                    Date = Convert.ToDateTime(txadddiarydate.Value)
-                };
-                var sp = new CalendarSearchParameters { InsertItem = c };
-                DBController.DbCalendar.Add(sp);
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txadddiaryname, txadddiarydesc, txadddiarydate);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
+                MemoItem im = (MemoItem)e.Item.DataItem;
+                Label lblName = (Label)e.Item.FindControl("lblName");
+                Label lblDesc = (Label)e.Item.FindControl("lblDesc");
+
+                lblName.Text = im.Date.HebrewDayName();
+                lblDesc.Text = string.Format("{0} -  {1}", im.MarkableName, im.MarkableDescription);
             }
         }
 
-        protected void btnAddShopItem_ServerClick(object sender, EventArgs e)
+        protected void rpShift_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (ValidateInputs(txShopItemToAdd))
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
-                if(ul == null)
-                {
-                    ShopItem n = new ShopItem
-                    {
-                        Name = txShopItemToAdd.Value
-                    };
-                    DBController.DbShop.AddNewShopItem(n);
-                }
-                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
-                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txShopItemToAdd);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
-            }
-        }
+                ShiftDayData im = (ShiftDayData)e.Item.DataItem;
+                Label lblName = (Label)e.Item.FindControl("lblName");
+                Label lblDesc = (Label)e.Item.FindControl("lblDesc");
 
-        protected void btnAddQuickTask_ServerClick(object sender, EventArgs e)
-        {
-            if (ValidateInputs(txTaskname, txTaskDesc))
-            {
-                QuickTask t = new QuickTask
-                {
-                    Name = txTaskname.Value,
-                    Description = txTaskDesc.Value,
-                    Active  = true,
-                    CreationDate = DateTime.Now,
-                    UserGroupId = CurrentUser.Id
-                };
-                DBController.DbCalendar.Add(t);
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txTaskname, txTaskDesc);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
+                lblName.Text = im.Date.HebrewDayName();
+                lblDesc.Text = im.MarkableName;
             }
         }
     }
+    
 }

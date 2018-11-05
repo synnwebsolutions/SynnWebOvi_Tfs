@@ -49,6 +49,20 @@ namespace WebSimplify
             return items;
         }
 
+        protected void btnadddic_ServerClick(object sender, EventArgs e)
+        {
+            if (ValidateInputs(txadddickey, txadddicval))
+            {
+                DBController.DbUserDictionary.Add(new DictionarySearchParameters { Key = txadddickey.Value, Value = txadddicval.Value });
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                ClearInputs(txadddickey, txadddicval);
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
+
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)

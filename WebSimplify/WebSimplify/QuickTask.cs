@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
-    public class QuickTask : IDbLoadable
+    public class QuickTask : IDbLoadable, IMarkAble
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -15,6 +16,30 @@ namespace WebSimplify
         public int UserGroupId { get; set; }
         public bool Active { get;  set; }
         public DateTime CreationDate { get;  set; }
+
+        public string MarkableDescription
+        {
+            get
+            {
+                return Description;
+            }
+        }
+
+        public string MarkableName
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        public string MarkableType
+        {
+            get
+            {
+                return "משימה";
+            }
+        }
 
         public QuickTask()
         {

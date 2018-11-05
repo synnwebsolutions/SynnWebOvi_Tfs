@@ -4,6 +4,25 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="spageheader">מילון מונחים</div>
+        <div class="row" id="trdic" runat="server">
+        <div class=" col-3">
+        </div>
+        <div class="spanel col-6">
+            <div class="spanelHeader ">הוספה למילון  <i class="fa fa-address-book"></i></div>
+            <div class="">
+                <div>
+                    <input type="text" name="name" id="txadddickey" placeholder="שם להוספה" runat="server" />
+                </div>
+                <div>
+                    <input type="text" name="name" id="txadddicval" placeholder="ערך להוספה" runat="server" />
+                </div>
+                <button class="sbutton" type="button" id="btnadddic" runat="server" onserverclick="btnadddic_ServerClick">הוסף</button>
+            </div>
+        </div>
+        <div class=" col-3">
+        </div>
+
+    </div>
     <div class="row">
         <div class=" col-3"></div>
         <div class="spanel col-6">

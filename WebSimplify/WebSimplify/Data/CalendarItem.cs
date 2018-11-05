@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
@@ -115,7 +116,7 @@ namespace WebSimplify
         }
     }
 
-    public class MemoItem : IDbLoadable
+    public class MemoItem : IDbLoadable, IMarkAble
     {
         public MemoItem()
         {
@@ -130,6 +131,31 @@ namespace WebSimplify
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public int Id { get;  set; }
+
+        public string MarkableDescription
+        {
+            get
+            {
+                return Description;
+            }
+        }
+
+        public string MarkableName
+        {
+            get
+            {
+                return title;
+            }
+        }
+
+        public string MarkableType
+        {
+            get
+            {
+                return "תזכורת";
+            }
+        }
+
         public string title { get; set; }
 
         public void Load(IDataReader reader)

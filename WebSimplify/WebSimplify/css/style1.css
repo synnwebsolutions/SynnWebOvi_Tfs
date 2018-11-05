@@ -435,18 +435,45 @@ textarea {
     border: 2px solid white;
     padding: 2%;
 }
-.menubuttoncontainer{
-      background-color: rgba(151, 151, 251, 0.5);
-      padding:4px;
- margin: 2px 0px 2px;
- text-align:left;
+
+.menubuttoncontainer {
+    background-color: rgba(151, 151, 251, 0.5);
+    padding: 4px;
+    margin: 2px 0px 2px;
+    text-align: left;
 }
-.menubutton{
+
+.menubutton {
     color: white;
     padding: 7px 7px;
     text-align: center;
     display: inline-block;
     font-size: 12px;
-    background-color:transparent;
+    background-color: transparent;
     border: 1px solid white;
+}
+
+.marktable {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(51, 47, 31, 0.5);
+}
+
+    .marktable table {
+        width: 100%;
+           font-size: 16px;
+           font-weight:600;
+    }
+     
+      .marktable td {
+        background-color: rgba(0, 0, 0, 0.5);
+        color:white;
+       padding: 20px 20px 20px;
+        border:none;
+    }
+
+legend {
+    text-shadow: 2px 2px 4px rgba(41, 57, 85, 0.5);
+    font-size: 18px;
+    color:white;
 }

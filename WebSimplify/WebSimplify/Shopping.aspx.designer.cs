@@ -22,6 +22,33 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnGenerate;
         
         /// <summary>
+        /// trshop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl trshop;
+        
+        /// <summary>
+        /// txShopItemToAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txShopItemToAdd;
+        
+        /// <summary>
+        /// btnAddShopItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddShopItem;
+        
+        /// <summary>
         /// trAdd control.
         /// </summary>
         /// <remarks>

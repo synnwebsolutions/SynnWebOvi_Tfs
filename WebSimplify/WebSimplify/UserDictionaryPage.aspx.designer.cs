@@ -13,6 +13,42 @@ namespace WebSimplify {
     public partial class UserDictionaryPage {
         
         /// <summary>
+        /// trdic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl trdic;
+        
+        /// <summary>
+        /// txadddickey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddickey;
+        
+        /// <summary>
+        /// txadddicval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddicval;
+        
+        /// <summary>
+        /// btnadddic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnadddic;
+        
+        /// <summary>
         /// txsearchkey control.
         /// </summary>
         /// <remarks>

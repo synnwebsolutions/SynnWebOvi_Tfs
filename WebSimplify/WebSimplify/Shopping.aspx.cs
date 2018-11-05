@@ -43,7 +43,7 @@ namespace WebSimplify
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            gv.Columns[1].Visible = trAdd.Visible = !GMode;
+            gv.Columns[1].Visible = trAdd.Visible = trshop.Visible = !GMode;
             btnGenerate.InnerText = GMode ?  "סגור" : "הפק רשימת קניות";
         }
 
@@ -111,6 +111,31 @@ namespace WebSimplify
         {
             GMode = !GMode;
             RefreshGrid(gv);
+        }
+
+        protected void btnAddShopItem_ServerClick(object sender, EventArgs e)
+        {
+            if (ValidateInputs(txShopItemToAdd))
+            {
+                ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                if (ul == null)
+                {
+                    ShopItem n = new ShopItem
+                    {
+                        Name = txShopItemToAdd.Value
+                    };
+                    DBController.DbShop.AddNewShopItem(n);
+                }
+                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                ClearInputs(txShopItemToAdd);
+                RefreshView();
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
         }
     }
 }

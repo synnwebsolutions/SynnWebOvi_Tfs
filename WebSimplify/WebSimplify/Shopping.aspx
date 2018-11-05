@@ -8,6 +8,23 @@
     <div class="menubuttoncontainer">
         <button class="menubutton" type="button" id="btnGenerate" runat="server" onserverclick="btnGenerate_ServerClick"> הפק רשימת קניות</button>
     </div>
+     <div class="row" id="trshop" runat="server">
+        <div class=" col-1">
+        </div>
+        <div class="spanel col-10">
+            <div class="spanelHeader ">הוספה לרשימת קניות    <i class="fa fa-credit-card"></i></div>
+            <div class="">
+                <div>
+                    <input type="text" name="name" id="txShopItemToAdd" placeholder="פריט להוספה" runat="server" />
+                </div>
+                <button class="sbutton" type="button" id="btnAddShopItem" runat="server" onserverclick="btnAddShopItem_ServerClick">הוסף</button>
+            </div>
+        </div>
+        <div class=" col-1">
+        </div>
+    </div>
+  
+
     <div class="row" id="trAdd" runat="server">
         <div class=" col-1"></div>
         <div class="spanel col-10">

@@ -150,6 +150,7 @@
     <Compile Include="DataAccess\SqlDbShop.cs" />
     <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
+    <Compile Include="Data\IMarkAble.cs" />
     <Compile Include="Data\PermissionGroup.cs" />
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />

@@ -27,6 +27,24 @@ namespace WebSimplify
             return dt.AddDays(-1 * diff).Date;
         }
 
+        public static DateTime StartOfWeek(this DateTime dt)
+        {
+            while (dt.DayOfWeek != DayOfWeek.Sunday)
+            {
+                dt = dt.AddDays(-1);
+            }
+            return dt;
+        }
+
+        public static DateTime EndOfWeek(this DateTime dt)
+        {
+            while (dt.DayOfWeek != DayOfWeek.Saturday)
+            {
+                dt = dt.AddDays(1);
+            }
+            return dt;
+        }
+
         public static bool InTwoWeekPeriod(this DateTime periodStart, DateTime dateToCheck)
         {
             if (dateToCheck.Date >= periodStart.Date)
@@ -43,6 +61,11 @@ namespace WebSimplify
         public static string HebrewMonthName(this DateTime cMonth)
         {
             return cMonth.ToString("MMMM", CultureHelper.HebrewCulture) + " " + cMonth.Year.ToString();
+        }
+
+        public static string HebrewDayName(this DateTime cMonth)
+        {
+            return CultureHelper.HebrewCulture.DateTimeFormat.DayNames[(int)cMonth.DayOfWeek];
         }
 
         public static string ToInputFormat(this DateTime cMonth)
@@ -128,6 +151,11 @@ namespace WebSimplify
                 break;
             }
             return any;
+        }
+
+        public static bool NotNull(this object d)
+        {
+            return d != null;
         }
 
     }

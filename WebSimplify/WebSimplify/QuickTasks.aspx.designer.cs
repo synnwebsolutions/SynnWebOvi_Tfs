@@ -13,6 +13,42 @@ namespace WebSimplify {
     public partial class QuickTasks {
         
         /// <summary>
+        /// dvQtasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvQtasks;
+        
+        /// <summary>
+        /// txTaskname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txTaskname;
+        
+        /// <summary>
+        /// txTaskDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txTaskDesc;
+        
+        /// <summary>
+        /// btnAddQuickTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddQuickTask;
+        
+        /// <summary>
         /// txwedsearchkey control.
         /// </summary>
         /// <remarks>
