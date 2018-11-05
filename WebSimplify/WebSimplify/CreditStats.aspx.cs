@@ -38,7 +38,7 @@ namespace WebSimplify
 
         private void RefreshView()
         {
-            List<CreditCardMonthlyData> ul = DBController.DbCredit.Get(new CreditSearchParameters { });
+            List<CreditCardMonthlyData> ul = DBController.DbMoney.Get(new CreditSearchParameters { });
             if (ul.NotEmpty())
             {
                 var inactiveItems = ul.Where(x => !x.Active).ToList();
@@ -49,7 +49,7 @@ namespace WebSimplify
                     txp2.Text = inactiveItems.Average(x => x.DaylyValue.ToInteger()).ToInteger().FormattedString();
                 }
 
-                var current = DBController.DbCredit.Get(new CreditSearchParameters { Month = DateTime.Now }).FirstOrDefault();
+                var current = DBController.DbMoney.Get(new CreditSearchParameters { Month = DateTime.Now }).FirstOrDefault();
                 if (current != null)
                     txp3.Text = current.MonthlyPrediction.ToInteger().FormattedString();
             }
@@ -64,7 +64,7 @@ namespace WebSimplify
 
         public IEnumerable GetCreditItems()
         {
-            List<CreditCardMonthlyData> ul = DBController.DbCredit.Get(new CreditSearchParameters { });
+            List<CreditCardMonthlyData> ul = DBController.DbMoney.Get(new CreditSearchParameters { });
             return ul.OrderByDescending(x => x.Date).ToList();
         }
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -74,10 +74,10 @@ namespace WebSimplify
                 var d = (CreditCardMonthlyData)e.Row.DataItem;
                 ((Label)e.Row.FindControl("lblMonthName")).Text = d.Date.HebrewMonthName();
                 ((Label)e.Row.FindControl("lblDaylyValue")).Text = d.DaylyValue;
-                ((Label)e.Row.FindControl("lblMonthlyPredictions")).Text = d.MonthlyPrediction;
+                ((Label)e.Row.FindControl("lblMonthlyPredictions")).Text = d.Active ? d.MonthlyPrediction : d.TotalSpent.FormattedString();
                 var txCurrentTotal = (TextBox)e.Row.FindControl("txCurrentTotal");
                 txCurrentTotal.Text = d.TotalSpent.FormattedString(); 
-                txCurrentTotal.Enabled = d.Active;
+                txCurrentTotal.Visible = d.Active;
 
                 var btnAction = ((ImageButton)e.Row.FindControl("btnAction"));
                 var btnCloseMonth = ((ImageButton)e.Row.FindControl("btnCloseMonth"));
@@ -95,14 +95,14 @@ namespace WebSimplify
             if (i.Active)
             {
                 i.TotalSpent = nVal;
-                DBController.DbCredit.Update(i);
+                DBController.DbMoney.Update(i);
                 RefreshGrid(gv);
             }
         }
 
         private CreditCardMonthlyData GetItem(object commandArgument)
         {
-            List<CreditCardMonthlyData> ul = DBController.DbCredit.Get(new CreditSearchParameters { Id = Convert.ToInt32(commandArgument) });
+            List<CreditCardMonthlyData> ul = DBController.DbMoney.Get(new CreditSearchParameters { Id = Convert.ToInt32(commandArgument) });
             return ul.FirstOrDefault();
         }
 
@@ -110,7 +110,7 @@ namespace WebSimplify
         {
             CreditCardMonthlyData i = GetItem(e.CommandArgument);
             i.Active = false;
-            DBController.DbCredit.Update(i);
+            DBController.DbMoney.Update(i);
             RefreshView();
         }
 

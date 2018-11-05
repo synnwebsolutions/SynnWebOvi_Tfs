@@ -46,11 +46,16 @@ namespace SynnWebOvi
         void AddNewShopItem(ShopItem n);
     }
 
-    public interface IDbCredit
+    public interface IDbMoney
     {
+        void Add(CashMonthlyData i);
         void Add(CreditCardMonthlyData i);
+        List<CashMonthlyData> Get(CashSearchParameters cashSearchParameters);
         List<CreditCardMonthlyData> Get(CreditSearchParameters creditSearchParameters);
         void Update(CreditCardMonthlyData i);
+        void Update(CashMonthlyData i);
+        List<CashMoneyItem> GetCashItems(CashSearchParameters cashSearchParameters);
+        void Add(CashMoneyItem i);
     }
 
     public interface IDbShifts
@@ -131,6 +136,17 @@ namespace SynnWebOvi
         public bool? Active { get;  set; }
         public int? Id { get;  set; }
         public DateTime? Month { get;  set; }
+    }
+
+    public class CashSearchParameters : BaseSearchParameters
+    {
+        public CashSearchParameters() : base()
+        {
+        }
+
+        public bool? Active { get; set; }
+        public int? Id { get; set; }
+        public DateTime? Month { get; set; }
     }
 
     public class WeddSearchParameters : BaseSearchParameters

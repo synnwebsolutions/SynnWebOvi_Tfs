@@ -23,7 +23,9 @@ namespace WebSimplify
         [Description("אשראי")]
         CreditData,
         [Description("מנהל מערכת")]
-        SysAdmin
+        SysAdmin,
+        [Description(" מעקב מזומן")]
+        CashLog
     }
     
 }

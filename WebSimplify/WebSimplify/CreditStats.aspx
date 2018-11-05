@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="row">
-        <div class=" col-3"></div>
-        <div class="col-6">
+        <div class=" col-2"></div>
+        <div class="col-8">
             <div class="sgridcontainer spanel">
                 <asp:GridView ID="gv" runat="server"
                     OnRowDataBound="gv_RowDataBound" AllowPaging="true"
@@ -75,7 +75,7 @@
                 </asp:GridView>
             </div>
         </div>
-        <div class=" col-3"></div>
+        <div class=" col-2"></div>
     </div>
 
 

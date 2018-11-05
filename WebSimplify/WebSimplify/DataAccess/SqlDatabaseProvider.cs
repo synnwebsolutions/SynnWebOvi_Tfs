@@ -15,7 +15,7 @@ namespace SynnWebOvi
         internal IDbWedd IDbWedd = null;
         internal IDbShop IDbShop = null;
         internal IDbShifts IDbShifts = null;
-        internal IDbCredit IDbCredit = null;
+        internal IDbMoney IDbCredit = null;
         
 
         internal IDbCalendar IDbCalendar = null;
@@ -112,7 +112,7 @@ namespace SynnWebOvi
             }
         }
 
-        public IDbCredit DbCredit
+        public IDbMoney DbMoney
         {
             get
             {

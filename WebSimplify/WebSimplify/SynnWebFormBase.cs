@@ -137,6 +137,10 @@ namespace SynnWebOvi
                 SynNavigation.Goto(Pages.Login);
             if (!IsPostBack)
             {
+                if (RequiredPermissions.NotEmpty())
+                    Title = GenericFormatter.GetEnumDescription(RequiredPermissions[0]);
+                else
+                    Title = "מסך הבית";
                 if (!LoginProvider)
                 {
                     Master.FindControl("navdiary").Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
@@ -146,6 +150,7 @@ namespace SynnWebOvi
                     Master.FindControl("navwed").Visible = CurrentUser.Allowed(ClientPagePermissions.Wedding);
                     Master.FindControl("navtask").Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
                     Master.FindControl("navcredit").Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
+                    Master.FindControl("navcash").Visible = CurrentUser.Allowed(ClientPagePermissions.CashLog);
 
                     //Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
                     Master.FindControl("navusers").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
@@ -161,6 +166,8 @@ namespace SynnWebOvi
                 }
             }
         }
+
+        
 
         public void AlertMessage(string message)
         {

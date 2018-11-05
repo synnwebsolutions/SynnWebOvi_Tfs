@@ -7,7 +7,7 @@ using System.Web;
 
 namespace WebSimplify
 {
-    public class CreditCardMonthlyData : IDbLoadable
+    public class CreditCardMonthlyData : MoneyMonthlyData
     {
         public CreditCardMonthlyData()
         {
@@ -18,38 +18,6 @@ namespace WebSimplify
         {
             Load(data);
         }
-
-        public int TotalSpent { get; set; }
-        public DateTime Date { get; set; }
-        public int Id { get;  set; }
-        public bool Active { get;  set; }
-       
-        public string DaylyValue
-        {
-            get
-            {
-                var res = TotalSpent / Date.NumberOfDays();
-                return res.FormattedString();
-            }
-        }
-        public string MonthlyPrediction
-        {
-            get
-            {
-                var res = Convert.ToInt32(DaylyValue) * Date.NumberOfDays();
-                return res.FormattedString(); 
-            }
-        }
-
-        public int UserGroupId { get;  set; }
-
-        public void Load(IDataReader reader)
-        {
-            Id = DataAccessUtility.LoadInt32(reader, "Id");
-            TotalSpent = DataAccessUtility.LoadNullable<int>(reader, "TotalSpent");
-            Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
-            Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
-        }
+        
     }
 }

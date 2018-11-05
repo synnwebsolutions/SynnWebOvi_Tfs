@@ -31,7 +31,8 @@ namespace WebSimplify
             var startOfWeek = DateTime.Now.StartOfWeek();
             if (CurrentUser.Allowed(ClientPagePermissions.Diary))
             {
-                rpCalendar.DataSource =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = startOfWeek, ToDate = DateTime.Now.EndOfWeek() });
+                rpCalendar.DataSource =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = startOfWeek, ToDate = DateTime.Now.EndOfWeek() }).OrderBy(x => x.Date)
+                    .ToList(); 
                 rpCalendar.DataBind();
             }
             if (CurrentUser.Allowed(ClientPagePermissions.Shifts))

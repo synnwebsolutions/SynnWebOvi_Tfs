@@ -41,6 +41,8 @@ namespace SynnWebOvi
             public static string User_ShoppingItems = "User_ShoppingItems";  // group
             public static string ShiftsData = "ShiftsData"; // group
             public static string CreditData = "CreditData"; // group
+            public static string CashData = "CashData"; // group
+            public static string CashItems = "CashItems"; // group
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
             public static string QuickTasks = "QuickTasks";
@@ -55,7 +57,7 @@ namespace SynnWebOvi
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
         IDbShop DbShop { get; }
-        IDbCredit DbCredit { get; }
+        IDbMoney DbMoney { get; }
         IDbShifts DbShifts { get; }
         IDbUserDictionary DbUserDictionary { get; }
         LoggedUser CurrentUser { get; set; }
@@ -150,7 +152,7 @@ namespace SynnWebOvi
             }
         }
 
-        public IDbCredit DbCredit
+        public IDbMoney DbMoney
         {
             get
             {

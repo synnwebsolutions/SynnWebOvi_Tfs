@@ -2,6 +2,7 @@
 using SynnWebOvi;
 using System.Collections.Generic;
 using System.Linq;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
@@ -14,6 +15,27 @@ namespace WebSimplify
             {
                 CreditDataAction(u);
             }
+            if (u.Allowed(ClientPagePermissions.CashLog))
+            {
+                CashDataAction(u);
+            }
+        }
+
+        private static void CashDataAction(LoggedUser u)
+        {
+            var date = DateTime.Now;
+            var current = DBController.DbMoney.Get(new CashSearchParameters { Month = date }).FirstOrDefault();
+            if (current == null)
+            {
+                var i = new CashMonthlyData
+                {
+                    Active = true,
+                    Date = new DateTime(date.Year, date.Month, 1),
+                    TotalSpent = 0,
+                    UserGroupId = u.AllowedSharedPermissions[0]
+                };
+                DBController.DbMoney.Add(i);
+            }
         }
 
         private static void CreditDataAction(LoggedUser u)
@@ -25,7 +47,7 @@ namespace WebSimplify
                 var date = p.CreditLogStartDate;
                 while (date <= DateTime.Now)
                 {
-                    var current = DBController.DbCredit.Get(new CreditSearchParameters { Month = date }).FirstOrDefault();
+                    var current = DBController.DbMoney.Get(new CreditSearchParameters { Month = date }).FirstOrDefault();
                     if (current == null)
                     {
                         var i = new CreditCardMonthlyData
@@ -35,7 +57,7 @@ namespace WebSimplify
                             TotalSpent = 0,
                             UserGroupId = u.AllowedSharedPermissions[0]
                         };
-                        DBController.DbCredit.Add(i);
+                        DBController.DbMoney.Add(i);
                     }
                     date = date.AddMonths(1);
                 }

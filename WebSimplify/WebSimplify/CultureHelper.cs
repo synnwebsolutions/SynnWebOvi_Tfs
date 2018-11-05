@@ -45,6 +45,11 @@ namespace WebSimplify
             return dt;
         }
 
+        public static DateTime EndOfMonth(this DateTime dt)
+        {
+            return new DateTime(dt.Year,dt.Month,1).AddMonths(1).AddDays(-1);
+        }
+
         public static bool InTwoWeekPeriod(this DateTime periodStart, DateTime dateToCheck)
         {
             if (dateToCheck.Date >= periodStart.Date)
