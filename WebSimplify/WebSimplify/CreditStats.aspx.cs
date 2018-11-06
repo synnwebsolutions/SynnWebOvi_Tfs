@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Data;
@@ -118,6 +121,21 @@ namespace WebSimplify
         {
             gv.PageIndex = e.NewPageIndex;
             RefreshGrid(gv);
+        }
+
+        [WebMethod]
+        [ScriptMethod()]
+        public static JsonChartData GetChartData(string chartid)
+        {
+            var da = new JsonChartData();
+            var lst = new List<JsonLineCahrtItem>();
+            lst.Add(new JsonLineCahrtItem { Label = "t1", Y = 10 });
+            lst.Add(new JsonLineCahrtItem { Label = "t2", Y = 55 });
+            lst.Add(new JsonLineCahrtItem { Label = "e3", Y = 24 });
+            lst.Add(new JsonLineCahrtItem { Label = "r4", Y = 33 });
+            da.ChartData =  new JavaScriptSerializer().Serialize(lst);
+            da.ChartTitle = "simple Title";
+            return da;
         }
     }
 }

@@ -33,5 +33,6 @@ namespace WebSimplify.Data
     {
         public int CreditCardPaymentDay { get;  set; }
         public DateTime CreditLogStartDate { get;  set; }
+        public bool UseCharts { get;  set; }
     }
 }

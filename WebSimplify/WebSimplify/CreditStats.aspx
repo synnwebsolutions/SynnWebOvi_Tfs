@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="CreditStats.aspx.cs" Inherits="WebSimplify.CreditStats" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div class="spageheader" id="acc">נתוני אשראי</div>
+    <div class="spageheader" id="acc">נתוני אשראי</div>
 
     <div class="spanel">
         <div class="row">
@@ -78,5 +79,7 @@
         <div class=" col-2"></div>
     </div>
 
-
+    <div class="row">
+        <div id="chartCredit" class="chartitem" ></div>
+    </div>
 </asp:Content>

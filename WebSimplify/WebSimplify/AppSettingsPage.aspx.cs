@@ -29,6 +29,7 @@ namespace WebSimplify
                     var p = CurrentUser.Preferences;
                     txCreditDayOfMonth.Value = p.CreditCardPaymentDay.ToString();
                     txCreditStartDate.Text = p.CreditLogStartDate != DateTime.MinValue ?  p.CreditLogStartDate.ToInputFormat() : DateTime.Now.ToInputFormat();
+                    chkUseCharts.Checked = p.UseCharts;
                 }
             }
         }
@@ -59,10 +60,8 @@ namespace WebSimplify
                         var p = CurrentUser.Preferences;
                         p.CreditCardPaymentDay = txCreditDayOfMonth.Value.ToInteger();
                         p.CreditLogStartDate = txCreditStartDate.Text.ToDateTime();
+                        p.UseCharts = chkUseCharts.Checked;
                     }
-
-
-
 
                     DBController.DbAuth.UpdatePreferences(CurrentUser);
                 }

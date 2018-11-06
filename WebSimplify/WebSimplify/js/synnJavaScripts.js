@@ -3,6 +3,7 @@
     ArrangeTableFilters(); // finds grid inner tbody and sets the class
     ArrangeASPcalendar();
     HandleDeleteShiftButtons();
+    HandleChartCredits();
 });
 function ArrangeTableFilters() {
     $(".tabletofilter").find("tbody").addClass('datatofilter');
@@ -50,4 +51,37 @@ function OnAddError(xhr, ajaxOptions, thrownError) {
     var err = eval("(" + xhr.responseText + ")");
     alert(err.Message);
     //alert("תקלה - פעולה לא בוצעה בהצלחה", "הוספה");
+}
+
+function HandleChartCredits()
+{
+    alert("HandleChartCredits");
+    $.ajax({
+        type: "POST",
+        url: "CreditStats.aspx/GetChartData",
+        data: "{'chartid': 'chartCredit'}",
+        dataType: 'Json',
+        contentType: "application/Json; charset=utf-8",
+        success: OnChartSuccess,
+        error: OnChartError
+    });
+}
+
+function OnChartSuccess(data) {
+    alert(data.data);
+    var chart = new CanvasJS.Chart("chartCredit", {
+        animationEnabled: true,
+        theme: "light2",//light1
+        title: {
+            text: data.ChartTitle
+        },
+        data: [
+        {
+            // Change type to "bar", "splineArea", "area", "spline", "pie",etc.
+            type: "line",
+            dataPoints: data.ChartData
+        }
+        ]
+    });
+    chart.render();
 }

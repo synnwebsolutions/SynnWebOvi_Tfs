@@ -108,9 +108,17 @@ namespace WebSimplify
 
         public static int ToInteger(this string d)
         {
-            return Convert.ToInt32(d);
+            var dd = string.Empty;
+            foreach (var c in d.Where(x => x.IsInteger()))
+                dd += c;
+            return Convert.ToInt32(dd);
         }
-        
+
+        public static bool IsInteger(this char a)
+        {
+            return a >= '0' && a <= '9';
+        }
+
         public static int ToInteger(this decimal d)
         {
             return Convert.ToInt32(d);
