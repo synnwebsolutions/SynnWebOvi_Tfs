@@ -49,9 +49,15 @@ namespace WebSimplify
                 AddSqlWhereField("Date",new DateTime(d.Year,d.Month,1), ">=");
                 AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
             }
-            if(lsp.Id.HasValue)
-                AddSqlWhereField("Id",lsp.Id.Value);
+            if(lsp.FromDate.HasValue)
+                AddSqlWhereField("Date", lsp.FromDate, ">=");
+            if (lsp.ToDate.HasValue)
+                AddSqlWhereField("Date", lsp.ToDate, "<");
 
+            if (lsp.Id.HasValue)
+                AddSqlWhereField("Id",lsp.Id.Value);
+            if (lsp.Active.HasValue)
+                AddSqlWhereField("Active", lsp.Active.Value);
             var lst = new List<CreditCardMonthlyData>();
             FillList(lst, typeof(CreditCardMonthlyData));
             return lst;

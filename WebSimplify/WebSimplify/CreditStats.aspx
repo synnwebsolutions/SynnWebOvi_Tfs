@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="CreditStats.aspx.cs" Inherits="WebSimplify.CreditStats" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -78,8 +80,44 @@
         </div>
         <div class=" col-2"></div>
     </div>
-
-    <div class="row">
-        <div id="chartCredit" class="chartitem" ></div>
+      <div class="row" runat="server" id="ichartcontainer">
+           <div class=" col-2"></div>
+        <div id="chart" class="col-8">
+        </div>
+           <div class=" col-2"></div>
     </div>
+
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'line'] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var options = {
+                title: 'הוצאות אשראי חודשיות כוללות',
+                legend: { position: "none" }
+            };
+            $.ajax({
+                type: "POST",
+                url: "CreditStats.aspx/GetChartData",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r.d);
+                    var chart = new google.visualization.LineChart($("#chart")[0]);
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+        $(window).resize(function () {
+            drawChart();
+        });
+    </script>
+  
 </asp:Content>

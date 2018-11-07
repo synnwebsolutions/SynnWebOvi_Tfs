@@ -483,7 +483,7 @@ legend {
     color:black;
        font-weight:600;
 }
-.chartitem{
-    height: 400px; 
-    width: 100%;
+.ichart {
+  width: 100%; 
+  min-height: 400px;
 }

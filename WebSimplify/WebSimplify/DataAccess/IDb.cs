@@ -136,6 +136,8 @@ namespace SynnWebOvi
         public bool? Active { get;  set; }
         public int? Id { get;  set; }
         public DateTime? Month { get;  set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
     }
 
     public class CashSearchParameters : BaseSearchParameters

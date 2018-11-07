@@ -28,7 +28,7 @@ namespace WebSimplify
         {
             get
             {
-                var res = TotalSpent / DateTime.Now.Day;
+                var res = TotalSpent / (Active? DateTime.Now.Day : Date.NumberOfDays());
                 return res.FormattedString();
             }
         }

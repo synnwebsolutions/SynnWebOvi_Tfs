@@ -2,6 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -21,6 +24,12 @@ namespace WebSimplify
             {
                 RefreshView();
             }
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            ichartcontainer.Visible = CurrentUser.Preferences.UseCharts;
         }
 
         protected override List<ClientPagePermissions> RequiredPermissions
@@ -124,18 +133,17 @@ namespace WebSimplify
         }
 
         [WebMethod]
-        [ScriptMethod()]
-        public static JsonChartData GetChartData(string chartid)
+        public static List<object> GetChartData()
         {
-            var da = new JsonChartData();
-            var lst = new List<JsonLineCahrtItem>();
-            lst.Add(new JsonLineCahrtItem { Label = "t1", Y = 10 });
-            lst.Add(new JsonLineCahrtItem { Label = "t2", Y = 55 });
-            lst.Add(new JsonLineCahrtItem { Label = "e3", Y = 24 });
-            lst.Add(new JsonLineCahrtItem { Label = "r4", Y = 33 });
-            da.ChartData =  new JavaScriptSerializer().Serialize(lst);
-            da.ChartTitle = "simple Title";
-            return da;
+            List<object> chartData = new List<object>();
+            chartData.Add(new object[] { "חודש", "סך הוצאות חודשי" });
+
+            var dbH = SynnDataProvider.DbProvider.DbMoney;
+            List<CreditCardMonthlyData> ul = DBController.DbMoney.Get(new CreditSearchParameters { Active = false , FromDate = new DateTime(DateTime.Now.Year,1,1)});
+            foreach (var item in ul.OrderBy(x => x.Date))
+                chartData.Add(new object[] { item.Date.HebrewMonthName(), item.TotalSpent });
+
+            return chartData;
         }
     }
 }

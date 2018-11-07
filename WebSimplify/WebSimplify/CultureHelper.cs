@@ -65,6 +65,11 @@ namespace WebSimplify
 
         public static string HebrewMonthName(this DateTime cMonth)
         {
+            return cMonth.ToString("MMMM", CultureHelper.HebrewCulture);
+        }
+
+        public static string HebrewMonthNameWithYear(this DateTime cMonth)
+        {
             return cMonth.ToString("MMMM", CultureHelper.HebrewCulture) + " " + cMonth.Year.ToString();
         }
 
