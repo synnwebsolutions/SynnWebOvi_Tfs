@@ -115,9 +115,9 @@
             });
         }
 
-        $(window).resize(function () {
-            drawChart();
-        });
+        //$(window).resize(function () {
+        //    drawChart();
+        //});
     </script>
   
 </asp:Content>
