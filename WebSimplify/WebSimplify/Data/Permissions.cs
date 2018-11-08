@@ -25,7 +25,9 @@ namespace WebSimplify
         [Description("מנהל מערכת")]
         SysAdmin,
         [Description(" מעקב מזומן")]
-        CashLog
+        CashLog,
+        [Description("  מעקב שעות עבודה")]
+        WorkHours
     }
     
 }

@@ -81,6 +81,14 @@ namespace SynnWebOvi
             }
         }
 
+        protected virtual bool HasNavLink
+        {
+            get
+            {
+                return true;
+            }
+        }
+        
         protected virtual bool LoginProvider
         {
             get
@@ -156,7 +164,8 @@ namespace SynnWebOvi
                     Master.FindControl("navusers").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
                     Master.FindControl("navlog").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
 
-                    ((HtmlAnchor)Master.FindControl(NavIdentifier)).Attributes.Add("class", "active");
+                    if(HasNavLink)
+                        ((HtmlAnchor)Master.FindControl(NavIdentifier)).Attributes.Add("class", "active");
                 }
 
                 foreach (ClientPagePermissions en in RequiredPermissions)

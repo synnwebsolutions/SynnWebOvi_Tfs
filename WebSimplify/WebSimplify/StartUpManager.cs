@@ -19,6 +19,32 @@ namespace WebSimplify
             {
                 CashDataAction(u);
             }
+            if (u.Allowed(ClientPagePermissions.WorkHours))
+            {
+                WorkHoursDataAction(u);
+            }
+        }
+
+        private static void WorkHoursDataAction(LoggedUser u)
+        {
+            var wh = DBController.DbShifts.GetWorkHoursData(new WorkHoursSearchParameters { Month = DateTime.Now }).FirstOrDefault();
+            if (!wh.NotNull())
+            {
+                wh = new WorkHoursData
+                {
+                    Active = true,
+                    CurrentMonthTotal = new WorkTime { Hour = 0, Minute = 0 },
+                    CurrentShiftStart = new WorkTime { Hour = 0, Minute = 0 },
+                    CurrentShiftEnd = new WorkTime { Hour = 0, Minute = 0 },
+                    Month = DateTime.Now.StartOfMonth(),
+                    UserGroupId = u.AllowedSharedPermissions[0]
+                };
+                DBController.DbShifts.AddWorkMonthlyData(wh);
+            }
+            else
+            {
+                // check unclosed shift
+            }
         }
 
         private static void CashDataAction(LoggedUser u)

@@ -23,6 +23,8 @@ namespace WebSimplify
             if (u != null)
             {
                 u.Preferences = GetPreferences(u.Id);
+                if (u.Preferences.CurrentWorkHoursData == null)
+                    u.Preferences.CurrentWorkHoursData = new WorkHoursData();
             }
             return u;
         }

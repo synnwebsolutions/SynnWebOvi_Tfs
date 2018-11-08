@@ -63,6 +63,9 @@ namespace SynnWebOvi
         void Save(ShiftsSearchParameters sp);
         List<ShiftDayData> GetShifts(ShiftsSearchParameters shiftsSearchParameters);
         void Delete(int id);
+        List<WorkHoursData> GetWorkHoursData(WorkHoursSearchParameters workHoursSearchParameters);
+        void AddWorkMonthlyData(WorkHoursData wh);
+        void UpdateWorkMonthlyData(WorkHoursData wh);
     }
 
 
@@ -143,6 +146,17 @@ namespace SynnWebOvi
     public class CashSearchParameters : BaseSearchParameters
     {
         public CashSearchParameters() : base()
+        {
+        }
+
+        public bool? Active { get; set; }
+        public int? Id { get; set; }
+        public DateTime? Month { get; set; }
+    }
+
+    public class WorkHoursSearchParameters : BaseSearchParameters
+    {
+        public WorkHoursSearchParameters() : base()
         {
         }
 

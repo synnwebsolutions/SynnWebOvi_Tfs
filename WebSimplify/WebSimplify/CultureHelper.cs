@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynnCore.Generics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -34,6 +35,11 @@ namespace WebSimplify
                 dt = dt.AddDays(-1);
             }
             return dt;
+        }
+
+        public static DateTime StartOfMonth(this DateTime dt)
+        {
+            return new DateTime (dt.Year,dt.Month,1);
         }
 
         public static DateTime EndOfWeek(this DateTime dt)
@@ -76,6 +82,11 @@ namespace WebSimplify
         public static string HebrewDayName(this DateTime cMonth)
         {
             return CultureHelper.HebrewCulture.DateTimeFormat.DayNames[(int)cMonth.DayOfWeek];
+        }
+
+        public static string HebrewDayAndMonth(this DateTime cMonth)
+        {
+            return CultureHelper.HebrewCulture.DateTimeFormat.DayNames[(int)cMonth.DayOfWeek] +  " " + cMonth.Day.ToString() + " " + CultureHelper.HebrewCulture.DateTimeFormat.MonthNames[cMonth.Month];
         }
 
         public static string ToInputFormat(this DateTime cMonth)
@@ -176,5 +187,15 @@ namespace WebSimplify
             return d != null;
         }
 
+        public static string ToTimeDisplay(this WorkTime d)
+        {
+            TimeSpan sp = new TimeSpan(d.Hour, d.Minute, 0);
+            return sp.ToString(@"hh\:mm");
+        }
+
+        public static string ToXml(this object d)
+        {
+            return XmlHelper.ToXml(d);
+        }
     }
 }

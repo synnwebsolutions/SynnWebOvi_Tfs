@@ -33,6 +33,8 @@ namespace WebSimplify.Data
     {
         public int CreditCardPaymentDay { get;  set; }
         public DateTime CreditLogStartDate { get;  set; }
+        public WorkHoursData CurrentWorkHoursData { get; set; }
+        public WorkTime DailyRequiredWorkHours { get; set; }
         public bool UseCharts { get;  set; }
     }
 }

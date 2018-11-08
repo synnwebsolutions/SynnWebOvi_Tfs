@@ -113,6 +113,7 @@
     <Content Include="WebSimpl.asmx" />
     <Content Include="WebSimplify.Master" />
     <Content Include="Wedding.aspx" />
+    <Content Include="WorkData.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -171,6 +172,7 @@
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
+    <Compile Include="Data\WorkHoursData.cs" />
     <Compile Include="Diary.aspx.cs">
       <DependentUpon>Diary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,6 +272,13 @@
     </Compile>
     <Compile Include="Wedding.aspx.designer.cs">
       <DependentUpon>Wedding.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkData.aspx.cs">
+      <DependentUpon>WorkData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkData.aspx.designer.cs">
+      <DependentUpon>WorkData.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,9 @@
 
     <div class="spageheader" id="acc">בית</div>
 
+    <div class="menubuttoncontainer" id="dvWorkHours" runat="server">
+        <button class="menubutton" type="button" id="btnWorkHours" runat="server" onserverclick="btnWorkHours_ServerClick">מעקב שעות עבודה</button>
+    </div>
 
     <fieldset class="row ">
         <legend>השבוע</legend>

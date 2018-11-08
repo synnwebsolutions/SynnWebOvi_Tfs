@@ -30,12 +30,30 @@
                     <input class="sinputnumber" id="txCreditDayOfMonth" placeholder="יש להזין מספר" runat="server" />
                 </div>
             </div>
-               <div class="row">
+            <div class="row">
                 <div class="col-4">
                     <label for="txCreditStartDate">הצג גרפים </label>
                 </div>
                 <div class="col-4">
                     <input class="sinputnumber" id="chkUseCharts" type="checkbox" runat="server" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="spanel" id="dvWorkHours" runat="server">
+        <fieldset class="row ">
+            <legend>הגדרות משמרות</legend>
+            <div class="row">
+                <div class="col-4">
+                    <label for="txCreditStartDate">אורך משמשרת </label>
+
+                </div>
+                <div class="col-4">
+                    <asp:TextBox ID="txWorkHour" TextMode="Number" runat="server" placeholder="שעות" />
+                </div>
+                <div class="col-4">
+                    <asp:TextBox ID="txWorkMinute" TextMode="Number" runat="server" placeholder="דקות" />
                 </div>
             </div>
         </fieldset>

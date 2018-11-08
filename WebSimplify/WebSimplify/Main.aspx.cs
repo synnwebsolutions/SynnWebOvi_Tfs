@@ -22,6 +22,7 @@ namespace WebSimplify
                 dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
+                dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
                 FillData();
             }
         }
@@ -95,6 +96,11 @@ namespace WebSimplify
                 lblName.Text = im.Date.HebrewDayName();
                 lblDesc.Text = im.MarkableName;
             }
+        }
+
+        protected void btnWorkHours_ServerClick(object sender, EventArgs e)
+        {
+            SynNavigation.Redirect("WorkData.aspx");
         }
     }
     

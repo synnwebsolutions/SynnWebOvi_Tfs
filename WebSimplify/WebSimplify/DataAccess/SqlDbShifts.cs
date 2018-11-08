@@ -17,7 +17,7 @@ namespace WebSimplify
 
         }
 
-        private void SetPermissions(ShiftsSearchParameters sp)
+        private void SetPermissions(BaseSearchParameters sp)
         {
             if (!sp.CurrentUser.IsAdmin)
             {
@@ -60,6 +60,52 @@ namespace WebSimplify
             SetSqlFormat("delete {0}", SynnDataProvider.TableNames.ShiftsData);
             ClearParameters();
             AddSqlWhereField("Id", id);
+            ExecuteSql();
+        }
+
+        public List<WorkHoursData> GetWorkHoursData(WorkHoursSearchParameters lsp)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.WorkHoursData);
+            ClearParameters();
+            SetPermissions(lsp);
+            if (lsp.Month.HasValue)
+            {
+                var d = lsp.Month.Value;
+                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, 1), ">=");
+                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+            }
+            if (lsp.Id.HasValue)
+                AddSqlWhereField("Id", lsp.Id.Value);
+            if (lsp.Active.HasValue)
+                AddSqlWhereField("Active", lsp.Active.Value);
+            var lst = new List<WorkHoursData>();
+            FillList(lst, typeof(WorkHoursData));
+            return lst;
+        }
+
+        public void AddWorkMonthlyData(WorkHoursData w)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserGroupId", w.UserGroupId));
+            sqlItems.Add(new SqlItem("Month",w.Month));
+            sqlItems.Add(new SqlItem("Active", w.Active));
+            sqlItems.Add(new SqlItem("CurrentMonthTotal", w.CurrentMonthTotal.ToXml()));
+            sqlItems.Add(new SqlItem("CurrentShiftStart", w.CurrentShiftStart.ToXml()));
+            sqlItems.Add(new SqlItem("CurrentShiftEnd", w.CurrentShiftEnd.ToXml()));
+            SetInsertIntoSql(SynnDataProvider.TableNames.WorkHoursData, sqlItems);
+            ExecuteSql();
+        }
+
+        public void UpdateWorkMonthlyData(WorkHoursData w)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserGroupId", w.UserGroupId));
+            sqlItems.Add(new SqlItem("Month", w.Month));
+            sqlItems.Add(new SqlItem("Active", w.Active));
+            sqlItems.Add(new SqlItem("CurrentMonthTotal", w.CurrentMonthTotal.ToXml()));
+            sqlItems.Add(new SqlItem("CurrentShiftStart", w.CurrentShiftStart.ToXml()));
+            sqlItems.Add(new SqlItem("CurrentShiftEnd", w.CurrentShiftEnd.ToXml()));
+            SetUpdateSql(SynnDataProvider.TableNames.WorkHoursData, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = w.Id } });
             ExecuteSql();
         }
     }
