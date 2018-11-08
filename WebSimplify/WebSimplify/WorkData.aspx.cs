@@ -73,16 +73,19 @@ namespace WebSimplify
             {
                 var d = (WorkHoursData)e.Row.DataItem;
                 ((Label)e.Row.FindControl("lblDate")).Text = DateTime.Now.HebrewDayAndMonth();
+                if (!CurrentUser.IsAdmin)
+                {
 
-                txCurrentDailyRequired.Text = CurrentUser.Preferences.DailyRequiredWorkHours.NotNull() ? CurrentUser.Preferences.DailyRequiredWorkHours.ToTimeDisplay() : string.Empty;
-                txCurrentMonthState.Text = d.CurrentMonthTotal.ToTimeDisplay();
-                if (d.CurrentMonthTotal.Hour < 0 || (d.CurrentMonthTotal.Hour == 0 && d.CurrentMonthTotal.Minute < 0))
-                    txCurrentMonthState.ForeColor = System.Drawing.Color.Red;
-                else
-                    txCurrentMonthState.ForeColor = System.Drawing.Color.Black;
+                    txCurrentDailyRequired.Text = CurrentUser.Preferences.DailyRequiredWorkHours.NotNull() ? CurrentUser.Preferences.DailyRequiredWorkHours.ToTimeDisplay() : string.Empty;
+                    txCurrentMonthState.Text = d.CurrentMonthTotal.ToTimeDisplay();
+                    if (d.CurrentMonthTotal.Hour < 0 || (d.CurrentMonthTotal.Hour == 0 && d.CurrentMonthTotal.Minute < 0))
+                        txCurrentMonthState.ForeColor = System.Drawing.Color.Red;
+                    else
+                        txCurrentMonthState.ForeColor = System.Drawing.Color.Black;
 
-                txCurrentShifStart.Text = d.CurrentShiftStart.NotFilled() ? string.Empty : d.CurrentShiftStart.ToTimeDisplay();
-                txCurrentShiftLeft.Text = d.CurrentShiftTimeLeft(CurrentUser.Preferences.DailyRequiredWorkHours);
+                    txCurrentShifStart.Text = d.CurrentShiftStart.NotFilled() ? string.Empty : d.CurrentShiftStart.ToTimeDisplay();
+                    txCurrentShiftLeft.Text = d.CurrentShiftTimeLeft(CurrentUser.Preferences.DailyRequiredWorkHours);
+                }
             }
         }
 

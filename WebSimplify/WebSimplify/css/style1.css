@@ -63,12 +63,12 @@
 
 
 body {
-    background-color: rgba(119, 136, 153, 0.9);
+    background-color: rgba(34,88,144, 0.9);
     width: 100%;
     direction: rtl;
     background-attachment: fixed;
-    background-image: url("../img/body-bg.jpeg");
-    /*background-image: url("https://images.pexels.com/photos/289586/pexels-photo-289586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
+    /*background-image: url("../img/body-bg.jpeg");*/
+    background-image: url("https://images.pexels.com/photos/772476/pexels-photo-772476.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -94,7 +94,7 @@ body {
 .scontainer {
     width: 80%;
     border: 1px solid #9999ff;
-    background-color: rgba(204, 204, 255, 0.5);
+    background-color: rgba(255,255,255, 0.3);
     margin: auto;
 }
 
@@ -124,7 +124,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(34,88,144,0.5) 100%);
 }
 
     .snav ul {
@@ -188,7 +188,7 @@ textarea {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5em;
-    background-color: #9797FB;
+    background-color: #225890;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #1D1D1D;
 }
@@ -198,7 +198,7 @@ textarea {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    background-color: rgba(51, 47, 31, 0.5);
+    background-color: rgba(34,88,144, 0.5);
     margin-top: 5px;
     padding: 12px;
     color: white;
@@ -215,7 +215,7 @@ textarea {
         text-shadow: 2px 2px 4px #1D1D1D;
     }
 
-    .spanel input[type=text], input[type=date], input[type=password], select {
+    .spanel input[type=text], input[type=date],input[type=number], input[type=password], select {
         width: 100%;
         display: inline-block;
         border: 1px solid #ccc;
@@ -233,7 +233,7 @@ textarea {
 }
     /*theme*/
     .sbutton:hover {
-        background-color: #9797FC;
+        background-color: #8AAED4;
         color: white;
     }
 
@@ -247,7 +247,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #8080FF;
+        background: #225890;
         color: white;
         border: 0;
     }
@@ -267,11 +267,11 @@ textarea {
     .synngridstyled td {
         border: 0;
     }
-
+/*theme*/
 .synngridpagination {
     padding: 20px 20px;
     border-radius: 4px;
-    background: #8080FF;
+    background: #225890;
 }
 
     .synngridpagination tr {
@@ -368,7 +368,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(128,128,255,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(34,88,144,0.5) 100%);
 }
 
 .content {
@@ -435,9 +435,9 @@ textarea {
     border: 2px solid white;
     padding: 2%;
 }
-
+/*theme*/
 .menubuttoncontainer {
-    background-color: rgba(151, 151, 251, 0.5);
+    background-color: rgba(34,88,144, 0.5);
     padding: 4px;
     margin: 2px 0px 2px;
     text-align: left;
@@ -452,12 +452,12 @@ textarea {
     background-color: transparent;
     border: 1px solid white;
 }
-
+/*theme*/
 .marktable {
     width: 100%;
     text-align: center;
-    background-color: rgba(51, 47, 31, 0.5);
-}
+    background-color: rgba(91,142,196, 0.5);
+}t
 
     .marktable table {
         width: 100%;
@@ -466,7 +466,7 @@ textarea {
     }
      
       .marktable td {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(34,88,144, 0.5);
         color:white;
        padding: 20px 20px 20px;
         border:none;

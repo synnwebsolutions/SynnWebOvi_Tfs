@@ -21,7 +21,7 @@ function ArrangeTableFilters() {
 function ArrangeASPcalendar()
 {
     var headersTable = $(".aspcalendar").find("tbody").find("tbody");
-    headersTable.css('background-color', '#9797FB');
+    headersTable.css('background-color', '#225890');
     headersTable.find('a').parent().addClass("aspcalendarheaderactions");
 }
 

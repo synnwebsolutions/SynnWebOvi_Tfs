@@ -29,7 +29,8 @@ namespace WebSimplify
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            ichartcontainer.Visible = CurrentUser.Preferences.UseCharts;
+            if(!CurrentUser.IsAdmin)
+                ichartcontainer.Visible = CurrentUser.Preferences.UseCharts;
         }
 
         protected override List<ClientPagePermissions> RequiredPermissions

@@ -27,7 +27,7 @@
       /*theme*/
     .scontainer {
         width: 100%;
-        border: 1px solid #9999ff;
+        border: 1px solid white;
         margin: auto;
     }
 
@@ -72,7 +72,7 @@
       /*theme*/
     .synngridpagination {
         border-radius: 4px;
-        background: #8080FF;
+        background: #225890;
     }
 
         .synngridpagination tr {
@@ -99,7 +99,7 @@
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
-        background: #8080FF;
+        background: #225890;
         color: white;
         border: 0;
     }
