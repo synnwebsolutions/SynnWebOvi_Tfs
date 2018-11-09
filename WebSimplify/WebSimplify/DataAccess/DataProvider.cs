@@ -47,6 +47,7 @@ namespace SynnWebOvi
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
             public static string QuickTasks = "QuickTasks";
+            public static string MigrationItems = "MigrationItems";
             public static string PermissionGroups = "PermissionGroups";
             public static string User_PermissionGroups = "User_PermissionGroups";
         }
@@ -64,6 +65,8 @@ namespace SynnWebOvi
         LoggedUser CurrentUser { get; set; }
 
         IDbCalendar DbCalendar { get;}
+
+        IDbMigration DbMigration { get; }
 
     }
 
@@ -138,6 +141,14 @@ namespace SynnWebOvi
         }
 
         public IDbCalendar DbCalendar
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbMigration DbMigration
         {
             get
             {

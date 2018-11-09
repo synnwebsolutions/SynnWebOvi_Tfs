@@ -27,6 +27,8 @@ namespace WebSimplify
                     u.Preferences.CurrentWorkHoursData = new WorkHoursData();
             }
             return u;
+
+            
         }
 
         private List<LoggedUser> GetUsersEx(UserSearchParameters lp)

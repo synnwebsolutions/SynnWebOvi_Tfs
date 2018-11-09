@@ -78,6 +78,13 @@ namespace SynnWebOvi
         void Add(QuickTask t);
     }
 
+    public interface IDbMigration
+    {
+        void ExecurteCreateTable(string v);
+        void FinishMethod(string stepName);
+        List<string> GetAlreadyFinishedSteps();
+    }
+
     public interface IDbUserDictionary
     {
         void Add(DictionarySearchParameters p);

@@ -20,6 +20,7 @@ namespace SynnWebOvi
         protected void Application_Start(object sender, EventArgs e)
         {
             Dbl = DBController.DbLog;
+            MigrationHandler.Perform();
         }
 
         protected void Session_Start(object sender, EventArgs e)

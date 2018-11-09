@@ -16,7 +16,8 @@ namespace SynnWebOvi
         internal IDbShop IDbShop = null;
         internal IDbShifts IDbShifts = null;
         internal IDbMoney IDbCredit = null;
-        
+        internal IDbMigration IDbMig = null;
+
 
         internal IDbCalendar IDbCalendar = null;
         
@@ -119,6 +120,16 @@ namespace SynnWebOvi
                 if (IDbCredit == null)
                     IDbCredit = new SqlDbCredit(_connectionString);
                 return IDbCredit;
+            }
+        }
+
+        public IDbMigration DbMigration
+        {
+            get
+            {
+                if (IDbMig == null)
+                    IDbMig = new SqlDbMigration(_connectionString);
+                return IDbMig;
             }
         }
 
