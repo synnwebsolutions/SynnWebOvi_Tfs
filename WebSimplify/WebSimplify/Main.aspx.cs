@@ -102,6 +102,11 @@ namespace WebSimplify
         {
             SynNavigation.Redirect("WorkData.aspx");
         }
+
+        protected void btnDevTasks_ServerClick(object sender, EventArgs e)
+        {
+            SynNavigation.Redirect("DevTasks.aspx");
+        }
     }
     
 }

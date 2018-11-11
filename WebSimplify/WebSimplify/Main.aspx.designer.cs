@@ -31,6 +31,15 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnWorkHours;
         
         /// <summary>
+        /// btnDevTasks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnDevTasks;
+        
+        /// <summary>
         /// dtDiary control.
         /// </summary>
         /// <remarks>

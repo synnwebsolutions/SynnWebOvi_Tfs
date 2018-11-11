@@ -23,6 +23,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
+                gv.Columns[1].Visible = false;
                 RefreshView();
             }
         }
@@ -43,7 +44,7 @@ namespace WebSimplify
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            gv.Columns[1].Visible = trAdd.Visible = trshop.Visible = !GMode;
+            trshop.Visible = !GMode;
             btnGenerate.InnerText = GMode ?  "סגור" : "הפק רשימת קניות";
         }
 
@@ -56,18 +57,16 @@ namespace WebSimplify
         }
         private void RefreshView()
         {
-            List<ShopItem> ul = DBController.DbShop.Get(new ShopSearchParameters());
-            cmbItems.Items.Clear();
-            AddSelectItemForCombo(cmbItems);
-            foreach (var u in ul)
-                cmbItems.Items.Add(new ListItem { Text = u.Name, Value = u.Id.ToString() });
             RefreshGrid(gv);
+            RefreshGrid(gvAdd);
         }
 
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)
                 return "GetCurrentShopItems";
+            if (gridId == gvAdd.ID)
+                return DummyMethodName;
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -85,14 +84,6 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lblLastValue")).Text = d.LastBought.HasValue ? d.LastBought.Value.ToShortDateString() : string.Empty;
                 ((ImageButton)e.Row.FindControl("btnClose")).CommandArgument = d.Id.ToString();
             }
-        }
-
-        protected void btnAdd_ServerClick(object sender, EventArgs e)
-        {
-            if(cmbItems.SelectedIndex > 0)
-                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = Convert.ToInt32(cmbItems.SelectedValue) });
-
-            RefreshView();
         }
 
         protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -113,23 +104,33 @@ namespace WebSimplify
             RefreshGrid(gv);
         }
 
-        protected void btnAddShopItem_ServerClick(object sender, EventArgs e)
+        protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (ValidateInputs(txShopItemToAdd))
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                ((TextBox)e.Row.FindControl("txProductName")).Text =  string.Empty;
+            }
+        }
+
+        protected void btnAdd_Command(object sender, CommandEventArgs e)
+        {
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+
+            var txProductName = ((TextBox)row.FindControl("txProductName")).Text;
+            if (txProductName.NotEmpty())
+            {
+                ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txProductName }).FirstOrDefault();
                 if (ul == null)
                 {
                     ShopItem n = new ShopItem
                     {
-                        Name = txShopItemToAdd.Value
+                        Name = txProductName
                     };
                     DBController.DbShop.AddNewShopItem(n);
                 }
-                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txShopItemToAdd.Value }).FirstOrDefault();
+                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txProductName }).FirstOrDefault();
                 DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
                 AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txShopItemToAdd);
                 RefreshView();
             }
             else

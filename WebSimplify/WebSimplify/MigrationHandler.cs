@@ -52,5 +52,20 @@ namespace SynnWebOvi
             //db.ExecurteCreateTable(t.ToString());
         }
 
+        public static void DevTasksTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = "DevTasks"
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "Status", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "Description", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
     }
 }

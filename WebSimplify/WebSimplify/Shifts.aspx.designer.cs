@@ -13,31 +13,13 @@ namespace WebSimplify {
     public partial class Shifts {
         
         /// <summary>
-        /// txadddiarydate control.
+        /// gvAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
-        
-        /// <summary>
-        /// cmbShifts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbShifts;
-        
-        /// <summary>
-        /// btnAddShift control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddShift;
+        protected global::System.Web.UI.WebControls.GridView gvAdd;
         
         /// <summary>
         /// cdr control.

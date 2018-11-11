@@ -23,6 +23,7 @@ namespace SynnWebOvi
 
         internal static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
         internal const string DecimalFormat = "#.#";
+        internal const string DummyMethodName = "GetDummy";
         public LoggedUser CurrentUser
         {
             get
@@ -33,6 +34,12 @@ namespace SynnWebOvi
             {
                 StoreInSession("ssUser_*", value);
             }
+        }
+
+        public IEnumerable GetDummy()
+        {
+            List<object> items = new List<object> { 1 };
+            return items;
         }
 
         protected override void InitializeCulture()

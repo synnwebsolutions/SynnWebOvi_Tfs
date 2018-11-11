@@ -124,7 +124,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(34,88,144,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #CCD9E7 0%, rgba(34,88,144,0.5) 100%);
 }
 
     .snav ul {
@@ -215,7 +215,7 @@ textarea {
         text-shadow: 2px 2px 4px #1D1D1D;
     }
 
-    .spanel input[type=text], input[type=date],input[type=number], input[type=password], select {
+    .spanel input[type=text], input[type=date], input[type=number], input[type=password], select {
         width: 100%;
         display: inline-block;
         border: 1px solid #ccc;
@@ -368,7 +368,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #292929 0%, rgba(34,88,144,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #CCD9E7 0%, rgba(34,88,144,0.5) 100%);
 }
 
 .content {
@@ -457,33 +457,55 @@ textarea {
     width: 100%;
     text-align: center;
     background-color: rgba(91,142,196, 0.5);
-}t
+}
 
     .marktable table {
         width: 100%;
-           font-size: 16px;
-           font-weight:600;
+        font-size: 16px;
+        font-weight: 600;
     }
-     
-      .marktable td {
+
+    .marktable td {
         background-color: rgba(34,88,144, 0.5);
-        color:white;
-       padding: 20px 20px 20px;
-        border:none;
+        color: white;
+        padding: 20px 20px 20px;
+        border: none;
     }
 
 legend {
     text-shadow: 2px 2px 4px rgba(41, 57, 85, 0.5);
     font-size: 18px;
-    color:white;
+    color: white;
 }
-.gridtextinput{
-    height:30px;
-    background-color:transparent;
-    color:black;
-       font-weight:600;
+
+.gridtextinput {
+    height: 30px;
+    background-color: transparent;
+    color: black;
+    font-weight: 600;
 }
+
+.griddateinput {
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+}
+
+.griddateinput:hover {
+     color: black;
+}
+.griddropinput {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    background-color: transparent;
+}
+
 .ichart {
-  width: 100%; 
-  min-height: 400px;
+    width: 100%;
+    min-height: 400px;
 }

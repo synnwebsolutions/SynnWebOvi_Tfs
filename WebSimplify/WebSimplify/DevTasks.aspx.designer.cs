@@ -10,16 +10,7 @@
 namespace WebSimplify {
     
     
-    public partial class Shopping {
-        
-        /// <summary>
-        /// btnGenerate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnGenerate;
+    public partial class DevTasks {
         
         /// <summary>
         /// trshop control.
@@ -38,6 +29,15 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAdd;
+        
+        /// <summary>
+        /// dvTaks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTaks;
         
         /// <summary>
         /// gv control.

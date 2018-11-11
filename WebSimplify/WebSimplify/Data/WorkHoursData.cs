@@ -63,14 +63,16 @@ namespace WebSimplify
                 CurrentShiftStart = new WorkTime();
                 return CurrentShiftStart.ToTimeDisplay();
             }
-            var cPoint = new WorkTime { Hour = DateTime.Now.Hour, Minute = DateTime.Now.Minute };
-            WorkTime soFar = cPoint.Reduce(CurrentShiftStart);
+           
 
             TimeSpan requiredSpan = new TimeSpan(required.Hour, required.Minute, 0);
-            TimeSpan predEnd = new TimeSpan(CurrentShiftStart.Hour, CurrentShiftStart.Minute, 0);
-            predEnd = predEnd + requiredSpan;
+            TimeSpan predEnd = new TimeSpan(CurrentShiftStart.Hour, CurrentShiftStart.Minute, 0) + requiredSpan;
+            TimeSpan actualBalance =  new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0) - new TimeSpan(CurrentShiftStart.Hour, CurrentShiftStart.Minute, 0) - requiredSpan;
 
-            return  required.Reduce(soFar).ToTimeDisplay() + " | " + new WorkTime { Hour = predEnd.Hours, Minute = predEnd.Minutes }.ToTimeDisplay();
+            string balanceStr = actualBalance.ToTimeDisplay();
+            if (actualBalance > new TimeSpan(0,0,0)) // extra hours
+                balanceStr += " EX";
+            return balanceStr + " | " + new WorkTime { Hour = predEnd.Hours, Minute = predEnd.Minutes }.ToTimeDisplay();
         }
 
         internal void HandleShift(int hour, int minute, WorkTime required)

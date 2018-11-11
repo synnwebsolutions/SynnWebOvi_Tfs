@@ -22,6 +22,8 @@ namespace SynnWebOvi
         void Update(LoggedUser u);
         LoggedUser GetUser(int ownerId);
         void UpdatePreferences(LoggedUser u);
+        List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters);
+        void Add(DevTaskItem d);
     }
 
     public interface IDbLog
@@ -124,7 +126,16 @@ namespace SynnWebOvi
         public ShiftDayData ItemForAction { get; set; }
 
     }
+    
+        public class DevTaskItemSearchParameters : BaseSearchParameters
+    {
+        public DevTaskItemSearchParameters() : base()
+        {
+        }
 
+        public bool? Active { get; internal set; }
+        public string ItemName { get; internal set; }
+    }
     public class ShopSearchParameters : BaseSearchParameters
     {
         public ShopSearchParameters() : base()
