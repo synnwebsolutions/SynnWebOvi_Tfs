@@ -42,14 +42,14 @@ namespace WebSimplify
             }
         }
 
-        protected override string NavIdentifier
+        protected override string DefaultNavItem
         {
             get
             {
                 return "navsys";
             }
         }
-        
+
 
         protected void btnReverse_ServerClick(object sender, EventArgs e)
         {

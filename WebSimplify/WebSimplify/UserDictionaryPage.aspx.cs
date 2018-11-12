@@ -28,13 +28,6 @@ namespace WebSimplify
                 RefreshGrids();
             }
         }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navdic";
-            }
-        }
 
         internal override string GetGridSourceMethodName(string gridId)
         {

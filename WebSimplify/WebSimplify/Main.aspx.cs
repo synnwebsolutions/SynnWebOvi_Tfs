@@ -50,14 +50,7 @@ namespace WebSimplify
                 rpTasks.DataBind();
             }
         }
-
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navmain";
-            }
-        }
+        
 
         protected void rpTasks_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

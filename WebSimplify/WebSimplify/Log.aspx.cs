@@ -24,17 +24,11 @@ namespace WebSimplify
         {
             get
             {
-                var l = new List<ClientPagePermissions> { ClientPagePermissions.SysAdmin };
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.SysLog };
                 return l;
             }
         }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navlog";
-            }
-        }
+      
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)

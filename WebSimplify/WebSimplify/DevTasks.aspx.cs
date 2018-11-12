@@ -15,18 +15,13 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                dvTaks.Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin);
+                dvTaks.Visible = CurrentUser.Allowed(ClientPagePermissions.SysDev);
                 RefreshView();
             }
         }
 
-        protected override bool HasNavLink
-        {
-            get
-            {
-                return false;
-            }
-        }
+        
+       
         private void RefreshView()
         {
             RefreshGrid(gv);

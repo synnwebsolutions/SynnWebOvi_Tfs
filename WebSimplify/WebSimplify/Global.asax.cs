@@ -25,12 +25,12 @@ namespace SynnWebOvi
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            string st = "";
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            string st = "";
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

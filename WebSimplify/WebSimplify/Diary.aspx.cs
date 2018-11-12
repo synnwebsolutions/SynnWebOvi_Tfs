@@ -36,13 +36,7 @@ namespace WebSimplify
             }
         }
 
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navdiary";
-            }
-        }
+    
 
         protected void btnadddiary_ServerClick(object sender, EventArgs e)
         {

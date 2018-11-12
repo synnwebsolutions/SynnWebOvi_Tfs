@@ -26,13 +26,6 @@ namespace WebSimplify
                 return l;
             }
         }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navtask";
-            }
-        }
 
         internal override string GetGridSourceMethodName(string gridId)
         {

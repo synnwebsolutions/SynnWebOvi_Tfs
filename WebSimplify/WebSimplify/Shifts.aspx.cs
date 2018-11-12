@@ -44,13 +44,7 @@ namespace WebSimplify
             return base.GetGridSourceMethodName(gridId);
         }
 
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navshifts";
-            }
-        }
+        
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

@@ -47,14 +47,7 @@ namespace WebSimplify
             trshop.Visible = !GMode;
             btnGenerate.InnerText = GMode ?  "סגור" : "הפק רשימת קניות";
         }
-
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navshop";
-            }
-        }
+        
         private void RefreshView()
         {
             RefreshGrid(gv);
