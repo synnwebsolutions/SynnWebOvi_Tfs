@@ -135,5 +135,33 @@ namespace WebSimplify
             SetInsertIntoSql(SynnDataProvider.TableNames.CashItems, sqlItems);
             ExecuteSql();
         }
+
+        public List<MonthlyMoneyTransaction> Get(MonthlyMoneyTransactionSearchParameters monthlyMoneyTransactionSearchParameters)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionItems);
+            ClearParameters();
+            //SetPermissions(lsp);
+            //if (lsp.Month.HasValue)
+            //{
+            //    var d = lsp.Month.Value;
+            //    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
+            //    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+            //}
+            //if (lsp.Id.HasValue)
+            //    AddSqlWhereField("Id", lsp.Id.Value);
+
+            var lst = new List<MonthlyMoneyTransaction>();
+            FillList(lst, typeof(MonthlyMoneyTransaction));
+            return lst;
+        }
+
+        public List<MoneyTransactionTemplate> GetMoneyTransactionTemplate(MonthlyMoneyTransactionSearchParameters mp)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionTemplatess);
+            ClearParameters();
+            var lst = new List<MoneyTransactionTemplate>();
+            FillList(lst, typeof(MoneyTransactionTemplate));
+            return lst;
+        }
     }
 }

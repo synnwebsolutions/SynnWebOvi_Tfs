@@ -67,5 +67,39 @@ namespace SynnWebOvi
             db.ExecurteCreateTable(t.ToString());
         }
 
+
+        public static void MoneyTransactionsTemplatesTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = "MoneyTransactionTemplatess"
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "TransactionType", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Auto", FieldType = TableMigrationFieldType.Bit, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void MoneyTransactionItems(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = "MoneyTransactionItems"
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "TemplateId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Month", FieldType = TableMigrationFieldType.Date, IsNullAble = false });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 }

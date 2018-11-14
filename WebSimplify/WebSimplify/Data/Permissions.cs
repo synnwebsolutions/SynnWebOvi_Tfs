@@ -32,6 +32,9 @@ namespace WebSimplify
         [PageLink("navusers")]
         [Description("מנהל משתמשים")]
         SysUsers,
+        [PageLink("navmonbal")]
+        [Description(@" מעקב הוצאות\הכנסות")]
+        MoneyBalance,
         [Description("מנהל משימות פיתוח")]
         SysDev,
         [PageLink("navlog")]

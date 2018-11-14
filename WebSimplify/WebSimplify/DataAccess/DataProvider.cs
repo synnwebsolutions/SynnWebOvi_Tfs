@@ -45,6 +45,8 @@ namespace SynnWebOvi
             public static string CreditData = "CreditData"; // group
             public static string CashData = "CashData"; // group
             public static string CashItems = "CashItems"; // group
+            public static string MoneyTransactionItems = "MoneyTransactionItems";
+            public static string MoneyTransactionTemplatess = "MoneyTransactionTemplatess";
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
             public static string QuickTasks = "QuickTasks";

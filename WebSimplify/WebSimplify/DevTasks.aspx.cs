@@ -19,8 +19,6 @@ namespace WebSimplify
                 RefreshView();
             }
         }
-
-        
        
         private void RefreshView()
         {

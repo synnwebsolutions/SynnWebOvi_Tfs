@@ -105,6 +105,7 @@
     <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="MoneyBalance.aspx" />
     <Content Include="packages.config" />
     <Content Include="QuickTasks.aspx" />
     <Content Include="Shifts.aspx" />
@@ -167,6 +168,7 @@
     <Compile Include="Data\IMarkAble.cs" />
     <Compile Include="Data\JsonPointItem.cs" />
     <Compile Include="Data\MoneyMonthlyData.cs" />
+    <Compile Include="Data\MonthlyMoneyTransaction.cs" />
     <Compile Include="Data\PermissionGroup.cs" />
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />
@@ -202,6 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlStringHelper.cs" />
+    <Compile Include="Helpers\MoneyBalanceHelper.cs" />
     <Compile Include="Log.aspx.cs">
       <DependentUpon>Log.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,6 +228,13 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MigrationHandler.cs" />
+    <Compile Include="MoneyBalance.aspx.cs">
+      <DependentUpon>MoneyBalance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MoneyBalance.aspx.designer.cs">
+      <DependentUpon>MoneyBalance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickTask.cs" />
     <Compile Include="QuickTasks.aspx.cs">

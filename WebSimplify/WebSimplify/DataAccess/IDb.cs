@@ -58,6 +58,8 @@ namespace SynnWebOvi
         void Update(CashMonthlyData i);
         List<CashMoneyItem> GetCashItems(CashSearchParameters cashSearchParameters);
         void Add(CashMoneyItem i);
+        List<MonthlyMoneyTransaction> Get(MonthlyMoneyTransactionSearchParameters monthlyMoneyTransactionSearchParameters);
+        List<MoneyTransactionTemplate> GetMoneyTransactionTemplate(MonthlyMoneyTransactionSearchParameters mp);
     }
 
     public interface IDbShifts
@@ -164,6 +166,17 @@ namespace SynnWebOvi
     public class CashSearchParameters : BaseSearchParameters
     {
         public CashSearchParameters() : base()
+        {
+        }
+
+        public bool? Active { get; set; }
+        public int? Id { get; set; }
+        public DateTime? Month { get; set; }
+    }
+
+    public class MonthlyMoneyTransactionSearchParameters : BaseSearchParameters
+    {
+        public MonthlyMoneyTransactionSearchParameters() : base()
         {
         }
 
