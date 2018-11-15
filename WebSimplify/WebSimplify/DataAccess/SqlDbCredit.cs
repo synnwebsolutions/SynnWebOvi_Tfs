@@ -62,13 +62,13 @@ namespace WebSimplify
             FillList(lst, typeof(CreditCardMonthlyData));
             return lst;
         }
-        private void SetPermissions(BaseSearchParameters sp)
+        private void SetPermissions(BaseSearchParameters sp, string tablePrefix = "")
         {
             if (!sp.CurrentUser.IsAdmin)
             {
                 StartORGroup();
                 foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
-                    AddOREqualField("UserGroupId", gid);
+                    AddOREqualField(tablePrefix + "UserGroupId", gid);
                 EndORGroup();
             }
         }
@@ -136,32 +136,105 @@ namespace WebSimplify
             ExecuteSql();
         }
 
-        public List<MonthlyMoneyTransaction> Get(MonthlyMoneyTransactionSearchParameters monthlyMoneyTransactionSearchParameters)
+        public List<MoneyTransactionTemplate> GetMoneyTransactionTemplates(MonthlyMoneyTransactionSearchParameters mp)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionTemplatess);
+            ClearParameters();
+            SetPermissions(mp);
+            if (mp.Id.HasValue)
+                AddSqlWhereField("Id", mp.Id.Value);
+            var lst = new List<MoneyTransactionTemplate>();
+            FillList(lst, typeof(MoneyTransactionTemplate));
+            return lst;
+        }
+
+        public void Add(MonthlyMoneyTransaction p)
+        {
+            SqlItemList sqlItems = GetFrom(p);
+            SetInsertIntoSql(SynnDataProvider.TableNames.MoneyTransactionItems, sqlItems);
+            ExecuteSql();
+        }
+
+        private static SqlItemList GetFrom(MonthlyMoneyTransaction p)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
+            sqlItems.Add(new SqlItem("Amount", p.Amount));
+            sqlItems.Add(new SqlItem("Closed", p.Closed));
+            sqlItems.Add(new SqlItem("Month", p.Month));
+            sqlItems.Add(new SqlItem("TemplateId", p.TemplateId));
+            return sqlItems;
+        }
+
+        public MoneyTransactionTemplate GetTransactionTemplate(int templateId)
+        {
+            return GetMoneyTransactionTemplates(new MonthlyMoneyTransactionSearchParameters { Id = templateId }).FirstOrDefault();
+        }
+
+        public List<MonthlyMoneyTransaction> GetMoneyTransactions(MonthlyMoneyTransactionSearchParameters mp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionItems);
+            if(mp.TranType.HasValue)
+                AddSqlText(string.Format("inner join {0} tmp on tmp.Id = TemplateId", SynnDataProvider.TableNames.MoneyTransactionTemplatess));
             ClearParameters();
-            //SetPermissions(lsp);
-            //if (lsp.Month.HasValue)
-            //{
-            //    var d = lsp.Month.Value;
-            //    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
-            //    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
-            //}
-            //if (lsp.Id.HasValue)
-            //    AddSqlWhereField("Id", lsp.Id.Value);
-
+            SetPermissions(mp, string.Format("{0}.", SynnDataProvider.TableNames.MoneyTransactionItems));
+            if (mp.Id.HasValue)
+                AddSqlWhereField("Id", mp.Id.Value);
+            if (mp.Closed.HasValue)
+                AddSqlWhereField("Closed", mp.Closed.Value);
+            if (mp.TranType.HasValue)
+                AddSqlWhereField("tmp.TransactionType", (int)mp.TranType.Value);
+            if (mp.Month.HasValue)
+            {
+                var d = mp.Month.Value;
+                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, 1), ">=");
+                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+            }
+            if (mp.TemplateId.HasValue)
+                AddSqlWhereField("TemplateId", mp.TemplateId.Value);
             var lst = new List<MonthlyMoneyTransaction>();
             FillList(lst, typeof(MonthlyMoneyTransaction));
             return lst;
         }
 
-        public List<MoneyTransactionTemplate> GetMoneyTransactionTemplate(MonthlyMoneyTransactionSearchParameters mp)
+        public MonthlyMoneyTransaction GetTransaction(MonthlyMoneyTransactionSearchParameters mp)
         {
-            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionTemplatess);
-            ClearParameters();
-            var lst = new List<MoneyTransactionTemplate>();
-            FillList(lst, typeof(MoneyTransactionTemplate));
-            return lst;
+            return GetMoneyTransactions(mp).FirstOrDefault();
+        }
+
+        public void Update(MoneyTransactionTemplate tmpl)
+        {
+            SqlItemList sqlItems = Get(tmpl);
+            SetUpdateSql(SynnDataProvider.TableNames.MoneyTransactionTemplatess, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = tmpl.Id } });
+            ExecuteSql();
+        }
+
+        private SqlItemList Get(MoneyTransactionTemplate p)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
+            sqlItems.Add(new SqlItem("Amount", p.Amount));
+            sqlItems.Add(new SqlItem("Active", p.Active));
+            sqlItems.Add(new SqlItem("Auto", p.Auto));
+            sqlItems.Add(new SqlItem("FromDate", p.FromDate));
+            sqlItems.Add(new SqlItem("ToDate", p.ToDate));
+            sqlItems.Add(new SqlItem("Name", p.Name));
+            sqlItems.Add(new SqlItem("TransactionType", p.TransactionType));
+            return sqlItems;
+        }
+
+        public void Add(MoneyTransactionTemplate i)
+        {
+            SqlItemList sqlItems = Get(i);
+            SetInsertIntoSql(SynnDataProvider.TableNames.MoneyTransactionTemplatess, sqlItems);
+            ExecuteSql();
+        }
+
+        public void Update(MonthlyMoneyTransaction i)
+        {
+            SqlItemList sqlItems = GetFrom(i);
+            SetUpdateSql(SynnDataProvider.TableNames.MoneyTransactionItems, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = i.Id } });
+            ExecuteSql();
         }
     }
 }

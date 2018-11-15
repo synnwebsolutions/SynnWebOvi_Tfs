@@ -170,7 +170,11 @@ namespace WebSimplify
             return Convert.ToDateTime(d);
         }
 
-        
+        public static bool IsDefault(this DateTime d)
+        {
+            return d == DateTime.MinValue;
+        }
+
         public static bool NotEmpty(this IEnumerable d)
         {
             if (d == null)
@@ -187,6 +191,11 @@ namespace WebSimplify
         public static bool NotNull(this object d)
         {
             return d != null;
+        }
+
+        public static bool NotZero(this int d)
+        {
+            return d != 0;
         }
 
         public static string GedDescription(this Enum e)

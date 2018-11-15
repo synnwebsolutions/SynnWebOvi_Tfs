@@ -17,6 +17,7 @@ namespace WebSimplify
             {
                 dvcredit.Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
                 dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
+                dvBalance.Visible = CurrentUser.Allowed(ClientPagePermissions.MoneyBalance);
                 FillSettings();
             }
         }
@@ -38,6 +39,11 @@ namespace WebSimplify
                     var p = CurrentUser.Preferences;
                     txWorkHour.Text = p.DailyRequiredWorkHours.NotNull() ? p.DailyRequiredWorkHours.Hour.ToString() : string.Empty;
                     txWorkMinute.Text = p.DailyRequiredWorkHours.NotNull() ? p.DailyRequiredWorkHours.Minute.ToString() : string.Empty;
+                }
+                if (CurrentUser.Allowed(ClientPagePermissions.MoneyBalance))
+                {
+                    var p = CurrentUser.Preferences;
+                    txBalanceStartDate.Text = !p.BalanceLogStartDate.IsDefault() ? p.BalanceLogStartDate.ToString() : string.Empty;
                 }
             }
         }
@@ -78,6 +84,12 @@ namespace WebSimplify
                             p.DailyRequiredWorkHours = new WorkTime();
                         p.DailyRequiredWorkHours.Hour = txWorkHour.Text.ToInteger();
                         p.DailyRequiredWorkHours.Minute = txWorkMinute.Text.ToInteger();
+                    }
+
+                    if (CurrentUser.Allowed(ClientPagePermissions.MoneyBalance))
+                    {
+                        var p = CurrentUser.Preferences;
+                        p.BalanceLogStartDate = txBalanceStartDate.Text.ToDateTime();
                     }
 
                     DBController.DbAuth.UpdatePreferences(CurrentUser);

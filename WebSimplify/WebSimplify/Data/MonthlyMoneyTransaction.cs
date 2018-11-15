@@ -29,6 +29,8 @@ namespace WebSimplify
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             Auto = DataAccessUtility.LoadNullable<bool>(reader, "Auto");
             UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
+            FromDate = DataAccessUtility.LoadNullable<DateTime>(reader, "FromDate");
+            ToDate = DataAccessUtility.LoadNullable<DateTime?>(reader, "ToDate");
         }
 
         public MonthlyTransactionType TransactionType { get; set; }
@@ -38,6 +40,8 @@ namespace WebSimplify
         public bool Active { get; set; }
         public bool Auto { get; set; }
         public int Amount { get; set; }
+        public DateTime FromDate { get; internal set; }
+        public DateTime? ToDate { get; internal set; }
     }
     public class MonthlyMoneyTransaction : IDbLoadable
     {
@@ -58,10 +62,12 @@ namespace WebSimplify
         public int TemplateId { get; set; }
        
         public int UserGroupId { get; set; }
+        public bool Closed { get; internal set; }
 
         public void Load(IDataReader reader)
         {
             Amount = DataAccessUtility.LoadNullable<int>(reader, "Amount");
+            Closed = DataAccessUtility.LoadNullable<bool>(reader, "Closed");
             Id = DataAccessUtility.LoadInt32(reader, "Id");
             TemplateId = DataAccessUtility.LoadInt32(reader, "TemplateId");
             Month = DataAccessUtility.LoadNullable<DateTime>(reader, "Month");
@@ -69,6 +75,14 @@ namespace WebSimplify
         }
     }
 
+    public class MonthBalanceItem
+    {
+        public DateTime Month { get; set; }
+        public int TotalIncomes { get; set; }
+        public int TotalExpenses { get; set; }
+        public int Balance { get; set; }
+        public bool Active { get; set; }
+    }
     public enum MonthlyTransactionType
     {
         [Description("חובה")]

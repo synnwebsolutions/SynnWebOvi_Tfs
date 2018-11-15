@@ -58,6 +58,24 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkUseCharts;
         
         /// <summary>
+        /// dvBalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvBalance;
+        
+        /// <summary>
+        /// txBalanceStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txBalanceStartDate;
+        
+        /// <summary>
         /// dvWorkHours control.
         /// </summary>
         /// <remarks>

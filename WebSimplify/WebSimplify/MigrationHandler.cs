@@ -73,15 +73,18 @@ namespace SynnWebOvi
             var t = new TableMigration
             {
                 HasIdentity = true,
-                TableName = "MoneyTransactionTemplatess"
+                TableName = SynnDataProvider.TableNames.MoneyTransactionTemplatess
             };
             t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "TransactionType", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
-            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "Auto", FieldType = TableMigrationFieldType.Bit, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "TransactionType", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit});
+            t.Fields.Add(new TableMigrationField { FieldName = "Auto", FieldType = TableMigrationFieldType.Bit});
+            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000});
+
+            t.Fields.Add(new TableMigrationField { FieldName = "FromDate", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "ToDate", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
 
             db.ExecurteCreateTable(t.ToString());
         }
@@ -91,13 +94,14 @@ namespace SynnWebOvi
             var t = new TableMigration
             {
                 HasIdentity = true,
-                TableName = "MoneyTransactionItems"
+                TableName = SynnDataProvider.TableNames.MoneyTransactionItems
             };
             t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "TemplateId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            t.Fields.Add(new TableMigrationField { FieldName = "Month", FieldType = TableMigrationFieldType.Date, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "Amount", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "TemplateId", FieldType = TableMigrationFieldType.Integer});
+            t.Fields.Add(new TableMigrationField { FieldName = "UserGroupId", FieldType = TableMigrationFieldType.Integer});
+            t.Fields.Add(new TableMigrationField { FieldName = "Month", FieldType = TableMigrationFieldType.Date});
+            t.Fields.Add(new TableMigrationField { FieldName = "Closed", FieldType = TableMigrationFieldType.Bit });
 
             db.ExecurteCreateTable(t.ToString());
         }

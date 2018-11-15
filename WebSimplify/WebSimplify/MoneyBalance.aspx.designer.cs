@@ -13,39 +13,66 @@ namespace WebSimplify {
     public partial class MoneyBalance {
         
         /// <summary>
-        /// txp1 control.
+        /// txAvgBalance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txp1;
+        protected global::System.Web.UI.WebControls.TextBox txAvgBalance;
         
         /// <summary>
-        /// txp2 control.
+        /// txLastBalance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txp2;
+        protected global::System.Web.UI.WebControls.TextBox txLastBalance;
         
         /// <summary>
-        /// txp3 control.
+        /// txCurrentMonthBal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txp3;
+        protected global::System.Web.UI.WebControls.TextBox txCurrentMonthBal;
         
         /// <summary>
-        /// gvCurrentMonthOpenTrans control.
+        /// gvOpenTrans control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCurrentMonthOpenTrans;
+        protected global::System.Web.UI.WebControls.GridView gvOpenTrans;
+        
+        /// <summary>
+        /// gvMonthlyBalancesView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMonthlyBalancesView;
+        
+        /// <summary>
+        /// gvTemplates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTemplates;
+        
+        /// <summary>
+        /// gvAllTemplates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAllTemplates;
     }
 }
