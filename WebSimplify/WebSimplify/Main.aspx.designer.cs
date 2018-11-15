@@ -92,14 +92,5 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpShift;
-        
-        /// <summary>
-        /// WsDialog control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebSimplify.HtmlControls.WsDialog WsDialog;
     }
 }
