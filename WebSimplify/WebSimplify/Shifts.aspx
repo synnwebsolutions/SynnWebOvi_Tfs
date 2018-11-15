@@ -4,21 +4,43 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="spageheader">יומן משמרות</div>
+
+
     <div class="row">
         <div class="col-3"></div>
-        <div class="spanel spanelmin col-6">
-            <div class="spanelHeader">הוספת משמרת   <i class="fa fa-address-card"></i></div>
 
-            <div>
-                <input type="date" name="name" id="txadddiarydate" placeholder="תאריך" runat="server" />
+        <div class="spanel spanelmin col-6">
+
+            <div class="sgridcontainer spanel">
+                <asp:GridView ID="gvAdd" runat="server"
+                    OnRowDataBound="gvAdd_RowDataBound" CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false">
+                    <PagerStyle CssClass="synngridpagination" />
+                    <Columns>
+                        <asp:TemplateField HeaderText=" תאריך " AccessibleHeaderText="lb">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txDate" TextMode="Date" CssClass="griddateinput"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" משמרת" ControlStyle-CssClass="griddatecell">
+                            <ItemTemplate>
+                                <asp:DropDownList runat="server" ID="cmbShifts" CssClass="griddropinput" ></asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" הוספה ">
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ID="btnAdd" OnCommand="btnAdd_Command" CssClass="gridbutton" ImageUrl="Img/add.png"></asp:ImageButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
-            <div>
-                <asp:DropDownList ID="cmbShifts" placeholder=" משמרת" runat="server" />
-            </div>
-            <button class="sbutton sbutton-sm" type="button" id="btnAddShift" runat="server" onserverclick="btnAddShift_ServerClick">הוסף</button>
         </div>
+
+
         <div class="col-3"></div>
     </div>
+
     <div class="spanel">
         <asp:Calendar ID="cdr" runat="server" FirstDayOfWeek="Sunday" Width="100%" OnDayRender="Calendar1_DayRender" CssClass="aspcalendar"></asp:Calendar>
     </div>

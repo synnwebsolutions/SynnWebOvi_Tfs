@@ -60,6 +60,8 @@ namespace WebSimplify
         [Description("")]
         Data,
         [Description("datetime")]
-        Date
+        Date,
+        [Description("bit")]
+        Bit
     }
 }

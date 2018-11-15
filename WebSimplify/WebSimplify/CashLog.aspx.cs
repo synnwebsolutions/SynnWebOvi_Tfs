@@ -41,13 +41,7 @@ namespace WebSimplify
             RefreshGrid(gvCashMoneyItems);
         }
 
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navcash";
-            }
-        }
+        
 
         internal override string GetGridSourceMethodName(string gridId)
         {

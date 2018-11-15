@@ -25,18 +25,11 @@ namespace WebSimplify
         {
             get
             {
-                var l = new List<ClientPagePermissions> { ClientPagePermissions.SysAdmin };
+                var l = new List<ClientPagePermissions> { ClientPagePermissions.SysUsers };
                 return l;
             }
         }
 
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navusers";
-            }
-        }
         public LoggedUser EditedUser
         {
             get

@@ -9,39 +9,36 @@
         <button class="menubutton" type="button" id="btnGenerate" runat="server" onserverclick="btnGenerate_ServerClick"> הפק רשימת קניות</button>
     </div>
      <div class="row" id="trshop" runat="server">
-        <div class=" col-1">
+           <div class=" col-3">
         </div>
-        <div class="spanel col-10">
-            <div class="spanelHeader ">הוספה לרשימת קניות    <i class="fa fa-credit-card"></i></div>
-            <div class="">
-                <div>
-                    <input type="text" name="name" id="txShopItemToAdd" placeholder="פריט להוספה" runat="server" />
-                </div>
-                <button class="sbutton" type="button" id="btnAddShopItem" runat="server" onserverclick="btnAddShopItem_ServerClick">הוסף</button>
+        <div class="spanel col-6">
+            <div class="sgridcontainer spanel">
+                <asp:GridView ID="gvAdd" runat="server"
+                    OnRowDataBound="gvAdd_RowDataBound" CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false" >
+                    <PagerStyle CssClass="synngridpagination" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="שם פריט " AccessibleHeaderText="lb">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txProductName" CssClass="gridtextinput"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" הוספה ">
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ID="btnAdd" OnCommand="btnAdd_Command" CssClass="gridbutton" ImageUrl="Img/add.png"></asp:ImageButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
+
+
+        
         </div>
-        <div class=" col-1">
+        <div class=" col-3">
         </div>
     </div>
   
-
-    <div class="row" id="trAdd" runat="server">
-        <div class=" col-1"></div>
-        <div class="spanel col-10">
-            <div class="row" >
-                <div class="spanelHeader">הוספה</div>
-                <div class="col-7">
-                    <div>
-                        <asp:DropDownList ID="cmbItems" runat="server"></asp:DropDownList>
-                    </div>
-                </div>
-                <div class=" col-5">
-                    <button class="sbutton sbutton-sm" type="button" id="btnAdd" runat="server" onserverclick="btnAdd_ServerClick">הוסף פריט</button>
-                </div>
-            </div>
-        </div>
-        <div class=" col-1"></div>
-    </div>
     <div class="row">
         <div class=" col-3"></div>
         <div class="col-6">

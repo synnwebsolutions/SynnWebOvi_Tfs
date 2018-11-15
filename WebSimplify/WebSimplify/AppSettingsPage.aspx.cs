@@ -17,6 +17,7 @@ namespace WebSimplify
             {
                 dvcredit.Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
                 dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
+                dvBalance.Visible = CurrentUser.Allowed(ClientPagePermissions.MoneyBalance);
                 FillSettings();
             }
         }
@@ -39,17 +40,22 @@ namespace WebSimplify
                     txWorkHour.Text = p.DailyRequiredWorkHours.NotNull() ? p.DailyRequiredWorkHours.Hour.ToString() : string.Empty;
                     txWorkMinute.Text = p.DailyRequiredWorkHours.NotNull() ? p.DailyRequiredWorkHours.Minute.ToString() : string.Empty;
                 }
+                if (CurrentUser.Allowed(ClientPagePermissions.MoneyBalance))
+                {
+                    var p = CurrentUser.Preferences;
+                    txBalanceStartDate.Text = !p.BalanceLogStartDate.IsDefault() ? p.BalanceLogStartDate.ToString() : string.Empty;
+                }
             }
         }
 
-        protected override string NavIdentifier
+        protected override string DefaultNavItem
         {
             get
             {
                 return "navsys";
             }
         }
-        
+
 
         protected void btnReverse_ServerClick(object sender, EventArgs e)
         {
@@ -78,6 +84,12 @@ namespace WebSimplify
                             p.DailyRequiredWorkHours = new WorkTime();
                         p.DailyRequiredWorkHours.Hour = txWorkHour.Text.ToInteger();
                         p.DailyRequiredWorkHours.Minute = txWorkMinute.Text.ToInteger();
+                    }
+
+                    if (CurrentUser.Allowed(ClientPagePermissions.MoneyBalance))
+                    {
+                        var p = CurrentUser.Preferences;
+                        p.BalanceLogStartDate = txBalanceStartDate.Text.ToDateTime();
                     }
 
                     DBController.DbAuth.UpdatePreferences(CurrentUser);

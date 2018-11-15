@@ -25,14 +25,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                RefreshGrid(gv);
-            }
-        }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navdic";
+                RefreshGrids();
             }
         }
 
@@ -40,6 +33,8 @@ namespace WebSimplify
         {
             if (gridId == gv.ID)
                 return "GetData";
+            if (gridId == gvAdd.ID)
+                return DummyMethodName;
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -47,20 +42,6 @@ namespace WebSimplify
         {
             List<DictionaryItem> items = DBController.DbUserDictionary.PerformSearch(new DictionarySearchParameters { SearchText = txsearchkey.Value });
             return items;
-        }
-
-        protected void btnadddic_ServerClick(object sender, EventArgs e)
-        {
-            if (ValidateInputs(txadddickey, txadddicval))
-            {
-                DBController.DbUserDictionary.Add(new DictionarySearchParameters { Key = txadddickey.Value, Value = txadddicval.Value });
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txadddickey, txadddicval);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
-            }
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -76,6 +57,38 @@ namespace WebSimplify
         protected void btnSearch_ServerClick(object sender, EventArgs e)
         {
             RefreshGrid(gv);
+        }
+
+        protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ((TextBox)e.Row.FindControl("txName")).Text = ((TextBox)e.Row.FindControl("txIdesc")).Text = string.Empty;
+            }
+        }
+
+        protected void btnAdd_Command(object sender, CommandEventArgs e)
+        {
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+
+            var txName = ((TextBox)row.FindControl("txName")).Text;
+            var txIdesc = ((TextBox)row.FindControl("txIdesc")).Text;
+            if (txName.NotEmpty() && txIdesc.NotEmpty())
+            {
+                DBController.DbUserDictionary.Add(new DictionarySearchParameters { Key = txName, Value = txIdesc });
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                RefreshGrids();
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
+
+        private void RefreshGrids()
+        {
+            RefreshGrid(gv);
+            RefreshGrid(gvAdd);
         }
     }
 }

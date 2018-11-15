@@ -146,6 +146,32 @@ namespace WebSimplify
             SetInsertIntoSql(SynnDataProvider.TableNames.UserPreferences, sqlItems);
             ExecuteSql();
         }
+
+        public List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.DevTasks);
+            ClearParameters();
+            
+            var lst = new List<DevTaskItem>();
+            FillList(lst, typeof(DevTaskItem));
+            return lst;
+        }
+
+        public void Add(DevTaskItem d)
+        {
+            SqlItemList sqlItems = Get(d);
+            SetInsertIntoSql(SynnDataProvider.TableNames.DevTasks, sqlItems);
+            ExecuteSql();
+        }
+
+        private SqlItemList Get(DevTaskItem u)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("Description", u.Description));
+            sqlItems.Add(new SqlItem("Name", u.Name));
+            sqlItems.Add(new SqlItem("Status", u.Status));
+            return sqlItems;
+        }
     }
 
 

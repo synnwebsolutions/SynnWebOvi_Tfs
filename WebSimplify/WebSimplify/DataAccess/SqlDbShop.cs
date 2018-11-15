@@ -49,7 +49,8 @@ namespace SynnWebOvi
 
         public void ActivateShopItem(ShopSearchParameters sp)
         {
-            if (sp.IdToActivate.HasValue)
+            bool exsisst = CheckUserShopItems(sp);
+            if (!exsisst && sp.IdToActivate.HasValue)
             {
                 var sqlItems = new SqlItemList();
                 sqlItems.Add(new SqlItem("ItemId", sp.IdToActivate.Value));
@@ -57,6 +58,16 @@ namespace SynnWebOvi
                 SetInsertIntoSql(SynnDataProvider.TableNames.User_ShoppingItems, sqlItems);
                 ExecuteSql();
             }
+        }
+
+        private bool CheckUserShopItems(ShopSearchParameters sp)
+        {
+            SetSqlFormat("select count(*) from {0} ", SynnDataProvider.TableNames.User_ShoppingItems);
+            ClearParameters();
+            AddSqlWhereField("ItemId", sp.IdToActivate.Value);
+            AddSqlWhereField("UserGroupId", sp.CurrentUser.AllowedSharedPermissions[0]);
+            int res = (int)GetSingleRecordFirstValue();
+            return res > 0;
         }
 
         public void DeActivateShopItem(ShopSearchParameters lsp)

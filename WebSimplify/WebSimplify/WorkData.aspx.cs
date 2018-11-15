@@ -38,13 +38,7 @@ namespace WebSimplify
             }
         }
 
-        protected override bool HasNavLink
-        {
-            get
-            {
-                return false;
-            }
-        }
+       
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gvWorkHours.ID)

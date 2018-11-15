@@ -23,6 +23,7 @@ namespace SynnWebOvi
 
         internal static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
         internal const string DecimalFormat = "#.#";
+        internal const string DummyMethodName = "GetDummy";
         public LoggedUser CurrentUser
         {
             get
@@ -33,6 +34,12 @@ namespace SynnWebOvi
             {
                 StoreInSession("ssUser_*", value);
             }
+        }
+
+        public IEnumerable GetDummy()
+        {
+            List<object> items = new List<object> { 1 };
+            return items;
         }
 
         protected override void InitializeCulture()
@@ -72,20 +79,11 @@ namespace SynnWebOvi
         //    //}
         //    return true;
         //}
-        protected virtual string NavIdentifier { get;}
         protected virtual List<ClientPagePermissions> RequiredPermissions
         {
             get
             {
                 return new List<ClientPagePermissions>();
-            }
-        }
-
-        protected virtual bool HasNavLink
-        {
-            get
-            {
-                return true;
             }
         }
         
@@ -137,6 +135,13 @@ namespace SynnWebOvi
             return true;
         }
 
+        protected virtual string DefaultNavItem
+        {
+            get
+            {
+                return "navmain";
+            }
+        }
 
         protected override void OnInit(EventArgs e)
         {
@@ -151,21 +156,23 @@ namespace SynnWebOvi
                     Title = "מסך הבית";
                 if (!LoginProvider)
                 {
-                    Master.FindControl("navdiary").Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
-                    Master.FindControl("navdic").Visible = CurrentUser.Allowed(ClientPagePermissions.Dictionary);
-                    Master.FindControl("navshifts").Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
-                    Master.FindControl("navshop").Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
-                    Master.FindControl("navwed").Visible = CurrentUser.Allowed(ClientPagePermissions.Wedding);
-                    Master.FindControl("navtask").Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
-                    Master.FindControl("navcredit").Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
-                    Master.FindControl("navcash").Visible = CurrentUser.Allowed(ClientPagePermissions.CashLog);
+                    BuildSiteMapLinks();
+                    bool navSelected = false;
+                    
+                    if (RequiredPermissions.NotEmpty())
+                    {
+                        var requiredPermis = RequiredPermissions.FirstOrDefault();
+                        PageLinkAttribute HasNavLink = GetPageLink(requiredPermis);
+                        if (HasNavLink != null)
+                        {
+                            ((HtmlAnchor)Master.FindControl(HasNavLink.NavLinks.FirstOrDefault())).Attributes.Add("class", "active");
+                            navSelected = true;
+                        }
+                    }
 
-                    //Master.FindControl("navsys").Visible = CurrentUser.IsAdmin;
-                    Master.FindControl("navusers").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
-                    Master.FindControl("navlog").Visible = CurrentUser.Allowed(ClientPagePermissions.SysAdmin) || CurrentUser.IsAdmin;
+                    if(!navSelected)
+                        ((HtmlAnchor)Master.FindControl(DefaultNavItem)).Attributes.Add("class", "active");
 
-                    if(HasNavLink)
-                        ((HtmlAnchor)Master.FindControl(NavIdentifier)).Attributes.Add("class", "active");
                 }
 
                 foreach (ClientPagePermissions en in RequiredPermissions)
@@ -176,7 +183,31 @@ namespace SynnWebOvi
             }
         }
 
-        
+        private void BuildSiteMapLinks()
+        {
+            foreach (ClientPagePermissions ep in Enum.GetValues(typeof(ClientPagePermissions)))
+            {
+                PageLinkAttribute attribute = GetPageLink(ep);
+                if (attribute != null)
+                {
+                    foreach (var navlink in attribute.NavLinks)
+                    {
+                        Master.FindControl(navlink).Visible = CurrentUser.Allowed(ep);
+                    }
+                }
+            }
+        }
+
+        public PageLinkAttribute GetPageLink(ClientPagePermissions pageP)
+        {
+            MemberInfo memberInfo = typeof(ClientPagePermissions).GetMember(pageP.ToString()).FirstOrDefault();
+            if (memberInfo != null)
+            {
+                PageLinkAttribute attribute = (PageLinkAttribute)memberInfo.GetCustomAttributes(typeof(PageLinkAttribute), false).FirstOrDefault();
+                return attribute;
+            }
+            return null;
+        }
 
         public void AlertMessage(string message)
         {

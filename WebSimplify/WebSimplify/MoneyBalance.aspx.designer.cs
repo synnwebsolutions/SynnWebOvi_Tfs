@@ -10,96 +10,69 @@
 namespace WebSimplify {
     
     
-    public partial class Main {
+    public partial class MoneyBalance {
         
         /// <summary>
-        /// dvWorkHours control.
+        /// txAvgBalance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvWorkHours;
+        protected global::System.Web.UI.WebControls.TextBox txAvgBalance;
         
         /// <summary>
-        /// btnWorkHours control.
+        /// txLastBalance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnWorkHours;
+        protected global::System.Web.UI.WebControls.TextBox txLastBalance;
         
         /// <summary>
-        /// btnDevTasks control.
+        /// txCurrentMonthBal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDevTasks;
+        protected global::System.Web.UI.WebControls.TextBox txCurrentMonthBal;
         
         /// <summary>
-        /// dtDiary control.
+        /// gvOpenTrans control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dtDiary;
+        protected global::System.Web.UI.WebControls.GridView gvOpenTrans;
         
         /// <summary>
-        /// rpCalendar control.
+        /// gvMonthlyBalancesView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpCalendar;
+        protected global::System.Web.UI.WebControls.GridView gvMonthlyBalancesView;
         
         /// <summary>
-        /// dtTasks control.
+        /// gvTemplates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dtTasks;
+        protected global::System.Web.UI.WebControls.GridView gvTemplates;
         
         /// <summary>
-        /// rpTasks control.
+        /// gvAllTemplates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpTasks;
-        
-        /// <summary>
-        /// dtShifts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dtShifts;
-        
-        /// <summary>
-        /// rpShift control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpShift;
-        
-        /// <summary>
-        /// WsDialog control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebSimplify.HtmlControls.WsDialog WsDialog;
+        protected global::System.Web.UI.WebControls.GridView gvAllTemplates;
     }
 }

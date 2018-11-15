@@ -22,6 +22,8 @@ namespace SynnWebOvi
         void Update(LoggedUser u);
         LoggedUser GetUser(int ownerId);
         void UpdatePreferences(LoggedUser u);
+        List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters);
+        void Add(DevTaskItem d);
     }
 
     public interface IDbLog
@@ -48,14 +50,40 @@ namespace SynnWebOvi
 
     public interface IDbMoney
     {
-        void Add(CashMonthlyData i);
+        #region Credit
         void Add(CreditCardMonthlyData i);
-        List<CashMonthlyData> Get(CashSearchParameters cashSearchParameters);
         List<CreditCardMonthlyData> Get(CreditSearchParameters creditSearchParameters);
         void Update(CreditCardMonthlyData i);
+
+
+        #endregion
+
+
+        #region Cash
+        List<CashMonthlyData> Get(CashSearchParameters cashSearchParameters);
+
+        void Add(CashMoneyItem i);
+
+        void Add(CashMonthlyData i);
         void Update(CashMonthlyData i);
         List<CashMoneyItem> GetCashItems(CashSearchParameters cashSearchParameters);
-        void Add(CashMoneyItem i);
+
+        #endregion
+
+
+
+        #region Balance
+
+        void Add(MonthlyMoneyTransaction trnForMonth);
+        MoneyTransactionTemplate GetTransactionTemplate(int templateId);
+        List<MoneyTransactionTemplate> GetMoneyTransactionTemplates(MonthlyMoneyTransactionSearchParameters mp);
+        List<MonthlyMoneyTransaction> GetMoneyTransactions(MonthlyMoneyTransactionSearchParameters mp);
+        MonthlyMoneyTransaction GetTransaction(MonthlyMoneyTransactionSearchParameters mp);
+        void Update(MoneyTransactionTemplate tmpl);
+        void Add(MoneyTransactionTemplate i);
+        void Update(MonthlyMoneyTransaction i);
+
+        #endregion
     }
 
     public interface IDbShifts
@@ -124,7 +152,16 @@ namespace SynnWebOvi
         public ShiftDayData ItemForAction { get; set; }
 
     }
+    
+        public class DevTaskItemSearchParameters : BaseSearchParameters
+    {
+        public DevTaskItemSearchParameters() : base()
+        {
+        }
 
+        public bool? Active { get; internal set; }
+        public string ItemName { get; internal set; }
+    }
     public class ShopSearchParameters : BaseSearchParameters
     {
         public ShopSearchParameters() : base()
@@ -159,6 +196,19 @@ namespace SynnWebOvi
         public bool? Active { get; set; }
         public int? Id { get; set; }
         public DateTime? Month { get; set; }
+    }
+
+    public class MonthlyMoneyTransactionSearchParameters : BaseSearchParameters
+    {
+        public MonthlyMoneyTransactionSearchParameters() : base()
+        {
+        }
+
+        public bool? Closed { get; set; }
+        public int? Id { get; set; }
+        public DateTime? Month { get; set; }
+        public int? TemplateId { get;  set; }
+        public MonthlyTransactionType? TranType { get;  set; }
     }
 
     public class WorkHoursSearchParameters : BaseSearchParameters

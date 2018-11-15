@@ -41,13 +41,6 @@ namespace WebSimplify
                 return l;
             }
         }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navcredit";
-            }
-        }
 
         private void RefreshView()
         {

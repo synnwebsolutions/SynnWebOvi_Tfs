@@ -10,13 +10,7 @@ namespace WebSimplify
 {
     public partial class ErrorPage : SynnWebFormBase
     {
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navmain";
-            }
-        }
+     
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

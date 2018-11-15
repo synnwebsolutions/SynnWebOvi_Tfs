@@ -36,13 +36,15 @@ namespace WebSimplify
                 StoreInSession("CurrentPeriodStart*", value);
             }
         }
-        protected override string NavIdentifier
+
+        internal override string GetGridSourceMethodName(string gridId)
         {
-            get
-            {
-                return "navshifts";
-            }
+            if (gridId == gvAdd.ID)
+                return DummyMethodName;
+            return base.GetGridSourceMethodName(gridId);
         }
+
+        
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -59,11 +61,7 @@ namespace WebSimplify
                 cdr.VisibleDate = dt;
                 cdr.SelectedDate = dt;
 
-                foreach (Enum se in Enum.GetValues(typeof(ShiftTime)))
-                {
-                    ListItem item = new ListItem(GenericFormatter.GetEnumDescription(se), (se).ToString());
-                    cmbShifts.Items.Add(item);
-                }
+                RefreshGrid(gvAdd);
             }
         }
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
@@ -77,6 +75,9 @@ namespace WebSimplify
                     e.Cell.CssClass = "shiftcellbase shiftcellactive";
                 else
                     e.Cell.CssClass = "shiftcellbase shiftcellvalid";
+
+                if (e.Day.Date == DateTime.Now.Date)
+                    e.Cell.BorderColor = System.Drawing.Color.Red;
             }
             else
             {
@@ -85,9 +86,21 @@ namespace WebSimplify
             }
         }
 
+
+        List<ShiftDayData> cm;
+        protected List<ShiftDayData> CurrentMonthData
+        {
+            get
+            {
+                if (cm == null)
+                    cm = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { FromDate = DateTime.Now.StartOfMonth(), ToDate = DateTime.Now.EndOfMonth() });
+                return cm;
+            }
+        }
+
         private string GetShiftsForDate(DateTime date)
         {
-            List<ShiftDayData> currentData = DBController.DbShifts.GetShifts(new ShiftsSearchParameters {FromDate = date, ToDate = date.AddHours(23).AddMinutes(59) });
+            List<ShiftDayData> currentData = CurrentMonthData.Where(x => x.Date.Date == date.Date).ToList();
             StringBuilder sb = new StringBuilder();
             if (currentData != null)
             {
@@ -103,26 +116,7 @@ namespace WebSimplify
             }
             return sb.ToString();
         }
-
-        protected void btnAddShift_ServerClick(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txadddiarydate.Value))
-            {
-                AlertMessage("יש להזין תאריך");
-                return;
-            }
-
-            ShiftDayData d = new ShiftDayData();
-            d.Date = Convert.ToDateTime(txadddiarydate.Value);
-            ShiftTime es;
-            Enum.TryParse(cmbShifts.SelectedValue, out es);
-            d.DaylyShift = es;
-            d.OwnerId = CurrentUser.Id;
-            d.UserGroupId = CurrentUser.AllowedSharedPermissions[0];
-
-            DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
-            ClearInputs(txadddiarydate);
-        }
+        
 
         [WebMethod]
         [ScriptMethod()]
@@ -136,6 +130,48 @@ namespace WebSimplify
             catch (Exception ex)
             {
                 string msg = ex.Message;
+            }
+        }
+
+        protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var cmbShifts = ((DropDownList)e.Row.FindControl("cmbShifts"));
+                ((TextBox)e.Row.FindControl("txDate")).Text = string.Empty;
+
+                foreach (Enum se in Enum.GetValues(typeof(ShiftTime)))
+                {
+                    ListItem item = new ListItem(GenericFormatter.GetEnumDescription(se), (se).ToString());
+                    cmbShifts.Items.Add(item);
+                }
+            }
+        }
+
+        protected void btnAdd_Command(object sender, CommandEventArgs e)
+        {
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+
+            var cmbShifts = ((DropDownList)row.FindControl("cmbShifts"));
+            var txDate = ((TextBox)row.FindControl("txDate"));
+
+            if (cmbShifts.SelectedIndex > 0  && txDate.Text.NotEmpty())
+            {
+                ShiftDayData d = new ShiftDayData();
+                d.Date = Convert.ToDateTime(txDate.Text);
+                ShiftTime es;
+                Enum.TryParse(cmbShifts.SelectedValue, out es);
+                d.DaylyShift = es;
+                d.OwnerId = CurrentUser.Id;
+                d.UserGroupId = CurrentUser.AllowedSharedPermissions[0];
+
+                DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                RefreshGrid(gvAdd);
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
             }
         }
     }

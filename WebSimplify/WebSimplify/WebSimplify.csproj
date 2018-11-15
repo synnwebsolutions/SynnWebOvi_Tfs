@@ -91,9 +91,9 @@
     <Content Include="CreditStats.aspx" />
     <Content Include="css\style1.css" />
     <Content Include="css\Style1resp.css" />
+    <Content Include="DevTasks.aspx" />
     <Content Include="Diary.aspx" />
     <Content Include="ErrorPage.aspx" />
-    <Content Include="HtmlControls\WsDialog.ascx" />
     <Content Include="Img\add.png" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\exchange.png" />
@@ -102,10 +102,10 @@
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
     <Content Include="js\synnJavaScripts.js" />
-    <Content Include="js\WsDialog.js" />
     <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="MoneyBalance.aspx" />
     <Content Include="packages.config" />
     <Content Include="QuickTasks.aspx" />
     <Content Include="Shifts.aspx" />
@@ -164,9 +164,11 @@
     <Compile Include="DataAccess\SqlDbShop.cs" />
     <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
+    <Compile Include="Data\DevTaskItem.cs" />
     <Compile Include="Data\IMarkAble.cs" />
     <Compile Include="Data\JsonPointItem.cs" />
     <Compile Include="Data\MoneyMonthlyData.cs" />
+    <Compile Include="Data\MonthlyMoneyTransaction.cs" />
     <Compile Include="Data\PermissionGroup.cs" />
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />
@@ -177,6 +179,13 @@
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
     <Compile Include="Data\WorkHoursData.cs" />
+    <Compile Include="DevTasks.aspx.cs">
+      <DependentUpon>DevTasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevTasks.aspx.designer.cs">
+      <DependentUpon>DevTasks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Diary.aspx.cs">
       <DependentUpon>Diary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -195,13 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlStringHelper.cs" />
-    <Compile Include="HtmlControls\WsDialog.ascx.cs">
-      <DependentUpon>WsDialog.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HtmlControls\WsDialog.ascx.designer.cs">
-      <DependentUpon>WsDialog.ascx</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\MoneyBalanceHelper.cs" />
     <Compile Include="Log.aspx.cs">
       <DependentUpon>Log.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,6 +228,13 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MigrationHandler.cs" />
+    <Compile Include="MoneyBalance.aspx.cs">
+      <DependentUpon>MoneyBalance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MoneyBalance.aspx.designer.cs">
+      <DependentUpon>MoneyBalance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickTask.cs" />
     <Compile Include="QuickTasks.aspx.cs">

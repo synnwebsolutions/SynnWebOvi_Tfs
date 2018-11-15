@@ -56,10 +56,12 @@ namespace WebSimplify
             return new DateTime(dt.Year,dt.Month,1).AddMonths(1).AddDays(-1);
         }
 
+       
+
         public static bool InTwoWeekPeriod(this DateTime periodStart, DateTime dateToCheck)
         {
             if (dateToCheck.Date >= periodStart.Date)
-                return (dateToCheck.Date - periodStart.Date).TotalDays < 15;
+                return (dateToCheck.Date - periodStart.Date).TotalDays < 14;
 
             return false;
         }
@@ -168,7 +170,11 @@ namespace WebSimplify
             return Convert.ToDateTime(d);
         }
 
-        
+        public static bool IsDefault(this DateTime d)
+        {
+            return d == DateTime.MinValue;
+        }
+
         public static bool NotEmpty(this IEnumerable d)
         {
             if (d == null)
@@ -187,9 +193,24 @@ namespace WebSimplify
             return d != null;
         }
 
+        public static bool NotZero(this int d)
+        {
+            return d != 0;
+        }
+
+        public static string GedDescription(this Enum e)
+        {
+            return GenericFormatter.GetEnumDescription(e);
+        }
+
         public static string ToTimeDisplay(this WorkTime d)
         {
             TimeSpan sp = new TimeSpan(d.Hour, d.Minute, 0);
+            return sp.ToString(@"hh\:mm");
+        }
+
+        public static string ToTimeDisplay(this TimeSpan sp)
+        {
             return sp.ToString(@"hh\:mm");
         }
 

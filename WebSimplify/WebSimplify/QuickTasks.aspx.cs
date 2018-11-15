@@ -15,7 +15,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                RefreshGrid(gv);
+                RefreshGrids();
             }
         }
         protected override List<ClientPagePermissions> RequiredPermissions
@@ -27,46 +27,18 @@ namespace WebSimplify
             }
         }
 
-        protected void btnAddQuickTask_ServerClick(object sender, EventArgs e)
-        {
-            if (ValidateInputs(txTaskname, txTaskDesc))
-            {
-                QuickTask t = new QuickTask
-                {
-                    Name = txTaskname.Value,
-                    Description = txTaskDesc.Value,
-                    Active = true,
-                    CreationDate = DateTime.Now,
-                    UserGroupId = CurrentUser.Id
-                };
-                DBController.DbCalendar.Add(t);
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txTaskname, txTaskDesc);
-                RefreshGrid(gv);
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
-            }
-        }
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navtask";
-            }
-        }
-
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)
                 return "GetData";
+            if (gridId == gvAdd.ID)
+                return DummyMethodName;
             return base.GetGridSourceMethodName(gridId);
         }
 
         public IEnumerable GetData()
         {
-            List<QuickTask> items = DBController.DbCalendar.Get(new QuickTasksSearchParameters { SearchText = txwedsearchkey.Value, Active = chkActive.Checked });
+            List<QuickTask> items = DBController.DbCalendar.Get(new QuickTasksSearchParameters {  Active = true });
             return items;
         }
 
@@ -94,9 +66,44 @@ namespace WebSimplify
             RefreshGrid(gv);
         }
 
-        protected void chkActive_CheckedChanged(object sender, EventArgs e)
+        protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ((TextBox)e.Row.FindControl("txName")).Text = ((TextBox)e.Row.FindControl("txIdesc")).Text = string.Empty;
+            }
+        }
+
+        protected void btnAdd_Command(object sender, CommandEventArgs e)
+        {
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+
+            var txName = ((TextBox)row.FindControl("txName")).Text;
+            var txIdesc = ((TextBox)row.FindControl("txIdesc")).Text;
+            if (txName.NotEmpty() && txIdesc.NotEmpty())
+            {
+                QuickTask t = new QuickTask
+                {
+                    Name = txName,
+                    Description = txIdesc,
+                    Active = true,
+                    CreationDate = DateTime.Now,
+                    UserGroupId = CurrentUser.Id
+                };
+                DBController.DbCalendar.Add(t);
+                AlertMessage("פעולה זו בוצעה בהצלחה");
+                RefreshGrids();
+            }
+            else
+            {
+                AlertMessage("אחד או יותר מהשדות ריקים");
+            }
+        }
+
+        private void RefreshGrids()
         {
             RefreshGrid(gv);
+            RefreshGrid(gvAdd);
         }
     }
 }

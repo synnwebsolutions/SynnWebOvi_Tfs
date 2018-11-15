@@ -23,6 +23,15 @@ namespace WebSimplify
             {
                 WorkHoursDataAction(u);
             }
+            if (u.Allowed(ClientPagePermissions.MoneyBalance))
+            {
+                MoneyBalanceDataAction(u);
+            }
+        }
+
+        private static void MoneyBalanceDataAction(LoggedUser u)
+        {
+            MoneyBalanceHelper.RefreshUserData(u);
         }
 
         private static void WorkHoursDataAction(LoggedUser u)

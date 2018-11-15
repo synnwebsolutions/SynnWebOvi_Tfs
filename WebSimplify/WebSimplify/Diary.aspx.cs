@@ -36,13 +36,7 @@ namespace WebSimplify
             }
         }
 
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navdiary";
-            }
-        }
+    
 
         protected void btnadddiary_ServerClick(object sender, EventArgs e)
         {
@@ -98,9 +92,20 @@ namespace WebSimplify
                 e.Cell.Text = string.Empty;
         }
 
+        List<MemoItem> cm;
+        protected List<MemoItem> CurrentMonthData
+        {
+            get
+            {
+                if(cm == null)
+                    cm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.StartOfMonth(), ToDate = DateTime.Now.EndOfMonth() });
+                return cm;
+            }
+        }
+
         private string GetDiaryForDate(DateTime date, ref bool hasval)
         {
-            List<MemoItem> currentData = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = date, ToDate = date.AddHours(23).AddMinutes(59) });
+            var currentData = CurrentMonthData.Where(x => x.Date.Date == date.Date).ToList();
             StringBuilder sb = new StringBuilder();
             sb.Append(date.Day.ToString() + HtmlStringHelper.LineBreak);
             if (currentData != null)

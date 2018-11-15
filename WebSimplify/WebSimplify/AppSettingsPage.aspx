@@ -41,6 +41,21 @@
         </fieldset>
     </div>
 
+       <div class="spanel" id="dvBalance" runat="server">
+        <fieldset class="row ">
+            <legend>הגדרות מעקב הכנסות \ הוצאות</legend>
+            <div class="row">
+                <div class="col-4">
+                    <label for="txBalanceStartDate">תאריך תחילת תיעוד</label>
+
+                </div>
+                <div class="col-4">
+                    <asp:TextBox ID="txBalanceStartDate" TextMode="Date" runat="server" placeholder="dd/MM/yyyy" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
     <div class="spanel" id="dvWorkHours" runat="server">
         <fieldset class="row ">
             <legend>הגדרות משמרות</legend>

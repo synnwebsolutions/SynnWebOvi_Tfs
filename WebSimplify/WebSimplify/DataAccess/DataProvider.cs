@@ -34,6 +34,7 @@ namespace SynnWebOvi
             public static string UserDictionary = "UserDictionary"; // user only
             public static string Users = "Users";
             public static string UserPreferences = "UserPreferences";
+            public static string DevTasks = "DevTasks";
             public static string Log = "Log";
             public static string ThemeLog = "ThemeLog";
             public static string WeddingItems = "WeddingItems"; // group
@@ -44,6 +45,8 @@ namespace SynnWebOvi
             public static string CreditData = "CreditData"; // group
             public static string CashData = "CashData"; // group
             public static string CashItems = "CashItems"; // group
+            public static string MoneyTransactionItems = "MoneyTransactionItems";
+            public static string MoneyTransactionTemplatess = "MoneyTransactionTemplatess";
             public static string AppSettings = "AppSettings";
             public static string DiaryData = "DiaryData";// group
             public static string QuickTasks = "QuickTasks";

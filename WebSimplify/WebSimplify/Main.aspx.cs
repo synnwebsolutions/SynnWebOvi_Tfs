@@ -50,14 +50,7 @@ namespace WebSimplify
                 rpTasks.DataBind();
             }
         }
-
-        protected override string NavIdentifier
-        {
-            get
-            {
-                return "navmain";
-            }
-        }
+        
 
         protected void rpTasks_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -101,6 +94,11 @@ namespace WebSimplify
         protected void btnWorkHours_ServerClick(object sender, EventArgs e)
         {
             SynNavigation.Redirect("WorkData.aspx");
+        }
+
+        protected void btnDevTasks_ServerClick(object sender, EventArgs e)
+        {
+            SynNavigation.Redirect("DevTasks.aspx");
         }
     }
     
