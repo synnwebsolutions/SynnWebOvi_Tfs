@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="WebSimplify.Main" %>
 
+<%@ Register Src="~/HtmlControls/WsDialog.ascx" TagPrefix="uc1" TagName="WsDialog" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -98,5 +101,7 @@
 
     </fieldset>
 
+
+    <uc1:WsDialog runat="server" id="WsDialog"  />
 
 </asp:Content>
