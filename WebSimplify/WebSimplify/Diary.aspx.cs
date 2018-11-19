@@ -11,6 +11,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Helpers;
+using WebSimplify.Controls;
 
 namespace WebSimplify
 {
@@ -66,7 +67,14 @@ namespace WebSimplify
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 cdr.VisibleDate = ActionMonth;
                 cdr.SelectedDate = DateTime.Now;
+
+                //WsSlider.SelectedChanged = new WsSlider.SelectionChanged(WsSlider_SelectedChanged);
             }
+        }
+
+        public void WsSlider_SelectedChanged(ListItem li)
+        {
+            AlertMessage(li.Text);
         }
 
         protected void cdr_DayRender(object sender, DayRenderEventArgs e)
@@ -103,6 +111,7 @@ namespace WebSimplify
             }
         }
 
+
         private string GetDiaryForDate(DateTime date, ref bool hasval)
         {
             var currentData = CurrentMonthData.Where(x => x.Date.Date == date.Date).ToList();
@@ -123,6 +132,19 @@ namespace WebSimplify
         protected void cdr_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
             ActionMonth = new DateTime(e.NewDate.Year, e.NewDate.Month, 1);
+        }
+
+        public List<ListItem> GetMonths()
+        {
+            var lst = new List<ListItem>();
+            var fromDate = DateTime.Now.AddMonths(6);
+            for (int i = 0; i < 12; i++)
+            {
+                var selected = fromDate.StartOfMonth().Date == DateTime.Now.StartOfMonth().Date;
+                lst.Add(new ListItem { Selected = selected, Text = fromDate.HebrewMonthNameWithYear(), Value = fromDate.ToShortDateString() });
+                fromDate = fromDate.AddMonths(-1);
+            }
+            return lst;
         }
     }
 }

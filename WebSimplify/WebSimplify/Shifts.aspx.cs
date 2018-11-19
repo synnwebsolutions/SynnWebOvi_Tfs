@@ -155,7 +155,7 @@ namespace WebSimplify
             var cmbShifts = ((DropDownList)row.FindControl("cmbShifts"));
             var txDate = ((TextBox)row.FindControl("txDate"));
 
-            if (cmbShifts.SelectedIndex > 0  && txDate.Text.NotEmpty())
+            if (txDate.Text.NotEmpty())
             {
                 ShiftDayData d = new ShiftDayData();
                 d.Date = Convert.ToDateTime(txDate.Text);

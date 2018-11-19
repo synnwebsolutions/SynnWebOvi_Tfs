@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="CashLog.aspx" />
+    <Content Include="Controls\WsSlider.ascx" />
     <Content Include="CreditStats.aspx" />
     <Content Include="css\style1.css" />
     <Content Include="css\Style1resp.css" />
@@ -98,7 +99,9 @@
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\exchange.png" />
     <Content Include="Img\insert.png" />
+    <Content Include="Img\left-arrow.png" />
     <Content Include="Img\locked.png" />
+    <Content Include="Img\right-arrow.png" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />
     <Content Include="js\synnJavaScripts.js" />
@@ -134,6 +137,13 @@
     </Compile>
     <Compile Include="CashLog.aspx.designer.cs">
       <DependentUpon>CashLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WsSlider.ascx.cs">
+      <DependentUpon>WsSlider.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\WsSlider.ascx.designer.cs">
+      <DependentUpon>WsSlider.ascx</DependentUpon>
     </Compile>
     <Compile Include="CreditStats.aspx.cs">
       <DependentUpon>CreditStats.aspx</DependentUpon>
