@@ -72,7 +72,7 @@ namespace SynnWebOvi
             if (lsp.FromDate.HasValue)
                 AddSqlWhereField("Date", lsp.FromDate, ">=");
             if (lsp.ToDate.HasValue)
-                AddSqlWhereField("Date", lsp.ToDate, "<");
+                AddSqlWhereField("Date", lsp.ToDate, "<=");
             var lst = new List<MemoItem>();
             FillList(lst, typeof(MemoItem));
             return lst;

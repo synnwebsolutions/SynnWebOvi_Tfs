@@ -105,8 +105,10 @@ namespace WebSimplify
         {
             get
             {
-                if(cm == null)
-                    cm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.StartOfMonth(), ToDate = DateTime.Now.EndOfMonth() });
+                if (cm == null)
+                {
+                    RefreshData();
+                }
                 return cm;
             }
         }
@@ -132,6 +134,12 @@ namespace WebSimplify
         protected void cdr_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
         {
             ActionMonth = new DateTime(e.NewDate.Year, e.NewDate.Month, 1);
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            cm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth.StartOfMonth(), ToDate = ActionMonth.EndOfMonth() });
         }
 
         public List<ListItem> GetMonths()
