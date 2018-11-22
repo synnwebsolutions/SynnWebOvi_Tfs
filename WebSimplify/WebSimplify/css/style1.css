@@ -178,7 +178,7 @@ myselect::-ms-expand {
 
 textarea {
     width: 100%;
-    height: 350px;
+    height: 50px;
 }
 
 /*theme*/
@@ -532,4 +532,63 @@ legend {
     .slider input[type=image] {
         height: 35px;
         color: white;
+    }
+
+.editor {
+    border-color: white;
+    border: 1px solid #9999ff;
+    z-index: 10;
+    background-color: rgba(255,255,255, 0.3);
+}
+
+    .editor .header {
+        text-align: center;
+        top: 0;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 12px;
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px #1D1D1D;
+        align-content: center;
+    }
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.modalbackground {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #383838;
+    z-index: 10;
+}
+
+.editormessage {
+    background-color: rgba(41, 57, 85, 0.5);
+    text-align:center;
+    padding: 35px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.editorbody {
+    background-color: #8AAED4;
+    padding: 10px 5px 10px 5px;
+}
+
+    .editorbody input[type=text], input[type=date], input[type=number], input[type=password], select {
+        width: 100%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        padding: 12px;
+        text-align: center;
     }

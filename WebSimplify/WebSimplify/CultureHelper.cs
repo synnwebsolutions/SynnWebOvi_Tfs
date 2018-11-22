@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace WebSimplify
 {
@@ -217,6 +219,29 @@ namespace WebSimplify
         public static string ToXml(this object d)
         {
             return XmlHelper.ToXml(d);
+        }
+
+        public static void FindControlRecursive(this System.Web.UI.Control c, string cotrolToFind, ref System.Web.UI.Control resp)
+        {
+            if (c.ID == cotrolToFind)
+            {
+                resp = c;
+                return;
+            }
+            else if (c.Controls.NotEmpty())
+                foreach (System.Web.UI.Control ctr in c.Controls)
+                    ctr.FindControlRecursive(cotrolToFind,ref resp);
+        }
+
+        public static void FillControlValues(this System.Web.UI.Control c, ref Dictionary<string,string> data)
+        {
+            if (c is HtmlInputText)
+            {
+                data.Add(c.UniqueID, (c as HtmlInputText).Value);
+            }
+            else if (c.Controls.NotEmpty())
+                foreach (System.Web.UI.Control ctr in c.Controls)
+                    ctr.FillControlValues(ref data);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="WebSimplify.master.cs" Inherits="WebSimplify.WebSimplify" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,6 +47,33 @@
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
                     </div>
+                    
+        <div class="row">
+           <div class=" col-3">
+        </div>
+        <asp:Panel ID="messageBoxx" runat="server" Visible="false" CssClass="editor centered col-6">
+            <div class="row header" id="editorHaeder" runat="server">
+            </div>
+
+            <div class="editormessage"  runat="server" id="editorbody">
+
+            </div>
+
+            <div class="row panelbottom" id="editorBottom" runat="server">
+                <div class="col-3" id="dva" runat="server">
+                </div>
+                <div class="col-6" id="dvb" runat="server"> 
+                    <asp:Button ID="btnMessageBoxOk" runat="server" OnClick="btnMessageBoxOk_Click" CssClass="sbutton" Text="אישור" />
+                </div>
+                <div class="col-3" id="dvc" runat="server">
+                </div>
+            </div>
+        </asp:Panel>
+           <div class=" col-3">
+        </div>
+    </div>
+
+
                 </form>
             </div>
         </div>
@@ -57,7 +83,6 @@
             <p></p>
         </div>
     </div>
-
 
     <%--Nav Responsivity Script--%>
     <script>

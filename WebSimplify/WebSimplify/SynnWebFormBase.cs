@@ -14,6 +14,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WebSimplify;
+using WebSimplify.Controls;
 using WebSimplify.Data;
 
 namespace SynnWebOvi
@@ -21,7 +22,7 @@ namespace SynnWebOvi
     public class SynnWebFormBase : System.Web.UI.Page
     {
 
-        internal static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
+        public static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
         internal const string DecimalFormat = "#.#";
         internal const string DummyMethodName = "GetDummy";
         public LoggedUser CurrentUser
@@ -67,18 +68,6 @@ namespace SynnWebOvi
             }
         }
 
-
-
-
-        //public bool UserAllowed(LoggedUser user)
-        //{
-        //    //foreach (PermissionsEnum en in RequiredPermissions)
-        //    //{
-        //    //    if (!user.Allowed(en))
-        //    //        return false;
-        //    //}
-        //    return true;
-        //}
         protected virtual List<ClientPagePermissions> RequiredPermissions
         {
             get
@@ -146,6 +135,7 @@ namespace SynnWebOvi
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+            Page.PreRender += new EventHandler(PagePreRender);
             if (!LoginProvider && CurrentUser == null)
                 SynNavigation.Goto(Pages.Login);
             if (!IsPostBack)
@@ -183,6 +173,46 @@ namespace SynnWebOvi
             }
         }
 
+        internal void AlertSuccess()
+        {
+            AlertMessage("פעולה בוצעה בהצלחה !");
+        }
+
+        void PagePreRender(object sender, EventArgs e)
+        {
+            RenderModalBackground();
+        }
+
+        protected virtual List<Panel> ModalPanels
+        {
+            get
+            {
+                return new List<Panel>();
+            }
+        }
+
+        public Panel MessageBoxx
+        {
+            get
+            {
+                return Master.FindControl("messageBoxx") as Panel;
+            }
+        }
+        private void RenderModalBackground()
+        {
+            if (Master.NotNull())
+            {
+                var xpanels = new List<Panel> { MessageBoxx };// message box pannel
+                xpanels.AddRange(ModalPanels);
+                var visiblePanel = xpanels.Where(x => x.Visible).FirstOrDefault();
+
+                if (visiblePanel.NotNull())
+                {
+                    visiblePanel.Attributes.CssStyle.Add("z-index", (ModalHelper.ZIndex + 1).ToString());
+                    visiblePanel.AddModalToPage();
+                }
+            }
+        }
         private void BuildSiteMapLinks()
         {
             foreach (ClientPagePermissions ep in Enum.GetValues(typeof(ClientPagePermissions)))
@@ -211,8 +241,9 @@ namespace SynnWebOvi
 
         public void AlertMessage(string message)
         {
-            string scriptmessage = string.Format("alert(\"{0}\");", message);
-            ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", scriptmessage, true);
+            MessageBoxx.SetHeader("התראה");
+            MessageBoxx.SetMessage(message);
+            MessageBoxx.Show();
         }
 
 

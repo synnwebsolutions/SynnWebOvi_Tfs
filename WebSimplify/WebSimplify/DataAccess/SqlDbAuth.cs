@@ -147,11 +147,12 @@ namespace WebSimplify
             ExecuteSql();
         }
 
-        public List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters)
+        public List<DevTaskItem> Get(DevTaskItemSearchParameters lp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.DevTasks);
             ClearParameters();
-            
+            if (lp.Id.HasValue)
+                AddSqlWhereLikeField("Id", lp.Id.ToString());
             var lst = new List<DevTaskItem>();
             FillList(lst, typeof(DevTaskItem));
             return lst;
@@ -171,6 +172,14 @@ namespace WebSimplify
             sqlItems.Add(new SqlItem("Name", u.Name));
             sqlItems.Add(new SqlItem("Status", u.Status));
             return sqlItems;
+        }
+
+        public void Update(DevTaskItem d)
+        {
+            SqlItemList sqlItems = Get(d);
+            var wItems = new SqlItemList { new SqlItem("Id", d.Id) };
+            SetUpdateSql(SynnDataProvider.TableNames.DevTasks, sqlItems, wItems);
+            ExecuteSql();
         }
     }
 

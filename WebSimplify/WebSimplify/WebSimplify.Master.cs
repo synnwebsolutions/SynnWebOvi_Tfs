@@ -13,5 +13,10 @@ namespace WebSimplify
         {
 
         }
+
+        protected void btnMessageBoxOk_Click(object sender, EventArgs e)
+        {
+            messageBoxx.Hide();
+        }
     }
 }

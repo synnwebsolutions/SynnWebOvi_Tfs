@@ -24,6 +24,7 @@ namespace SynnWebOvi
         void UpdatePreferences(LoggedUser u);
         List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters);
         void Add(DevTaskItem d);
+        void Update(DevTaskItem d);
     }
 
     public interface IDbLog
@@ -160,6 +161,7 @@ namespace SynnWebOvi
         }
 
         public bool? Active { get; internal set; }
+        public int? Id { get; internal set; }
         public string ItemName { get; internal set; }
     }
     public class ShopSearchParameters : BaseSearchParameters

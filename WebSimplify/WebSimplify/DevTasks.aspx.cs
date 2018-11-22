@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebSimplify.Controls;
 
 namespace WebSimplify
 {
@@ -16,6 +17,8 @@ namespace WebSimplify
             if (!IsPostBack)
             {
                 dvTaks.Visible = CurrentUser.Allowed(ClientPagePermissions.SysDev);
+                FillEnum(cmbXStatus, typeof(DevTaskStatus));
+
                 RefreshView();
             }
         }
@@ -24,6 +27,13 @@ namespace WebSimplify
         {
             RefreshGrid(gv);
             RefreshGrid(gvAdd);
+        }
+        protected override List<Panel> ModalPanels
+        {
+            get
+            {
+                return new List<Panel> { panelx};
+            }
         }
 
         internal override string GetGridSourceMethodName(string gridId)
@@ -87,6 +97,7 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lbltaskdesc")).Text = d.Description;
                 ((Label)e.Row.FindControl("lblStatus")).Text = d.Status.GedDescription();
                 ((ImageButton)e.Row.FindControl("btnClose")).CommandArgument = d.Id.ToString();
+                ((ImageButton)e.Row.FindControl("btnEdit")).CommandArgument = d.Id.ToString();
             }
         }
 
@@ -94,6 +105,37 @@ namespace WebSimplify
         {
             gv.PageIndex = e.NewPageIndex;
             RefreshGrid(gv);
+        }
+
+        protected void btnEdit_Command(object sender, CommandEventArgs e)
+        {
+            panelx.SetHeader("עריכה");
+            var dt = DBController.DbAuth.Get(new DevTaskItemSearchParameters { Id = e.CommandArgument.ToString().ToInteger() }).First();
+            cmbXStatus.SelectedValue = ((int)dt.Status).ToString();
+            txdTaskName.Text = dt.Name;
+            txXtaskDesc.Text = dt.Description;
+            panelx.SetEditedItemId(dt.Id);
+            panelx.Show();
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            panelx.Hide();
+        }
+
+        protected void btnOk_Click(object sender, EventArgs e)
+        {
+            var d = new DevTaskItem
+            {
+                Description = txXtaskDesc.Text,
+                Name = txdTaskName.Text,
+                Status = (DevTaskStatus)cmbXStatus.SelectedValue.ToString().ToInteger(),
+                Id = panelx.GetEditedItemId().Value
+            };
+            DBController.DbAuth.Update(d);
+            panelx.Hide();
+            AlertSuccess();
+            RefreshView();
         }
     }
 }

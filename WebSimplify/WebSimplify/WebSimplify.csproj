@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="CashLog.aspx" />
+    <Content Include="Controls\WsEditor.ascx" />
     <Content Include="Controls\WsSlider.ascx" />
     <Content Include="CreditStats.aspx" />
     <Content Include="css\style1.css" />
@@ -97,6 +98,7 @@
     <Content Include="ErrorPage.aspx" />
     <Content Include="Img\add.png" />
     <Content Include="Img\body-bg.jpeg" />
+    <Content Include="Img\edit.png" />
     <Content Include="Img\exchange.png" />
     <Content Include="Img\insert.png" />
     <Content Include="Img\left-arrow.png" />
@@ -137,6 +139,13 @@
     </Compile>
     <Compile Include="CashLog.aspx.designer.cs">
       <DependentUpon>CashLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WsEditor.ascx.cs">
+      <DependentUpon>WsEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\WsEditor.ascx.designer.cs">
+      <DependentUpon>WsEditor.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WsSlider.ascx.cs">
       <DependentUpon>WsSlider.ascx</DependentUpon>
@@ -214,6 +223,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlStringHelper.cs" />
+    <Compile Include="Helpers\ModalHelper.cs" />
     <Compile Include="Helpers\MoneyBalanceHelper.cs" />
     <Compile Include="Log.aspx.cs">
       <DependentUpon>Log.aspx</DependentUpon>
