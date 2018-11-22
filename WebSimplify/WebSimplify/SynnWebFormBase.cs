@@ -241,9 +241,17 @@ namespace SynnWebOvi
 
         public void AlertMessage(string message)
         {
-            MessageBoxx.SetHeader("התראה");
-            MessageBoxx.SetMessage(message);
-            MessageBoxx.Show();
+            if (Master.NotNull())
+            {
+                MessageBoxx.SetHeader("התראה");
+                MessageBoxx.SetMessage(message);
+                MessageBoxx.Show();
+            }
+            else
+            {
+                string scriptmessage = string.Format("alert(\"{0}\");", message);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", scriptmessage, true);
+            }
         }
 
 
