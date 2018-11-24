@@ -22,6 +22,24 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnSaveSettings;
         
         /// <summary>
+        /// dvThemes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvThemes;
+        
+        /// <summary>
+        /// gvThemes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvThemes;
+        
+        /// <summary>
         /// dvcredit control.
         /// </summary>
         /// <remarks>

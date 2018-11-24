@@ -9,6 +9,48 @@
         <button class="menubutton" type="button" id="btnSaveSettings" runat="server" onserverclick="btnSaveSettings_ServerClick">שמור הגדרות</button>
     </div>
 
+     <div id="dvThemes" runat="server">
+        <div class="row">
+            <div class="col-12">
+                <div class="sgridcontainer spanel">
+                <asp:GridView ID="gvThemes" runat="server"
+                    OnRowDataBound="gvThemes_RowDataBound" AllowPaging="true"
+                    CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false" PageSize="20" OnPageIndexChanging="gvThemes_PageIndexChanging"
+                    PagerSettings-FirstPageText="ראשון"
+                    PagerSettings-NextPageText=">"
+                    PagerSettings-LastPageText="אחרון"
+                    PagerSettings-PreviousPageText="<">
+                    <PagerStyle CssClass="synngridpagination" />
+                    <Columns>
+                            <asp:TemplateField HeaderText="ElementIdentifier " AccessibleHeaderText="lb">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txElementIdentifier" CssClass="gridtextinput"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CssAttribute " AccessibleHeaderText="lb">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txCssAttribute" CssClass="gridtextinput"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CssValue">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txCssValue" CssClass="gridtextinput"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" הוספה\עדכון ">
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ID="btnAddCashItem" OnCommand="btnAddCashItem_Command" CssClass="gridbutton" ImageUrl="Img/add.png"></asp:ImageButton>
+                                <asp:ImageButton runat="server" ID="btnUpade" OnCommand="btnUpade_Command" CssClass="gridbutton" ImageUrl="Img/exchange.png" AlternateText="עדכן"></asp:ImageButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="spanel" id="dvcredit" runat="server">
         <fieldset class="row ">
@@ -74,6 +116,5 @@
         </fieldset>
     </div>
 
-
-
+   
 </asp:Content>

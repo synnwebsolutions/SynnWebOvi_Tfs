@@ -105,5 +105,20 @@ namespace SynnWebOvi
 
             db.ExecurteCreateTable(t.ToString());
         }
+
+        public static void ThemeItemsTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.ThemeItems
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "ElementIdentifier", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "CssAttribute", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "CssValue", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = false });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 }

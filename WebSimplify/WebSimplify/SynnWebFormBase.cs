@@ -178,6 +178,11 @@ namespace SynnWebOvi
             AlertMessage("פעולה בוצעה בהצלחה !");
         }
 
+        protected override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            ThemeHelper.Apply(this);
+        }
         void PagePreRender(object sender, EventArgs e)
         {
             RenderModalBackground();

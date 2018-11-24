@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="CreditStats.aspx.cs" Inherits="WebSimplify.CreditStats" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 </asp:Content>
@@ -80,11 +80,11 @@
         </div>
         <div class=" col-2"></div>
     </div>
-      <div class="row" runat="server" id="ichartcontainer">
-           <div class=" col-2"></div>
+    <div class="row" runat="server" id="ichartcontainer">
+        <div class=" col-2"></div>
         <div id="chart" class="col-8">
         </div>
-           <div class=" col-2"></div>
+        <div class=" col-2"></div>
     </div>
 
     <script type="text/javascript">
@@ -119,5 +119,7 @@
         //    drawChart();
         //});
     </script>
-  
+
+
+
 </asp:Content>

@@ -34,6 +34,9 @@ namespace SynnWebOvi
         List<LogItem> GetLogs(LogSearchParameters lsp);
         void AddThemeLog(ThemeLog tl);
         ThemeLog GetLastItem();
+        List<ThemeScript> GetThemes(ThemeSearchParameters themeSearchParameters);
+        void Update(ThemeScript i);
+        void Add(ThemeScript i);
     }
 
     public interface IDbWedd
@@ -241,6 +244,15 @@ namespace SynnWebOvi
 
         public string UserName { get; set; }
         public string Password { get; set; }
+        public int? Id { get; set; }
+    }
+
+    public class ThemeSearchParameters : BaseSearchParameters
+    {
+        public ThemeSearchParameters() : base()
+        {
+        }
+
         public int? Id { get; set; }
     }
 

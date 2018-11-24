@@ -1,8 +1,10 @@
 ﻿using SynnWebOvi;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Data;
@@ -18,8 +20,29 @@ namespace WebSimplify
                 dvcredit.Visible = CurrentUser.Allowed(ClientPagePermissions.CreditData);
                 dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
                 dvBalance.Visible = CurrentUser.Allowed(ClientPagePermissions.MoneyBalance);
+                dvThemes.Visible = CurrentUser.IsAdmin;
+                
+                RefreshGrid(gvThemes);
                 FillSettings();
             }
+        }
+
+        internal override string GetGridSourceMethodName(string gridId)
+        {
+            if (gridId == gvThemes.ID)
+                return "GetThemes";
+            return base.GetGridSourceMethodName(gridId);
+        }
+
+        public IEnumerable GetThemes()
+        {
+            if (dvThemes.Visible)
+            {
+                List<ThemeScript> tls = new List<ThemeScript> { new ThemeScript { IsDummy = true } };
+                tls.AddRange(DBController.DbLog.GetThemes(new ThemeSearchParameters { }));
+                return tls;
+            }
+            return null;
         }
 
         private void FillSettings()
@@ -100,6 +123,71 @@ namespace WebSimplify
                     return;
                 }
             }
+        }
+
+        protected void btnAddCashItem_Command(object sender, CommandEventArgs e)
+        {
+            ThemeScript i = new ThemeScript();
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+            i.ElementIdentifier = ((TextBox)row.FindControl("txElementIdentifier")).Text;
+            i.CssAttribute = ((TextBox)row.FindControl("txCssAttribute")).Text;
+            i.CssValue = ((TextBox)row.FindControl("txCssValue")).Text;
+            DBController.DbLog.Add(i);
+            RefreshGrid(gvThemes);
+        }
+
+        protected void gvThemes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var d = (ThemeScript)e.Row.DataItem;
+                ((TextBox)e.Row.FindControl("txElementIdentifier")).Text = d.ElementIdentifier;
+                ((TextBox)e.Row.FindControl("txCssAttribute")).Text = d.CssAttribute;
+                ((TextBox)e.Row.FindControl("txCssValue")).Text = d.CssValue;
+
+                var btnAddCashItem = ((ImageButton)e.Row.FindControl("btnAddCashItem"));
+                var btnUpade = ((ImageButton)e.Row.FindControl("btnUpade"));
+                btnAddCashItem.Visible = d.IsDummy;
+                btnUpade.Visible = !d.IsDummy;
+
+                if (!d.IsDummy)
+                    btnUpade.CommandArgument = d.Id.ToString();
+            }
+        }
+
+        protected void gvThemes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvThemes.PageIndex = e.NewPageIndex;
+            RefreshGrid(gvThemes);
+        }
+
+        protected void btnUpade_Command(object sender, CommandEventArgs e)
+        {
+            ThemeScript i = GetItem(e.CommandArgument);
+            var row = (sender as ImageButton).NamingContainer as GridViewRow;
+            i.ElementIdentifier = ((TextBox)row.FindControl("txElementIdentifier")).Text;
+            i.CssAttribute = ((TextBox)row.FindControl("txCssAttribute")).Text;
+            i.CssValue = ((TextBox)row.FindControl("txCssValue")).Text;
+            DBController.DbLog.Update(i);
+            RefreshGrid(gvThemes);
+        }
+
+        private ThemeScript GetItem(object ca)
+        {
+            return DBController.DbLog.GetThemes(new ThemeSearchParameters { Id = ca.ToString().ToInteger() }).FirstOrDefault(); 
+        }
+
+        [WebMethod]
+        public static List<object> GetThemeData()
+        {
+            List<object> chartData = new List<object>();
+
+            List<ThemeScript> scripyts = DBController.DbLog.GetThemes(new ThemeSearchParameters { });
+
+            foreach (var item in scripyts)
+                chartData.Add(new object[] { "", item.ScriptText });
+
+            return chartData;
         }
     }
 }

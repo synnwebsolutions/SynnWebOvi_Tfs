@@ -68,7 +68,7 @@ body {
     direction: rtl;
     background-attachment: fixed;
     /*background-image: url("../img/body-bg.jpeg");*/
-    background-image: url("https://images.pexels.com/photos/1040499/pexels-photo-1040499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-image: url("https://images.pexels.com/photos/1292838/pexels-photo-1292838.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -94,7 +94,7 @@ body {
 .scontainer {
     width: 80%;
     border: 1px solid #9999ff;
-    background-color: rgba(255,255,255, 0.3);
+    background-color: rgba(79,78,76, 0.3);
     margin: auto;
 }
 
@@ -124,7 +124,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #CCD9E7 0%, rgba(34,88,144,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #CFB53B 0%, rgba(79,78,76,0.5) 100%);
 }
 
     .snav ul {
@@ -147,7 +147,7 @@ myselect::-ms-expand {
         }
 
             .snav li a:hover:not(.active) {
-                background-color: #707099;
+                background-color: #4F4E4C;
             }
 
 .active {
@@ -188,9 +188,10 @@ textarea {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5em;
-    background-color: #225890;
+    background-color: #4F4E4C;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #1D1D1D;
+    border: 1px solid #CFB53B;
 }
 
 /*theme*/
@@ -198,7 +199,7 @@ textarea {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    background-color: rgba(34,88,144, 0.5);
+    background-color: rgba(79,78,76, 0.5);
     margin-top: 5px;
     padding: 12px;
     color: white;
@@ -233,7 +234,7 @@ textarea {
 }
     /*theme*/
     .sbutton:hover {
-        background-color: #8AAED4;
+        background-color: #CFB53B;
         color: white;
     }
 
@@ -247,7 +248,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #225890;
+        background: #4F4E4C;
         color: white;
         border: 0;
     }
@@ -259,7 +260,7 @@ textarea {
 
         .synngridstyled tr:hover {
             background-color: white;
-            border: 1px solid rgba(204, 204, 255, 0.9);
+            border: 1px solid #CFB53B;
             color: #000000;
             /*text-shadow: 1px 1px 1px #000000;*/
         }
@@ -271,7 +272,7 @@ textarea {
 .synngridpagination {
     padding: 20px 20px;
     border-radius: 4px;
-    background: #225890;
+    background: #CFB53B;
 }
 
     .synngridpagination tr {
@@ -368,7 +369,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #CCD9E7 0%, rgba(34,88,144,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #CFB53B 0%, rgba(79,78,76,0.5) 100%);
 }
 
 .content {
@@ -397,14 +398,14 @@ textarea {
 .shiftcellvalid {
     /*height: 80px;*/
     border: 1px solid #FFFFFF;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(79,78,76, 0.4);
     height: 75px;
     color: rgba(41, 57, 85, 0.5);
 }
 
 .shiftcellactive {
-    border: 2px solid #292929;
-    background-color: rgba(41, 57, 85, 0.5);
+    border: 1px solid #CFB53B;
+    background-color: rgba(79,78,76, 0.5);
 }
 
 .aspcalendarheaderactions {
@@ -437,7 +438,7 @@ textarea {
 }
 /*theme*/
 .menubuttoncontainer {
-    background-color: rgba(34,88,144, 0.5);
+    background-color: rgba(79,78,76, 0.5);
     padding: 4px;
     margin: 2px 0px 2px;
     text-align: left;
@@ -456,7 +457,7 @@ textarea {
 .marktable {
     width: 100%;
     text-align: center;
-    background-color: rgba(91,142,196, 0.5);
+    background-color: rgba(207,181,59, 0.3);
 }
 
     .marktable table {
@@ -466,7 +467,7 @@ textarea {
     }
 
     .marktable td {
-        background-color: rgba(34,88,144, 0.5);
+        background-color: #4F4E4C;
         color: white;
         padding: 20px 20px 20px;
         border: none;
@@ -533,12 +534,12 @@ legend {
         height: 35px;
         color: white;
     }
-
+/*theme*/
 .editor {
     border-color: white;
-    border: 1px solid #9999ff;
+    border: 1px solid #CFB53B;
     z-index: 10;
-    background-color: rgba(255,255,255, 0.3);
+    background-color: rgba(79,78,76, 0.3);
 }
 
     .editor .header {
@@ -566,12 +567,12 @@ legend {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #383838;
+    background-color: #4F4E4C;
     z-index: 10;
 }
 
 .editormessage {
-    background-color: rgba(41, 57, 85, 0.5);
+    background-color: rgba(79,78,76, 0.9);
     text-align:center;
     padding: 35px;
     font-size: 20px;
@@ -592,3 +593,128 @@ legend {
         padding: 12px;
         text-align: center;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+@media only screen and (min-width: 801px) {
+    body {
+        /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+    }
+
+    .snav li {
+        float: right;
+    }
+
+    .collapsible {
+        display: none;
+    }
+
+    .content {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        /*background-image: -webkit-linear-gradient(0deg, #929292 0%, #FF2525 100%);*/
+        height: 100%;
+        margin: auto;
+    }
+      /*theme*/
+    .scontainer {
+        width: 100%;
+        border: 1px solid #CFB53B;
+        margin: auto;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    .snav {
+        width: 100%;
+    }
+
+    .spanel {
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 5px;
+        padding: 12px;
+        color: white;
+        width: 100%;
+    }
+
+    .snav li {
+        float: none;
+    }
+
+    .collapsible {
+        display: block;
+    }
+
+    .content {
+        display: none;
+    }
+
+    .gridcalendar {
+        display: none;
+    }
+
+    .synngridstyled {
+        text-align: center;
+        font-size: 10px;
+    }
+      /*theme*/
+    .synngridpagination {
+        border-radius: 4px;
+        background: #225890;
+    }
+
+        .synngridpagination tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+
+        .synngridpagination table > tbody > tr > td > a, .synngridpagination table > tbody > tr > td > span {
+            text-decoration: none;
+            color: #111;
+            border-color: #ddd;
+            margin: 0 0;
+            margin-left: 0;
+            padding: 0 0 0 0;
+        }
+
+    .min-grid {
+        display: block;
+        text-overflow: clip;
+        font-size: 8px;
+    }
+      /*theme*/
+    .synngridstyled th {
+        text-align: center;
+        font-weight: 600;
+        background: #4F4E4C;
+        color: white;
+        border: 0;
+    }
+
+    [class*="col-"] {
+        width: 100%;
+    }
+}

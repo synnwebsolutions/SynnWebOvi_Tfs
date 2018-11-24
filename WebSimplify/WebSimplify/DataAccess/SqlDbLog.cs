@@ -80,6 +80,37 @@ namespace WebSimplify
             FillList(lst, typeof(LogItem));
             return lst;
         }
+
+        public List<ThemeScript> GetThemes(ThemeSearchParameters tsp)
+        {
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ThemeItems);
+            ClearParameters();
+            if (tsp.Id.HasValue)
+                AddSqlWhereField("Id", tsp.Id);
+            var lst = new List<ThemeScript>();
+            FillList(lst, typeof(ThemeScript));
+            return lst;
+        }
+
+        public void Update(ThemeScript i)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("CssAttribute", i.CssAttribute));
+            sqlItems.Add(new SqlItem("CssValue", i.CssValue));
+            sqlItems.Add(new SqlItem("ElementIdentifier", i.ElementIdentifier));
+            SetUpdateSql(SynnDataProvider.TableNames.ThemeItems, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = i.Id } });
+            ExecuteSql();
+        }
+
+        public void Add(ThemeScript i)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("CssAttribute", i.CssAttribute));
+            sqlItems.Add(new SqlItem("CssValue", i.CssValue));
+            sqlItems.Add(new SqlItem("ElementIdentifier", i.ElementIdentifier));
+            SetInsertIntoSql(SynnDataProvider.TableNames.ThemeItems, sqlItems);
+            ExecuteSql();
+        }
     }
   
 }

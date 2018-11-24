@@ -53,6 +53,7 @@ namespace SynnWebOvi
             public static string MigrationItems = "MigrationItems";
             public static string PermissionGroups = "PermissionGroups";
             public static string User_PermissionGroups = "User_PermissionGroups";
+            public static string ThemeItems = "ThemeItems";
         }
     }
 

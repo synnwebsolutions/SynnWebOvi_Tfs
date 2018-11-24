@@ -283,6 +283,7 @@
     <Compile Include="SynnWebFormBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ThemeHelper.cs" />
     <Compile Include="UserDictionaryPage.aspx.cs">
       <DependentUpon>UserDictionaryPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

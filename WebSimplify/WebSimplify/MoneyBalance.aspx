@@ -114,11 +114,10 @@
     </div>
 
     <div class="row">
-        <div class="col-2">
-        </div>
-        <div class=" col-8 spanel">
+     
+        <div class="col-12 spanel">
             <div class="spanelHeader"> הוספת תנועה קבועה</div>
-            <div class="sgridcontainer spanel">
+            <div class="sgridcontainer">
                 <asp:GridView ID="gvTemplates" runat="server"
                     OnRowDataBound="gvTemplates_RowDataBound" AllowPaging="true"
                     CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
@@ -172,15 +171,12 @@
                 </asp:GridView>
             </div>
         </div>
-        <div class="col-2">
-        </div>
 
     </div>
 
         <div class="row">
-        <div class="col-2">
-        </div>
-        <div class=" col-8 spanel">
+ 
+        <div class=" col-12 spanel">
             <div class="spanelHeader">תנועות קבועות</div>
             <div class="sgridcontainer spanel">
                 <asp:GridView ID="gvAllTemplates" runat="server"
@@ -226,8 +222,6 @@
                     </Columns>
                 </asp:GridView>
             </div>
-        </div>
-        <div class="col-2">
         </div>
 
     </div>
