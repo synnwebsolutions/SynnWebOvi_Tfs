@@ -7,11 +7,12 @@ using SynnWebOvi;
 using SynnCore.DataAccess;
 using System.Data;
 using SynnCore.Generics;
+using WebSimplify.Controls;
 
 namespace WebSimplify.Data
 {
     [Serializable]
-    public class ShiftDayData : IDbLoadable, IMarkAble
+    public class ShiftDayData : IDbLoadable, IMarkAble, ICalendarItem
     {
         public DateTime Date { get; set; }
         public ShiftTime DaylyShift { get; set; }
@@ -40,6 +41,30 @@ namespace WebSimplify.Data
             get
             {
                 return "המשמרת הבאה";
+            }
+        }
+
+        public string Display
+        {
+            get
+            {
+                return GenericFormatter.GetEnumDescription(DaylyShift);
+            }
+        }
+
+        public DateTime WeekStart
+        {
+            get
+            {
+                return Date.StartOfWeek().Date;
+            }
+        }
+
+        public int Index
+        {
+            get
+            {
+                return (int)DaylyShift;
             }
         }
 

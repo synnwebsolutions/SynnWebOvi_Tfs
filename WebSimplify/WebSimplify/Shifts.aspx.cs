@@ -10,6 +10,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebSimplify.Controls;
 using WebSimplify.Data;
 using WebSimplify.Helpers;
 
@@ -25,17 +26,6 @@ namespace WebSimplify
                 return l;
             }
         }
-        public DateTime CurrentPeriodStart
-        {
-            get
-            {
-                return (DateTime)GetFromSession("CurrentPeriodStart*");
-            }
-            set
-            {
-                StoreInSession("CurrentPeriodStart*", value);
-            }
-        }
 
         internal override string GetGridSourceMethodName(string gridId)
         {
@@ -48,90 +38,37 @@ namespace WebSimplify
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            var date = DateTime.Now;
-            CurrentPeriodStart = DateTime.Now.StartOfWeek(DayOfWeek.Sunday);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                DateTime dt = default(DateTime);
-                dt = DateTime.Now;
-                cdr.VisibleDate = dt;
-                cdr.SelectedDate = dt;
-
-                RefreshGrid(gvAdd);
-            }
-        }
-        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
-        {
-            var inPeriod = CurrentPeriodStart.InTwoWeekPeriod(e.Day.Date);
-            if (inPeriod)
-            {
-                e.Cell.ToolTip = e.Day.Date.ToString("MMMM dd, yyyy");
-                e.Cell.Text = GetShiftsForDate(e.Day.Date);
-                if (!string.IsNullOrEmpty(e.Cell.Text))
-                    e.Cell.CssClass = "shiftcellbase shiftcellactive";
-                else
-                    e.Cell.CssClass = "shiftcellbase shiftcellvalid";
-
-                if (e.Day.Date == DateTime.Now.Date)
-                    e.Cell.BorderColor = System.Drawing.Color.Red;
-            }
-            else
-            {
-                e.Cell.Visible = false;
-                e.Cell.CssClass = "shiftcellbase";
+                WsCalendar.StartDate = DateTime.Now.StartOfWeek();
+                RefreshView();
             }
         }
 
-
-        List<ShiftDayData> cm;
-        protected List<ShiftDayData> CurrentMonthData
+        public List<ICalendarItem> GetCalendarItems(DateTime StartDate, DateTime EndDate)
         {
-            get
-            {
-                if (cm == null)
-                    cm = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { FromDate = DateTime.Now.StartOfMonth(), ToDate = DateTime.Now.EndOfMonth() });
-                return cm;
-            }
-        }
-
-        private string GetShiftsForDate(DateTime date)
-        {
-            List<ShiftDayData> currentData = CurrentMonthData.Where(x => x.Date.Date == date.Date).ToList();
-            StringBuilder sb = new StringBuilder();
-            if (currentData != null)
-            {
-                foreach (var si in currentData.OrderBy( x => Convert.ToInt32(x.DaylyShift)).ToList())
-                {
-                    // add shift owner name
-                    //string jsEditButton = string.Format("<button class=\"btnedt\" id=\"btnedt{0}\"><i class=\"fas fa-pencil-alt\"></i></button>", si.Id.ToString());
-                    string jsDeleteButton = string.Format("<button class=\"btndlt\" id=\"btndlt{0}\"><i class=\"far fa-trash-alt\"></i></button>", si.Id.ToString());
-                    LoggedUser owner = DBController.DbAuth.GetUser(si.OwnerId);
-                    sb.AppendFormat("{0}{1} - {2}", jsDeleteButton, owner.DisplayName, GenericFormatter.GetEnumDescription(si.DaylyShift));
-                    sb.Append(HtmlStringHelper.LineBreak);
-                }
-            }
-            return sb.ToString();
+            return DBController.DbShifts.GetShifts(new ShiftsSearchParameters { FromDate = StartDate, ToDate = EndDate }).Select(x => x as ICalendarItem).ToList();
         }
         
 
-        [WebMethod]
-        [ScriptMethod()]
-        public static void PerformDelete(string btnidentifier)
-        {
-            try
-            {
-                var id = Convert.ToInt32(btnidentifier.Replace("btndlt", string.Empty));
-                DBController.DbShifts.Delete(id);
-            }
-            catch (Exception ex)
-            {
-                string msg = ex.Message;
-            }
-        }
+        //[WebMethod]
+        //[ScriptMethod()]
+        //public static void PerformDelete(string btnidentifier)
+        //{
+        //    try
+        //    {
+        //        var id = Convert.ToInt32(btnidentifier.Replace("btndlt", string.Empty));
+        //        DBController.DbShifts.Delete(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string msg = ex.Message;
+        //    }
+        //}
 
         protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -167,12 +104,18 @@ namespace WebSimplify
 
                 DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
                 AlertMessage("פעולה זו בוצעה בהצלחה");
-                RefreshGrid(gvAdd);
+                RefreshView();
             }
             else
             {
                 AlertMessage("אחד או יותר מהשדות ריקים");
             }
+        }
+
+        private void RefreshView()
+        {
+            RefreshGrid(gvAdd);
+            WsCalendar.RefreshView();
         }
     }
 }

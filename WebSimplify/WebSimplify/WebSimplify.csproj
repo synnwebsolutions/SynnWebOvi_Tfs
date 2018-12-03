@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="CashLog.aspx" />
+    <Content Include="Controls\WsCalendar.ascx" />
     <Content Include="Controls\WsEditor.ascx" />
     <Content Include="Controls\WsSlider.ascx" />
     <Content Include="CreditStats.aspx" />
@@ -139,6 +140,13 @@
     </Compile>
     <Compile Include="CashLog.aspx.designer.cs">
       <DependentUpon>CashLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WsCalendar.ascx.cs">
+      <DependentUpon>WsCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\WsCalendar.ascx.designer.cs">
+      <DependentUpon>WsCalendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WsEditor.ascx.cs">
       <DependentUpon>WsEditor.ascx</DependentUpon>

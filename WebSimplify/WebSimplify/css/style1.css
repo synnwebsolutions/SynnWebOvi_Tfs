@@ -594,7 +594,47 @@ legend {
         text-align: center;
     }
 
+.wscalendargridstyled {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
 
+.wscalendargridstyled th {
+        text-align: center;
+        font-weight: 600;
+        background: #4F4E4C;
+    
+        border: 0;
+    }
+	
+    /*theme*/
+    .wscalendargridstyled th {
+        text-align: center;
+        font-weight: 600;
+        padding: 8px 8px 8px 8px;
+           background-color: rgba(255,0,0, 0.9);
+        color: white;
+        border: 0;
+    }
+
+    .wscalendargridstyled tr {
+        padding-top: 40px;
+             border: 1px solid #ccc;
+        /*background-image: -webkit-linear-gradient(0deg, #F9F9FF 0%, #FFFFFF 100%);*/
+    }
+
+        .wscalendargridstyled tr:hover {
+            background-color: white;
+            border: 1px solid #CFB53B;
+            color: #000000;
+            /*text-shadow: 1px 1px 1px #000000;*/
+        }
+
+    .wscalendargridstyled td {
+        border: 0;
+        height :75px;
+    }
 
 
 
@@ -717,4 +757,6 @@ legend {
     [class*="col-"] {
         width: 100%;
     }
+
+
 }

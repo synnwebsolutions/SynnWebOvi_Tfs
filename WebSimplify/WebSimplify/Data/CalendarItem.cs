@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
+using WebSimplify.Controls;
 using WebSimplify.Data;
 
 namespace WebSimplify
@@ -116,7 +117,7 @@ namespace WebSimplify
         }
     }
 
-    public class MemoItem : IDbLoadable, IMarkAble
+    public class MemoItem : IDbLoadable, IMarkAble, ICalendarItem
     {
         public MemoItem()
         {
@@ -130,7 +131,24 @@ namespace WebSimplify
 
         public DateTime Date { get; set; }
         public string Description { get; set; }
+
+        public string Display
+        {
+            get
+            {
+                return string.Format("{0} - {1}", title, Description);
+            }
+        }
+
         public int Id { get;  set; }
+
+        public int Index
+        {
+            get
+            {
+                return 0 ;
+            }
+        }
 
         public string MarkableDescription
         {
@@ -157,6 +175,14 @@ namespace WebSimplify
         }
 
         public string title { get; set; }
+
+        public DateTime WeekStart
+        {
+            get
+            {
+                return Date.StartOfWeek().Date;
+            }
+        }
 
         public void Load(IDataReader reader)
         {

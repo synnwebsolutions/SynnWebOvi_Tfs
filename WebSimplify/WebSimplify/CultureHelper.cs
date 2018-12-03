@@ -39,6 +39,11 @@ namespace WebSimplify
             return dt;
         }
 
+        public static bool InSameWeek(this DateTime dt, DateTime o)
+        {
+            return dt.StartOfWeek().Date == o.StartOfWeek().Date;
+        }
+
         public static DateTime StartOfMonth(this DateTime dt)
         {
             return new DateTime (dt.Year,dt.Month,1);
@@ -231,6 +236,11 @@ namespace WebSimplify
             else if (c.Controls.NotEmpty())
                 foreach (System.Web.UI.Control ctr in c.Controls)
                     ctr.FindControlRecursive(cotrolToFind,ref resp);
+        }
+
+        public static string HebrewDayName(this DayOfWeek d)
+        {
+            return CultureHelper.HebrewCulture.DateTimeFormat.GetDayName(d);
         }
 
         public static void FillControlValues(this System.Web.UI.Control c, ref Dictionary<string,string> data)

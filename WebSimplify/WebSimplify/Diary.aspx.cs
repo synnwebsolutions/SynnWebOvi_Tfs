@@ -37,7 +37,11 @@ namespace WebSimplify
             }
         }
 
-    
+        public List<ICalendarItem> GetCalendarItems(DateTime StartDate, DateTime EndDate)
+        {
+            return DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = StartDate.StartOfMonth().Date, ToDate = EndDate.EndOfMonth() }).Select(x => x as ICalendarItem).ToList(); ;
+        }
+
 
         protected void btnadddiary_ServerClick(object sender, EventArgs e)
         {
@@ -53,6 +57,7 @@ namespace WebSimplify
                 DBController.DbCalendar.Add(sp);
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 ClearInputs(txadddiaryname, txadddiarydesc, txadddiarydate);
+                RefreshView();
             }
             else
             {
@@ -65,94 +70,18 @@ namespace WebSimplify
             if (!IsPostBack)
             {
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                cdr.VisibleDate = ActionMonth;
-                cdr.SelectedDate = DateTime.Now;
-
-                //WsSlider.SelectedChanged = new WsSlider.SelectionChanged(WsSlider_SelectedChanged);
+                WsCalendar.StartDate = ActionMonth;
+                RefreshView();
             }
         }
 
-        public void WsSlider_SelectedChanged(ListItem li)
+        private void RefreshView()
         {
-            AlertMessage(li.Text);
-        }
-
-        protected void cdr_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (ActionMonth.Year == e.Day.Date.Year && ActionMonth.Month == e.Day.Date.Month)
-            {
-                bool hasVal = false;
-                DateTime Today = DateTime.Today;
-
-                var HebCal = new HebrewCalendar();
-                //int curYear = HebCal.GetYear(Today);    //current numeric hebrew year
-                //int curMonth = HebCal.GetMonth(Today);
-
-                e.Cell.ToolTip = e.Day.Date.ToString("MMMM dd, yyyy");
-                e.Cell.Text = GetDiaryForDate(e.Day.Date, ref hasVal);
-                e.Cell.CssClass = "shiftcell ";
-                if (hasVal)
-                    e.Cell.CssClass += "shiftcellactive";
-                else
-                    e.Cell.CssClass += "shiftcellvalid";
-            }
-            else
-                e.Cell.Text = string.Empty;
+           
+            WsCalendar.RefreshView();
         }
 
         List<MemoItem> cm;
-        protected List<MemoItem> CurrentMonthData
-        {
-            get
-            {
-                if (cm == null)
-                {
-                    RefreshData();
-                }
-                return cm;
-            }
-        }
-
-
-        private string GetDiaryForDate(DateTime date, ref bool hasval)
-        {
-            var currentData = CurrentMonthData.Where(x => x.Date.Date == date.Date).ToList();
-            StringBuilder sb = new StringBuilder();
-            sb.Append(date.Day.ToString() + HtmlStringHelper.LineBreak);
-            if (currentData != null)
-            {
-                foreach (var si in currentData)
-                {
-                    sb.AppendFormat("{0} - {1}", si.title, si.Description);
-                    sb.Append(HtmlStringHelper.LineBreak);
-                    hasval = true;
-                }
-            }
-            return sb.ToString();
-        }
-
-        protected void cdr_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
-        {
-            ActionMonth = new DateTime(e.NewDate.Year, e.NewDate.Month, 1);
-            RefreshData();
-        }
-
-        private void RefreshData()
-        {
-            cm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth.StartOfMonth(), ToDate = ActionMonth.EndOfMonth() });
-        }
-
-        public List<ListItem> GetMonths()
-        {
-            var lst = new List<ListItem>();
-            var fromDate = DateTime.Now.AddMonths(6);
-            for (int i = 0; i < 12; i++)
-            {
-                var selected = fromDate.StartOfMonth().Date == DateTime.Now.StartOfMonth().Date;
-                lst.Add(new ListItem { Selected = selected, Text = fromDate.HebrewMonthNameWithYear(), Value = fromDate.ToShortDateString() });
-                fromDate = fromDate.AddMonths(-1);
-            }
-            return lst;
-        }
+        
     }
 }

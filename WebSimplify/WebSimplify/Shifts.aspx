@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Shifts.aspx.cs" Inherits="WebSimplify.Shifts" %>
 
+<%@ Register Src="~/Controls/WsCalendar.ascx" TagPrefix="uc1" TagName="WsCalendar" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -41,7 +44,7 @@
         <div class="col-3"></div>
     </div>
 
-    <div class="spanel">
-        <asp:Calendar ID="cdr" runat="server" FirstDayOfWeek="Sunday" Width="100%" OnDayRender="Calendar1_DayRender" CssClass="aspcalendar"></asp:Calendar>
+       <div class="spanel">
+           <uc1:WsCalendar runat="server" ID="WsCalendar" GetDataSourceMethodName="GetCalendarItems" ShowEmptyDays="false" Mode="TwoWeeks" Title="משמרות"/>
     </div>
 </asp:Content>

@@ -7,54 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSimplify {
+namespace WebSimplify.Controls {
     
     
-    public partial class Diary {
+    public partial class WsCalendar {
         
         /// <summary>
-        /// txadddiarydate control.
+        /// btnPrev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
+        protected global::System.Web.UI.WebControls.ImageButton btnPrev;
         
         /// <summary>
-        /// txadddiaryname control.
+        /// txDisplay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiaryname;
+        protected global::System.Web.UI.WebControls.Label txDisplay;
         
         /// <summary>
-        /// txadddiarydesc control.
+        /// btnNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiarydesc;
+        protected global::System.Web.UI.WebControls.ImageButton btnNext;
         
         /// <summary>
-        /// btnadddiary control.
+        /// wCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnadddiary;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl wCalendar;
         
         /// <summary>
-        /// WsCalendar control.
+        /// gvC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebSimplify.Controls.WsCalendar WsCalendar;
+        protected global::System.Web.UI.WebControls.GridView gvC;
     }
 }

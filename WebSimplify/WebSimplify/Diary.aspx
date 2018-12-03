@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Diary.aspx.cs" Inherits="WebSimplify.Diary" %>
+
+<%@ Register Src="~/Controls/WsCalendar.ascx" TagPrefix="uc1" TagName="WsCalendar" %>
+
 <%--<%@ Register Src="~/Controls/WsSlider.ascx" TagPrefix="uc1" TagName="WsSlider" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -6,8 +9,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader">יומן</div>
-
-    <%--<uc1:WsSlider runat="server" id="WsSlider" GetSourceMethodName="GetMonths" />--%>
 
     <div class="row">
         <div class="col-3"></div>
@@ -28,7 +29,7 @@
         <div class="col-3"></div>
     </div>
     <div class="spanel">
-        <asp:Calendar ID="cdr" runat="server" FirstDayOfWeek="Sunday" Width="100%" OnDayRender="cdr_DayRender" OnVisibleMonthChanged="cdr_VisibleMonthChanged" CssClass="aspcalendar"></asp:Calendar>
+        <uc1:WsCalendar runat="server" ID="WsCalendar" GetDataSourceMethodName="GetCalendarItems" ShowEmptyDays="false" Mode="TwoWeeks"  MonthNameAsTitle="true"/>
     </div>
 
 
