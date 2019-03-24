@@ -44,7 +44,13 @@ namespace WebSimplify
         [Description(" מעקב מזומן")]
         CashLog,
         [Description("  מעקב שעות עבודה")]
-        WorkHours
+        WorkHours,
+        [PageLink("navlot")]
+        [Description("הגרלות לוטו")]
+        Lotto,
+        [PageLink("navlotro")]
+        [Description("טפסי לוטו")]
+        LottoRows,
     }
 
     public class PageLinkAttribute : Attribute

@@ -52,6 +52,17 @@ namespace SynnWebOvi
         void AddNewShopItem(ShopItem n);
     }
 
+    public interface IDbLotto
+    {
+        void AddLottoPole(LottoPole lp);
+        void AddLottoRow(LottoRow lr);
+
+        List<LottoPole> Get(LottoPolesSearchParameters polesSearchParameters);
+        List<LottoRow> Get(LottoRowsSearchParameters rowsSearchParameters);
+        void Update(LottoRow row);
+        void Update(LottoPole cp);
+    }
+
     public interface IDbMoney
     {
         #region Credit
@@ -177,6 +188,26 @@ namespace SynnWebOvi
         public int? IdToActivate { get; internal set; }
         public int? IdToDeactivate { get; internal set; }
         public string ItemName { get; internal set; }
+    }
+
+    public class LottoSearchParameters : BaseSearchParameters
+    {
+        public LottoSearchParameters() : base()
+        {
+        }
+
+        public DateTime? PoleActionDate { get; internal set; }
+        public string PoleKey { get; internal set; }
+        public int? Id { get; internal set; }
+
+    }
+
+    public class LottoRowsSearchParameters : LottoSearchParameters
+    {
+    }
+
+    public class LottoPolesSearchParameters : LottoSearchParameters
+    {
     }
 
     public class CreditSearchParameters : BaseSearchParameters

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using WebSimplify;
 
 namespace SynnWebOvi
 {
@@ -21,6 +22,9 @@ namespace SynnWebOvi
         {
             Dbl = DBController.DbLog;
             MigrationHandler.Perform();
+#if debug
+            ExcelHelper.Perform(DBController);
+#endif
         }
 
         protected void Session_Start(object sender, EventArgs e)

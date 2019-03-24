@@ -14,6 +14,7 @@ namespace SynnWebOvi
         internal IDbLog IDbLog = null;
         internal IDbWedd IDbWedd = null;
         internal IDbShop IDbShop = null;
+        internal IDbLotto IDbLotto = null;
         internal IDbShifts IDbShifts = null;
         internal IDbMoney IDbCredit = null;
         internal IDbMigration IDbMig = null;
@@ -90,6 +91,16 @@ namespace SynnWebOvi
                 if (IDbShop == null)
                     IDbShop = new SqlDbShop(_connectionString);
                 return IDbShop;
+            }
+        }
+
+        public IDbLotto DbLotto
+        {
+            get
+            {
+                if (IDbLotto == null)
+                    IDbLotto = new SqlDbLotto(_connectionString);
+                return IDbLotto;
             }
         }
 

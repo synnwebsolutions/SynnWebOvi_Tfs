@@ -120,5 +120,53 @@ namespace SynnWebOvi
 
             db.ExecurteCreateTable(t.ToString());
         }
+
+        public static void LottoRowsTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.LottoRows
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "N1", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N2", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N3", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N4", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N5", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N6", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "S", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+
+            t.Fields.Add(new TableMigrationField { FieldName = "PoleKey", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 250, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "PoleDestinationDate", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "WinsData", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void LottoPolesTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.LottoPoles
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "N1", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N2", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N3", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N4", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N5", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "N6", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+            t.Fields.Add(new TableMigrationField { FieldName = "S", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+
+            t.Fields.Add(new TableMigrationField { FieldName = "PoleKey", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 250, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "PoleActionDate", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "WinsData", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
     }
 }

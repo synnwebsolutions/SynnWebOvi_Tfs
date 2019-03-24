@@ -54,6 +54,8 @@ namespace SynnWebOvi
             public static string PermissionGroups = "PermissionGroups";
             public static string User_PermissionGroups = "User_PermissionGroups";
             public static string ThemeItems = "ThemeItems";
+            public static string LottoRows = "LottoRows";
+            public static string LottoPoles = "LottoPoles";
         }
     }
 
@@ -62,6 +64,9 @@ namespace SynnWebOvi
          IDbAuth DbAuth { get; }
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
+
+        IDbLotto DbLotto { get; }
+
         IDbShop DbShop { get; }
         IDbMoney DbMoney { get; }
         IDbShifts DbShifts { get; }
@@ -169,6 +174,14 @@ namespace SynnWebOvi
         }
 
         public IDbMoney DbMoney
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbLotto DbLotto
         {
             get
             {
