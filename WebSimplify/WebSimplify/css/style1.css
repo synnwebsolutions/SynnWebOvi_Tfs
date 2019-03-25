@@ -63,12 +63,12 @@
 
 
 body {
-    background-color: rgba(34,88,144, 0.9);
+    background-color: rgba(128, 128, 128, 0.9);
     width: 100%;
     direction: rtl;
     background-attachment: fixed;
     /*background-image: url("../img/body-bg.jpeg");*/
-    background-image: url("https://images.pexels.com/photos/1292838/pexels-photo-1292838.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    /*background-image: url("https://images.pexels.com/photos/1292838/pexels-photo-1292838.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -93,7 +93,7 @@ body {
 /*theme*/
 .scontainer {
     width: 80%;
-    border: 1px solid #9999ff;
+    border: 1px solid #C00000;
     background-color: rgba(79,78,76, 0.3);
     margin: auto;
 }
@@ -124,7 +124,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #CFB53B 0%, rgba(79,78,76,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #C00000 0%, rgba(79,78,76,0.5) 100%);
 }
 
     .snav ul {
@@ -188,10 +188,10 @@ textarea {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5em;
-    background-color: #4F4E4C;
+    background-color: #C00000;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #1D1D1D;
-    border: 1px solid #CFB53B;
+    border: 1px solid white;
 }
 
 /*theme*/
@@ -199,7 +199,7 @@ textarea {
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    background-color: rgba(79,78,76, 0.5);
+    background-color: rgba(128, 128, 128, 0.5);
     margin-top: 5px;
     padding: 12px;
     color: white;
@@ -234,7 +234,7 @@ textarea {
 }
     /*theme*/
     .sbutton:hover {
-        background-color: #CFB53B;
+        background-color: #C00000;
         color: white;
     }
 
@@ -248,7 +248,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #4F4E4C;
+        background: #C00000;
         color: white;
         border: 0;
     }
@@ -260,7 +260,7 @@ textarea {
 
         .synngridstyled tr:hover {
             background-color: white;
-            border: 1px solid #CFB53B;
+            border: 2px solid white;
             color: #000000;
             /*text-shadow: 1px 1px 1px #000000;*/
         }
@@ -272,7 +272,7 @@ textarea {
 .synngridpagination {
     padding: 20px 20px;
     border-radius: 4px;
-    background: #CFB53B;
+    background: #a6a6a6;
 }
 
     .synngridpagination tr {
@@ -369,7 +369,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #CFB53B 0%, rgba(79,78,76,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #b30000 0%, rgba(204, 204, 204,0.5) 100%);
 }
 
 .content {
@@ -438,7 +438,7 @@ textarea {
 }
 /*theme*/
 .menubuttoncontainer {
-    background-color: rgba(79,78,76, 0.5);
+    background-color: rgba(204, 204, 204, 0.1);
     padding: 4px;
     margin: 2px 0px 2px;
     text-align: left;
@@ -457,7 +457,7 @@ textarea {
 .marktable {
     width: 100%;
     text-align: center;
-    background-color: rgba(207,181,59, 0.3);
+    background-color: rgba(204, 204, 204, 0.3);
 }
 
     .marktable table {
@@ -537,9 +537,9 @@ legend {
 /*theme*/
 .editor {
     border-color: white;
-    border: 1px solid #CFB53B;
+    border: 1px solid #C00000;
     z-index: 10;
-    background-color: rgba(79,78,76, 0.3);
+    background-color: rgba(204, 204, 204, 0.3);
 }
 
     .editor .header {
@@ -603,7 +603,7 @@ legend {
 .wscalendargridstyled th {
         text-align: center;
         font-weight: 600;
-        background: #4F4E4C;
+        background: #ccc;
     
         border: 0;
     }
@@ -613,7 +613,7 @@ legend {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-           background-color: rgba(255,0,0, 0.9);
+           background-color: rgba(192,0,0, 0.9);
         color: white;
         border: 0;
     }
@@ -626,7 +626,7 @@ legend {
 
         .wscalendargridstyled tr:hover {
             background-color: white;
-            border: 1px solid #CFB53B;
+            border: 2px solid white;
             color: #000000;
             /*text-shadow: 1px 1px 1px #000000;*/
         }
@@ -677,7 +677,7 @@ legend {
       /*theme*/
     .scontainer {
         width: 100%;
-        border: 1px solid #CFB53B;
+        border: 1px solid #C00000;
         margin: auto;
     }
 
@@ -722,7 +722,7 @@ legend {
       /*theme*/
     .synngridpagination {
         border-radius: 4px;
-        background: #225890;
+        background: #cccccc;
     }
 
         .synngridpagination tr {
@@ -749,7 +749,7 @@ legend {
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
-        background: #4F4E4C;
+        background: #C00000;
         color: white;
         border: 0;
     }
