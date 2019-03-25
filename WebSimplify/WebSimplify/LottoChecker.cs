@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SynnWebOvi;
 
 namespace WebSimplify
 {
@@ -10,24 +11,56 @@ namespace WebSimplify
         const LottoWin minWinState = LottoWin.Three;
         private static Random Rnd = new Random();
         private static readonly object syncLock = new object();
-        internal static bool Match(LottoPole pole, LottoRow row)
+        private static bool Match(LottoPole pole, LottoRow row)
         {
             row.PoleKey = pole.PoleKey;
             row.PoleDestinationDate = pole.PoleActionDate;
 
+            LottoWin state = GetWinState(pole, row);
+
+            row.Wins.Add(state);
+            if (state != LottoWin.OnePlus && state != LottoWin.TwoPlus && state != LottoWin.NonePlus && state >= minWinState)
+                pole.Wins.Add(state);
+            return state >= minWinState;
+        }
+
+        private static LottoWin GetWinState(LottoPole pole, LottoRow row)
+        {
             LottoWin state = LottoWin.None;
             List<int> polenums = pole.GetNumbers();
             List<int> trynums = row.GetNumbers();
             var res = polenums.Intersect(trynums).ToList().Count;
+
+            state = Calculate(res,pole,row);
+            return state;
+        }
+
+        private static LottoWin Calculate(int intersection, LottoPole pole, LottoRow row)
+        {
+            switch (intersection)
+            {
+                case 1:
+                    return SetSpecialEffect(LottoWin.One, LottoWin.OnePlus, pole, row);
+                case 2:
+                    return SetSpecialEffect(LottoWin.Two, LottoWin.TwoPlus, pole, row);
+                case 3:
+                    return SetSpecialEffect(LottoWin.Three, LottoWin.ThreePlus, pole, row);
+                case 4:
+                    return SetSpecialEffect(LottoWin.Four, LottoWin.FourPlus, pole, row);
+                case 5:
+                    return SetSpecialEffect(LottoWin.Five, LottoWin.FivePlus, pole, row);
+                case 6:
+                    return SetSpecialEffect(LottoWin.Six, LottoWin.JackPot, pole, row);
+                default:
+                    return SetSpecialEffect(LottoWin.None, LottoWin.NonePlus, pole, row);
+            }
+        }
+
+        private static LottoWin SetSpecialEffect(LottoWin cState,LottoWin altWinstate, LottoPole pole, LottoRow row)
+        {
             if (pole.SpecialNumber == row.SpecialNumber)
-                res += 10;
-
-            state = (LottoWin)res;
-
-            row.Wins.Add(state);
-            if (state >= minWinState)
-                pole.Wins.Add(state);
-            return state >= minWinState;
+                return altWinstate;
+            return cState;
         }
 
         internal static List<LottoRow> Generate(int numOfRows, DateTime destinationDate)
@@ -47,7 +80,11 @@ namespace WebSimplify
                 ri.N5 = GenerateNumber(flags);
                 ri.N6 = GenerateNumber(flags);
                 ri.SpecialNumber = GenerateNumber(speFlags, true);
-                r.Add(ri);
+
+                if (!r.Any(x => x.GetCodedNumbers() == ri.GetCodedNumbers()))
+                    r.Add(ri);
+                else
+                    i -= 1;
             }
             return r;
         }
@@ -71,7 +108,7 @@ namespace WebSimplify
             return res;
         }
 
-        private static Dictionary<int, bool> GenerateFlags(bool specialNumber = false)
+        public static Dictionary<int, bool> GenerateFlags(bool specialNumber = false)
         {
             var d = new Dictionary<int, bool>();
             int maxV = specialNumber ? 8 : 38;
@@ -79,6 +116,40 @@ namespace WebSimplify
             for (int i = 1; i < maxV; i++)
                 d.Add(i, false);
             return d;
+        }
+
+        public static Dictionary<int, int> GenerateCountFlags(bool specialNumber = false)
+        {
+            var d = new Dictionary<int, int>();
+            int maxV = specialNumber ? 8 : 38;
+
+            for (int i = 1; i < maxV; i++)
+                d.Add(i, 0);
+            return d;
+        }
+
+        internal static void FindMatches(IDatabaseProvider dBController, LottoPole cp)
+        {
+            if (cp != null)
+            {
+                List<LottoRow> rows = dBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = cp.PoleActionDate, PoleKey = cp.PoleKey });
+                bool match = false;
+                foreach (var row in rows)
+                {
+                    if (Match(cp, row))
+                    {
+                        match = true;
+                        dBController.DbLotto.Update(row);
+                    }
+                }
+                if (match)
+                    dBController.DbLotto.Update(cp);
+            }
+        }
+
+        internal static LottoWin TestMatch(LottoPole pole, LottoRow trow)
+        {
+            return GetWinState(pole,trow);
         }
     }
 }

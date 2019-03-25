@@ -29,6 +29,12 @@ namespace WebSimplify
             return new List<int> { N1,N2,N3,N4,N5,N6 };
         }
 
+        public string GetCodedNumbers()
+        {
+            var N = GetNumbers().OrderByDescending(x => x).ToList();
+            return string.Format("{0}#{1}#{2}#{3}#{4}#{5}", N[0], N[1], N[2], N[3], N[4], N[5]);
+        }
+
         public int N1 { get;  set; }
         public int N2 { get;  set; }
         public int N3 { get;  set; }
@@ -98,6 +104,11 @@ namespace WebSimplify
             }
         }
 
+        public string GetCodedNumbers()
+        {
+            var N = GetNumbers().OrderByDescending(x => x).ToList();
+            return string.Format("{0}#{1}#{2}#{3}#{4}#{5}", N[0], N[1], N[2], N[3], N[4], N[5]);
+        }
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
@@ -129,32 +140,32 @@ namespace WebSimplify
     public enum LottoWin
     {
         [Description("1")]
-        One = 1,
+        One = 2,
         [Description("1+")]
-        OnePlus = 11,
+        OnePlus = 3,
         [Description("2")]
-        Two = 2,
+        Two = 4,
         [Description("2+")]
-        TwoPlus = 12,
+        TwoPlus = 5,
         [Description("3")]
-        Three = 3,
+        Three = 6,
         [Description("3+")]
-        ThreePlus = 13,
+        ThreePlus = 7,
         [Description("4")]
-        Four = 4,
+        Four = 8,
         [Description("4+")]
-        FourPlus = 14,
+        FourPlus = 9,
         [Description("5")]
-        Five = 5,
+        Five = 10,
         [Description("5+")]
-        FivePlus = 15,
+        FivePlus = 11,
         [Description("6")]
-        Six = 6,
-        [Description("6+")]
-        SixPlus = 16,
+        Six = 12,
         [Description("$$$")]
-        JackPot = 7,
+        JackPot = 13,
         [Description("0")]
-        None = 0
+        None = 0,
+        [Description("0+")]
+        NonePlus = 1
     }
 }

@@ -52,7 +52,8 @@ namespace WebSimplify
             i.Add(new SqlItem("PoleKey", n.PoleKey));
             i.Add(new SqlItem("PoleDestinationDate", n.PoleDestinationDate));
             i.Add(new SqlItem("CreationDate", n.CreationDate));
-            i.Add(new SqlItem("WinsData", XmlHelper.ToXml(n.Wins)));
+            string xml = XmlHelper.ToXml(n.Wins);
+            i.Add(new SqlItem("WinsData", xml));
             return i;
         }
 

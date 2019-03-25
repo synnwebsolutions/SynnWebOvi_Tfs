@@ -100,6 +100,7 @@ namespace WebSimplify
                 };
 
                 DBController.DbLotto.AddLottoPole(i);
+                LottoHandler.FindMatches(DBController, i);
                 RefreshGrid(gvNewPole);
                 RefreshGrid(gv);
             }
@@ -112,19 +113,7 @@ namespace WebSimplify
         protected void btnUpdate_Command(object sender, CommandEventArgs e)
         {
             LottoPole cp = DBController.DbLotto.Get(new LottoPolesSearchParameters { Id = e.CommandArgument.ToString().ToInteger() }).FirstOrDefault();
-            List<LottoRow> rows = DBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = cp.PoleActionDate, PoleKey = cp.PoleKey });
-            bool match = false;
-            foreach (var row in rows)
-            {
-                if (LottoHandler.Match(cp,row))
-                {
-                    match = true;
-                    DBController.DbLotto.Update(row);
-                }
-            }
-            if (match)
-                DBController.DbLotto.Update(cp);
-
+            LottoHandler.FindMatches(DBController, cp);
             RefreshGrid(gv);
         }
     }

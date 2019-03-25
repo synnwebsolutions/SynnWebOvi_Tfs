@@ -26,7 +26,6 @@ namespace WebSimplify
             if (!IsPostBack)
             {
                 RefreshGrid(gvNewPole);
-                
             }
         }
 
@@ -51,7 +50,10 @@ namespace WebSimplify
             {
                 ((TextBox)e.Row.FindControl("txNewDestDate")).Text =
                 ((TextBox)e.Row.FindControl("txNumOfRows")).Text = string.Empty;
-
+                ((CheckBox)e.Row.FindControl("cmbStat")).Checked = false;
+                //var cmb = ((DropDownList)e.Row.FindControl("cmbStat"));
+                //cmb.Items.Clear();
+                //FillEnum(cmb, typeof(LottoStatItem));
             }
         }
 
@@ -65,11 +67,31 @@ namespace WebSimplify
             try
             {
                 var row = (sender as ImageButton).NamingContainer as GridViewRow;
-                var numOfRows = ((TextBox)row.FindControl("txNumOfRows")).Text.ToInteger();
+                var txx = ((TextBox)row.FindControl("txNumOfRows"));
+                //var cmbStat = ((DropDownList)row.FindControl("cmbStat"));
+                var cmbStat = ((CheckBox)row.FindControl("cmbStat"));
+                var numOfRows = txx.Text.IsEmpty() ? 14 :  txx.Text.ToInteger();
                 DateTime newDate = ((TextBox)row.FindControl("txNewDestDate")).Text.ToDateTime();
-                TempRows = LottoHandler.Generate(numOfRows, newDate);
 
-                //RefreshGrid(gvNewPole);
+                if (cmbStat.Checked)
+                {
+                    int cnt = 0;
+                    LottoWin maxWin = LottoWin.None;
+                    do
+                    {
+                        LottoPole maxPole = null;
+                        TempRows = LottoHandler.Generate(numOfRows, newDate);
+                        GetMaxWinForTempRows(ref maxWin, ref maxPole);
+                        cnt++;
+                    }
+                    while (maxWin < LottoWin.Six);
+                    string msg = "הסתיים בהצלחה לאחר לאחר נסיונות : " + cnt.ToString();
+                    DBController.DbLog.AddLog(msg);
+                    AlertMessage(msg);
+                }
+                else
+                    TempRows = LottoHandler.Generate(numOfRows, newDate);
+
                 RefreshGrid(gvTempRows);
             }
             catch (Exception ex)
@@ -125,6 +147,39 @@ namespace WebSimplify
                 TempRows = null;
                 RefreshGrid(gvTempRows);
                 RefreshGrid(gvNewPole);
+            }
+        }
+
+        protected void btnTestHistory_ServerClick(object sender, EventArgs e)
+        {
+            if (!TempRows.IsEmpty())
+            {
+                LottoWin maxWin = LottoWin.None;
+                LottoPole maxPole = null;
+                GetMaxWinForTempRows(ref maxWin, ref maxPole);
+                string msg = string.Format("max win is {0} at [{1}]  {2}", maxWin.GedDescription(), maxPole.PoleKey, maxPole.PoleActionDate.ToShortDateString());
+                AlertMessage(msg);
+            }
+        }
+
+        private void GetMaxWinForTempRows(ref LottoWin maxWin, ref LottoPole maxPole)
+        {
+            var poles = DBController.DbLotto.Get(new LottoPolesSearchParameters { }).OrderByDescending(x => x.PoleActionDate);
+            foreach (var pole in poles)
+            {
+                foreach (var trow in TempRows)
+                {
+                    LottoWin cwin = LottoHandler.TestMatch(pole, trow);
+                    if (cwin > maxWin)
+                    {
+                        maxWin = cwin;
+                        maxPole = pole;
+                    }
+                    if (maxWin == LottoWin.JackPot)
+                        break;
+                }
+                if (maxWin == LottoWin.JackPot)
+                    break;
             }
         }
     }

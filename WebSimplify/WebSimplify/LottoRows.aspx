@@ -1,18 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="LottoRows.aspx.cs" Inherits="WebSimplify.LottoRows" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-      <div class="spageheader" id="acc">הפקת לוטו</div>
-    
+    <div class="spageheader" id="acc">הפקת לוטו</div>
+
     <div class="menubuttoncontainer" id="dvWorkHours" runat="server">
         <button class="menubutton" type="button" id="btnSaveTempRows" runat="server" onserverclick="btnSaveTempRows_ServerClick">שמור מספרים</button>
+        <button class="menubutton" type="button" id="btnTestHistory" runat="server" onserverclick="btnTestHistory_ServerClick">בדוק בהיסטורייה</button>
     </div>
 
-        <div class="row">
+    <div class="row">
 
         <div class="col-12 spanel">
-            <div class="spanelHeader"> צור טופס</div>
+            <div class="spanelHeader">צור טופס</div>
             <div class="sgridcontainer">
                 <asp:GridView ID="gvNewPole" runat="server"
                     OnRowDataBound="gvNewPole_RowDataBound" AllowPaging="true"
@@ -34,7 +36,12 @@
                                 <asp:TextBox runat="server" ID="txNumOfRows" CssClass="gridtextinput" Text="14"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText=" הוספה ">
+                        <asp:TemplateField HeaderText="עם זכייה">
+                            <ItemTemplate>
+                                <asp:CheckBox runat="server" ID="cmbStat" CssClass="gridtextinput"></asp:CheckBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" הגרל ">
                             <ItemTemplate>
                                 <asp:ImageButton runat="server" ID="btnGenerate" OnCommand="btnGenerate_Command" CssClass="gridbutton" ImageUrl="Img/add.png"></asp:ImageButton>
                             </ItemTemplate>
@@ -47,7 +54,7 @@
     </div>
 
 
-        <div class="row">
+    <div class="row">
 
         <div class="col-12 spanel">
             <div class="spanelHeader">הוספת הגרלה</div>
@@ -62,6 +69,11 @@
                     PagerSettings-PreviousPageText="<">
                     <PagerStyle CssClass="synngridpagination" />
                     <Columns>
+                        <asp:TemplateField HeaderText="#">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="תאריך הגרלה ">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="txDestDate" CssClass="gridtextinput" TextMode="Date"></asp:Label>
@@ -69,7 +81,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="מספר הגרלה ">
                             <ItemTemplate>
-                                <asp:Label runat="server" ID="txPoleKey" CssClass="gridtextinput" ></asp:Label>
+                                <asp:Label runat="server" ID="txPoleKey" CssClass="gridtextinput"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="1">
