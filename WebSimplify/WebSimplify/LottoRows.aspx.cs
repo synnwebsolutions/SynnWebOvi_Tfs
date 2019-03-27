@@ -66,6 +66,7 @@ namespace WebSimplify
         {
             try
             {
+                
                 var row = (sender as ImageButton).NamingContainer as GridViewRow;
                 var txx = ((TextBox)row.FindControl("txNumOfRows"));
                 //var cmbStat = ((DropDownList)row.FindControl("cmbStat"));

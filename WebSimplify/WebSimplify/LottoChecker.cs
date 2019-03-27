@@ -71,14 +71,19 @@ namespace WebSimplify
                 var ri = new LottoRow();
                 Dictionary<int, bool> flags = GenerateFlags();
                 Dictionary<int, bool> speFlags = GenerateFlags(true);
+                var lst = new List<int>();
+                for (int j = 0; j <= 5; j++)
+                    lst.Add(GenerateNumber(flags));
                 ri.CreationDate = DateTime.Now;
                 ri.PoleDestinationDate = destinationDate;
-                ri.N1 = GenerateNumber(flags);
-                ri.N2 = GenerateNumber(flags);
-                ri.N3 = GenerateNumber(flags);
-                ri.N4 = GenerateNumber(flags);
-                ri.N5 = GenerateNumber(flags);
-                ri.N6 = GenerateNumber(flags);
+                lst = lst.OrderBy(x => x).ToList();
+
+                ri.N1 = lst[0];// GenerateNumber(flags);
+                ri.N2 = lst[1];// GenerateNumber(flags);
+                ri.N3 = lst[2];//GenerateNumber(flags);
+                ri.N4 = lst[3];//GenerateNumber(flags);
+                ri.N5 = lst[4];//GenerateNumber(flags);
+                ri.N6 = lst[5];//GenerateNumber(flags);
                 ri.SpecialNumber = GenerateNumber(speFlags, true);
 
                 if (!r.Any(x => x.GetCodedNumbers() == ri.GetCodedNumbers()))
