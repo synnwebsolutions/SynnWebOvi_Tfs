@@ -25,8 +25,14 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                RefreshGrid(gvNewPole);
+                RefreshGrids();
             }
+        }
+
+        private void RefreshGrids()
+        {
+            RefreshGrid(gvNewPole);
+            RefreshGrid(gvAllRows);
         }
 
         internal override string GetGridSourceMethodName(string gridId)
@@ -35,6 +41,8 @@ namespace WebSimplify
                 return DummyMethodName;
             if (gridId == gvTempRows.ID)
                 return "GetTempData";
+            if (gridId == gvAllRows.ID)
+                return "GetAllData";
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -42,6 +50,16 @@ namespace WebSimplify
         {
             dvWorkHours.Visible = TempRows != null && TempRows.Count > 0;
             return TempRows;
+        }
+
+        public IEnumerable GetAllData()
+        {
+            if (!TempRows.IsEmpty())
+                return null;
+
+            List<LottoRow> rows = DBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = string.IsNullOrEmpty(txPoleDate.Text) ? (DateTime?)null : txPoleDate.Text.ToDateTime()
+                , PoleKey = txPolekey.Value });
+            return rows.OrderByDescending(x => x.PoleDestinationDate).ToList();
         }
 
         protected void gvNewPole_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -94,6 +112,7 @@ namespace WebSimplify
                     TempRows = LottoHandler.Generate(numOfRows, newDate);
 
                 RefreshGrid(gvTempRows);
+                RefreshGrids();
             }
             catch (Exception ex)
             {
@@ -147,7 +166,7 @@ namespace WebSimplify
 
                 TempRows = null;
                 RefreshGrid(gvTempRows);
-                RefreshGrid(gvNewPole);
+                RefreshGrids();
             }
         }
 
@@ -182,6 +201,36 @@ namespace WebSimplify
                 if (maxWin == LottoWin.JackPot)
                     break;
             }
+        }
+
+        protected void gvAllRows_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvAllRows.PageIndex = e.NewPageIndex;
+            RefreshGrid(gvAllRows);
+        }
+
+        protected void gvAllRows_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var d = (LottoRow)e.Row.DataItem;
+
+                ((Label)e.Row.FindControl("atxDestDate")).Text = d.PoleDestinationDate.ToShortDateString();
+                ((Label)e.Row.FindControl("atxPoleKey")).Text = d.PoleKey;
+                ((Label)e.Row.FindControl("atx1")).Text = d.N1.ToString();
+                ((Label)e.Row.FindControl("atx2")).Text = d.N2.ToString();
+                ((Label)e.Row.FindControl("atx3")).Text = d.N3.ToString();
+                ((Label)e.Row.FindControl("atx4")).Text = d.N4.ToString();
+                ((Label)e.Row.FindControl("atx5")).Text = d.N5.ToString();
+                ((Label)e.Row.FindControl("atx6")).Text = d.N6.ToString();
+                ((Label)e.Row.FindControl("atxSpecial")).Text = d.SpecialNumber.ToString();
+                ((Label)e.Row.FindControl("lblPoleWins")).Text = d.WinsText;
+            }
+        }
+
+        protected void btnSearch_ServerClick(object sender, EventArgs e)
+        {
+            RefreshGrid(gvAllRows);
         }
     }
 }

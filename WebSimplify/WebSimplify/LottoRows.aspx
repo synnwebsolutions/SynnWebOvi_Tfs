@@ -125,4 +125,98 @@
         </div>
 
     </div>
+
+    <div class="row">
+        <div class="col-12 spanel">
+            <div class="spanelHeader">כל ההגרלות</div>
+        </div>
+
+
+        <div class=" col-3">חיפוש לפי הגרלה או תאריך</div>
+        <div class="col-3">
+            <input type="text" class="tablefilter" name="name" id="txPolekey" placeholder=" מספר הגרלה" runat="server" />
+        </div>
+        <div class="col-3">
+            <asp:TextBox ID="txPoleDate" TextMode="Date" runat="server" placeholder="dd/MM/yyyy" />
+        </div>
+        <div class=" col-3">
+            <button class="sbutton sbutton-sm" type="button" id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick">חפש</button>
+        </div>
+
+
+
+
+        <div class="col-12 spanel">
+            <div class="sgridcontainer">
+                <asp:GridView ID="gvAllRows" runat="server" AllowPaging="true"
+                    OnRowDataBound="gvAllRows_RowDataBound"
+                    CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false" PageSize="14" OnPageIndexChanging="gvAllRows_PageIndexChanging"
+                    PagerSettings-FirstPageText="ראשון"
+                    PagerSettings-NextPageText=">"
+                    PagerSettings-LastPageText="אחרון"
+                    PagerSettings-PreviousPageText="<">
+                    <PagerStyle CssClass="synngridpagination" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="#">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="תאריך הגרלה ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atxDestDate" CssClass="gridtextinput" TextMode="Date"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="מספר הגרלה ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atxPoleKey" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="1">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx1" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="2">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx2" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="3">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx3" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="4">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx4" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="5">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx5" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="6">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atx6" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="מספר חזק">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atxSpecial" CssClass="gridtextinput"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="זכיות">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblPoleWins"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+        </div>
+
+    </div>
 </asp:Content>

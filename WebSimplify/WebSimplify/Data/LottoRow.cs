@@ -46,6 +46,16 @@ namespace WebSimplify
         public int SpecialNumber { get;  set; }
         public List<LottoWin> Wins { get; set; }
 
+        public string WinsText
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (LottoWin item in Wins)
+                    sb.AppendLine(item.GedDescription());
+                return sb.ToString();
+            }
+        }
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");

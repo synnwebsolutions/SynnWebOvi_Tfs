@@ -224,7 +224,14 @@ textarea {
         padding: 12px;
         text-align: center;
     }
-
+       input[type=text], input[type=date], input[type=number], input[type=password], select {
+        width: 100%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        padding: 12px;
+        text-align: center;
+    }
 
 .sbutton {
     width: 100%;
