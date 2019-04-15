@@ -15,7 +15,7 @@ namespace WebSimplify
         {
             row.PoleKey = pole.PoleKey;
             row.PoleDestinationDate = pole.PoleActionDate;
-
+            row.Wins = new List<LottoWin>();
             LottoWin state = GetWinState(pole, row);
 
             row.Wins.Add(state);
@@ -138,17 +138,15 @@ namespace WebSimplify
             if (cp != null)
             {
                 List<LottoRow> rows = dBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = cp.PoleActionDate, PoleKey = cp.PoleKey });
-                bool match = false;
+                cp.Wins = new List<LottoWin>();
                 foreach (var row in rows)
                 {
-                    if (Match(cp, row))
+                    if (Match(cp, row) || true)
                     {
-                        match = true;
                         dBController.DbLotto.Update(row);
                     }
                 }
-                if (match)
-                    dBController.DbLotto.Update(cp);
+                dBController.DbLotto.Update(cp);
             }
         }
 
