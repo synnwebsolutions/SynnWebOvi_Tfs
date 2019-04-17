@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using WebSimplify.Helpers;
 using WebSimplify.Controls;
 
+
 namespace WebSimplify
 {
     public partial class Diary : SynnWebFormBase
@@ -37,9 +38,14 @@ namespace WebSimplify
             }
         }
 
-        public List<ICalendarItem> GetCalendarItems(DateTime StartDate, DateTime EndDate)
+        public List<XCalendarItem> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
         {
-            return DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = StartDate.StartOfMonth().Date, ToDate = EndDate.EndOfMonth() }).Select(x => x as ICalendarItem).ToList(); ;
+            var d = new List<XCalendarItem>();
+            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
+                ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date }).Select(x => x as ICalendarItem).ToList();
+            foreach (var dbitem in dbData)
+                d.Add(new XCalendarItem { Date =dbitem.Date, Text = dbitem.Display });
+            return d;
         }
 
 
@@ -65,23 +71,27 @@ namespace WebSimplify
             }
         }
 
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            //xCalendar.RefreshView();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                WsCalendar.StartDate = ActionMonth;
+                //WsCalendar.StartDate = ActionMonth;
+                //xCalendar cal= 
                 RefreshView();
             }
         }
 
         private void RefreshView()
         {
-           
-            WsCalendar.RefreshView();
+            //WsCalendar.RefreshView();
         }
 
         List<MemoItem> cm;
-        
     }
 }

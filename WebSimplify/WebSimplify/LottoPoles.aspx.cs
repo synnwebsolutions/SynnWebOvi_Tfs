@@ -27,7 +27,7 @@ namespace WebSimplify
             if (!IsPostBack)
             {
                 RefreshGrid(gv);
-                RefreshGrid(gvNewPole);
+                //RefreshGrid(gvNewPole);
             }
         }
 
@@ -35,8 +35,8 @@ namespace WebSimplify
         {
             if (gridId == gv.ID)
                 return "GetData";
-            if (gridId == gvNewPole.ID)
-                return DummyMethodName;
+            //if (gridId == gvNewPole.ID)
+            //    return DummyMethodName;
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -99,15 +99,20 @@ namespace WebSimplify
                     N6 = ((TextBox)row.FindControl("tx6")).Text.ToInteger()
                 };
 
-                DBController.DbLotto.AddLottoPole(i);
-                LottoHandler.FindMatches(DBController, i);
-                RefreshGrid(gvNewPole);
-                RefreshGrid(gv);
+                AddPole(i);
             }
             catch
             {
                 AlertMessage("פעולה לא בוצעה בהצלחה");
             }
+        }
+
+        public void AddPole(LottoPole i)
+        {
+            DBController.DbLotto.AddLottoPole(i);
+            LottoHandler.FindMatches(DBController, i);
+            //RefreshGrid(gvNewPole);
+            RefreshGrid(gv);
         }
 
         protected void btnUpdate_Command(object sender, CommandEventArgs e)

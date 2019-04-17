@@ -117,8 +117,8 @@ namespace WebSimplify
         {
             var tmpm = new DateTime(cMonth.Year, cMonth.Month, 1);
             var tmpmEnd = tmpm.AddMonths(1).AddDays(-1);
-            var span = tmpmEnd - tmpm;
-            return Convert.ToInt32(span.TotalDays);
+            
+            return tmpmEnd.Day;
         }
 
         public static string FormattedString(this int integer)
@@ -253,5 +253,7 @@ namespace WebSimplify
                 foreach (System.Web.UI.Control ctr in c.Controls)
                     ctr.FillControlValues(ref data);
         }
+
+
     }
 }

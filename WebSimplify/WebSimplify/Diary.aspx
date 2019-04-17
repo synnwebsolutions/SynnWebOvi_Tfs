@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Diary.aspx.cs" Inherits="WebSimplify.Diary" %>
 
 <%@ Register Src="~/Controls/WsCalendar.ascx" TagPrefix="uc1" TagName="WsCalendar" %>
+<%@ Register Src="~/Controls/xCalendar.ascx" TagPrefix="uc1" TagName="xCalendar" %>
+
 
 <%--<%@ Register Src="~/Controls/WsSlider.ascx" TagPrefix="uc1" TagName="WsSlider" %>--%>
 
@@ -29,7 +31,12 @@
         <div class="col-3"></div>
     </div>
     <div class="spanel">
-        <uc1:WsCalendar runat="server" ID="WsCalendar" GetDataSourceMethodName="GetCalendarItems" ShowEmptyDays="false" Mode="TwoWeeks"  MonthNameAsTitle="true"/>
+      
+        <div class="row">
+            <div class="col-12">
+                <uc1:xCalendar runat="server" ID="xCalendar" DisplayMode="Month" GetDataSourceMethodName="GetCalendarItems" ShowSelector="true"/>
+            </div>
+        </div>
     </div>
 
 

@@ -7,54 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSimplify {
+namespace WebSimplify.Controls {
     
     
-    public partial class Diary {
+    public partial class LottoPoleSelector {
         
         /// <summary>
-        /// txadddiarydate control.
+        /// txPoleDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txPoleDate;
         
         /// <summary>
-        /// txadddiaryname control.
+        /// txPoleKey control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiaryname;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txPoleKey;
         
         /// <summary>
-        /// txadddiarydesc control.
+        /// gvLottoPoleNumbers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiarydesc;
+        protected global::System.Web.UI.WebControls.GridView gvLottoPoleNumbers;
         
         /// <summary>
-        /// btnadddiary control.
+        /// btnGenerate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnadddiary;
+        protected global::System.Web.UI.WebControls.ImageButton btnGenerate;
         
         /// <summary>
-        /// xCalendar control.
+        /// btnClear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebSimplify.Controls.xCalendar xCalendar;
+        protected global::System.Web.UI.WebControls.ImageButton btnClear;
     }
 }

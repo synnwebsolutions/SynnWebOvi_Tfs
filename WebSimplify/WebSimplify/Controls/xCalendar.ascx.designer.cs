@@ -7,54 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSimplify {
+namespace WebSimplify.Controls {
     
     
-    public partial class Diary {
+    public partial class xCalendar {
         
         /// <summary>
-        /// txadddiarydate control.
+        /// selector control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiarydate;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl selector;
         
         /// <summary>
-        /// txadddiaryname control.
+        /// btnPrev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiaryname;
+        protected global::System.Web.UI.WebControls.ImageButton btnPrev;
         
         /// <summary>
-        /// txadddiarydesc control.
+        /// txDisplay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiarydesc;
+        protected global::System.Web.UI.WebControls.Label txDisplay;
         
         /// <summary>
-        /// btnadddiary control.
+        /// btnNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnadddiary;
+        protected global::System.Web.UI.WebControls.ImageButton btnNext;
         
         /// <summary>
-        /// xCalendar control.
+        /// tbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebSimplify.Controls.xCalendar xCalendar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tbl;
     }
 }

@@ -44,16 +44,23 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                WsCalendar.StartDate = DateTime.Now.StartOfWeek();
+                //WsCalendar.StartDate = DateTime.Now.StartOfWeek();
                 RefreshView();
             }
         }
 
-        public List<ICalendarItem> GetCalendarItems(DateTime StartDate, DateTime EndDate)
+        public List<XCalendarItem> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
         {
-            return DBController.DbShifts.GetShifts(new ShiftsSearchParameters { FromDate = StartDate, ToDate = EndDate }).Select(x => x as ICalendarItem).ToList();
+            var d = new List<XCalendarItem>();
+            var dbData = DBController.DbShifts.GetShifts(new ShiftsSearchParameters
+            {
+                FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
+                ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date
+            }).Select(x => x as ICalendarItem).ToList();
+            foreach (var dbitem in dbData)
+                d.Add(new XCalendarItem { Date = dbitem.Date, Text = dbitem.Display });
+            return d;
         }
-        
 
         //[WebMethod]
         //[ScriptMethod()]
@@ -115,7 +122,7 @@ namespace WebSimplify
         private void RefreshView()
         {
             RefreshGrid(gvAdd);
-            WsCalendar.RefreshView();
+            //WsCalendar.RefreshView();
         }
     }
 }

@@ -141,9 +141,19 @@ namespace WebSimplify
 
         }
 
+        internal void Add(int num)
+        {
+            throw new NotImplementedException();
+        }
+
         internal List<int> GetNumbers()
         {
             return new List<int> { N1, N2, N3, N4, N5, N6 };
+        }
+
+        internal void Remove(int num)
+        {
+            throw new NotImplementedException();
         }
     }
 

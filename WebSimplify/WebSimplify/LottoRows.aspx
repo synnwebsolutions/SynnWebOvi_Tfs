@@ -57,7 +57,7 @@
     <div class="row">
 
         <div class="col-12 spanel">
-            <div class="spanelHeader">הוספת הגרלה</div>
+            <div class="spanelHeader">מספרים להגרלה נוכחית : </div>
             <div class="sgridcontainer">
                 <asp:GridView ID="gvTempRows" runat="server"
                     OnRowDataBound="gvTempRows_RowDataBound"
@@ -128,7 +128,7 @@
 
     <div class="row">
         <div class="col-12 spanel">
-            <div class="spanelHeader">כל ההגרלות</div>
+            <div class="spanelHeader">ארכיון ניסיונות</div>
         </div>
 
 

@@ -88,9 +88,11 @@
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
     <Content Include="CashLog.aspx" />
+    <Content Include="Controls\LottoPoleSelector.ascx" />
     <Content Include="Controls\WsCalendar.ascx" />
     <Content Include="Controls\WsEditor.ascx" />
     <Content Include="Controls\WsSlider.ascx" />
+    <Content Include="Controls\xCalendar.ascx" />
     <Content Include="CreditStats.aspx" />
     <Content Include="css\style1.css" />
     <Content Include="css\Style1resp.css" />
@@ -143,6 +145,14 @@
     <Compile Include="CashLog.aspx.designer.cs">
       <DependentUpon>CashLog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LottoPoleSelector.ascx.cs">
+      <DependentUpon>LottoPoleSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\LottoPoleSelector.ascx.designer.cs">
+      <DependentUpon>LottoPoleSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Consts.cs" />
     <Compile Include="Controls\WsCalendar.ascx.cs">
       <DependentUpon>WsCalendar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,6 +173,13 @@
     </Compile>
     <Compile Include="Controls\WsSlider.ascx.designer.cs">
       <DependentUpon>WsSlider.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\xCalendar.ascx.cs">
+      <DependentUpon>xCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\xCalendar.ascx.designer.cs">
+      <DependentUpon>xCalendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="CreditStats.aspx.cs">
       <DependentUpon>CreditStats.aspx</DependentUpon>
@@ -209,6 +226,9 @@
     <Compile Include="Data\DictionaryItem.cs" />
     <Compile Include="Data\ShoppingData.cs" />
     <Compile Include="Data\WorkHoursData.cs" />
+    <Compile Include="Data\xCalendarDay.cs" />
+    <Compile Include="Data\xCalendarExtensions.cs" />
+    <Compile Include="Data\XCalendarItem.cs" />
     <Compile Include="DevTasks.aspx.cs">
       <DependentUpon>DevTasks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

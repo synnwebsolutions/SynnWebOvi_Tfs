@@ -1,11 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="LottoPoles.aspx.cs" Inherits="WebSimplify.LottoPoles" %>
 
+<%@ Register Src="~/Controls/LottoPoleSelector.ascx" TagPrefix="uc1" TagName="LottoPoleSelector" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <div class="row">
+  <%--  <div class="row">
 
         <div class="col-12 spanel">
             <div class="spanelHeader">הוספת הגרלה</div>
@@ -27,7 +30,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="מספר הגרלה ">
                             <ItemTemplate>
-                                <asp:TextBox runat="server" ID="txPoleKey" CssClass="gridtextinput" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txPoleKey" CssClass="gridtextinput"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="1">
@@ -75,13 +78,18 @@
             </div>
         </div>
 
-    </div>
-
-
+    </div>--%>
 
     <div class="row">
-        <div class=" col-3"></div>
-        <div class="col-6">
+
+        <div class="col-12 spanel">
+            <uc1:LottoPoleSelector runat="server" id="LottoPoleSelector" SaveDataMethodName="AddPole"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <%--<div class=" col-3"></div>--%>
+        <div class="col-12">
             <div class="sgridcontainer spanel">
                 <asp:GridView ID="gv" runat="server"
                     OnRowDataBound="gv_RowDataBound"
@@ -117,7 +125,7 @@
                 </asp:GridView>
             </div>
         </div>
-        <div class=" col-3"></div>
+        <%--<div class=" col-3"></div>--%>
     </div>
 
 </asp:Content>

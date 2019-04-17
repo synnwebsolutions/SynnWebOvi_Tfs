@@ -22,12 +22,12 @@ namespace WebSimplify {
         protected global::System.Web.UI.WebControls.GridView gvAdd;
         
         /// <summary>
-        /// WsCalendar control.
+        /// xCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebSimplify.Controls.WsCalendar WsCalendar;
+        protected global::WebSimplify.Controls.xCalendar xCalendar;
     }
 }
