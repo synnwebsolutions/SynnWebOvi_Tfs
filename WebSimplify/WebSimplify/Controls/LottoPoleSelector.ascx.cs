@@ -157,8 +157,9 @@ namespace WebSimplify.Controls
                 return Data[RowIdentifier];
             }
         }
+       
 
-        protected void btnGenerate_Click(object sender, ImageClickEventArgs e)
+        protected void btnGenerate_Click1(object sender, EventArgs e)
         {
             if (SpecialNumber > 0 && IPole.Count == 6 && txPoleKey.Value.NotEmpty() && txPoleDate.Value.NotEmpty())
             {
@@ -175,7 +176,7 @@ namespace WebSimplify.Controls
                 i.N5 = IPole[4];
                 i.N5 = IPole[5];
                 m.Invoke(Page, new object[] { i });
-                btnClear_Click(sender, null);
+                btnClear_Click1(sender, null);
             }
             else
             {
@@ -183,7 +184,7 @@ namespace WebSimplify.Controls
             }
         }
 
-        protected void btnClear_Click(object sender, ImageClickEventArgs e)
+        protected void btnClear_Click1(object sender, EventArgs e)
         {
             txPoleDate.Value = string.Empty;
             txPoleKey.Value = string.Empty;

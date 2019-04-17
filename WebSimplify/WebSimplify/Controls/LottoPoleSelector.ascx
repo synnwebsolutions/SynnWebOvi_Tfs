@@ -28,6 +28,15 @@
             /*border: 2px solid #ff0000;*/
         }
 
+        .ltgrid input[type=image] {
+            font-weight: 600;
+            font-size: 18px;
+          
+        }
+         .ltgrid input[type=image] img {
+display:none;          
+        }
+
         .ltgrid .rg {
             font-weight: 600;
             font-size: 18px;
@@ -38,7 +47,7 @@
 
     .ltactive {
         color: #ff0000;
-        background-color:black;
+        background-color: black;
     }
 </style>
 
@@ -68,37 +77,37 @@
             <Columns>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI1" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI1" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI2" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI2" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI3" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI3" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI4" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI4" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI5" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI5" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI6" OnCommand="btnI1_Command"></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI6" OnCommand="btnI1_Command"  ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="מספר חזק" ItemStyle-CssClass="sp">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnSp" OnCommand="btnSp_Command"></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnSp" OnCommand="btnSp_Command" ></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -108,11 +117,11 @@
 
 <div class="row spanel">
     <div class="col-2">
-        <asp:ImageButton ID="btnGenerate" runat="server" AlternateText="שמור" CssClass="sbutton" OnClick="btnGenerate_Click" />
+        <asp:Button ID="btnGenerate" runat="server" Text="שמור" CssClass="sbutton" OnClick="btnGenerate_Click1" />
     </div>
     <div class="col-8">
     </div>
     <div class="col-2">
-        <asp:ImageButton ID="btnClear" runat="server" AlternateText="נקה בחירה" CssClass="sbutton" OnClick="btnClear_Click" />
+        <asp:Button ID="btnClear" runat="server" Text="נקה בחירה" CssClass="sbutton" OnClick="btnClear_Click1" />
     </div>
 </div>
