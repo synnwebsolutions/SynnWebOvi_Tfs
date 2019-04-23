@@ -139,6 +139,12 @@ namespace WebSimplify
             return Convert.ToInt32(dd);
         }
 
+        public static bool IsInteger(this string d)
+        {
+            var dd = 0;
+            return int.TryParse(d,out dd);
+        }
+
         public static bool IsInteger(this char a)
         {
             return a >= '0' && a <= '9';

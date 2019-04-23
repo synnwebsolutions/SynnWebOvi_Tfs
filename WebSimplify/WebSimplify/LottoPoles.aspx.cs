@@ -51,11 +51,15 @@ namespace WebSimplify
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var d = (LottoPole)e.Row.DataItem;
+                List<LottoRow> rowPoles = GetPoleRows(d);
+
                 ((Label)e.Row.FindControl("lblPoleKey")).Text = d.PoleKey;
                 ((Label)e.Row.FindControl("lblPoleDate")).Text = d.PoleActionDate.ToShortDateString();
                 ((Label)e.Row.FindControl("lblPoleWins")).Text = d.WinsText;
+                ((Label)e.Row.FindControl("lblPoleRows")).Text = rowPoles.Count.ToString();
                 var btnUpdate = ((ImageButton)e.Row.FindControl("btnUpdate"));
-                btnUpdate.CommandArgument = d.Id.ToString();
+                var btnReGenerate = ((ImageButton)e.Row.FindControl("btnReGenerate"));
+                btnUpdate.CommandArgument = btnReGenerate.CommandArgument = d.Id.ToString();
             }
         }
 
@@ -120,6 +124,50 @@ namespace WebSimplify
             LottoPole cp = DBController.DbLotto.Get(new LottoPolesSearchParameters { Id = e.CommandArgument.ToString().ToInteger() }).FirstOrDefault();
             LottoHandler.FindMatches(DBController, cp);
             RefreshGrid(gv);
+        }
+
+        protected void btnReGenerate_Command(object sender, CommandEventArgs e)
+        {
+            panelx.SetEditedItemId(e.CommandArgument.ToString().ToInteger());
+            panelx.Visible = true;
+        }
+
+        private  List<LottoRow> GetPoleRows(LottoPole cp)
+        {
+            return DBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = cp.PoleActionDate, PoleKey = cp.PoleKey });
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            HideEditor();
+        }
+
+        private void HideEditor()
+        {
+            panelx.Visible = false;
+        }
+
+        protected void btnOk_Click(object sender, EventArgs e)
+        {
+            if (txPoleDate.Text.NotEmpty())
+            {
+                var poleId = panelx.GetEditedItemId();
+                if (poleId.HasValue)
+                {
+                    var allPoles = DBController.DbLotto.Get(new LottoPolesSearchParameters { });
+                    var maxpoleNum = allPoles.Select(x => x.PoleKey).Where(x => x.IsInteger()).Select(x => x.ToInteger()).OrderByDescending(x => x).First();
+                    LottoPole cp = DBController.DbLotto.Get(new LottoPolesSearchParameters { Id = poleId }).FirstOrDefault();
+                    List<LottoRow> rowPoles = GetPoleRows(cp);
+                    foreach (var row in rowPoles)
+                    {
+                        row.PoleDestinationDate = txPoleDate.Text.ToDateTime().Date;
+                        row.PoleKey = string.Empty;
+                        DBController.DbLotto.AddLottoRow(row);
+                    }
+                    ShowUserNotification("פעולה בוצעה בהצלחה");
+                }
+            }
+            HideEditor();
         }
     }
 }

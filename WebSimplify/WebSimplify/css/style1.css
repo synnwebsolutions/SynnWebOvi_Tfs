@@ -546,7 +546,7 @@ legend {
     border-color: white;
     border: 1px solid #C00000;
     z-index: 10;
-    background-color: rgba(204, 204, 204, 0.3);
+    background-color:#7A7979;
 }
 
     .editor .header {
@@ -588,7 +588,7 @@ legend {
 }
 
 .editorbody {
-    background-color: #8AAED4;
+    background-color: #706968;
     padding: 10px 5px 10px 5px;
 }
 

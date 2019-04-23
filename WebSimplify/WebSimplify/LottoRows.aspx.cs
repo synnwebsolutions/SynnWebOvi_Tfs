@@ -26,6 +26,7 @@ namespace WebSimplify
             if (!IsPostBack)
             {
                 RefreshGrids();
+                FillEnum(cmbFromWin, typeof(LottoWin));
             }
         }
 
@@ -59,6 +60,10 @@ namespace WebSimplify
 
             List<LottoRow> rows = DBController.DbLotto.Get(new LottoRowsSearchParameters { PoleActionDate = string.IsNullOrEmpty(txPoleDate.Text) ? (DateTime?)null : txPoleDate.Text.ToDateTime()
                 , PoleKey = txPolekey.Value });
+            if (cmbFromWin.SelectedIndex > 0)
+            {
+                rows = rows.Where(x => x.Wins.NotEmpty() && x.Wins.Any(w => (int)w >= cmbFromWin.SelectedValue.ToInteger())).ToList();
+            }
             return rows.OrderByDescending(x => x.PoleDestinationDate).ToList();
         }
 

@@ -111,9 +111,19 @@
                                 <asp:Label runat="server" ID="lblPoleDate"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="מספר שורות">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblPoleRows"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="זכיות">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblPoleWins"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" הפק שורות שוב ">
+                            <ItemTemplate>
+                                <asp:ImageButton runat="server" ID="btnReGenerate" OnCommand="btnReGenerate_Command" CssClass="gridbutton" ImageUrl="Img/play-button.png" AlternateText="עדכן"></asp:ImageButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText=" עדכן ">
@@ -126,6 +136,35 @@
             </div>
         </div>
         <%--<div class=" col-3"></div>--%>
+    </div>
+
+
+     <div class="row">
+           <div class=" col-3">
+        </div>
+        <asp:Panel ID="panelx" runat="server" Visible="false" CssClass="editor centered col-6">
+            <div class="row header" id="editorHaeder" runat="server">
+            </div>
+            <div class="editorbody">
+                <div class="row">
+                    <div class="col-6">תאריך יעד</div>
+                    <div class="col-6">
+                        <asp:TextBox ID="txPoleDate" TextMode="Date" runat="server" placeholder="dd/MM/yyyy" />
+                    </div>
+                </div>
+            </div>
+            <div class="row panelbottom" id="editorBottom" runat="server">
+                <div class="col-4">
+                    <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" CssClass="sbutton" Text="ביטול" />
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <asp:Button ID="btnOk" runat="server" OnClick="btnOk_Click" CssClass="sbutton" Text="אישור" />
+                </div>
+            </div>
+        </asp:Panel>
+           <div class=" col-3">
+        </div>
     </div>
 
 </asp:Content>
