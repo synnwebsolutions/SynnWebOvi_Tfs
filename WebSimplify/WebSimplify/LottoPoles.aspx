@@ -92,7 +92,7 @@
         <div class="col-12">
             <div class="sgridcontainer spanel">
                 <asp:GridView ID="gv" runat="server"
-                    OnRowDataBound="gv_RowDataBound"
+                    OnRowDataBound="gv_RowDataBound" OnPageIndexChanging="gv_PageIndexChanging"
                     CssClass="synngridstyled tabletofilter" ItemStyle-Width="100%" ControlStyle-Width="100%"
                     PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false" PageSize="10" AllowPaging="true"
                     PagerSettings-FirstPageText="ראשון"

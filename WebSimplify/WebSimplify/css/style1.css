@@ -292,10 +292,14 @@ textarea {
         margin: 2px 2px;
         text-decoration: none;
         padding: 10px 5px 10px 5px;
-        color: #111;
+        /*color: #111;*/
         border-color: #ddd;
         margin-left: -1px;
     }
+
+          /*.synngridpagination table > tbody > tr > td > a.active{
+            color: red;
+        }*/
 
 .sgridcontainer {
     width: 100%;
@@ -740,12 +744,14 @@ legend {
 
         .synngridpagination table > tbody > tr > td > a, .synngridpagination table > tbody > tr > td > span {
             text-decoration: none;
-            color: #111;
+            /*color: #111;*/
             border-color: #ddd;
             margin: 0 0;
             margin-left: 0;
             padding: 0 0 0 0;
         }
+
+    
 
     .min-grid {
         display: block;

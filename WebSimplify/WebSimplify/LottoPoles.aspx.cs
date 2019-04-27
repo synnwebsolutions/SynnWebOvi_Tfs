@@ -84,7 +84,7 @@ namespace WebSimplify
 
         protected void gvTemplates_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            
+         
         }
         protected void btnAddPole_Command(object sender, CommandEventArgs e)
         {
@@ -170,6 +170,12 @@ namespace WebSimplify
                 }
             }
             HideEditor();
+        }
+
+        protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gv.PageIndex = e.NewPageIndex;
+            RefreshGrid(gv);
         }
     }
 }
