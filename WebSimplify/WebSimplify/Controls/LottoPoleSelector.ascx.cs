@@ -17,7 +17,7 @@ namespace WebSimplify.Controls
         }
 
         public string SaveDataMethodName { get; set; }
-
+        public PoleSelectorMode SelectorMode { get; set; }
         public SynnWebFormBase IPage
         {
             get
@@ -58,16 +58,25 @@ namespace WebSimplify.Controls
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
+            gvLottoPoleNumbers.Visible = SelectorMode == PoleSelectorMode.Grid;
+            rSingleSelector.Visible = SelectorMode == PoleSelectorMode.SingleInput;
             FillGrid();
         }
 
         private void FillGrid()
         {
-            var data = new List<LottoSelectorItem>();
-            for (int i = 1; i <= 7; i++)
-                data.Add(new LottoSelectorItem(i));
-            gvLottoPoleNumbers.DataSource = data;
-            gvLottoPoleNumbers.DataBind();
+            if (SelectorMode == PoleSelectorMode.Grid)
+            {
+                var data = new List<LottoSelectorItem>();
+                for (int i = 1; i <= 7; i++)
+                    data.Add(new LottoSelectorItem(i));
+                gvLottoPoleNumbers.DataSource = data;
+                gvLottoPoleNumbers.DataBind();
+            }
+            else
+            {
+
+            }
         }
 
         protected void btnSp_Command(object sender, CommandEventArgs e)
@@ -161,7 +170,16 @@ namespace WebSimplify.Controls
 
         protected void btnGenerate_Click1(object sender, EventArgs e)
         {
-            if (SpecialNumber > 0 && IPole.Count == 6 && txPoleKey.Value.NotEmpty() && txPoleDate.Value.NotEmpty())
+            if (SelectorMode == PoleSelectorMode.SingleInput && txSingleTextNums.Value.NotEmpty() && txSingleTextSpeciaslNum.Value.NotEmpty())
+            {
+                var inums = txSingleTextNums.Value.Split(' ').Where(x => x.Length > 0).ToList();
+                if (inums.Count == 6)
+                {
+                    IPole = inums.Select(x => x.ToInteger()).ToList();
+                    SpecialNumber = txSingleTextSpeciaslNum.Value.ToInteger();
+                }
+            }
+            if (SpecialNumber.InRangeNoBorders(0,8) && IPole.Count == 6  && IPole.InRangeNoBorders(0, 38) && txPoleKey.Value.NotEmpty() && txPoleDate.Value.NotEmpty())
             {
                 MethodInfo m = Page.GetType().GetMethod(SaveDataMethodName);
                 IPole = IPole.OrderBy(x => x).ToList();
@@ -188,8 +206,15 @@ namespace WebSimplify.Controls
         {
             txPoleDate.Value = string.Empty;
             txPoleKey.Value = string.Empty;
+            txSingleTextNums.Value = txSingleTextSpeciaslNum.Value = string.Empty;
             SpecialNumber = 0;
             IPole = new List<int>();
         }
+    }
+
+    public enum PoleSelectorMode
+    {
+        Grid,
+        SingleInput
     }
 }

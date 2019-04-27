@@ -53,9 +53,11 @@ namespace WebSimplify
                 var d = (LottoPole)e.Row.DataItem;
                 List<LottoRow> rowPoles = GetPoleRows(d);
 
+                ((Label)e.Row.FindControl("lblPoleId")).Text = d.Id.ToString();
                 ((Label)e.Row.FindControl("lblPoleKey")).Text = d.PoleKey;
                 ((Label)e.Row.FindControl("lblPoleDate")).Text = d.PoleActionDate.ToShortDateString();
                 ((Label)e.Row.FindControl("lblPoleWins")).Text = d.WinsText;
+                ((Label)e.Row.FindControl("lblPoleNums")).Text = string.Format("({0}) [{1}]",string.Join(",", d.GetNumbers().Select(x => x.ToString()).ToList()),d.SpecialNumber);
                 ((Label)e.Row.FindControl("lblPoleRows")).Text = rowPoles.Count.ToString();
                 var btnUpdate = ((ImageButton)e.Row.FindControl("btnUpdate"));
                 var btnReGenerate = ((ImageButton)e.Row.FindControl("btnReGenerate"));

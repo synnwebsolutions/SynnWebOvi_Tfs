@@ -221,6 +221,7 @@ namespace WebSimplify
                 var d = (LottoRow)e.Row.DataItem;
 
                 ((Label)e.Row.FindControl("atxDestDate")).Text = d.PoleDestinationDate.ToShortDateString();
+                ((Label)e.Row.FindControl("atxRowId")).Text = d.Id.ToString();
                 ((Label)e.Row.FindControl("atxPoleKey")).Text = d.PoleKey;
                 ((Label)e.Row.FindControl("atx1")).Text = d.N1.ToString();
                 ((Label)e.Row.FindControl("atx2")).Text = d.N2.ToString();

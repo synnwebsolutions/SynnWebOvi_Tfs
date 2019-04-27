@@ -10,7 +10,7 @@
             text-align: center;
             font-weight: 600;
             padding: 8px 8px 8px 8px;
-            background: #C00000;
+            background: #8080ff;
             color: white;
             border: 0;
         }
@@ -31,11 +31,11 @@
         .ltgrid input[type=image] {
             font-weight: 600;
             font-size: 18px;
-          
         }
-         .ltgrid input[type=image] img {
-display:none;          
-        }
+
+            .ltgrid input[type=image] img {
+                display: none;
+            }
 
         .ltgrid .rg {
             font-weight: 600;
@@ -56,15 +56,25 @@ display:none;
     <div class="spanel col-6">
         <div class="spanelHeader">תאריך הגרלה</div>
         <div class="">
-            <input type="date" class="tablefilter" name="name" id="txPoleDate" placeholder=" תאריך הגרלה" runat="server" />
+            <input type="date" name="name" id="txPoleDate" placeholder=" תאריך הגרלה" runat="server" />
         </div>
     </div>
 
     <div class="spanel col-6">
         <div class="spanelHeader">מספר הגרלה</div>
         <div class="">
-            <input type="text" class="tablefilter" name="name" id="txPoleKey" placeholder="מספר הגרלה " runat="server" />
+            <input type="text"  name="name" id="txPoleKey" placeholder="מספר הגרלה " runat="server" />
         </div>
+    </div>
+</div>
+<div class="row" id="rSingleSelector" runat="server">
+    <div class="col-3">מספרים  להגרלה</div>
+    <div class="col-6">
+        <input type="text"  name="name" id="txSingleTextNums" placeholder=" (יש להזין רווח בין מספרים) " runat="server" />
+    </div>
+      <div class="col-1">  מספר חזק</div>
+    <div class="col-2">
+        <input type="text"  name="name" id="txSingleTextSpeciaslNum" placeholder=" " runat="server" />
     </div>
 </div>
 
@@ -77,37 +87,37 @@ display:none;
             <Columns>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI1" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI1" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI2" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI2" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI3" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI3" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI4" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI4" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI5" OnCommand="btnI1_Command" CssClass="" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI5" OnCommand="btnI1_Command" CssClass=""></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="" ItemStyle-CssClass="rg">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnI6" OnCommand="btnI1_Command"  ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnI6" OnCommand="btnI1_Command"></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="מספר חזק" ItemStyle-CssClass="sp">
                     <ItemTemplate>
-                        <asp:ImageButton runat="server" ID="btnSp" OnCommand="btnSp_Command" ></asp:ImageButton>
+                        <asp:ImageButton runat="server" ID="btnSp" OnCommand="btnSp_Command"></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

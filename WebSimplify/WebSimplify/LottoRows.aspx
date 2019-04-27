@@ -166,6 +166,11 @@
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" מזהה שורה ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atxRowId" CssClass="gridtextinput" TextMode="Date"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="תאריך הגרלה ">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="atxDestDate" CssClass="gridtextinput" TextMode="Date"></asp:Label>

@@ -83,7 +83,7 @@
     <div class="row">
 
         <div class="col-12 spanel">
-            <uc1:LottoPoleSelector runat="server" id="LottoPoleSelector" SaveDataMethodName="AddPole"/>
+            <uc1:LottoPoleSelector runat="server" id="LottoPoleSelector" SaveDataMethodName="AddPole" SelectorMode="SingleInput"/>
         </div>
     </div>
 
@@ -101,6 +101,11 @@
                     PagerSettings-PreviousPageText="<">
                     <PagerStyle CssClass="synngridpagination" />
                     <Columns>
+                        <asp:TemplateField HeaderText=" מזהה הגרלה ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblPoleId"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText=" מספר הגרלה ">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblPoleKey"></asp:Label>
@@ -114,6 +119,11 @@
                         <asp:TemplateField HeaderText="מספר שורות">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblPoleRows"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="מספרים">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblPoleNums"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="זכיות">

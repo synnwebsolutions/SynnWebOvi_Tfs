@@ -131,6 +131,22 @@ namespace WebSimplify
             return Convert.ToInt32(d);
         }
 
+        public static bool InRangeNoBorders(this List<int> lst, int bottom, int top)
+        {
+            var res = true;
+            foreach (var n in lst)
+            {
+                if (!n.InRangeNoBorders(bottom, top))
+                    res = false;
+            }
+            return res;
+        }
+
+        public static bool InRangeNoBorders(this int n, int bottom, int top)
+        {
+            return n > bottom && n < top;
+        }
+
         public static int ToInteger(this string d)
         {
             var dd = string.Empty;
