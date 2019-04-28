@@ -31,6 +31,33 @@ namespace WebSimplify.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txPoleKey;
         
         /// <summary>
+        /// rSingleSelector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rSingleSelector;
+        
+        /// <summary>
+        /// txSingleTextNums control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txSingleTextNums;
+        
+        /// <summary>
+        /// txSingleTextSpeciaslNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txSingleTextSpeciaslNum;
+        
+        /// <summary>
         /// gvLottoPoleNumbers control.
         /// </summary>
         /// <remarks>

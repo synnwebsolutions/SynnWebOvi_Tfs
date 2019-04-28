@@ -106,6 +106,7 @@
     <Content Include="Img\insert.png" />
     <Content Include="Img\left-arrow.png" />
     <Content Include="Img\locked.png" />
+    <Content Include="Img\play-button.png" />
     <Content Include="Img\right-arrow.png" />
     <Content Include="Img\synnlg.png" />
     <Content Include="Img\synnlg1.png" />

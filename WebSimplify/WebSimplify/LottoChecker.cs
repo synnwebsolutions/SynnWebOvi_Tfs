@@ -24,7 +24,7 @@ namespace WebSimplify
             return state >= minWinState;
         }
 
-        private static LottoWin GetWinState(LottoPole pole, LottoRow row)
+        private static LottoWin GetWinState(LottoPole pole, LottoRow row) 
         {
             LottoWin state = LottoWin.None;
             List<int> polenums = pole.GetNumbers();

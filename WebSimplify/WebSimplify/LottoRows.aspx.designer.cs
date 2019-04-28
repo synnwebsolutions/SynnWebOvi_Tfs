@@ -67,6 +67,15 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txPolekey;
         
         /// <summary>
+        /// cmbFromWin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbFromWin;
+        
+        /// <summary>
         /// txPoleDate control.
         /// </summary>
         /// <remarks>

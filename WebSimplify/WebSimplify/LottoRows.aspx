@@ -132,9 +132,12 @@
         </div>
 
 
-        <div class=" col-3">חיפוש לפי הגרלה או תאריך</div>
+        <div class=" col-12 text">חיפוש לפי הגרלה או תאריך</div>
         <div class="col-3">
             <input type="text" class="tablefilter" name="name" id="txPolekey" placeholder=" מספר הגרלה" runat="server" />
+        </div>
+         <div class="col-3">
+            <asp:DropDownList ID="cmbFromWin" runat="server"></asp:DropDownList>
         </div>
         <div class="col-3">
             <asp:TextBox ID="txPoleDate" TextMode="Date" runat="server" placeholder="dd/MM/yyyy" />
@@ -161,6 +164,11 @@
                         <asp:TemplateField HeaderText="#">
                             <ItemTemplate>
                                 <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText=" מזהה שורה ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="atxRowId" CssClass="gridtextinput" TextMode="Date"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="תאריך הגרלה ">
