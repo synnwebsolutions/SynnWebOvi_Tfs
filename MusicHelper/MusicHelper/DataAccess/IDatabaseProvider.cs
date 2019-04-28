@@ -8,5 +8,7 @@ namespace MusicHelper
 {
     public interface IDatabaseProvider
     {
+        bool Match(MusicItem ti);
+        void AddMusicItem(MusicItem ti);
     }
 }

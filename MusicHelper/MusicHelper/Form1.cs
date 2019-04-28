@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HundredMilesSoftware.UltraID3Lib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,14 +21,20 @@ namespace MusicHelper
             this.ApplyTheme();
             DbController = this.InitDataProvider();
 
-            var p = @"D:\SmachData\2Pac - Letter to my unborn child.mp3";
-            var fi = TagLib.File.Create(p);
-            MusicItem i = new MusicItem(fi);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnScanFolder_Click(object sender, EventArgs e)
+        {
+            var dg = foldersToScanDialog.ShowDialog();
+            if (dg == DialogResult.OK)
+            {
+                DirectoryHandler.Handle(DbController, foldersToScanDialog.SelectedPath);
+            }
         }
     }
 }

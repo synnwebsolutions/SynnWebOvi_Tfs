@@ -30,14 +30,15 @@
         {
             this.btnExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.gbLibrary = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbActions = new System.Windows.Forms.GroupBox();
-            this.gbLibrary = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnScanFolder = new System.Windows.Forms.Button();
+            this.foldersToScanDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
+            this.gbLibrary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbActions.SuspendLayout();
-            this.gbLibrary.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -59,24 +60,6 @@
             this.panel1.Size = new System.Drawing.Size(1390, 657);
             this.panel1.TabIndex = 1;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 112);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1035, 445);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // gbActions
-            // 
-            this.gbActions.Controls.Add(this.button1);
-            this.gbActions.Location = new System.Drawing.Point(1122, 49);
-            this.gbActions.Name = "gbActions";
-            this.gbActions.Size = new System.Drawing.Size(247, 402);
-            this.gbActions.TabIndex = 1;
-            this.gbActions.TabStop = false;
-            this.gbActions.Text = "Library Actions";
-            // 
             // gbLibrary
             // 
             this.gbLibrary.Controls.Add(this.dataGridView1);
@@ -87,14 +70,33 @@
             this.gbLibrary.TabStop = false;
             this.gbLibrary.Text = "Library";
             // 
-            // button1
+            // dataGridView1
             // 
-            this.button1.Location = new System.Drawing.Point(18, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 34);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 112);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1035, 445);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // gbActions
+            // 
+            this.gbActions.Controls.Add(this.btnScanFolder);
+            this.gbActions.Location = new System.Drawing.Point(1122, 49);
+            this.gbActions.Name = "gbActions";
+            this.gbActions.Size = new System.Drawing.Size(247, 402);
+            this.gbActions.TabIndex = 1;
+            this.gbActions.TabStop = false;
+            this.gbActions.Text = "Library Actions";
+            // 
+            // btnScanFolder
+            // 
+            this.btnScanFolder.Location = new System.Drawing.Point(18, 45);
+            this.btnScanFolder.Name = "btnScanFolder";
+            this.btnScanFolder.Size = new System.Drawing.Size(223, 34);
+            this.btnScanFolder.TabIndex = 0;
+            this.btnScanFolder.Text = "Scan Folder";
+            this.btnScanFolder.UseVisualStyleBackColor = true;
+            this.btnScanFolder.Click += new System.EventHandler(this.btnScanFolder_Click);
             // 
             // Form1
             // 
@@ -107,9 +109,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            this.gbLibrary.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gbActions.ResumeLayout(false);
-            this.gbLibrary.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -121,7 +123,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox gbLibrary;
         private System.Windows.Forms.GroupBox gbActions;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnScanFolder;
+        private System.Windows.Forms.FolderBrowserDialog foldersToScanDialog;
     }
 }
 

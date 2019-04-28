@@ -58,11 +58,15 @@
       <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="UltraID3Lib">
+      <HintPath>C:\Users\adelasm\Desktop\UltraID3Lib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\IDatabaseProvider.cs" />
     <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
     <Compile Include="Data\MusicItem.cs" />
+    <Compile Include="DirectoryHandler.cs" />
     <Compile Include="ExtensionsHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
