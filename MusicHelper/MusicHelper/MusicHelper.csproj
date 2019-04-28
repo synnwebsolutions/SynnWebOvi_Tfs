@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BIUSCore">
-      <HintPath>C:\BIuTFS\BIU\BIUSCore\BIUSCore\bin\Debug\BIUSCore.dll</HintPath>
+      <HintPath>C:\Synn Data\BIUSCore.dll</HintPath>
     </Reference>
     <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
@@ -59,7 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="UltraID3Lib">
-      <HintPath>C:\Users\adelasm\Desktop\UltraID3Lib.dll</HintPath>
+      <HintPath>C:\Synn Data\UltraID3Lib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThemeHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
