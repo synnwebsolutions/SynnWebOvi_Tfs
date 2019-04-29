@@ -91,6 +91,10 @@
     <Compile Include="Log\FileLogger.cs" />
     <Compile Include="DataAccess\MySQLBaseDataHelper.cs" />
     <Compile Include="Mail\MailHelper.cs" />
+    <Compile Include="Migration\IdbMigration.cs" />
+    <Compile Include="Migration\MigrationHandler.cs" />
+    <Compile Include="Migration\TableMigration.cs" />
+    <Compile Include="Migration\TableMigrationField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\VaultItem.cs" />
     <Compile Include="Security\XCipher.cs" />
