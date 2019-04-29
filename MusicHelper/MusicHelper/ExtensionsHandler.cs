@@ -17,16 +17,21 @@ namespace MusicHelper
             IDatabaseProvider dbc = null;
             if (dbc == null)
             {
-                string _connectionString = string.Empty;
-#if DEBUG
-                _connectionString = ConfigurationSettings.AppSettings["connectionString"];
-#else
-            _connectionString = ConfigurationSettings.AppSettings["prodConnectionString"];
-#endif
-
+                string _connectionString = GetConnectionString();
                 dbc = new SqlDatabaseProvider(new SynnSqlDataProvider(_connectionString));
             }
             return dbc;
+        }
+
+        public static string GetConnectionString()
+        {
+            string _connectionString = string.Empty;
+#if DEBUG
+            _connectionString = ConfigurationSettings.AppSettings["connectionString"];
+#else
+            _connectionString = ConfigurationSettings.AppSettings["prodConnectionString"];
+#endif
+            return _connectionString;
         }
     }
 }

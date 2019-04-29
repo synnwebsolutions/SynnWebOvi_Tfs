@@ -93,6 +93,7 @@
     <Compile Include="Mail\MailHelper.cs" />
     <Compile Include="Migration\IdbMigration.cs" />
     <Compile Include="Migration\MigrationHandler.cs" />
+    <Compile Include="Migration\SqlDbMigrationExecuter.cs" />
     <Compile Include="Migration\TableMigration.cs" />
     <Compile Include="Migration\TableMigrationField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

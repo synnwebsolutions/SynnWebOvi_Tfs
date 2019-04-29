@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\IDatabaseProvider.cs" />
     <Compile Include="DataAccess\SqlDatabaseProvider.cs" />
+    <Compile Include="Data\MigrationItems.cs" />
     <Compile Include="Data\MusicItem.cs" />
     <Compile Include="DirectoryHandler.cs" />
     <Compile Include="ExtensionsHandler.cs" />

@@ -9,13 +9,21 @@ namespace SynnCore.Migration
 {
     public class MigrationHandler
     {
-        internal static void Perform(IdbMigration db)
+        public static void Perform(string connectionString, string table, List<MethodInfo> methods)
         {
             string stepName = null;
             try
             {
-                List<MethodInfo> methods = db.GetMethodsToPerform();
-                List<string> finishedSteps = db.GetAlreadyFinishedSteps();
+                var db = new SqlDbMigrationExecuter(connectionString, table);
+                List<string> finishedSteps = new List<string>();
+                try
+                {
+                    finishedSteps = db.GetAlreadyFinishedSteps();
+                }
+                catch (Exception)
+                {
+                    finishedSteps = new List<string>();
+                }
                 var steps = methods.Where(x => !finishedSteps.Contains(x.Name)).ToList();
                 
                 foreach (var m in steps)

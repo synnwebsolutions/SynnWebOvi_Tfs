@@ -9,8 +9,8 @@ namespace SynnCore.Migration
 {
     public interface IdbMigration
     {
-        List<MethodInfo> GetMethodsToPerform();
         List<string> GetAlreadyFinishedSteps();
         void FinishMethod(string stepName);
+        void ExecurteCreateTable(string tsql);
     }
 }

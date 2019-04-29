@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SynnCore.Migration;
+using System;
+using System.Configuration;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace MusicHelper
@@ -16,7 +17,15 @@ namespace MusicHelper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            HandleDbMigration();
             Application.Run(new Form1());
+        }
+
+        private static void HandleDbMigration()
+        {
+            var methods = typeof(MigrationItems).GetMethods(BindingFlags.Static | BindingFlags.Public).ToList();
+            var migrationTableName = ConfigurationSettings.AppSettings["migrationTableName"];
+            MigrationHandler.Perform(ExtensionsHandler.GetConnectionString(), migrationTableName, methods);
         }
     }
 }
