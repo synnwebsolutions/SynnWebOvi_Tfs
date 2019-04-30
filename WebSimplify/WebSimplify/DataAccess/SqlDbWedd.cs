@@ -26,7 +26,8 @@ namespace SynnWebOvi
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.WeddingItems);
             ClearParameters();
-            SetPermissions(sp);
+            if(!sp.FromWs)
+                SetPermissions(sp);
 
             if (!string.IsNullOrEmpty(sp.SearchText))
             {

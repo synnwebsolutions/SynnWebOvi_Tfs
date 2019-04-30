@@ -40,8 +40,8 @@ namespace WebSimplify
         public bool Active { get; set; }
         public bool Auto { get; set; }
         public int Amount { get; set; }
-        public DateTime FromDate { get; internal set; }
-        public DateTime? ToDate { get; internal set; }
+        public DateTime FromDate { get;  set; }
+        public DateTime? ToDate { get;  set; }
     }
     public class MonthlyMoneyTransaction : IDbLoadable
     {
@@ -62,7 +62,7 @@ namespace WebSimplify
         public int TemplateId { get; set; }
        
         public int UserGroupId { get; set; }
-        public bool Closed { get; internal set; }
+        public bool Closed { get;  set; }
 
         public void Load(IDataReader reader)
         {

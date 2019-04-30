@@ -137,7 +137,7 @@ namespace SynnWebOvi
     public class BaseSearchParameters
     {
         public LoggedUser CurrentUser { get; set; }
-
+        public bool FromWs { get; set; }
         public bool RequirePrivateKeyOnly { get; set; }
         public BaseSearchParameters()
         {
@@ -285,6 +285,7 @@ namespace SynnWebOvi
         }
 
         public int? Id { get; set; }
+
     }
 
     public class DictionarySearchParameters : BaseSearchParameters
@@ -298,6 +299,7 @@ namespace SynnWebOvi
         public string SearchText { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+
     }
 
     public class QuickTasksSearchParameters : BaseSearchParameters

@@ -10,7 +10,7 @@ namespace SynnWebOvi
 {
     public class Global : System.Web.HttpApplication
     {
-        internal IDatabaseProvider DBController = SynnDataProvider.DbProvider;
+        public static IDatabaseProvider DBController = SynnDataProvider.DbProvider;
         public static string PassPhrase = "682";
         internal static IDbLog Dbl;
 

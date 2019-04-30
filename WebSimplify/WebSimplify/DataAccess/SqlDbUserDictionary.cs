@@ -27,7 +27,8 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserDictionary);
             ClearParameters();
-            AddSqlWhereField("UserGroupId", p.CurrentUser.Id);
+            if(!p.FromWs)
+                AddSqlWhereField("UserGroupId", p.CurrentUser.Id);
             if (!string.IsNullOrEmpty(p.SearchText))
             {
                 StartORGroup();

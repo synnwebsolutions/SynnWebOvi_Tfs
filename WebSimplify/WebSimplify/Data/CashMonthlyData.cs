@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace WebSimplify.Data
+namespace WebSimplify
 {
     public class CashMonthlyData : MoneyMonthlyData
     {

@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettingsPage.aspx" />
+    <Content Include="BkpWs.asmx" />
     <Content Include="CashLog.aspx" />
     <Content Include="Controls\LottoPoleSelector.ascx" />
     <Content Include="Controls\WsCalendar.ascx" />
@@ -138,6 +139,10 @@
     </Compile>
     <Compile Include="AppSettingsPage.aspx.designer.cs">
       <DependentUpon>AppSettingsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BkpWs.asmx.cs">
+      <DependentUpon>BkpWs.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CashLog.aspx.cs">
       <DependentUpon>CashLog.aspx</DependentUpon>

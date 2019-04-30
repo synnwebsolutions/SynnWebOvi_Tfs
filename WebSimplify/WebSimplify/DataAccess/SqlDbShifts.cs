@@ -45,11 +45,14 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShiftsData);
             ClearParameters();
-            SetPermissions(lsp);
-            if (lsp.FromDate.HasValue)
-                AddSqlWhereField("Date", lsp.FromDate, ">=");
-            if (lsp.ToDate.HasValue)
-                AddSqlWhereField("Date", lsp.ToDate, "<");
+            if (!lsp.FromWs)
+            {
+                SetPermissions(lsp);
+                if (lsp.FromDate.HasValue)
+                    AddSqlWhereField("Date", lsp.FromDate, ">=");
+                if (lsp.ToDate.HasValue)
+                    AddSqlWhereField("Date", lsp.ToDate, "<");
+            }
             var lst = new List<ShiftDayData>();
             FillList(lst, typeof(ShiftDayData));
             return lst;

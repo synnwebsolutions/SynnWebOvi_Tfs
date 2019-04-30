@@ -28,19 +28,22 @@ namespace SynnWebOvi
                 AddSqlText(string.Format("inner join {0} usi on usi.ItemId = si.Id", SynnDataProvider.TableNames.User_ShoppingItems)); // join
      
             ClearParameters();
-            if (!lsp.CurrentUser.IsAdmin)
+            if (!lsp.FromWs)
             {
-                if (lsp.Active.HasValue)
+                if (!lsp.CurrentUser.IsAdmin)
                 {
-                    StartORGroup();
-                    foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
-                        AddOREqualField("usi.UserGroupId", gid);
-                    EndORGroup();
+                    if (lsp.Active.HasValue)
+                    {
+                        StartORGroup();
+                        foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
+                            AddOREqualField("usi.UserGroupId", gid);
+                        EndORGroup();
+                    }
                 }
-            }
-            if (!string.IsNullOrEmpty(lsp.ItemName))
-                AddSqlWhereField("Name", lsp.ItemName);
+                if (!string.IsNullOrEmpty(lsp.ItemName))
+                    AddSqlWhereField("Name", lsp.ItemName);
 
+            }
 
             var lst = new List<ShopItem>();
             FillList(lst, typeof(ShopItem));
