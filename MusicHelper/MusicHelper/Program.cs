@@ -25,7 +25,8 @@ namespace MusicHelper
         {
             var methods = typeof(MigrationItems).GetMethods(BindingFlags.Static | BindingFlags.Public).ToList();
             var migrationTableName = ConfigurationSettings.AppSettings["migrationTableName"];
-            MigrationHandler.Perform(ExtensionsHandler.GetConnectionString(), migrationTableName, methods);
+            string connStr = (new object()).GetConnectionString();
+            MigrationHandler.Perform(connStr, migrationTableName, methods);
         }
     }
 }

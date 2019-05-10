@@ -45,14 +45,14 @@ namespace MusicHelper
             var t = new TableMigration
             {
                 HasIdentity = true,
-                TableName = "MusicItems"
+                TableName = xmConsts.MusicItems
             };
             t.Fields = new List<TableMigrationField>();
             t.Fields.Add(new TableMigrationField { FieldName = "Artist", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "FullFileName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "FileName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "Title", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-
+            t.Fields.Add(new TableMigrationField { FieldName = "MachineName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
             db.ExecurteCreateTable(t.ToString());
         }
     }

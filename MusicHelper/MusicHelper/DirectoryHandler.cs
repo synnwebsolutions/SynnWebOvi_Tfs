@@ -1,41 +1,103 @@
-﻿using System;
+﻿using HundredMilesSoftware.UltraID3Lib;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MusicHelper
 {
     public class DirectoryHandler
     {
-        internal static void Handle(IDatabaseProvider dbController, string selectedPath)
+        int cnt = 0;
+        public Action<int> ProgressInit { get;  set; }
+        public Action<int> ReportProgress { get;  set; }
+
+        public void SyncData()
         {
 
-            //var p = @"D:\SmachData\2Pac - Letter to my unborn child.mp3\2Pac - Letter to my unborn child.mp3";
+            try
+            {
+                List<DirectoryInfo> dList = GetDirectories();
+                List<string> fList = new List<string>();
 
-            //var fi = TagLib.File.Create(p);
-            //MusicItem ti = new MusicItem(fi);
+                var DbController = (new object()).InitDataProvider();
+                foreach (var directory in dList)
+                   fList.AddRange(GetDirectoryFiles(directory.FullName.ToString()));
 
-            //UltraID3 u = new UltraID3();
-            //u.Read(p);
-            //MusicItem i = new MusicItem(u);
+                if (ProgressInit != null)
+                    ProgressInit.Invoke(fList.Count);
 
-            var files = Directory.GetFiles(selectedPath, "*.mp3|*.wma", SearchOption.AllDirectories);
+                SaveFiles(DbController, fList);
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+        }
+
+        private List<string> GetDirectoryFiles(string selectedPath)
+        {
+            try
+            {
+                var wmaFiles = Directory.GetFiles(selectedPath, "*.wma", SearchOption.AllDirectories).ToList();
+                var mp3Files = Directory.GetFiles(selectedPath, "*.mp3", SearchOption.AllDirectories).ToList();
+                wmaFiles.AddRange(mp3Files);
+                return wmaFiles;
+            }
+            catch (Exception ex)
+            {
+                return new List<string>();
+            }
+        }
+
+        private void ReportProgressOn()
+        {
+            if (ReportProgress != null)
+                ReportProgress.Invoke(cnt);
+        }
+     
+        private static List<DirectoryInfo> GetDirectories()
+        {
+            var dList = new List<DirectoryInfo>();
+            var dirs = System.Configuration.ConfigurationSettings.AppSettings["dirs"].Split(',');
+            
+            foreach (var dI in dirs)
+            {
+                try { dList.Add(new DirectoryInfo(dI)); }
+                catch (Exception) { }
+            }
+
+            return dList;
+        }
+
+        private void SaveFiles(IDatabaseProvider dbController, List<string> files)
+        {
             foreach (var fi in files)
             {
                 try
                 {
                     var ii = TagLib.File.Create(fi);
-                    MusicItem ti = new MusicItem(ii);
-                    if(!dbController.Match(ti))
+                    UltraID3 u = new UltraID3();
+                    u.Read(fi);
+                    MusicItem ti = new MusicItem(ii,u);
+                    if (!dbController.Match(ti))
                     {
                         dbController.AddMusicItem(ti);
+                        cnt++;
+                        ReportProgressOn();
+                    }
+                    else
+                    {
+                        // similar file already exists in db
                     }
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                   // throw;
                 }
             }
         }

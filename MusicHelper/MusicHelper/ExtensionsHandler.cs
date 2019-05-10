@@ -11,27 +11,25 @@ namespace MusicHelper
 {
     public static class ExtensionsHandler
     {
-   
-        public static IDatabaseProvider InitDataProvider(this Form frm)
+        public static string GetConnectionString(this object frm)
+        {
+            return ConfigurationSettings.AppSettings["connectionString"];
+        }
+        public static IDatabaseProvider InitDataProvider(this object frm)
         {
             IDatabaseProvider dbc = null;
             if (dbc == null)
             {
-                string _connectionString = GetConnectionString();
-                dbc = new SqlDatabaseProvider(new SynnSqlDataProvider(_connectionString));
-            }
-            return dbc;
-        }
-
-        public static string GetConnectionString()
-        {
-            string _connectionString = string.Empty;
+                string _connectionString = string.Empty;
 #if DEBUG
-            _connectionString = ConfigurationSettings.AppSettings["connectionString"];
+                _connectionString = ConfigurationSettings.AppSettings["connectionString"];
 #else
             _connectionString = ConfigurationSettings.AppSettings["prodConnectionString"];
 #endif
-            return _connectionString;
+
+                dbc = new SqlDatabaseProvider(new SynnSqlDataProvider(_connectionString));
+            }
+            return dbc;
         }
     }
 }
