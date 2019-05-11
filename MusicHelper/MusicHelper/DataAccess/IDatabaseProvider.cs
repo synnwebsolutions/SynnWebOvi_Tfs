@@ -10,5 +10,15 @@ namespace MusicHelper
     {
         bool Match(MusicItem ti);
         void AddMusicItem(MusicItem ti);
+        List<MusicItem> GetMusicItems(MusicSearchParameters musicSearchParameters);
+        void ClearData(MusicSearchParameters musicSearchParameters);
+        void Update(MusicItem mclickedMusicItem);
+    }
+
+    public class MusicSearchParameters
+    {
+        public bool? InPlayList { get; internal set; }
+        public bool? InUsbList { get; internal set; }
+        public string SearchText { get; set; }
     }
 }

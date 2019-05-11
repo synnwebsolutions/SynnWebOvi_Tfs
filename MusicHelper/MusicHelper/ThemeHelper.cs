@@ -30,15 +30,24 @@ namespace MusicHelper
             if (ctr is Button)
                 ApplyButtonStyle(ctr as Button);
 
+            if (ctr is CheckedListBox)
+                ApplyCheckedListBoxStyle(ctr as CheckedListBox);
+
             if (ctr.Controls.Count > 0)
                 foreach (Control ictr in ctr.Controls)
                     ApplyThemeInternal(ictr);
         }
 
+        private static void ApplyCheckedListBoxStyle(CheckedListBox c)
+        {
+            c.BackColor = Color.OrangeRed;
+            c.SelectionMode = SelectionMode.One;
+        }
+
         private static void ApplyButtonStyle(Button btnExam)
         {
+            HandleRole(btnExam);
             btnExam.FlatStyle = FlatStyle.Flat;
-            btnExam.BackColor = Color.Azure;
             btnExam.FlatAppearance.BorderColor = btnExam.BackColor;
             btnExam.SetBounds(btnExam.Location.X, btnExam.Location.Y, btnExam.Width, btnExam.Height);
 
@@ -52,6 +61,24 @@ namespace MusicHelper
             // Constrain the button to the region.
             btnExam.Region = polygon_region;
             btnExam.SizeChanged += BtnExam_SizeChanged;
+
+        }
+
+        private static void HandleRole(Control ctr)
+        {
+            if (ctr.Tag != null)
+            {
+                if (ctr.Tag.ToString() == "ext")
+                {
+                    ctr.BackColor = Color.Black;
+                    ctr.ForeColor = Color.White;
+                }
+            }
+            else
+            {
+                ctr.BackColor = Color.DarkGray;
+                ctr.ForeColor = Color.WhiteSmoke;
+            }
         }
 
         private static void BtnExam_SizeChanged(object sender, EventArgs e)
@@ -64,7 +91,7 @@ namespace MusicHelper
             GraphicsPath polygon_path = new GraphicsPath(FillMode.Winding);
             polygon_path.AddPolygon(GetPoints(btnExam.ClientRectangle));
             btnExam.Region = new Region(polygon_path);
-            
+  
         }
 
         public static Point[] GetPoints(Rectangle container)
@@ -83,13 +110,13 @@ namespace MusicHelper
 
         private static void ApplyGroupBoxStyle(GroupBox groupBox)
         {
-            groupBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            groupBox.ForeColor = System.Drawing.Color.Black;
+            groupBox.BackColor = System.Drawing.Color.FromArgb(225, 85, 10);
+            groupBox.ForeColor = System.Drawing.Color.WhiteSmoke;
         }
 
         private static void ApplyPanelStyle(Panel panel)
         {
-            panel.BackColor = System.Drawing.Color.DarkCyan;
+            panel.BackColor = System.Drawing.Color.OrangeRed;
         }
 
         private static void ApplyFormStyle(Form form)

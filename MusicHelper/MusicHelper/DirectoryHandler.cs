@@ -30,13 +30,18 @@ namespace MusicHelper
 
                 if (ProgressInit != null)
                     ProgressInit.Invoke(fList.Count);
-
+                ClearExistingData(DbController);
                 SaveFiles(DbController, fList);
             }
             catch (Exception ex)
             {
                 string msg = ex.Message;
             }
+        }
+
+        private void ClearExistingData(IDatabaseProvider dbController)
+        {
+            dbController.ClearData(new MusicSearchParameters { });
         }
 
         private List<string> GetDirectoryFiles(string selectedPath)

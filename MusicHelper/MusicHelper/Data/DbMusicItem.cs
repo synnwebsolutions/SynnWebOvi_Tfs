@@ -27,13 +27,22 @@ namespace MusicHelper
             FileName = DataAccessUtility.LoadNullable<string>(reader, "FileName");
             Title = DataAccessUtility.LoadNullable<string>(reader, "Title");
             MachineName = DataAccessUtility.LoadNullable<string>(reader, "MachineName");
+
+            ToUsb = DataAccessUtility.LoadNullable<bool?>(reader, "ToUsb");
+            ToPlaylist = DataAccessUtility.LoadNullable<bool?>(reader, "ToPlaylist");
         }
 
         public int Id { get; set; }
+        [GridInfo(1, "Artist", "אומן", true, true)]
         public string Artist { get; set; }
+        
         public string FullFileName { get; set; }
+        [GridInfo(3, "FileName", "קובץ", true, true)]
         public string FileName { get; set; }
+        [GridInfo(2, "Title", "שיר", true, true)]
         public string Title { get; set; }
         public string MachineName { get; set; }
+        public bool? ToUsb { get;  set; }
+        public bool? ToPlaylist { get;  set; }
     }
 }
