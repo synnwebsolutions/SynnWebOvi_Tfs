@@ -29,16 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnExit = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txYoutubeUrl = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPlayPlaylist = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClearUsb = new System.Windows.Forms.Button();
             this.btnSyncUsb = new System.Windows.Forms.Button();
-            this.btnSync = new System.Windows.Forms.Button();
+            this.btnPlayUsbLst = new System.Windows.Forms.Button();
+            this.txYoutubeUrl = new System.Windows.Forms.TextBox();
             this.btnYoutubeDownload = new System.Windows.Forms.Button();
+            this.btnSync = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.pnDrives = new System.Windows.Forms.Panel();
+            this.btnClip = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.txSearchText = new System.Windows.Forms.TextBox();
             this.btnRefreshGrid = new System.Windows.Forms.Button();
@@ -49,20 +56,14 @@
             this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuToPLaylist = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuSearchMore = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnPlayUsbLst = new System.Windows.Forms.Button();
-            this.btnPlayPlaylist = new System.Windows.Forms.Button();
             this.chkUsbs = new System.Windows.Forms.CheckedListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnClearUsb = new System.Windows.Forms.Button();
-            this.btnClip = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.pnDrives.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -94,12 +95,47 @@
             this.panel1.Size = new System.Drawing.Size(200, 365);
             this.panel1.TabIndex = 4;
             // 
-            // txYoutubeUrl
+            // groupBox2
             // 
-            this.txYoutubeUrl.Location = new System.Drawing.Point(4, 50);
-            this.txYoutubeUrl.Name = "txYoutubeUrl";
-            this.txYoutubeUrl.Size = new System.Drawing.Size(193, 20);
-            this.txYoutubeUrl.TabIndex = 3;
+            this.groupBox2.Controls.Add(this.btnPlayPlaylist);
+            this.groupBox2.Location = new System.Drawing.Point(4, 262);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(190, 100);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Play List";
+            // 
+            // btnPlayPlaylist
+            // 
+            this.btnPlayPlaylist.Location = new System.Drawing.Point(0, 19);
+            this.btnPlayPlaylist.Name = "btnPlayPlaylist";
+            this.btnPlayPlaylist.Size = new System.Drawing.Size(194, 23);
+            this.btnPlayPlaylist.TabIndex = 5;
+            this.btnPlayPlaylist.Text = "Play PlayList";
+            this.btnPlayPlaylist.UseVisualStyleBackColor = true;
+            this.btnPlayPlaylist.Click += new System.EventHandler(this.btnPlayPlaylist_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnClearUsb);
+            this.groupBox1.Controls.Add(this.btnSyncUsb);
+            this.groupBox1.Controls.Add(this.btnPlayUsbLst);
+            this.groupBox1.Location = new System.Drawing.Point(3, 105);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(193, 113);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "USB";
+            // 
+            // btnClearUsb
+            // 
+            this.btnClearUsb.Location = new System.Drawing.Point(0, 75);
+            this.btnClearUsb.Name = "btnClearUsb";
+            this.btnClearUsb.Size = new System.Drawing.Size(194, 23);
+            this.btnClearUsb.TabIndex = 5;
+            this.btnClearUsb.Text = "Clear USB List";
+            this.btnClearUsb.UseVisualStyleBackColor = true;
+            this.btnClearUsb.Click += new System.EventHandler(this.btnClearUsb_Click);
             // 
             // btnSyncUsb
             // 
@@ -111,15 +147,22 @@
             this.btnSyncUsb.UseVisualStyleBackColor = true;
             this.btnSyncUsb.Click += new System.EventHandler(this.btnSyncUsb_Click);
             // 
-            // btnSync
+            // btnPlayUsbLst
             // 
-            this.btnSync.Location = new System.Drawing.Point(13, 8);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(194, 23);
-            this.btnSync.TabIndex = 1;
-            this.btnSync.Text = "Sync Data";
-            this.btnSync.UseVisualStyleBackColor = true;
-            this.btnSync.Click += new System.EventHandler(this.button1_Click);
+            this.btnPlayUsbLst.Location = new System.Drawing.Point(-3, 46);
+            this.btnPlayUsbLst.Name = "btnPlayUsbLst";
+            this.btnPlayUsbLst.Size = new System.Drawing.Size(194, 23);
+            this.btnPlayUsbLst.TabIndex = 4;
+            this.btnPlayUsbLst.Text = "Play USB List";
+            this.btnPlayUsbLst.UseVisualStyleBackColor = true;
+            this.btnPlayUsbLst.Click += new System.EventHandler(this.btnPlayUsbLst_Click);
+            // 
+            // txYoutubeUrl
+            // 
+            this.txYoutubeUrl.Location = new System.Drawing.Point(4, 50);
+            this.txYoutubeUrl.Name = "txYoutubeUrl";
+            this.txYoutubeUrl.Size = new System.Drawing.Size(193, 20);
+            this.txYoutubeUrl.TabIndex = 3;
             // 
             // btnYoutubeDownload
             // 
@@ -130,6 +173,16 @@
             this.btnYoutubeDownload.Text = "Youtube";
             this.btnYoutubeDownload.UseVisualStyleBackColor = true;
             this.btnYoutubeDownload.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btnSync
+            // 
+            this.btnSync.Location = new System.Drawing.Point(13, 8);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Size = new System.Drawing.Size(194, 23);
+            this.btnSync.TabIndex = 1;
+            this.btnSync.Text = "Sync Data";
+            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -160,6 +213,16 @@
             this.pnDrives.Name = "pnDrives";
             this.pnDrives.Size = new System.Drawing.Size(751, 34);
             this.pnDrives.TabIndex = 6;
+            // 
+            // btnClip
+            // 
+            this.btnClip.Location = new System.Drawing.Point(224, 9);
+            this.btnClip.Name = "btnClip";
+            this.btnClip.Size = new System.Drawing.Size(26, 23);
+            this.btnClip.TabIndex = 1;
+            this.btnClip.Text = ">>";
+            this.btnClip.UseVisualStyleBackColor = true;
+            this.btnClip.Click += new System.EventHandler(this.btnClip_Click);
             // 
             // btnClear
             // 
@@ -243,26 +306,6 @@
             this.toolStripMenuSearchMore.Tag = "src";
             this.toolStripMenuSearchMore.Text = "Search More ..";
             // 
-            // btnPlayUsbLst
-            // 
-            this.btnPlayUsbLst.Location = new System.Drawing.Point(-3, 46);
-            this.btnPlayUsbLst.Name = "btnPlayUsbLst";
-            this.btnPlayUsbLst.Size = new System.Drawing.Size(194, 23);
-            this.btnPlayUsbLst.TabIndex = 4;
-            this.btnPlayUsbLst.Text = "Play USB List";
-            this.btnPlayUsbLst.UseVisualStyleBackColor = true;
-            this.btnPlayUsbLst.Click += new System.EventHandler(this.btnPlayUsbLst_Click);
-            // 
-            // btnPlayPlaylist
-            // 
-            this.btnPlayPlaylist.Location = new System.Drawing.Point(0, 19);
-            this.btnPlayPlaylist.Name = "btnPlayPlaylist";
-            this.btnPlayPlaylist.Size = new System.Drawing.Size(194, 23);
-            this.btnPlayPlaylist.TabIndex = 5;
-            this.btnPlayPlaylist.Text = "Play PlayList";
-            this.btnPlayPlaylist.UseVisualStyleBackColor = true;
-            this.btnPlayPlaylist.Click += new System.EventHandler(this.btnPlayPlaylist_Click);
-            // 
             // chkUsbs
             // 
             this.chkUsbs.FormattingEnabled = true;
@@ -271,48 +314,6 @@
             this.chkUsbs.Size = new System.Drawing.Size(193, 34);
             this.chkUsbs.TabIndex = 7;
             this.chkUsbs.SelectedValueChanged += new System.EventHandler(this.chkUsbs_SelectedValueChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnClearUsb);
-            this.groupBox1.Controls.Add(this.btnSyncUsb);
-            this.groupBox1.Controls.Add(this.btnPlayUsbLst);
-            this.groupBox1.Location = new System.Drawing.Point(3, 105);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(193, 113);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "USB";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnPlayPlaylist);
-            this.groupBox2.Location = new System.Drawing.Point(4, 262);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 100);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Play List";
-            // 
-            // btnClearUsb
-            // 
-            this.btnClearUsb.Location = new System.Drawing.Point(0, 75);
-            this.btnClearUsb.Name = "btnClearUsb";
-            this.btnClearUsb.Size = new System.Drawing.Size(194, 23);
-            this.btnClearUsb.TabIndex = 5;
-            this.btnClearUsb.Text = "Clear USB List";
-            this.btnClearUsb.UseVisualStyleBackColor = true;
-            this.btnClearUsb.Click += new System.EventHandler(this.btnClearUsb_Click);
-            // 
-            // btnClip
-            // 
-            this.btnClip.Location = new System.Drawing.Point(224, 9);
-            this.btnClip.Name = "btnClip";
-            this.btnClip.Size = new System.Drawing.Size(26, 23);
-            this.btnClip.TabIndex = 1;
-            this.btnClip.Text = ">>";
-            this.btnClip.UseVisualStyleBackColor = true;
-            this.btnClip.Click += new System.EventHandler(this.btnClip_Click);
             // 
             // Form1
             // 
@@ -326,6 +327,7 @@
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.btnExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -333,13 +335,13 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.pnDrives.ResumeLayout(false);
             this.pnDrives.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
