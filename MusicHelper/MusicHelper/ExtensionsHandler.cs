@@ -16,20 +16,24 @@ namespace MusicHelper
     {
         public static string GetConnectionString(this object frm)
         {
-            return ConfigurationSettings.AppSettings["connectionString"];
+            return GetConnectionString();
         }
+
+        private static string GetConnectionString()
+        {
+#if DEBUG
+            return ConfigurationSettings.AppSettings["connectionString"];
+#else
+           return ConfigurationSettings.AppSettings["prodConnectionString"];
+#endif
+        }
+
         public static IDatabaseProvider InitDataProvider(this object frm)
         {
             IDatabaseProvider dbc = null;
             if (dbc == null)
             {
-                string _connectionString = string.Empty;
-#if DEBUG
-                _connectionString = ConfigurationSettings.AppSettings["connectionString"];
-#else
-            _connectionString = ConfigurationSettings.AppSettings["prodConnectionString"];
-#endif
-
+                string _connectionString = GetConnectionString();
                 dbc = new SqlDatabaseProvider(new SynnSqlDataProvider(_connectionString));
             }
             return dbc;

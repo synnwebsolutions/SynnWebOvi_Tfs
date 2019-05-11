@@ -90,6 +90,10 @@ namespace MusicHelper
             List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { SearchText =  txSearchText.Text });
             dgv.RefreshGrid(musicitems);
             AfterGridRefreshed();
+
+            string syncText = "Sync USB";
+            List<MusicItem> usbmusicitems = DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true });
+            btnSyncUsb.Text = string.Format("{0} ({1} Songs)", syncText,usbmusicitems.Count);
         }
 
         private void AfterGridRefreshed()
@@ -183,7 +187,8 @@ namespace MusicHelper
 
         private void chkUsbs_SelectedValueChanged(object sender, EventArgs e)
         {
-            CurrentDrive = Drives.Where(x => x.VolumeLabel == chkUsbs.SelectedItem.ToString()).First();
+            if(chkUsbs.SelectedItem != null)
+                CurrentDrive = Drives.Where(x => x.VolumeLabel == chkUsbs.SelectedItem.ToString()).First();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -206,6 +211,12 @@ namespace MusicHelper
         private void AlertSuccess()
         {
             var dr = MessageBox.Show("Action Commited Successfully !");
+            RefreshGrid();
+        }
+
+        private void btnClip_Click(object sender, EventArgs e)
+        {
+            txSearchText.Text = Clipboard.GetText();
             RefreshGrid();
         }
     }

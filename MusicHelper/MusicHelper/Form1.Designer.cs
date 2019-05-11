@@ -55,6 +55,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnClearUsb = new System.Windows.Forms.Button();
+            this.btnClip = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -150,6 +151,7 @@
             // 
             // pnDrives
             // 
+            this.pnDrives.Controls.Add(this.btnClip);
             this.pnDrives.Controls.Add(this.btnClear);
             this.pnDrives.Controls.Add(this.txSearchText);
             this.pnDrives.Controls.Add(this.btnRefreshGrid);
@@ -171,9 +173,9 @@
             // 
             // txSearchText
             // 
-            this.txSearchText.Location = new System.Drawing.Point(240, 11);
+            this.txSearchText.Location = new System.Drawing.Point(256, 11);
             this.txSearchText.Name = "txSearchText";
-            this.txSearchText.Size = new System.Drawing.Size(325, 20);
+            this.txSearchText.Size = new System.Drawing.Size(309, 20);
             this.txSearchText.TabIndex = 2;
             // 
             // btnRefreshGrid
@@ -302,6 +304,16 @@
             this.btnClearUsb.UseVisualStyleBackColor = true;
             this.btnClearUsb.Click += new System.EventHandler(this.btnClearUsb_Click);
             // 
+            // btnClip
+            // 
+            this.btnClip.Location = new System.Drawing.Point(224, 9);
+            this.btnClip.Name = "btnClip";
+            this.btnClip.Size = new System.Drawing.Size(26, 23);
+            this.btnClip.TabIndex = 1;
+            this.btnClip.Text = ">>";
+            this.btnClip.UseVisualStyleBackColor = true;
+            this.btnClip.Click += new System.EventHandler(this.btnClip_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,6 +372,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnClearUsb;
+        private System.Windows.Forms.Button btnClip;
     }
 }
 
