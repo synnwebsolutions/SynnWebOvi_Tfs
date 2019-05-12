@@ -17,6 +17,7 @@ namespace MusicHelper
         void AddToPlayList(MusicItem mclickedMusicItem);
         void ClearUsbList();
         bool ValidateUser(ref LoggedUser u);
+        UserTheme GetUserTheme();
     }
 
     public class MusicSearchParameters

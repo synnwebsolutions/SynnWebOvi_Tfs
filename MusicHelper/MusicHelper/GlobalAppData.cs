@@ -10,6 +10,7 @@ namespace MusicHelper
 {
     public static class GlobalAppData
     {
+        //private static IDatabaseProvider db = (new object()).InitDataProvider();
         private static LoggedUser cu;
         public static LoggedUser CurrentUser
         {
@@ -30,6 +31,32 @@ namespace MusicHelper
         public static void SetUser(LoggedUser u)
         {
             cu = u;
+        }
+
+        private static UserTheme ut;
+        public static UserTheme UserTheme
+        {
+            get
+            {
+                if (CurrentUser != null)
+                {
+                    if (ut != null)
+                        return ut;
+                    //ut = db.GetUserTheme();
+                    if (ut != null)
+                        return ut;
+                }
+                return GetDefaultTheme();
+            }
+        }
+
+        private static UserTheme GetDefaultTheme()
+        {
+            var t = new UserTheme
+            {
+
+            };
+            return t;
         }
     }
 
