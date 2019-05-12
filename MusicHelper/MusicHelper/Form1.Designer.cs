@@ -83,7 +83,7 @@
             // 
             this.progressBar2.Location = new System.Drawing.Point(18, 12);
             this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(958, 23);
+            this.progressBar2.Size = new System.Drawing.Size(751, 23);
             this.progressBar2.TabIndex = 3;
             // 
             // panel1
@@ -320,10 +320,10 @@
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(195)));
-            this.lblUser.Location = new System.Drawing.Point(786, 454);
+            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(195)));
+            this.lblUser.Location = new System.Drawing.Point(791, 12);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(52, 17);
+            this.lblUser.Size = new System.Drawing.Size(47, 15);
             this.lblUser.TabIndex = 8;
             this.lblUser.Text = "label1";
             // 
