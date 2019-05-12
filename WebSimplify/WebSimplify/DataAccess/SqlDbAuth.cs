@@ -36,9 +36,9 @@ namespace WebSimplify
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.Users);
             ClearParameters();
             if (!string.IsNullOrEmpty(lp.UserName))
-                AddSqlWhereLikeField("UserName", lp.UserName);
+                AddSqlWhereLikeField("UserName", lp.UserName, LikeSelectionStyle.AsIs);
             if (!string.IsNullOrEmpty(lp.Password))
-                AddSqlWhereLikeField("Password", lp.Password);
+                AddSqlWhereLikeField("Password", lp.Password, LikeSelectionStyle.AsIs);
             if (lp.Id.HasValue)
                 AddSqlWhereLikeField("Id", lp.Id.ToString());
             var lst = new List<LoggedUser>();
