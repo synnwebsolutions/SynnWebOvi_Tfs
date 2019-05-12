@@ -68,9 +68,7 @@ namespace MusicHelper
         private static List<DirectoryInfo> GetDirectories()
         {
             var dList = new List<DirectoryInfo>();
-            var dirs = System.Configuration.ConfigurationSettings.AppSettings["dirs"].Split(',');
-            
-            foreach (var dI in dirs)
+            foreach (var dI in GlobalAppData.Configs.SyncDirectories)
             {
                 try { dList.Add(new DirectoryInfo(dI)); }
                 catch (Exception) { }

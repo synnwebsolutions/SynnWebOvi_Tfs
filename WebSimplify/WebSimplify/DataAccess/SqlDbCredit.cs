@@ -42,22 +42,25 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.CreditData);
             ClearParameters();
-            SetPermissions(lsp);
-            if (lsp.Month.HasValue)
+            if (!lsp.FromWs)
             {
-                var d = lsp.Month.Value;
-                AddSqlWhereField("Date",new DateTime(d.Year,d.Month,1), ">=");
-                AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
-            }
-            if(lsp.FromDate.HasValue)
-                AddSqlWhereField("Date", lsp.FromDate, ">=");
-            if (lsp.ToDate.HasValue)
-                AddSqlWhereField("Date", lsp.ToDate, "<");
+                SetPermissions(lsp);
+                if (lsp.Month.HasValue)
+                {
+                    var d = lsp.Month.Value;
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                }
+                if (lsp.FromDate.HasValue)
+                    AddSqlWhereField("Date", lsp.FromDate, ">=");
+                if (lsp.ToDate.HasValue)
+                    AddSqlWhereField("Date", lsp.ToDate, "<");
 
-            if (lsp.Id.HasValue)
-                AddSqlWhereField("Id",lsp.Id.Value);
-            if (lsp.Active.HasValue)
-                AddSqlWhereField("Active", lsp.Active.Value);
+                if (lsp.Id.HasValue)
+                    AddSqlWhereField("Id", lsp.Id.Value);
+                if (lsp.Active.HasValue)
+                    AddSqlWhereField("Active", lsp.Active.Value);
+            }
             var lst = new List<CreditCardMonthlyData>();
             FillList(lst, typeof(CreditCardMonthlyData));
             return lst;
@@ -84,15 +87,18 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.CashData);
             ClearParameters();
-            SetPermissions(lsp);
-            if (lsp.Month.HasValue)
+            if (!lsp.FromWs)
             {
-                var d = lsp.Month.Value;
-                AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
-                AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                SetPermissions(lsp);
+                if (lsp.Month.HasValue)
+                {
+                    var d = lsp.Month.Value;
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                }
+                if (lsp.Id.HasValue)
+                    AddSqlWhereField("Id", lsp.Id.Value);
             }
-            if (lsp.Id.HasValue)
-                AddSqlWhereField("Id", lsp.Id.Value);
 
             var lst = new List<CashMonthlyData>();
             FillList(lst, typeof(CashMonthlyData));
@@ -110,15 +116,18 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.CashItems);
             ClearParameters();
-            SetPermissions(lsp);
-            if (lsp.Month.HasValue)
+            if (!lsp.FromWs)
             {
-                var d = lsp.Month.Value;
-                AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
-                AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                SetPermissions(lsp);
+                if (lsp.Month.HasValue)
+                {
+                    var d = lsp.Month.Value;
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, 1), ">=");
+                    AddSqlWhereField("Date", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                }
+                if (lsp.Id.HasValue)
+                    AddSqlWhereField("Id", lsp.Id.Value);
             }
-            if (lsp.Id.HasValue)
-                AddSqlWhereField("Id", lsp.Id.Value);
 
             var lst = new List<CashMoneyItem>();
             FillList(lst, typeof(CashMoneyItem));
@@ -140,9 +149,12 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.MoneyTransactionTemplatess);
             ClearParameters();
-            SetPermissions(mp);
-            if (mp.Id.HasValue)
-                AddSqlWhereField("Id", mp.Id.Value);
+            if (!mp.FromWs)
+            {
+                SetPermissions(mp);
+                if (mp.Id.HasValue)
+                    AddSqlWhereField("Id", mp.Id.Value);
+            }
             var lst = new List<MoneyTransactionTemplate>();
             FillList(lst, typeof(MoneyTransactionTemplate));
             return lst;
@@ -177,21 +189,24 @@ namespace WebSimplify
             if(mp.TranType.HasValue)
                 AddSqlText(string.Format("inner join {0} tmp on tmp.Id = TemplateId", SynnDataProvider.TableNames.MoneyTransactionTemplatess));
             ClearParameters();
-            SetPermissions(mp, string.Format("{0}.", SynnDataProvider.TableNames.MoneyTransactionItems));
-            if (mp.Id.HasValue)
-                AddSqlWhereField("Id", mp.Id.Value);
-            if (mp.Closed.HasValue)
-                AddSqlWhereField("Closed", mp.Closed.Value);
-            if (mp.TranType.HasValue)
-                AddSqlWhereField("tmp.TransactionType", (int)mp.TranType.Value);
-            if (mp.Month.HasValue)
+            if (!mp.FromWs)
             {
-                var d = mp.Month.Value;
-                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, 1), ">=");
-                AddSqlWhereField("Month", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                SetPermissions(mp, string.Format("{0}.", SynnDataProvider.TableNames.MoneyTransactionItems));
+                if (mp.Id.HasValue)
+                    AddSqlWhereField("Id", mp.Id.Value);
+                if (mp.Closed.HasValue)
+                    AddSqlWhereField("Closed", mp.Closed.Value);
+                if (mp.TranType.HasValue)
+                    AddSqlWhereField("tmp.TransactionType", (int)mp.TranType.Value);
+                if (mp.Month.HasValue)
+                {
+                    var d = mp.Month.Value;
+                    AddSqlWhereField("Month", new DateTime(d.Year, d.Month, 1), ">=");
+                    AddSqlWhereField("Month", new DateTime(d.Year, d.Month, d.NumberOfDays()), "<");
+                }
+                if (mp.TemplateId.HasValue)
+                    AddSqlWhereField("TemplateId", mp.TemplateId.Value);
             }
-            if (mp.TemplateId.HasValue)
-                AddSqlWhereField("TemplateId", mp.TemplateId.Value);
             var lst = new List<MonthlyMoneyTransaction>();
             FillList(lst, typeof(MonthlyMoneyTransaction));
             return lst;

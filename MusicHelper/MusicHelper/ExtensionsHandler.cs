@@ -22,9 +22,9 @@ namespace MusicHelper
         private static string GetConnectionString()
         {
 #if DEBUG
-            return ConfigurationSettings.AppSettings["connectionString"];
+            return GlobalAppData.Configs.TestConnectionString;
 #else
-           return ConfigurationSettings.AppSettings["prodConnectionString"];
+           return GlobalAppData.Configs.ProdConnectionString;
 #endif
         }
 

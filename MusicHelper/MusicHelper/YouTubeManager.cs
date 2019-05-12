@@ -14,7 +14,7 @@ namespace MusicHelper
 {
     public static class YouTubeManager
     {
-        const string destinationFolder = @"E:\Music\Music Helper Youtube Downloads";
+        private static string destinationFolder = GlobalAppData.Configs.YoutubeDataFolder;// @"E:\Music\Music Helper Youtube Downloads";
 
         public static MusicItem DownloadAndConvert(string videoUrl)
         {

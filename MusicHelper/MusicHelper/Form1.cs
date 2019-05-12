@@ -17,14 +17,32 @@ namespace MusicHelper
         IDatabaseProvider DbController;
         List<DriveInfo> Drives;
         DriveInfo CurrentDrive;
+        bool refreshData = false;
+
+        public List<MusicItem> UsbList()
+        {
+                return DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true });
+        }
+
+        public List<MusicItem> PlayList()
+        {
+            return DbController.GetMusicItems(new MusicSearchParameters { InPlayList = true }); 
+        }
+
         public Form1()
         {
             InitializeComponent();
             CenterToScreen();
             this.ApplyTheme();
             DbController = this.InitDataProvider();
-            
+            SetDisplay();
             HandleUsbs();
+        }
+
+        private void SetDisplay()
+        {
+            btnSyncUsb.Enabled = CurrentDrive != null;
+            lblUser.Text = $"Logged as : { GlobalAppData.CurrentUser.UserName}";
         }
 
         private void HandleUsbs()
@@ -92,20 +110,22 @@ namespace MusicHelper
             AfterGridRefreshed();
 
             string syncText = "Sync USB";
-            List<MusicItem> usbmusicitems = DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true });
-            btnSyncUsb.Text = string.Format("{0} ({1} Songs)", syncText,usbmusicitems.Count);
+            btnSyncUsb.Text = string.Format("{0} ({1} Songs)",syncText, UsbList().Count);
+            lblGridSummary.Text = $"{ String.Format("{0:n0}", musicitems.Count)} Items ";
         }
 
         private void AfterGridRefreshed()
         {
+            var usbList = UsbList();
+            var playList = PlayList();
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 var i = (MusicItem)row.DataBoundItem;
-                if (i.ToUsb == true && i.ToPlaylist == true)
+                if (playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
                     row.DefaultCellStyle.BackColor = Color.DarkOrange;
-                else if (i.ToUsb == true)
+                else if (usbList.Any(x => x.Id == i.Id))
                     row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
-                else if (i.ToPlaylist == true)
+                else if (playList.Any(x => x.Id == i.Id))
                     row.DefaultCellStyle.BackColor = Color.LightGreen;
             }
         }
@@ -120,8 +140,7 @@ namespace MusicHelper
         {
             if (CurrentDrive != null)
             {
-                List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true });
-                UsbHandler.Sync(CurrentDrive, musicitems);
+                UsbHandler.Sync(CurrentDrive, UsbList());
             }
             else
             {
@@ -155,13 +174,13 @@ namespace MusicHelper
             var mclickedMusicItem = (MusicItem)dgv.CurrentRow.DataBoundItem;
             if (menuAction == "usb")
             {
-                mclickedMusicItem.ToUsb = true;
+                DbController.AddToUsbList(mclickedMusicItem);
             }
             if (menuAction == "plst")
             {
-                mclickedMusicItem.ToPlaylist = true;
+                DbController.AddToPlayList(mclickedMusicItem);
             }
-            DbController.Update(mclickedMusicItem);
+            //DbController.Update(mclickedMusicItem);
 
             currentIndex = null;
             RefreshGrid();
@@ -169,14 +188,12 @@ namespace MusicHelper
 
         private void btnPlayUsbLst_Click(object sender, EventArgs e)
         {
-            List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true});
-            MusicListManager.PlayUsbList(musicitems);
+            MusicListManager.PlayUsbList(UsbList());
         }
 
         private void btnPlayPlaylist_Click(object sender, EventArgs e)
         {
-            List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { InPlayList = true });
-            MusicListManager.PlayPlayList(musicitems);
+            MusicListManager.PlayPlayList(PlayList());
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -199,12 +216,7 @@ namespace MusicHelper
 
         private void btnClearUsb_Click(object sender, EventArgs e)
         {
-            List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { InUsbList = true });
-            foreach (var m in musicitems)
-            {
-                m.ToUsb = false;
-                DbController.Update(m);
-            }
+            DbController.ClearUsbList();
             AlertSuccess();
         }
 

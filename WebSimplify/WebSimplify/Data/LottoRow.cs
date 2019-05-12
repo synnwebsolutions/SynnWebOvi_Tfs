@@ -146,7 +146,7 @@ namespace WebSimplify
             throw new NotImplementedException();
         }
 
-        internal List<int> GetNumbers()
+        public List<int> GetNumbers()
         {
             return new List<int> { N1, N2, N3, N4, N5, N6 };
         }

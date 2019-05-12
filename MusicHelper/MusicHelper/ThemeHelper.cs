@@ -73,12 +73,32 @@ namespace MusicHelper
                     ctr.BackColor = Color.Black;
                     ctr.ForeColor = Color.White;
                 }
+                if (ctr.Tag.ToString() == "login")
+                {
+                    if (ctr is Button)
+                    {
+                        var btn = ctr as Button;
+                        btn.Paint += Btn_Paint;
+                    }
+                }
             }
             else
             {
                 ctr.BackColor = Color.DarkGray;
                 ctr.ForeColor = Color.WhiteSmoke;
             }
+        }
+
+        private static void Btn_Paint(object sender, PaintEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            ControlPaint.DrawBorder(e.Graphics, btn.ClientRectangle,
+                                    Color.Red, 1, ButtonBorderStyle.Solid,
+                                    Color.Red, 1, ButtonBorderStyle.Solid,
+                                    Color.Red, 1, ButtonBorderStyle.Solid,
+                                    Color.Red, 1, ButtonBorderStyle.Solid
+                                    );
         }
 
         private static void BtnExam_SizeChanged(object sender, EventArgs e)

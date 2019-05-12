@@ -9,9 +9,9 @@ namespace MusicHelper
     public class xmConsts
     {
         public const string MusicItems = "MusicItems";
-        //public const string cssDayItemHeaderClass = "dayitemheader";
-        //public const string cssMainContainerClass = "maincontainer";
-        //public const string cssMainHeadersClass = "mainheaders";
+        public const string UserPlayList = "UserPlayList";
+        public const string UserUsbList = "UserUsbList";
+        public const string Users = "Users";
         //public const string cssDayItemContainerClass = "dayitemcontainer";
         //public const string cssToDayItemClass = "today";
     }

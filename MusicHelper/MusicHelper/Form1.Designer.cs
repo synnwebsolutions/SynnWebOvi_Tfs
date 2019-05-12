@@ -57,6 +57,8 @@
             this.toolStripMenuToPLaylist = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuSearchMore = new System.Windows.Forms.ToolStripMenuItem();
             this.chkUsbs = new System.Windows.Forms.CheckedListBox();
+            this.lblUser = new System.Windows.Forms.Label();
+            this.lblGridSummary = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,7 +70,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(776, 451);
+            this.btnExit.Location = new System.Drawing.Point(772, 474);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(200, 33);
             this.btnExit.TabIndex = 0;
@@ -315,11 +317,33 @@
             this.chkUsbs.TabIndex = 7;
             this.chkUsbs.SelectedValueChanged += new System.EventHandler(this.chkUsbs_SelectedValueChanged);
             // 
+            // lblUser
+            // 
+            this.lblUser.AutoSize = true;
+            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(195)));
+            this.lblUser.Location = new System.Drawing.Point(786, 454);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(52, 17);
+            this.lblUser.TabIndex = 8;
+            this.lblUser.Text = "label1";
+            // 
+            // lblGridSummary
+            // 
+            this.lblGridSummary.AutoSize = true;
+            this.lblGridSummary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(195)));
+            this.lblGridSummary.Location = new System.Drawing.Point(28, 454);
+            this.lblGridSummary.Name = "lblGridSummary";
+            this.lblGridSummary.Size = new System.Drawing.Size(46, 17);
+            this.lblGridSummary.TabIndex = 9;
+            this.lblGridSummary.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 496);
+            this.ClientSize = new System.Drawing.Size(988, 519);
+            this.Controls.Add(this.lblGridSummary);
+            this.Controls.Add(this.lblUser);
             this.Controls.Add(this.chkUsbs);
             this.Controls.Add(this.pnDrives);
             this.Controls.Add(this.panel2);
@@ -343,6 +367,7 @@
             this.pnDrives.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -375,6 +400,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnClearUsb;
         private System.Windows.Forms.Button btnClip;
+        private System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Label lblGridSummary;
     }
 }
 

@@ -13,6 +13,10 @@ namespace MusicHelper
         List<MusicItem> GetMusicItems(MusicSearchParameters musicSearchParameters);
         void ClearData(MusicSearchParameters musicSearchParameters);
         void Update(MusicItem mclickedMusicItem);
+        void AddToUsbList(MusicItem mclickedMusicItem);
+        void AddToPlayList(MusicItem mclickedMusicItem);
+        void ClearUsbList();
+        bool ValidateUser(ref LoggedUser u);
     }
 
     public class MusicSearchParameters

@@ -29,8 +29,8 @@ namespace MusicHelper
             sqlItems.Add(new SqlItem("FullFileName", m.FullFileName));
             sqlItems.Add(new SqlItem("MachineName", m.MachineName));
             sqlItems.Add(new SqlItem("Title", m.Title));
-            sqlItems.Add(new SqlItem("ToUsb", m.ToUsb));
-            sqlItems.Add(new SqlItem("ToPlaylist", m.ToPlaylist));
+            //sqlItems.Add(new SqlItem("ToUsb", m.ToUsb));
+            //sqlItems.Add(new SqlItem("ToPlaylist", m.ToPlaylist));
             return sqlItems;
         }
 
@@ -43,6 +43,12 @@ namespace MusicHelper
         public List<MusicItem> GetMusicItems(MusicSearchParameters p)
         {
             SetSqlFormat("select * from {0}", xmConsts.MusicItems);
+            if(p.InUsbList.HasValue)
+                AddSqlText(string.Format("inner join {0} usb on usb.ItemId = {1}.Id", xmConsts.UserUsbList, xmConsts.MusicItems));
+
+            if (p.InPlayList.HasValue)
+                AddSqlText(string.Format("inner join {0} pls on pls.ItemId = {1}.Id", xmConsts.UserPlayList, xmConsts.MusicItems));
+
             ClearParameters();
             if (!string.IsNullOrEmpty(p.SearchText))
             {
@@ -54,9 +60,9 @@ namespace MusicHelper
                 EndORGroup();
             }
             if (p.InUsbList.HasValue)
-                AddSqlWhereField("ToUsb", p.InUsbList.Value);
+                AddSqlWhereField("usb.UserId", GlobalAppData.CurrentUser.Id);
             if (p.InPlayList.HasValue)
-                AddSqlWhereField("ToPlaylist", p.InPlayList.Value);
+                AddSqlWhereField("pls.UserId",GlobalAppData.CurrentUser.Id);
             var lst = new List<MusicItem>();
             FillList(lst, typeof(MusicItem));
             return lst;
@@ -72,6 +78,51 @@ namespace MusicHelper
             var sqlItems = Get(m);
             SetUpdateSql(xmConsts.MusicItems, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = m.Id } });
             ExecuteSql();
+        }
+
+        public void AddToUsbList(MusicItem m)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserId", GlobalAppData.CurrentUser.Id));
+            sqlItems.Add(new SqlItem("ItemId", m.Id));
+            SetInsertIntoSql(xmConsts.UserUsbList, sqlItems);
+            ExecuteSql();
+        }
+
+        public void AddToPlayList(MusicItem m)
+        {
+            var sqlItems = new SqlItemList();
+            sqlItems.Add(new SqlItem("UserId", GlobalAppData.CurrentUser.Id));
+            sqlItems.Add(new SqlItem("ItemId", m.Id));
+            SetInsertIntoSql(xmConsts.UserPlayList, sqlItems);
+            ExecuteSql();
+        }
+
+        public void ClearUsbList()
+        {
+            SetSqlFormat("delete from {0}", xmConsts.UserUsbList);
+            ClearParameters();
+            AddSqlWhereField("UserId", GlobalAppData.CurrentUser.Id);
+            ExecuteSql();
+        }
+
+        public bool ValidateUser(ref LoggedUser u)
+        {
+            if (!string.IsNullOrEmpty(u.UserName) && !string.IsNullOrEmpty(u.Password))
+            {
+                SetSqlFormat("select * from {0}", xmConsts.Users);
+                ClearParameters();
+                AddSqlWhereField("UserName", u.UserName);
+                AddSqlWhereField("Password", u.Password);
+                var lst = new List<LoggedUser>();
+                FillList(lst, typeof(LoggedUser));
+                if (lst.Count == 1)
+                {
+                    u = lst[0];
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

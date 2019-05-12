@@ -28,8 +28,8 @@ namespace MusicHelper
             Title = DataAccessUtility.LoadNullable<string>(reader, "Title");
             MachineName = DataAccessUtility.LoadNullable<string>(reader, "MachineName");
 
-            ToUsb = DataAccessUtility.LoadNullable<bool?>(reader, "ToUsb");
-            ToPlaylist = DataAccessUtility.LoadNullable<bool?>(reader, "ToPlaylist");
+            //ToUsb = DataAccessUtility.LoadNullable<bool?>(reader, "ToUsb");
+            //ToPlaylist = DataAccessUtility.LoadNullable<bool?>(reader, "ToPlaylist");
         }
 
         public int Id { get; set; }
@@ -42,7 +42,7 @@ namespace MusicHelper
         [GridInfo(2, "Title", "שיר", true, true)]
         public string Title { get; set; }
         public string MachineName { get; set; }
-        public bool? ToUsb { get;  set; }
-        public bool? ToPlaylist { get;  set; }
+        //public bool? ToUsb { get;  set; }
+        //public bool? ToPlaylist { get;  set; }
     }
 }

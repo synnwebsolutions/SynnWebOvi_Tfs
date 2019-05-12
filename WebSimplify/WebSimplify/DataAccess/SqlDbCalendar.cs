@@ -45,12 +45,15 @@ namespace SynnWebOvi
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.QuickTasks);
             ClearParameters();
-            AddSqlWhereField("UserGroupId", lsp.CurrentUser.Id);
+            if (!lsp.FromWs)
+            {
+                AddSqlWhereField("UserGroupId", lsp.CurrentUser.Id);
 
-            if (lsp.Active.HasValue)
-                AddSqlWhereField("Active", lsp.Active);
-            if (lsp.Id.HasValue)
-                AddSqlWhereField("Id", lsp.Id);
+                if (lsp.Active.HasValue)
+                    AddSqlWhereField("Active", lsp.Active);
+                if (lsp.Id.HasValue)
+                    AddSqlWhereField("Id", lsp.Id);
+            }
             var lst = new List<QuickTask>();
             FillList(lst, typeof(QuickTask));
             return lst;
@@ -60,19 +63,22 @@ namespace SynnWebOvi
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.DiaryData);
             ClearParameters();
-
-            if (!lsp.CurrentUser.IsAdmin)
+            if (!lsp.FromWs)
             {
-                StartORGroup();
-                foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
-                    AddOREqualField("UserGroupId", gid);
-                EndORGroup();
-            }
 
-            if (lsp.FromDate.HasValue)
-                AddSqlWhereField("Date", lsp.FromDate, ">=");
-            if (lsp.ToDate.HasValue)
-                AddSqlWhereField("Date", lsp.ToDate, "<=");
+                if (!lsp.CurrentUser.IsAdmin)
+                {
+                    StartORGroup();
+                    foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
+                        AddOREqualField("UserGroupId", gid);
+                    EndORGroup();
+                }
+
+                if (lsp.FromDate.HasValue)
+                    AddSqlWhereField("Date", lsp.FromDate, ">=");
+                if (lsp.ToDate.HasValue)
+                    AddSqlWhereField("Date", lsp.ToDate, "<=");
+            }
             var lst = new List<MemoItem>();
             FillList(lst, typeof(MemoItem));
             return lst;

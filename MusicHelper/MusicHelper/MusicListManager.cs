@@ -22,14 +22,15 @@ namespace MusicHelper
 
         private static void SaveToFile(string created)
         {
-            string pt = $@"C:\temp\musictemp\temp" + $"{ (new Random()).Next(0, 15214) }.m3u";
-            using (var fs = new FileStream(pt, FileMode.Create))
+            //string pt =  $@"C:\temp\musictemp\temp" + $"{ (new Random()).Next(0, 15214) }.m3u";
+            string tmpTath = GlobalAppData.Configs.TempMusicListPath + $"{ (new Random()).Next(0, 15214) }.m3u";
+            using (var fs = new FileStream(tmpTath, FileMode.Create))
             {
 
             }
-            File.WriteAllText(pt, created);
+            File.WriteAllText(tmpTath, created);
 
-            Play(pt);
+            Play(tmpTath);
         }
 
         private static void Play(string pt)
@@ -37,7 +38,7 @@ namespace MusicHelper
             if (File.Exists(pt))
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = @"E:\SanProgramFiles\Winamp\winamp.exe";
+                startInfo.FileName = GlobalAppData.Configs.MediaPlayerPath; // @"E:\SanProgramFiles\Winamp\winamp.exe";
                 startInfo.Arguments = pt;
                 Process.Start(startInfo);
             }
@@ -67,6 +68,7 @@ namespace MusicHelper
             M3uContent content = new M3uContent();
             M3uPlaylist lst = Generate(m);
             string created = content.ToText(lst);
+            SaveToFile(created);
         }
 
         internal static void PlaySingle(MusicItem mclickedMusicItem)

@@ -54,25 +54,51 @@ namespace MusicHelper
             t.Fields.Add(new TableMigrationField { FieldName = "Title", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "MachineName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
 
-            t.Fields.Add(new TableMigrationField { FieldName = "ToUsb", FieldType = TableMigrationFieldType.Bit,  IsNullAble = true });
-            t.Fields.Add(new TableMigrationField { FieldName = "ToPlaylist", FieldType = TableMigrationFieldType.Bit, IsNullAble = true });
+            //t.Fields.Add(new TableMigrationField { FieldName = "ToUsb", FieldType = TableMigrationFieldType.Bit,  IsNullAble = true });
+            //t.Fields.Add(new TableMigrationField { FieldName = "ToPlaylist", FieldType = TableMigrationFieldType.Bit, IsNullAble = true });
             db.ExecurteCreateTable(t.ToString());
         }
 
-        //public static void MusicItemsTable(IdbMigration db)
-        //{
-        //    var t = new TableMigration
-        //    {
-        //        HasIdentity = true,
-        //        TableName = xmConsts.MusicItems
-        //    };
-        //    t.Fields = new List<TableMigrationField>();
-        //    t.Fields.Add(new TableMigrationField { FieldName = "Artist", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-        //    t.Fields.Add(new TableMigrationField { FieldName = "FullFileName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-        //    t.Fields.Add(new TableMigrationField { FieldName = "FileName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-        //    t.Fields.Add(new TableMigrationField { FieldName = "Title", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-        //    t.Fields.Add(new TableMigrationField { FieldName = "MachineName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
-        //    db.ExecurteCreateTable(t.ToString());
-        //}
+        public static void UsersTable(IdbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = xmConsts.Users
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "UserName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 5000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void UserPlaylistsTable(IdbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = xmConsts.UserPlayList
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "UserId", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "ItemId", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void UserUsbListTable(IdbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = xmConsts.UserUsbList
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "UserId", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "ItemId", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 }
