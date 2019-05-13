@@ -124,5 +124,10 @@ namespace MusicHelper
             }
             return false;
         }
+
+        public UserTheme GetUserTheme()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

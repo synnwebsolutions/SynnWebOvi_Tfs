@@ -11,6 +11,7 @@ namespace MusicHelper
 {
     public static class ThemeHelper
     {
+        private static UserTheme CurrentTheme = GlobalAppData.UserTheme;
         public static void ApplyTheme(this Form frm)
         {
             ApplyThemeInternal(frm);
@@ -40,7 +41,7 @@ namespace MusicHelper
 
         private static void ApplyCheckedListBoxStyle(CheckedListBox c)
         {
-            c.BackColor = Color.OrangeRed;
+            c.BackColor = CurrentTheme.CheckedListBoxBackColor; //Color.OrangeRed;
             c.SelectionMode = SelectionMode.One;
         }
 
@@ -144,5 +145,11 @@ namespace MusicHelper
             form.BackColor = System.Drawing.Color.DarkGray;
         }
 
+    }
+
+    [Serializable]
+    public class UserTheme
+    {
+        public Color CheckedListBoxBackColor { get; internal set; }
     }
 }

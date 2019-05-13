@@ -16,10 +16,11 @@ namespace MusicHelper
         [STAThread]
         static void Main()
         {
+            //var str = SynnCore.Generics.XmlHelper.ToXml(new AppConfiguration { MediaPlayerPath = " ", ProdConnectionString = " ", SyncDirectories = new System.Collections.Generic.List<string> { "dir2", "dir1" }, TempMusicListPath = " ", TestConnectionString = " ", YoutubeDataFolder = " " });
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoadStationConfigurations();
-
+            
             HandleDbMigration();
             Application.Run(new LoginForm());
         }

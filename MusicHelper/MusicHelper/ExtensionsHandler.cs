@@ -46,6 +46,7 @@ namespace MusicHelper
 
             if (ds != null && ds.Count > 0)
             {
+                Grid.RowPostPaint += Grid_RowPostPaint;
                 Grid.DataSource = ds;
                 Grid.Dock = DockStyle.Fill;
                 Grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -59,6 +60,11 @@ namespace MusicHelper
                 //    GridRefreshed(this, new XGridRefreshedEventArgs(ds));
 
             }
+        }
+
+        private static void Grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            (sender as DataGridView).Rows[e.RowIndex].Cells[rowIdxCol].Value = (e.RowIndex + 1).ToString();
         }
 
         private static void CustomizeGridAfterDataBound(DataGridView Grid, Type GridDataSourceType)
@@ -78,6 +84,7 @@ namespace MusicHelper
             {
                 HandleColumn(Grid, g, g.PropertName);
             }
+            AddIndexColumn(Grid);
             //foreach (DataGridViewButtonColumn extraButton in GetExtraButtons())
             //{
             //    if (Grid.Columns[extraButton.Name] == null)
@@ -85,6 +92,21 @@ namespace MusicHelper
             //}
         }
 
+        private static void AddIndexColumn(DataGridView grid)
+        {
+            DataGridViewColumn column = new DataGridViewTextBoxColumn();
+            column.ValueType = typeof(string);
+            column.Name = rowIdxCol;
+            //column.DataPropertyName = gInfo.PropertName;
+            column.HeaderText = rowIdxCol;
+            column.ReadOnly = true;
+            column.Visible = true;
+            column.Width = 10;
+            column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns.Add(column);
+        }
+
+        private static string rowIdxCol = "#";
         private static void HandleColumn(DataGridView Grid, GridInfoAttribute gInfo, string defaultName)
         {
             DataGridViewColumn column = Grid.Columns[defaultName];
