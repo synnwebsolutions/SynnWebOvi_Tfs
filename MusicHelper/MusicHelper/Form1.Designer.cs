@@ -59,6 +59,8 @@
             this.chkUsbs = new System.Windows.Forms.CheckedListBox();
             this.lblUser = new System.Windows.Forms.Label();
             this.lblGridSummary = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.synnMPlayer1 = new MusicHelper.SynnMPlayer();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -66,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.pnDrives.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -337,11 +340,28 @@
             this.lblGridSummary.TabIndex = 9;
             this.lblGridSummary.Text = "label1";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.synnMPlayer1);
+            this.panel3.Location = new System.Drawing.Point(18, 475);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(740, 100);
+            this.panel3.TabIndex = 10;
+            // 
+            // synnMPlayer1
+            // 
+            this.synnMPlayer1.Location = new System.Drawing.Point(55, 16);
+            this.synnMPlayer1.lstPlaylist = ((System.Collections.Generic.List<MusicHelper.MusicItem>)(resources.GetObject("synnMPlayer1.lstPlaylist")));
+            this.synnMPlayer1.Name = "synnMPlayer1";
+            this.synnMPlayer1.Size = new System.Drawing.Size(575, 68);
+            this.synnMPlayer1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 519);
+            this.ClientSize = new System.Drawing.Size(988, 588);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.lblGridSummary);
             this.Controls.Add(this.lblUser);
             this.Controls.Add(this.chkUsbs);
@@ -366,6 +386,7 @@
             this.pnDrives.ResumeLayout(false);
             this.pnDrives.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,6 +423,8 @@
         private System.Windows.Forms.Button btnClip;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Label lblGridSummary;
+        private System.Windows.Forms.Panel panel3;
+        private SynnMPlayer synnMPlayer1;
     }
 }
 

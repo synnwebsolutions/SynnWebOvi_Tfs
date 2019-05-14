@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicHelper
 {
+    [Serializable]
     public class DbMusicItem : IDbLoadable
     {
         public DbMusicItem()

@@ -199,7 +199,13 @@ namespace MusicHelper
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var mclickedMusicItem = (MusicItem)dgv.CurrentRow.DataBoundItem;
-            MusicListManager.PlaySingle(mclickedMusicItem);
+            //MusicListManager.PlaySingle(mclickedMusicItem);
+            //using (SynnPlayerUi player = new SynnPlayerUi())
+            //{
+            //    player.Init(new List<MusicItem> { mclickedMusicItem });
+            //    player.ShowDialog();
+            //}
+            synnMPlayer1.InitListAndPlay(new List<MusicItem> { mclickedMusicItem });
         }
 
         private void chkUsbs_SelectedValueChanged(object sender, EventArgs e)

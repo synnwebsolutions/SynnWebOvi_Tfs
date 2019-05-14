@@ -9,6 +9,7 @@ using System.Data;
 
 namespace MusicHelper
 {
+    [Serializable]
     public class MusicItem : DbMusicItem
     {
 
