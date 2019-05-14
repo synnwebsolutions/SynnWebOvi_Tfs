@@ -17,7 +17,7 @@ namespace MusicHelper
         IDatabaseProvider DbController;
         List<DriveInfo> Drives;
         DriveInfo CurrentDrive;
-        bool refreshData = false;
+
 
         public List<MusicItem> UsbList()
         {
@@ -33,10 +33,25 @@ namespace MusicHelper
         {
             InitializeComponent();
             CenterToScreen();
+            ApplyTags();
             this.ApplyTheme();
             DbController = this.InitDataProvider();
             SetDisplay();
             HandleUsbs();
+        }
+
+        private void ApplyTags()
+        {
+            this.Tag = ThemeTag.MainBg;
+            btnSync.Tag = ThemeTag.SyncAll;
+            pnDrives.Tag = ThemeTag.Search;
+            btnClip.Tag = ThemeTag.Search;
+            btnClear.Tag = ThemeTag.SearchClear;
+            btnRefreshGrid.Tag = ThemeTag.SearchDo;
+            btnExit.Tag = ThemeTag.Exit;
+            btnYoutubeDownload.Tag = ThemeTag.Youtube;
+            btnSyncUsb.Tag = btnPlayUsbLst.Tag = btnClearUsb.Tag = ThemeTag.USB;
+            btnPlayPlaylist.Tag = ThemeTag.Playlist;
         }
 
         private void SetDisplay()
@@ -78,11 +93,13 @@ namespace MusicHelper
 
         private void button1_Click(object sender, EventArgs e)
         {
+            progressBar2.Visible = true;
             var dh = new DirectoryHandler();
             dh.ProgressInit = InitProgressBar;
             dh.ReportProgress = ReportProgress;
             dh.SyncData();
             AlertSuccess();
+            progressBar2.Visible = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)

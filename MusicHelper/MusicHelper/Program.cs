@@ -22,7 +22,12 @@ namespace MusicHelper
             LoadStationConfigurations();
             
             HandleDbMigration();
+#if DEBUG
+            GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "DEBUG" });
+            Application.Run(new Form1());
+#else
             Application.Run(new LoginForm());
+# endif
         }
 
         private static void HandleDbMigration()

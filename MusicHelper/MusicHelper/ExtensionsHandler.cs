@@ -54,6 +54,9 @@ namespace MusicHelper
                 Grid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
                 Grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                 Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                Grid.AdvancedCellBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                Grid.AdvancedCellBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+                Grid.RowHeadersVisible = false;
                 Grid.RightToLeft = RightToLeft.Yes;
                 CustomizeGridAfterDataBound(Grid, ds[0].GetType());
                 //if (GridRefreshed != null)

@@ -107,7 +107,7 @@
             this.txtTime.BackColor = System.Drawing.SystemColors.MenuText;
             this.txtTime.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTime.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtTime.Location = new System.Drawing.Point(192, 3);
+            this.txtTime.Location = new System.Drawing.Point(232, 3);
             this.txtTime.Name = "txtTime";
             this.txtTime.ReadOnly = true;
             this.txtTime.Size = new System.Drawing.Size(98, 26);

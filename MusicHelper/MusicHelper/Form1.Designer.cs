@@ -29,18 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnExit = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.gbYoutube = new System.Windows.Forms.GroupBox();
+            this.btnYoutubeDownload = new System.Windows.Forms.Button();
+            this.txYoutubeUrl = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnPlayPlaylist = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClearUsb = new System.Windows.Forms.Button();
             this.btnSyncUsb = new System.Windows.Forms.Button();
             this.btnPlayUsbLst = new System.Windows.Forms.Button();
-            this.txYoutubeUrl = new System.Windows.Forms.TextBox();
-            this.btnYoutubeDownload = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv = new System.Windows.Forms.DataGridView();
@@ -62,6 +66,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.synnMPlayer1 = new MusicHelper.SynnMPlayer();
             this.panel1.SuspendLayout();
+            this.gbYoutube.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -73,7 +78,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(772, 474);
+            this.btnExit.Location = new System.Drawing.Point(775, 454);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(200, 33);
             this.btnExit.TabIndex = 0;
@@ -88,22 +93,52 @@
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(751, 23);
             this.progressBar2.TabIndex = 3;
+            this.progressBar2.Visible = false;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.gbYoutube);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.txYoutubeUrl);
-            this.panel1.Controls.Add(this.btnYoutubeDownload);
             this.panel1.Location = new System.Drawing.Point(775, 82);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 365);
             this.panel1.TabIndex = 4;
             // 
+            // gbYoutube
+            // 
+            this.gbYoutube.Controls.Add(this.btnYoutubeDownload);
+            this.gbYoutube.Controls.Add(this.txYoutubeUrl);
+            this.gbYoutube.Location = new System.Drawing.Point(0, 3);
+            this.gbYoutube.Name = "gbYoutube";
+            this.gbYoutube.Size = new System.Drawing.Size(193, 71);
+            this.gbYoutube.TabIndex = 8;
+            this.gbYoutube.TabStop = false;
+            this.gbYoutube.Text = "YouTube";
+            // 
+            // btnYoutubeDownload
+            // 
+            this.btnYoutubeDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnYoutubeDownload.Location = new System.Drawing.Point(3, 45);
+            this.btnYoutubeDownload.Name = "btnYoutubeDownload";
+            this.btnYoutubeDownload.Size = new System.Drawing.Size(187, 23);
+            this.btnYoutubeDownload.TabIndex = 0;
+            this.btnYoutubeDownload.Text = "Youtube";
+            this.btnYoutubeDownload.UseVisualStyleBackColor = true;
+            this.btnYoutubeDownload.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // txYoutubeUrl
+            // 
+            this.txYoutubeUrl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txYoutubeUrl.Location = new System.Drawing.Point(3, 16);
+            this.txYoutubeUrl.Name = "txYoutubeUrl";
+            this.txYoutubeUrl.Size = new System.Drawing.Size(187, 20);
+            this.txYoutubeUrl.TabIndex = 3;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnPlayPlaylist);
-            this.groupBox2.Location = new System.Drawing.Point(4, 262);
+            this.groupBox2.Location = new System.Drawing.Point(0, 262);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(190, 100);
             this.groupBox2.TabIndex = 7;
@@ -112,9 +147,10 @@
             // 
             // btnPlayPlaylist
             // 
-            this.btnPlayPlaylist.Location = new System.Drawing.Point(0, 19);
+            this.btnPlayPlaylist.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPlayPlaylist.Location = new System.Drawing.Point(3, 16);
             this.btnPlayPlaylist.Name = "btnPlayPlaylist";
-            this.btnPlayPlaylist.Size = new System.Drawing.Size(194, 23);
+            this.btnPlayPlaylist.Size = new System.Drawing.Size(184, 23);
             this.btnPlayPlaylist.TabIndex = 5;
             this.btnPlayPlaylist.Text = "Play PlayList";
             this.btnPlayPlaylist.UseVisualStyleBackColor = true;
@@ -125,7 +161,8 @@
             this.groupBox1.Controls.Add(this.btnClearUsb);
             this.groupBox1.Controls.Add(this.btnSyncUsb);
             this.groupBox1.Controls.Add(this.btnPlayUsbLst);
-            this.groupBox1.Location = new System.Drawing.Point(3, 105);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Location = new System.Drawing.Point(0, 105);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(193, 113);
             this.groupBox1.TabIndex = 6;
@@ -134,9 +171,10 @@
             // 
             // btnClearUsb
             // 
-            this.btnClearUsb.Location = new System.Drawing.Point(0, 75);
+            this.btnClearUsb.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnClearUsb.Location = new System.Drawing.Point(3, 62);
             this.btnClearUsb.Name = "btnClearUsb";
-            this.btnClearUsb.Size = new System.Drawing.Size(194, 23);
+            this.btnClearUsb.Size = new System.Drawing.Size(187, 23);
             this.btnClearUsb.TabIndex = 5;
             this.btnClearUsb.Text = "Clear USB List";
             this.btnClearUsb.UseVisualStyleBackColor = true;
@@ -144,9 +182,10 @@
             // 
             // btnSyncUsb
             // 
-            this.btnSyncUsb.Location = new System.Drawing.Point(-1, 19);
+            this.btnSyncUsb.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSyncUsb.Location = new System.Drawing.Point(3, 39);
             this.btnSyncUsb.Name = "btnSyncUsb";
-            this.btnSyncUsb.Size = new System.Drawing.Size(194, 23);
+            this.btnSyncUsb.Size = new System.Drawing.Size(187, 23);
             this.btnSyncUsb.TabIndex = 2;
             this.btnSyncUsb.Text = "Sync USB";
             this.btnSyncUsb.UseVisualStyleBackColor = true;
@@ -154,36 +193,21 @@
             // 
             // btnPlayUsbLst
             // 
-            this.btnPlayUsbLst.Location = new System.Drawing.Point(-3, 46);
+            this.btnPlayUsbLst.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPlayUsbLst.Location = new System.Drawing.Point(3, 16);
             this.btnPlayUsbLst.Name = "btnPlayUsbLst";
-            this.btnPlayUsbLst.Size = new System.Drawing.Size(194, 23);
+            this.btnPlayUsbLst.Size = new System.Drawing.Size(187, 23);
             this.btnPlayUsbLst.TabIndex = 4;
             this.btnPlayUsbLst.Text = "Play USB List";
             this.btnPlayUsbLst.UseVisualStyleBackColor = true;
             this.btnPlayUsbLst.Click += new System.EventHandler(this.btnPlayUsbLst_Click);
             // 
-            // txYoutubeUrl
-            // 
-            this.txYoutubeUrl.Location = new System.Drawing.Point(4, 50);
-            this.txYoutubeUrl.Name = "txYoutubeUrl";
-            this.txYoutubeUrl.Size = new System.Drawing.Size(193, 20);
-            this.txYoutubeUrl.TabIndex = 3;
-            // 
-            // btnYoutubeDownload
-            // 
-            this.btnYoutubeDownload.Location = new System.Drawing.Point(3, 20);
-            this.btnYoutubeDownload.Name = "btnYoutubeDownload";
-            this.btnYoutubeDownload.Size = new System.Drawing.Size(194, 23);
-            this.btnYoutubeDownload.TabIndex = 0;
-            this.btnYoutubeDownload.Text = "Youtube";
-            this.btnYoutubeDownload.UseVisualStyleBackColor = true;
-            this.btnYoutubeDownload.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // btnSync
             // 
-            this.btnSync.Location = new System.Drawing.Point(13, 8);
+            this.btnSync.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSync.Location = new System.Drawing.Point(0, 0);
             this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(194, 23);
+            this.btnSync.Size = new System.Drawing.Size(194, 34);
             this.btnSync.TabIndex = 1;
             this.btnSync.Text = "Sync Data";
             this.btnSync.UseVisualStyleBackColor = true;
@@ -199,9 +223,33 @@
             // 
             // dgv
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.Location = new System.Drawing.Point(4, 49);
             this.dgv.Name = "dgv";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv.Size = new System.Drawing.Size(744, 300);
             this.dgv.TabIndex = 0;
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
@@ -221,9 +269,10 @@
             // 
             // btnClip
             // 
-            this.btnClip.Location = new System.Drawing.Point(224, 9);
+            this.btnClip.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnClip.Location = new System.Drawing.Point(194, 0);
             this.btnClip.Name = "btnClip";
-            this.btnClip.Size = new System.Drawing.Size(26, 23);
+            this.btnClip.Size = new System.Drawing.Size(38, 34);
             this.btnClip.TabIndex = 1;
             this.btnClip.Text = ">>";
             this.btnClip.UseVisualStyleBackColor = true;
@@ -231,9 +280,10 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(665, 8);
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClear.Location = new System.Drawing.Point(601, 0);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 34);
             this.btnClear.TabIndex = 3;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -241,16 +291,17 @@
             // 
             // txSearchText
             // 
-            this.txSearchText.Location = new System.Drawing.Point(256, 11);
+            this.txSearchText.Location = new System.Drawing.Point(238, 8);
             this.txSearchText.Name = "txSearchText";
-            this.txSearchText.Size = new System.Drawing.Size(309, 20);
+            this.txSearchText.Size = new System.Drawing.Size(357, 20);
             this.txSearchText.TabIndex = 2;
             // 
             // btnRefreshGrid
             // 
-            this.btnRefreshGrid.Location = new System.Drawing.Point(584, 9);
+            this.btnRefreshGrid.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRefreshGrid.Location = new System.Drawing.Point(676, 0);
             this.btnRefreshGrid.Name = "btnRefreshGrid";
-            this.btnRefreshGrid.Size = new System.Drawing.Size(75, 23);
+            this.btnRefreshGrid.Size = new System.Drawing.Size(75, 34);
             this.btnRefreshGrid.TabIndex = 1;
             this.btnRefreshGrid.Text = "Search";
             this.btnRefreshGrid.UseVisualStyleBackColor = true;
@@ -345,7 +396,7 @@
             this.panel3.Controls.Add(this.synnMPlayer1);
             this.panel3.Location = new System.Drawing.Point(18, 475);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(740, 120);
+            this.panel3.Size = new System.Drawing.Size(751, 120);
             this.panel3.TabIndex = 10;
             // 
             // synnMPlayer1
@@ -355,7 +406,8 @@
             this.synnMPlayer1.Location = new System.Drawing.Point(13, 16);
             this.synnMPlayer1.lstPlaylist = null;
             this.synnMPlayer1.Name = "synnMPlayer1";
-            this.synnMPlayer1.Size = new System.Drawing.Size(711, 91);
+            this.synnMPlayer1.Padding = new System.Windows.Forms.Padding(5);
+            this.synnMPlayer1.Size = new System.Drawing.Size(721, 91);
             this.synnMPlayer1.TabIndex = 0;
             // 
             // Form1
@@ -380,7 +432,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.gbYoutube.ResumeLayout(false);
+            this.gbYoutube.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -427,6 +480,7 @@
         private System.Windows.Forms.Label lblGridSummary;
         private System.Windows.Forms.Panel panel3;
         private SynnMPlayer synnMPlayer1;
+        private System.Windows.Forms.GroupBox gbYoutube;
     }
 }
 

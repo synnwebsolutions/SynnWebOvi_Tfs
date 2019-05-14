@@ -12,7 +12,7 @@ namespace MusicHelper
     public static class ThemeHelper
     {
         private static UserTheme CurrentTheme = GlobalAppData.UserTheme;
-        public static void ApplyTheme(this Form frm)
+        public static void ApplyTheme(this Control frm)
         {
             ApplyThemeInternal(frm);
         }
@@ -37,6 +37,8 @@ namespace MusicHelper
             if (ctr is CheckedListBox)
                 ApplyCheckedListBoxStyle(ctr as CheckedListBox);
 
+            HandleRole(ctr);
+
             if (ctr.Controls.Count > 0)
                 foreach (Control ictr in ctr.Controls)
                     ApplyThemeInternal(ictr);
@@ -49,13 +51,12 @@ namespace MusicHelper
 
         private static void ApplyCheckedListBoxStyle(CheckedListBox c)
         {
-            c.BackColor = CurrentTheme.CheckedListBoxBackColor; //Color.OrangeRed;
+            //c.BackColor = CurrentTheme.CheckedListBoxBackColor; //Color.OrangeRed;
             c.SelectionMode = SelectionMode.One;
         }
 
         private static void ApplyButtonStyle(Button btnExam)
         {
-            HandleRole(btnExam);
             btnExam.FlatStyle = FlatStyle.Flat;
             btnExam.FlatAppearance.BorderColor = btnExam.BackColor;
             btnExam.SetBounds(btnExam.Location.X, btnExam.Location.Y, btnExam.Width, btnExam.Height);
@@ -80,24 +81,92 @@ namespace MusicHelper
         {
             if (ctr.Tag != null)
             {
-                if (ctr.Tag.ToString() == "ext")
+                var ct = ctr.Tag.ToString();
+
+                if (ct == ThemeTag.Exit)
                 {
-                    ctr.BackColor = Color.Black;
-                    ctr.ForeColor = Color.White;
+                    ctr.BackColor = CurrentTheme.Exit;
+                    //ctr.ForeColor = Color.White;
                 }
-                if (ctr.Tag.ToString() == "login")
+                if (ct == ThemeTag.Grid)
                 {
-                    if (ctr is Button)
-                    {
-                        var btn = ctr as Button;
-                        btn.Paint += Btn_Paint;
-                    }
+                    ctr.BackColor = CurrentTheme.Grid;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.MainBg)
+                {
+                    ctr.BackColor = CurrentTheme.MainBg;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.MediaPlayer)
+                {
+                    ctr.BackColor = CurrentTheme.MediaPlayer;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.Search)
+                {
+                    ctr.BackColor = CurrentTheme.Search;
+                    if(ctr is Button)
+                        ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.SearchClear)
+                {
+                    ctr.BackColor = CurrentTheme.SearchClear;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.SearchDo)
+                {
+                    ctr.BackColor = CurrentTheme.SearchDo;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.SideBar)
+                {
+                    ctr.BackColor = CurrentTheme.SideBar;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.SyncAll)
+                {
+                    ctr.BackColor = CurrentTheme.SyncAll;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.Youtube)
+                {
+                    ctr.BackColor = CurrentTheme.YouTube;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.USB)
+                {
+                    ctr.BackColor = CurrentTheme.USB;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.Playlist)
+                {
+                    ctr.BackColor = CurrentTheme.Playlist;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.MusicPlayerAction)
+                {
+                    ctr.BackColor = CurrentTheme.MusicPlayerAction;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.MusicPlayerMain)
+                {
+                    ctr.BackColor = CurrentTheme.MusicPlayerMain;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == "login")
+                {
+                    //if (ctr is Button)
+                    //{
+                    //    var btn = ctr as Button;
+                    //    btn.Paint += Btn_Paint;
+                    //}
                 }
             }
             else
             {
-                ctr.BackColor = Color.DarkGray;
-                ctr.ForeColor = Color.WhiteSmoke;
+                //ctr.BackColor = CurrentTheme.DefaultColor;
+                //ctr.ForeColor = Color.WhiteSmoke;
             }
         }
 
@@ -142,18 +211,18 @@ namespace MusicHelper
 
         private static void ApplyGroupBoxStyle(GroupBox groupBox)
         {
-            groupBox.BackColor = System.Drawing.Color.FromArgb(225, 85, 10);
+            //groupBox.BackColor = System.Drawing.Color.FromArgb(225, 85, 10);
             groupBox.ForeColor = System.Drawing.Color.WhiteSmoke;
         }
 
         private static void ApplyPanelStyle(Panel panel)
         {
-            panel.BackColor = System.Drawing.Color.OrangeRed;
+            //panel.BackColor = System.Drawing.Color.OrangeRed;
         }
 
         private static void ApplyFormStyle(Form form)
         {
-            form.BackColor = System.Drawing.Color.DarkGray;
+            //form.BackColor = System.Drawing.Color.Black;
         }
 
     }
@@ -162,6 +231,40 @@ namespace MusicHelper
     public class UserTheme
     {
         public Color CheckedListBoxBackColor { get;  set; }
+        public Color DefaultColor { get;  set; }
+        public Color Exit { get;  set; }
+        public Color Grid { get;  set; }
+        public Color MainBg { get;  set; }
+        public Color MediaPlayer { get;  set; }
+        public Color MusicPlayerAction { get; internal set; }
+        public Color MusicPlayerMain { get; internal set; }
+        public Color Playlist { get; internal set; }
+        public Color Search { get;  set; }
+        public Color SearchClear { get;  set; }
+        public Color SearchDo { get;  set; }
+        public Color SideBar { get;  set; }
+        public Color SyncAll { get;  set; }
+        public Color USB { get; internal set; }
         public bool UseShapedButtons { get;  set; }
+        public Color YouTube { get; internal set; }
+    }
+
+    public class ThemeTag
+    {
+        public const string MainBg = "mb";
+        public const string SyncAll = "sa";
+        public const string Search = "src";
+        public const string SearchClear = "srcc";
+        public const string SearchDo = "srcd";
+        public const string Grid = "grd";
+        public const string SideBar = "sb";
+        public const string MediaPlayer = "mp";
+        public const string Exit = "ex";
+        public const string Youtube = "yt";
+        public const string USB = "usb";
+        public const string Playlist = "pls";
+        public const string MusicPlayerMain = "mpm";
+        public const string MusicPlayerAction = "mpac";
+
     }
 }

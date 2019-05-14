@@ -228,6 +228,14 @@ namespace MusicHelper
             //    btnShuffle.Image = Properties.Resources.selected;
 
             CheckColumnSize();
+            ApplyTags();
+            this.ApplyTheme();
+        }
+
+        private void ApplyTags()
+        {
+            this.Tag = ThemeTag.MusicPlayerMain;
+            btnNext.Tag = btnPause.Tag = btnPlay.Tag = btnPrevious.Tag = btnStop.Tag = ThemeTag.MusicPlayerAction;
         }
 
         internal void Play(int track)

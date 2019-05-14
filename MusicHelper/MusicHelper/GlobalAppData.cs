@@ -54,7 +54,21 @@ namespace MusicHelper
         {
             var t = new UserTheme
             {
-
+                Exit = System.Drawing.Color.LightSlateGray,
+                Grid = System.Drawing.Color.Beige,
+                MainBg = System.Drawing.Color.Black,
+                MediaPlayer = System.Drawing.Color.Blue,
+                Search = System.Drawing.Color.Black,
+                SideBar = System.Drawing.Color.Red,
+                SyncAll = System.Drawing.Color.Orange,
+                DefaultColor = System.Drawing.Color.DarkGray,
+                SearchClear = System.Drawing.Color.DarkGray,
+                SearchDo = System.Drawing.Color.LightSlateGray,
+                YouTube = System.Drawing.Color.Red,
+                USB = System.Drawing.Color.RoyalBlue,
+                Playlist = System.Drawing.Color.SeaGreen,
+                MusicPlayerAction = System.Drawing.Color.IndianRed,
+                MusicPlayerMain = System.Drawing.Color.LightSlateGray,
             };
             return t;
         }
