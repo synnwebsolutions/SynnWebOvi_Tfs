@@ -93,7 +93,6 @@ namespace MusicHelper
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Id { get; set; }
-
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");

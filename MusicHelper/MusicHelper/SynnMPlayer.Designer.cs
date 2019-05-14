@@ -36,12 +36,14 @@
             this.trbVolume = new System.Windows.Forms.TrackBar();
             this.txtTime = new System.Windows.Forms.TextBox();
             this.trackBar = new System.Windows.Forms.TrackBar();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.chkShuffle = new System.Windows.Forms.CheckBox();
+            this.txCurrentPlaying = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trbBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
@@ -50,7 +52,7 @@
             // trbBalance
             // 
             this.trbBalance.AutoSize = false;
-            this.trbBalance.Location = new System.Drawing.Point(408, 26);
+            this.trbBalance.Location = new System.Drawing.Point(571, 27);
             this.trbBalance.Maximum = 1000;
             this.trbBalance.Name = "trbBalance";
             this.trbBalance.Size = new System.Drawing.Size(104, 30);
@@ -62,7 +64,7 @@
             // chkMute
             // 
             this.chkMute.AutoSize = true;
-            this.chkMute.Location = new System.Drawing.Point(519, 3);
+            this.chkMute.Location = new System.Drawing.Point(391, 3);
             this.chkMute.Name = "chkMute";
             this.chkMute.Size = new System.Drawing.Size(50, 17);
             this.chkMute.TabIndex = 43;
@@ -73,16 +75,16 @@
             // lblBalance
             // 
             this.lblBalance.AutoSize = true;
-            this.lblBalance.Location = new System.Drawing.Point(353, 33);
+            this.lblBalance.Location = new System.Drawing.Point(516, 34);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(49, 13);
+            this.lblBalance.Size = new System.Drawing.Size(43, 13);
             this.lblBalance.TabIndex = 40;
-            this.lblBalance.Text = "Balance:";
+            this.lblBalance.Text = "Tempo:";
             // 
             // lblVolume
             // 
             this.lblVolume.AutoSize = true;
-            this.lblVolume.Location = new System.Drawing.Point(357, 9);
+            this.lblVolume.Location = new System.Drawing.Point(520, 10);
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(45, 13);
             this.lblVolume.TabIndex = 41;
@@ -91,7 +93,7 @@
             // trbVolume
             // 
             this.trbVolume.AutoSize = false;
-            this.trbVolume.Location = new System.Drawing.Point(408, 2);
+            this.trbVolume.Location = new System.Drawing.Point(571, 3);
             this.trbVolume.Maximum = 1000;
             this.trbVolume.Name = "trbVolume";
             this.trbVolume.Size = new System.Drawing.Size(104, 25);
@@ -105,7 +107,7 @@
             this.txtTime.BackColor = System.Drawing.SystemColors.MenuText;
             this.txtTime.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTime.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtTime.Location = new System.Drawing.Point(223, 2);
+            this.txtTime.Location = new System.Drawing.Point(192, 3);
             this.txtTime.Name = "txtTime";
             this.txtTime.ReadOnly = true;
             this.txtTime.Size = new System.Drawing.Size(98, 26);
@@ -126,8 +128,15 @@
             this.trackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar_MouseDown);
             this.trackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar_MouseUp);
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 200;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // btnPlay
             // 
+            this.btnPlay.BackgroundImage = global::MusicHelper.Properties.Resources.play_on;
             this.btnPlay.Location = new System.Drawing.Point(24, 3);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(25, 25);
@@ -137,6 +146,7 @@
             // 
             // btnPause
             // 
+            this.btnPause.BackgroundImage = global::MusicHelper.Properties.Resources.pause_on;
             this.btnPause.Location = new System.Drawing.Point(55, 3);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(25, 25);
@@ -146,6 +156,7 @@
             // 
             // btnStop
             // 
+            this.btnStop.BackgroundImage = global::MusicHelper.Properties.Resources.stop_on;
             this.btnStop.Location = new System.Drawing.Point(86, 3);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(25, 25);
@@ -155,6 +166,7 @@
             // 
             // btnNext
             // 
+            this.btnNext.BackgroundImage = global::MusicHelper.Properties.Resources.next_on;
             this.btnNext.Location = new System.Drawing.Point(148, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(25, 25);
@@ -164,6 +176,7 @@
             // 
             // btnPrevious
             // 
+            this.btnPrevious.BackgroundImage = global::MusicHelper.Properties.Resources.previus_on;
             this.btnPrevious.Location = new System.Drawing.Point(117, 3);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(25, 25);
@@ -171,16 +184,37 @@
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
-            // timer
+            // chkShuffle
             // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 200;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.chkShuffle.AutoSize = true;
+            this.chkShuffle.Location = new System.Drawing.Point(391, 26);
+            this.chkShuffle.Name = "chkShuffle";
+            this.chkShuffle.Size = new System.Drawing.Size(59, 17);
+            this.chkShuffle.TabIndex = 44;
+            this.chkShuffle.Text = "Shuffle";
+            this.chkShuffle.UseVisualStyleBackColor = true;
+            this.chkShuffle.CheckedChanged += new System.EventHandler(this.chkShuffle_CheckedChanged);
+            // 
+            // txCurrentPlaying
+            // 
+            this.txCurrentPlaying.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txCurrentPlaying.Enabled = false;
+            this.txCurrentPlaying.ForeColor = System.Drawing.Color.Red;
+            this.txCurrentPlaying.Location = new System.Drawing.Point(24, 63);
+            this.txCurrentPlaying.Name = "txCurrentPlaying";
+            this.txCurrentPlaying.Size = new System.Drawing.Size(651, 20);
+            this.txCurrentPlaying.TabIndex = 45;
+            this.txCurrentPlaying.Text = "Current Playing Track";
+            this.txCurrentPlaying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SynnMPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.txCurrentPlaying);
+            this.Controls.Add(this.chkShuffle);
             this.Controls.Add(this.trbBalance);
             this.Controls.Add(this.chkMute);
             this.Controls.Add(this.lblBalance);
@@ -194,7 +228,7 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.Name = "SynnMPlayer";
-            this.Size = new System.Drawing.Size(575, 68);
+            this.Size = new System.Drawing.Size(697, 90);
             this.Load += new System.EventHandler(this.SynnMPlayer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trbBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
@@ -219,5 +253,7 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.CheckBox chkShuffle;
+        private System.Windows.Forms.TextBox txCurrentPlaying;
     }
 }

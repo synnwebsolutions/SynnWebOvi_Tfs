@@ -345,22 +345,24 @@
             this.panel3.Controls.Add(this.synnMPlayer1);
             this.panel3.Location = new System.Drawing.Point(18, 475);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(740, 100);
+            this.panel3.Size = new System.Drawing.Size(740, 120);
             this.panel3.TabIndex = 10;
             // 
             // synnMPlayer1
             // 
-            this.synnMPlayer1.Location = new System.Drawing.Point(55, 16);
-            this.synnMPlayer1.lstPlaylist = ((System.Collections.Generic.List<MusicHelper.MusicItem>)(resources.GetObject("synnMPlayer1.lstPlaylist")));
+            this.synnMPlayer1.BackColor = System.Drawing.Color.Silver;
+            this.synnMPlayer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.synnMPlayer1.Location = new System.Drawing.Point(13, 16);
+            this.synnMPlayer1.lstPlaylist = null;
             this.synnMPlayer1.Name = "synnMPlayer1";
-            this.synnMPlayer1.Size = new System.Drawing.Size(575, 68);
+            this.synnMPlayer1.Size = new System.Drawing.Size(711, 91);
             this.synnMPlayer1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 588);
+            this.ClientSize = new System.Drawing.Size(988, 607);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.lblGridSummary);
             this.Controls.Add(this.lblUser);

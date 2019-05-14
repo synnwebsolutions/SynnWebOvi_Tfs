@@ -112,6 +112,7 @@ namespace MusicHelper
             string syncText = "Sync USB";
             btnSyncUsb.Text = string.Format("{0} ({1} Songs)",syncText, UsbList().Count);
             lblGridSummary.Text = $"{ String.Format("{0:n0}", musicitems.Count)} Items ";
+            synnMPlayer1.InitList(musicitems);
         }
 
         private void AfterGridRefreshed()
@@ -205,7 +206,7 @@ namespace MusicHelper
             //    player.Init(new List<MusicItem> { mclickedMusicItem });
             //    player.ShowDialog();
             //}
-            synnMPlayer1.InitListAndPlay(new List<MusicItem> { mclickedMusicItem });
+            synnMPlayer1.Play(e.RowIndex);
         }
 
         private void chkUsbs_SelectedValueChanged(object sender, EventArgs e)

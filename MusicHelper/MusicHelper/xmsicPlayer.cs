@@ -32,7 +32,7 @@ namespace MusicHelper
             playlist = pl;
             NowPlaying = 0;
             Loop = false;
-            Shuffle = true;
+            Shuffle = false;
             Paused = false;
             msg = new StringBuilder(128);
             returnData = new StringBuilder(128);
@@ -66,6 +66,7 @@ namespace MusicHelper
             else
                 return true;
         }
+
 
 
         public bool Play(int track)
@@ -206,6 +207,19 @@ namespace MusicHelper
             {
                 Pcommand = "setaudio MediaFile volume to " + volume.ToString();
                 error = mciSendString(Pcommand, null, 0, IntPtr.Zero);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal bool SetTempo(int balance)
+        {
+            if (balance >= 0 && balance <= 1000)
+            {
+                Pcommand = "setaudio MediaFile speed to 0.1";
+                error = mciSendString(Pcommand, null, 0, IntPtr.Zero);
+
                 return true;
             }
             else

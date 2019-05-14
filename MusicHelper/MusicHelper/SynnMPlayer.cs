@@ -57,7 +57,8 @@ namespace MusicHelper
 
         private void trbBalance_Scroll(object sender, EventArgs e)
         {
-            player.SetBalance(trbBalance.Value);
+            //player.SetBalance(trbBalance.Value);
+            player.SetTempo(trbBalance.Value);
         }
 
         private void trackBar_MouseUp(object sender, MouseEventArgs e)
@@ -89,7 +90,7 @@ namespace MusicHelper
                 //        break;
                 //    }
                 //}
-                if (lstPlaylist.Count != 0 && !player.IsPlaying())
+                if (lstPlaylist != null &&  lstPlaylist.Count != 0 && !player.IsPlaying())
                 {
                     play(0);
                 }
@@ -106,6 +107,7 @@ namespace MusicHelper
                 trackBar.Maximum = player.GetSongLenght();
                 timer.Enabled = true;
                 //lstPlaylist.Items[player.NowPlaying].Selected = true;
+                txCurrentPlaying.Text = lstPlaylist[track].FileName;
                 SetEnviroment();
                 return true;
             }
@@ -228,6 +230,11 @@ namespace MusicHelper
             CheckColumnSize();
         }
 
+        internal void Play(int track)
+        {
+            play(track);
+        }
+
         internal void InitListAndPlay(List<MusicItem> list)
         {
             InitList(list);
@@ -296,5 +303,9 @@ namespace MusicHelper
             return String.Format("{0:00}", (float)minut) + ":" + String.Format("{0:00}", (float)(second % 60));
         }
 
+        private void chkShuffle_CheckedChanged(object sender, EventArgs e)
+        {
+            player.Shuffle = chkShuffle.Checked;
+        }
     }
 }

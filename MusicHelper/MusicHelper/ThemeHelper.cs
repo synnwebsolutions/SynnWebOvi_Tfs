@@ -31,12 +31,20 @@ namespace MusicHelper
             if (ctr is Button)
                 ApplyButtonStyle(ctr as Button);
 
+            if (ctr is SynnMPlayer)
+                ApplyMusicPlayerStyle(ctr as SynnMPlayer);
+
             if (ctr is CheckedListBox)
                 ApplyCheckedListBoxStyle(ctr as CheckedListBox);
 
             if (ctr.Controls.Count > 0)
                 foreach (Control ictr in ctr.Controls)
                     ApplyThemeInternal(ictr);
+        }
+
+        private static void ApplyMusicPlayerStyle(SynnMPlayer synnMPlayer)
+        {
+            
         }
 
         private static void ApplyCheckedListBoxStyle(CheckedListBox c)
@@ -52,16 +60,19 @@ namespace MusicHelper
             btnExam.FlatAppearance.BorderColor = btnExam.BackColor;
             btnExam.SetBounds(btnExam.Location.X, btnExam.Location.Y, btnExam.Width, btnExam.Height);
 
-            // Make the GraphicsPath.
-            GraphicsPath polygon_path = new GraphicsPath(FillMode.Winding);
-            polygon_path.AddPolygon(GetPoints(btnExam.ClientRectangle));
+            if (GlobalAppData.UserTheme.UseShapedButtons)
+            {
+                // Make the GraphicsPath.
+                GraphicsPath polygon_path = new GraphicsPath(FillMode.Winding);
+                polygon_path.AddPolygon(GetPoints(btnExam.ClientRectangle));
 
-            // Convert the GraphicsPath into a Region.
-            Region polygon_region = new Region(polygon_path);
+                // Convert the GraphicsPath into a Region.
+                Region polygon_region = new Region(polygon_path);
 
-            // Constrain the button to the region.
-            btnExam.Region = polygon_region;
-            btnExam.SizeChanged += BtnExam_SizeChanged;
+                // Constrain the button to the region.
+                btnExam.Region = polygon_region;
+                btnExam.SizeChanged += BtnExam_SizeChanged;
+            }
 
         }
 
@@ -150,6 +161,7 @@ namespace MusicHelper
     [Serializable]
     public class UserTheme
     {
-        public Color CheckedListBoxBackColor { get; internal set; }
+        public Color CheckedListBoxBackColor { get;  set; }
+        public bool UseShapedButtons { get;  set; }
     }
 }
