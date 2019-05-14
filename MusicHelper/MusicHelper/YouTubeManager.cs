@@ -19,7 +19,7 @@ namespace MusicHelper
         public static MusicItem DownloadAndConvert(string videoUrl)
         {
             var newPath = string.Empty;
-
+            GlobalAppData.SetWait();
             try
             {
                 var youtube = YouTube.Default;
@@ -42,7 +42,10 @@ namespace MusicHelper
             {
                 throw;
             }
-
+            finally
+            {
+                GlobalAppData.EndWait();
+            }
             var ii = TagLib.File.Create(newPath);
             UltraID3 u = new UltraID3();
             u.Read(newPath);

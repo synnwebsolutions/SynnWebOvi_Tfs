@@ -93,6 +93,7 @@ namespace MusicHelper
 
         private void button1_Click(object sender, EventArgs e)
         {
+            GlobalAppData.SetWait();
             progressBar2.Visible = true;
             var dh = new DirectoryHandler();
             dh.ProgressInit = InitProgressBar;
@@ -100,6 +101,7 @@ namespace MusicHelper
             dh.SyncData();
             AlertSuccess();
             progressBar2.Visible = false;
+            GlobalAppData.EndWait();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -158,7 +160,9 @@ namespace MusicHelper
         {
             if (CurrentDrive != null)
             {
+                GlobalAppData.SetWait();
                 UsbHandler.Sync(CurrentDrive, UsbList());
+                GlobalAppData.EndWait();
             }
             else
             {
@@ -206,12 +210,16 @@ namespace MusicHelper
 
         private void btnPlayUsbLst_Click(object sender, EventArgs e)
         {
+            GlobalAppData.SetWait();
             MusicListManager.PlayUsbList(UsbList());
+            GlobalAppData.EndWait();
         }
 
         private void btnPlayPlaylist_Click(object sender, EventArgs e)
         {
+            GlobalAppData.SetWait();
             MusicListManager.PlayPlayList(PlayList());
+            GlobalAppData.EndWait();
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

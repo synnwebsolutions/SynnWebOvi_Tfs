@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MusicHelper
 {
@@ -26,6 +27,16 @@ namespace MusicHelper
         public static void SetConfigs(AppConfiguration cfg)
         {
             ap = cfg;
+        }
+
+        public static void SetWait()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+        }
+
+        public static void EndWait()
+        {
+            Cursor.Current = Cursors.Default;
         }
 
         public static void SetUser(LoggedUser u)
