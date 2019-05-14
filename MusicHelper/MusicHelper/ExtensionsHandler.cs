@@ -97,16 +97,19 @@ namespace MusicHelper
 
         private static void AddIndexColumn(DataGridView grid)
         {
-            DataGridViewColumn column = new DataGridViewTextBoxColumn();
-            column.ValueType = typeof(string);
-            column.Name = rowIdxCol;
-            //column.DataPropertyName = gInfo.PropertName;
-            column.HeaderText = rowIdxCol;
-            column.ReadOnly = true;
-            column.Visible = true;
-            column.Width = 10;
-            column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grid.Columns.Add(column);
+            if (!grid.Columns.OfType<DataGridViewColumn>().Any(x => x.Name == rowIdxCol))
+            {
+                DataGridViewColumn column = new DataGridViewTextBoxColumn();
+                column.ValueType = typeof(string);
+                column.Name = rowIdxCol;
+                //column.DataPropertyName = gInfo.PropertName;
+                column.HeaderText = rowIdxCol;
+                column.ReadOnly = true;
+                column.Visible = true;
+                column.Width = 10;
+                column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grid.Columns.Add(column);
+            }
         }
 
         private static string rowIdxCol = "#";

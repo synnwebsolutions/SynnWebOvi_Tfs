@@ -79,7 +79,7 @@ namespace MusicHelper
                 USB = System.Drawing.Color.RoyalBlue,
                 Playlist = System.Drawing.Color.SeaGreen,
                 MusicPlayerAction = System.Drawing.Color.IndianRed,
-                MusicPlayerMain = System.Drawing.Color.LightSlateGray,
+                MusicPlayerMain = System.Drawing.Color.FromArgb(229, 148, 0),
             };
             return t;
         }
