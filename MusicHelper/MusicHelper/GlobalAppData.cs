@@ -67,7 +67,7 @@ namespace MusicHelper
             {
                 Exit = System.Drawing.Color.LightSlateGray,
                 Grid = System.Drawing.Color.Beige,
-                MainBg = System.Drawing.Color.Black,
+                MainBg = System.Drawing.Color.DarkGray,
                 MediaPlayer = System.Drawing.Color.Blue,
                 Search = System.Drawing.Color.Black,
                 SideBar = System.Drawing.Color.Red,
@@ -76,8 +76,8 @@ namespace MusicHelper
                 SearchClear = System.Drawing.Color.DarkGray,
                 SearchDo = System.Drawing.Color.LightSlateGray,
                 YouTube = System.Drawing.Color.Red,
-                USB = System.Drawing.Color.RoyalBlue,
-                Playlist = System.Drawing.Color.SeaGreen,
+                USB = System.Drawing.Color.FromArgb(212, 175, 55),
+                Playlist = System.Drawing.Color.FromArgb(218, 165, 32),
                 MusicPlayerAction = System.Drawing.Color.IndianRed,
                 MusicPlayerMain = System.Drawing.Color.FromArgb(229, 148, 0),
             };

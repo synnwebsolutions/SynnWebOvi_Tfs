@@ -35,7 +35,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnExit = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.gbYoutube = new System.Windows.Forms.GroupBox();
             this.btnYoutubeDownload = new System.Windows.Forms.Button();
             this.txYoutubeUrl = new System.Windows.Forms.TextBox();
@@ -65,7 +64,7 @@
             this.lblGridSummary = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.synnMPlayer1 = new MusicHelper.SynnMPlayer();
-            this.panel1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.gbYoutube.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -74,6 +73,7 @@
             this.pnDrives.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -94,16 +94,6 @@
             this.progressBar2.Size = new System.Drawing.Size(751, 23);
             this.progressBar2.TabIndex = 3;
             this.progressBar2.Visible = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.gbYoutube);
-            this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Location = new System.Drawing.Point(775, 82);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 365);
-            this.panel1.TabIndex = 4;
             // 
             // gbYoutube
             // 
@@ -401,7 +391,7 @@
             // 
             // synnMPlayer1
             // 
-            this.synnMPlayer1.BackColor = System.Drawing.Color.Silver;
+            this.synnMPlayer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(148)))), ((int)(((byte)(0)))));
             this.synnMPlayer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.synnMPlayer1.Location = new System.Drawing.Point(13, 16);
             this.synnMPlayer1.lstPlaylist = null;
@@ -409,6 +399,17 @@
             this.synnMPlayer1.Padding = new System.Windows.Forms.Padding(5);
             this.synnMPlayer1.Size = new System.Drawing.Size(721, 91);
             this.synnMPlayer1.TabIndex = 0;
+            this.synnMPlayer1.Tag = "mpm";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.gbYoutube);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Location = new System.Drawing.Point(775, 82);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 365);
+            this.panel1.TabIndex = 4;
             // 
             // Form1
             // 
@@ -431,7 +432,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.panel1.ResumeLayout(false);
             this.gbYoutube.ResumeLayout(false);
             this.gbYoutube.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -442,6 +442,7 @@
             this.pnDrives.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,7 +452,6 @@
 
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSyncUsb;
         private System.Windows.Forms.Button btnSync;
         private System.Windows.Forms.Button btnYoutubeDownload;
@@ -481,6 +481,7 @@
         private System.Windows.Forms.Panel panel3;
         private SynnMPlayer synnMPlayer1;
         private System.Windows.Forms.GroupBox gbYoutube;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

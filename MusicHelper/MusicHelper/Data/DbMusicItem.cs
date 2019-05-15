@@ -34,13 +34,13 @@ namespace MusicHelper
         }
 
         public int Id { get; set; }
-        [GridInfo(1, "Artist", "Artist", true, true)]
+        //[GridInfo(1, "Artist", "Artist", true, true)]
         public string Artist { get; set; }
         
         public string FullFileName { get; set; }
         [GridInfo(3, "FileName", "File", true, true)]
         public string FileName { get; set; }
-        [GridInfo(2, "Title", "Title", true, true)]
+        //[GridInfo(2, "Title", "Title", true, true)]
         public string Title { get; set; }
         public string MachineName { get; set; }
         //public bool? ToUsb { get;  set; }

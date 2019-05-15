@@ -23,7 +23,7 @@ namespace MusicHelper
             
             HandleDbMigration();
 #if DEBUG
-            GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "DEBUG" });
+            GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "DEBUG - DEBUG" });
             Application.Run(new Form1());
 #else
             Application.Run(new LoginForm());
