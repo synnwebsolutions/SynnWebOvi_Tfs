@@ -58,7 +58,11 @@ namespace MusicHelper
         private static void ApplyButtonStyle(Button btnExam)
         {
             btnExam.FlatStyle = FlatStyle.Flat;
-            btnExam.FlatAppearance.BorderColor = btnExam.BackColor;
+            if (btnExam.BackColor != Color.Transparent)
+                btnExam.FlatAppearance.BorderColor = btnExam.BackColor;
+            else
+                btnExam.FlatAppearance.BorderColor = Color.White;
+
             btnExam.SetBounds(btnExam.Location.X, btnExam.Location.Y, btnExam.Width, btnExam.Height);
 
             if (GlobalAppData.UserTheme.UseShapedButtons)

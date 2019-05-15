@@ -38,6 +38,21 @@ namespace MusicHelper
             DbController = this.InitDataProvider();
             SetDisplay();
             HandleUsbs();
+            HandleGrids();
+        }
+
+        private void HandleGrids()
+        {
+            dgvUsb.CellDoubleClick += dgv_CellDoubleClick;
+            dgvYoutube.CellDoubleClick += dgv_CellDoubleClick;
+            dgvPlaylist.CellDoubleClick += dgv_CellDoubleClick;
+
+
+            dgvUsb.MouseClick += dgv_MouseClick;
+            dgvYoutube.MouseClick += dgv_MouseClick;
+            dgvPlaylist.MouseClick += dgv_MouseClick;
+
+            
         }
 
         private void ApplyTags()
@@ -52,6 +67,7 @@ namespace MusicHelper
             btnYoutubeDownload.Tag = ThemeTag.Youtube;
             btnSyncUsb.Tag = btnPlayUsbLst.Tag = btnClearUsb.Tag = ThemeTag.USB;
             btnPlayPlaylist.Tag = ThemeTag.Playlist;
+            dgv.Tag = ThemeTag.MainBg;
         }
 
         private void SetDisplay()
@@ -124,8 +140,9 @@ namespace MusicHelper
 
         private void RefreshGrid()
         {
-            List<MusicItem> musicitems = DbController.GetMusicItems(new MusicSearchParameters { SearchText =  txSearchText.Text });
-            dgv.RefreshGrid(musicitems);
+            var cg = GetCurrentGrid();
+            List<MusicItem> musicitems = GetCurrentGridItems(); // 
+            cg.RefreshGrid(musicitems);
             AfterGridRefreshed();
 
             string syncText = "Sync USB";
@@ -134,11 +151,30 @@ namespace MusicHelper
             synnMPlayer1.InitList(musicitems);
         }
 
+        private List<MusicItem> GetCurrentGridItems()
+        {
+            List<MusicItem> g = null;
+            if (tabControl1.SelectedTab == tbPlaylist)
+            {
+                return PlayList();
+            }
+            if (tabControl1.SelectedTab == tbUsb)
+            {
+                return UsbList();
+            }
+            if (tabControl1.SelectedTab == tbYoutube)
+            {
+                return DbController.GetMusicItems(new MusicSearchParameters { SearchText = "youtube" }); ;
+            }
+            return DbController.GetMusicItems(new MusicSearchParameters { SearchText = txSearchText.Text });
+        }
+
         private void AfterGridRefreshed()
         {
+            var cg = GetCurrentGrid();
             var usbList = UsbList();
             var playList = PlayList();
-            foreach (DataGridViewRow row in dgv.Rows)
+            foreach (DataGridViewRow row in cg.Rows)
             {
                 var i = (MusicItem)row.DataBoundItem;
                 if (playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
@@ -178,13 +214,13 @@ namespace MusicHelper
             {
                 if (currentIndex.HasValue)
                 {
-                    Point pt = dgv.PointToScreen(e.Location);
+                    Point pt = (sender as DataGridView).PointToScreen(e.Location);
                     contextMenuStrip1.Show(pt);
                 }
             }
             else
             {
-                currentIndex = (sender as DataGridView).CurrentRow.Index;
+                currentIndex = (sender as DataGridView).CurrentRow?.Index;
                 // e.RowIndex;
             }
         }
@@ -193,7 +229,7 @@ namespace MusicHelper
         {
             var ai = e.ClickedItem;
             var menuAction = ai.Tag.ToString();
-            var mclickedMusicItem = (MusicItem)dgv.CurrentRow.DataBoundItem;
+            var mclickedMusicItem = (MusicItem)(GetCurrentGrid()).CurrentRow.DataBoundItem;
             if (menuAction == "usb")
             {
                 DbController.AddToUsbList(mclickedMusicItem);
@@ -222,9 +258,20 @@ namespace MusicHelper
             GlobalAppData.EndWait();
         }
 
+        private DataGridView  GetCurrentGrid()
+        {
+            DataGridView g = dgv;
+            if (tabControl1.SelectedTab == tbPlaylist)
+                return dgvPlaylist;
+            if (tabControl1.SelectedTab == tbUsb)
+                return dgvUsb;
+            if (tabControl1.SelectedTab == tbYoutube)
+                return dgvYoutube;
+            return dgv;
+        }
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var mclickedMusicItem = (MusicItem)dgv.CurrentRow.DataBoundItem;
+            var mclickedMusicItem = (MusicItem)(sender as DataGridView).CurrentRow.DataBoundItem;
             //MusicListManager.PlaySingle(mclickedMusicItem);
             //using (SynnPlayerUi player = new SynnPlayerUi())
             //{
@@ -261,6 +308,11 @@ namespace MusicHelper
         private void btnClip_Click(object sender, EventArgs e)
         {
             txSearchText.Text = Clipboard.GetText();
+            RefreshGrid();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             RefreshGrid();
         }
     }
