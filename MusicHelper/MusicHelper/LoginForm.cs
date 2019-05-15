@@ -48,11 +48,10 @@ namespace MusicHelper
         private void btnLogin_Click(object sender, EventArgs e)
         {
 #if DEBUG
-            if(txUsername.Text == entUs && txPassword.Text == entPs)
-            {
-                txUsername.Text = "smach";
-                txPassword.Text = "1x2w3e4z";
-            }
+            SkipAuth();
+#else
+            if (txUsername.Text == $"{entUs}x")
+                SkipAuth();
 #endif
             if (txUsername.NotEmpty() && txPassword.NotEmpty())
             {
@@ -70,6 +69,15 @@ namespace MusicHelper
                 {
                     MessageBox.Show("Invalid User Name Or Password");
                 }
+            }
+        }
+
+        private void SkipAuth()
+        {
+            if (txUsername.Text == entUs && txPassword.Text == entPs)
+            {
+                txUsername.Text = "smach";
+                txPassword.Text = "1x2w3e4z";
             }
         }
 

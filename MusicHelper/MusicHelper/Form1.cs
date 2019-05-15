@@ -238,6 +238,12 @@ namespace MusicHelper
             {
                 DbController.AddToPlayList(mclickedMusicItem);
             }
+            if (menuAction == "dir")
+            {
+                var dir = Path.GetDirectoryName(mclickedMusicItem.FullFileName);
+                DirectoryHandler.OpenContaingFolder(dir);
+                return;
+            }
             //DbController.Update(mclickedMusicItem);
 
             currentIndex = null;

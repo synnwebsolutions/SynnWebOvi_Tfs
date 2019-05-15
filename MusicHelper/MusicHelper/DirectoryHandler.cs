@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -102,6 +103,14 @@ namespace MusicHelper
                 {
                    // throw;
                 }
+            }
+        }
+
+        internal static void OpenContaingFolder(string dir)
+        {
+            if (!string.IsNullOrEmpty(dir))
+            {
+                Process.Start(dir);
             }
         }
     }
