@@ -68,6 +68,7 @@ namespace MusicHelper
             btnSyncUsb.Tag = btnPlayUsbLst.Tag = btnClearUsb.Tag = ThemeTag.USB;
             btnPlayPlaylist.Tag = ThemeTag.Playlist;
             dgv.Tag = ThemeTag.MainBg;
+            gbYoutube.Tag = ThemeTag.YoutubeContainer;
         }
 
         private void SetDisplay()
@@ -124,7 +125,9 @@ namespace MusicHelper
         {
             if (!string.IsNullOrEmpty( txYoutubeUrl.Text))
             {
-                var vidPath = YouTubeManager.DownloadAndConvert(txYoutubeUrl.Text);
+                TimeSpan? begin = txYoutubeFromSeconds.GetTimeSpan() ;
+                TimeSpan? endAt = txYoutubeToSeconds.GetTimeSpan();
+                var vidPath = YouTubeManager.DownloadAndConvert(txYoutubeUrl.Text,begin,endAt);
                 DbController.AddMusicItem(vidPath);
                 
                 txYoutubeUrl.Text = string.Empty;
@@ -172,17 +175,20 @@ namespace MusicHelper
         private void AfterGridRefreshed()
         {
             var cg = GetCurrentGrid();
-            var usbList = UsbList();
-            var playList = PlayList();
-            foreach (DataGridViewRow row in cg.Rows)
+            if (cg.RowCount > 0 )
             {
-                var i = (MusicItem)row.DataBoundItem;
-                if (playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
-                    row.DefaultCellStyle.BackColor = Color.DarkOrange;
-                else if (usbList.Any(x => x.Id == i.Id))
-                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
-                else if (playList.Any(x => x.Id == i.Id))
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                var usbList = UsbList();
+                var playList = PlayList();
+                foreach (DataGridViewRow row in cg.Rows)
+                {
+                    var i = (MusicItem)row.DataBoundItem;
+                    if (playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
+                        row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                    else if (usbList.Any(x => x.Id == i.Id))
+                        row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                    else if (playList.Any(x => x.Id == i.Id))
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
             }
         }
 

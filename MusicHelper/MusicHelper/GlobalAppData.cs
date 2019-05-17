@@ -80,6 +80,9 @@ namespace MusicHelper
                 Playlist = System.Drawing.Color.FromArgb(218, 165, 32),
                 MusicPlayerAction = System.Drawing.Color.IndianRed,
                 MusicPlayerMain = System.Drawing.Color.FromArgb(229, 148, 0),
+                YoutubeContainer = System.Drawing.Color.Black,
+                LoginAction = System.Drawing.Color.Red,
+                MainBgLogin = System.Drawing.Color.Black,
             };
             return t;
         }

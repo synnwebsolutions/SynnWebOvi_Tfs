@@ -118,13 +118,13 @@
             // trackBar
             // 
             this.trackBar.AutoSize = false;
-            this.trackBar.LargeChange = 1;
+            this.trackBar.LargeChange = 3;
             this.trackBar.Location = new System.Drawing.Point(12, 34);
             this.trackBar.Name = "trackBar";
             this.trackBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.trackBar.Size = new System.Drawing.Size(318, 22);
             this.trackBar.TabIndex = 37;
-            this.trackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar_MouseDown);
             this.trackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar_MouseUp);
             // 

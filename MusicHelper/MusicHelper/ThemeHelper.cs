@@ -158,6 +158,21 @@ namespace MusicHelper
                     ctr.BackColor = CurrentTheme.MusicPlayerMain;
                     //ctr.ForeColor = Color.White;
                 }
+                if (ct == ThemeTag.YoutubeContainer)
+                {
+                    ctr.BackColor = CurrentTheme.YoutubeContainer;
+                    ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.MainBgLogin)
+                {
+                    ctr.BackColor = CurrentTheme.MainBgLogin;
+                    //ctr.ForeColor = Color.White;
+                }
+                if (ct == ThemeTag.LoginAction)
+                {
+                    ctr.BackColor = CurrentTheme.LoginAction;
+                    ctr.ForeColor = Color.White;
+                }
                 if (ct == "login")
                 {
                     //if (ctr is Button)
@@ -238,7 +253,9 @@ namespace MusicHelper
         public Color DefaultColor { get;  set; }
         public Color Exit { get;  set; }
         public Color Grid { get;  set; }
+        public Color LoginAction { get; internal set; }
         public Color MainBg { get;  set; }
+        public Color MainBgLogin { get; internal set; }
         public Color MediaPlayer { get;  set; }
         public Color MusicPlayerAction { get; internal set; }
         public Color MusicPlayerMain { get; internal set; }
@@ -251,6 +268,7 @@ namespace MusicHelper
         public Color USB { get; internal set; }
         public bool UseShapedButtons { get;  set; }
         public Color YouTube { get; internal set; }
+        public Color YoutubeContainer { get; internal set; }
     }
 
     public class ThemeTag
@@ -269,6 +287,8 @@ namespace MusicHelper
         public const string Playlist = "pls";
         public const string MusicPlayerMain = "mpm";
         public const string MusicPlayerAction = "mpac";
-
+        public const string YoutubeContainer = "ytc";
+        public const string MainBgLogin = "lbg";
+        public const string LoginAction = "lac";
     }
 }

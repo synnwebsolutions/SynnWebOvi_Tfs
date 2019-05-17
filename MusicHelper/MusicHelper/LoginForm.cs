@@ -17,11 +17,19 @@ namespace MusicHelper
         public LoginForm()
         {
             InitializeComponent();
+            PrepreThemeSettings();
             this.ApplyTheme();
             DbController = this.InitDataProvider();
             CenterToScreen();
 
         }
+
+        private void PrepreThemeSettings()
+        {
+            this.Tag = ThemeTag.MainBgLogin;
+            btnLogin.Tag = ThemeTag.LoginAction;
+        }
+
         string entUs = "Enter User Name...";
         string entPs = "Enter Password...";
         private void LoginForm_Load(object sender, EventArgs e)

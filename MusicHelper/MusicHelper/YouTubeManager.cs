@@ -52,6 +52,18 @@ namespace MusicHelper
             MusicItem ti = new MusicItem(ii, u);
 
             return ti;
-        } 
+        }
+
+        internal static MusicItem DownloadAndConvert(string text, TimeSpan? begin, TimeSpan? endAt)
+        {
+            var mi = DownloadAndConvert(text);
+            if (begin.HasValue || endAt.HasValue)
+            {
+                var tempFilePath = mi.FullFileName;
+                MusicManipulator.TrimMp3(mi, begin, endAt);
+                File.Delete(tempFilePath);
+            }
+            return mi;
+        }
     }
 }
