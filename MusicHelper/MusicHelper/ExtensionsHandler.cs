@@ -112,6 +112,11 @@ namespace MusicHelper
             }
         }
 
+        public static bool NotEmpty(this IList lst)
+        {
+            return lst != null && lst.Count > 0;
+        }
+
         private static string rowIdxCol = "#";
         private static void HandleColumn(DataGridView Grid, GridInfoAttribute gInfo, string defaultName)
         {

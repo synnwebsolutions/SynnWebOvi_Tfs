@@ -182,11 +182,11 @@ namespace MusicHelper
                 foreach (DataGridViewRow row in cg.Rows)
                 {
                     var i = (MusicItem)row.DataBoundItem;
-                    if (playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
+                    if (playList.NotEmpty() &&  playList.Any(x => x.Id == i.Id) && usbList.Any(x => x.Id == i.Id))
                         row.DefaultCellStyle.BackColor = Color.DarkOrange;
-                    else if (usbList.Any(x => x.Id == i.Id))
+                    else if (usbList.NotEmpty() && usbList.Any(x => x.Id == i.Id))
                         row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
-                    else if (playList.Any(x => x.Id == i.Id))
+                    else if (playList.NotEmpty() && playList.Any(x => x.Id == i.Id))
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
                 }
             }
