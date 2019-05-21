@@ -31,7 +31,10 @@ namespace MusicHelper
                 if (appcfg.RequireAuthentication)
                     Application.Run(new LoginForm());
                 else
+                {
+                    GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "Generic User" });
                     Application.Run(new Form1());
+                }
 #endif
             }
             catch (Exception ex)
