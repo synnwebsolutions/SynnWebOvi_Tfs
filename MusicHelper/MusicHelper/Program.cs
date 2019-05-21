@@ -16,17 +16,20 @@ namespace MusicHelper
         [STAThread]
         static void Main()
         {
-            //var str = SynnCore.Generics.XmlHelper.ToXml(new AppConfiguration { MediaPlayerPath = " ", ProdConnectionString = " ", SyncDirectories = new System.Collections.Generic.List<string> { "dir2", "dir1" }, TempMusicListPath = " ", TestConnectionString = " ", YoutubeDataFolder = " " });
+            var str = SynnCore.Generics.XmlHelper.ToXml(new AppConfiguration { MediaPlayerPath = " ", ProdConnectionString = " ", SyncDirectories = new System.Collections.Generic.List<string> { "dir2", "dir1" }, TempMusicListPath = " ", TestConnectionString = " ", YoutubeDataFolder = " ", RequireAuthentication = false });
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LoadStationConfigurations();
+            var appcfg = LoadStationConfigurations();
             
             HandleDbMigration();
 #if DEBUG
             GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "DEBUG - DEBUG" });
             Application.Run(new Form1());
 #else
-            Application.Run(new LoginForm());
+            if(appcfg.RequireAuthentication)
+                Application.Run(new LoginForm());
+            else
+                Application.Run(new Form1());
 # endif
         }
 
@@ -38,11 +41,12 @@ namespace MusicHelper
             MigrationHandler.Perform(connStr, migrationTableName, methods);
         }
 
-        private static void LoadStationConfigurations()
+        private static AppConfiguration LoadStationConfigurations()
         {
             var configFilePath = ConfigurationSettings.AppSettings["configFilePath"];
             AppConfiguration appCfg = SynnCore.Generics.XmlHelper.CreateFromXml<AppConfiguration>(File.ReadAllText(configFilePath));
             GlobalAppData.SetConfigs(appCfg);
+            return appCfg;
         }
     }
 }

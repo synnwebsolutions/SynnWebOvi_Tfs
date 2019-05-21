@@ -97,6 +97,7 @@ namespace MusicHelper
         public string YoutubeDataFolder { get; set; }// station
         public string TempMusicListPath { get;  set; }// station
         public string MediaPlayerPath { get;  set; } // station
+        public bool RequireAuthentication { get;  set; }
     }
 
 
