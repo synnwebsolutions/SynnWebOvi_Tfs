@@ -16,21 +16,30 @@ namespace MusicHelper
         [STAThread]
         static void Main()
         {
-            var str = SynnCore.Generics.XmlHelper.ToXml(new AppConfiguration { MediaPlayerPath = " ", ProdConnectionString = " ", SyncDirectories = new System.Collections.Generic.List<string> { "dir2", "dir1" }, TempMusicListPath = " ", TestConnectionString = " ", YoutubeDataFolder = " ", RequireAuthentication = false });
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            var appcfg = LoadStationConfigurations();
-            
-            HandleDbMigration();
+            try
+            {
+                var str = SynnCore.Generics.XmlHelper.ToXml(new AppConfiguration { MediaPlayerPath = " ", ProdConnectionString = " ", SyncDirectories = new System.Collections.Generic.List<string> { "dir2", "dir1" }, TempMusicListPath = " ", TestConnectionString = " ", YoutubeDataFolder = " ", RequireAuthentication = false });
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                var appcfg = LoadStationConfigurations();
+
+                HandleDbMigration();
 #if DEBUG
             GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "DEBUG - DEBUG" });
             Application.Run(new Form1());
 #else
-            if(appcfg.RequireAuthentication)
-                Application.Run(new LoginForm());
-            else
-                Application.Run(new Form1());
-# endif
+                if (appcfg.RequireAuthentication)
+                    Application.Run(new LoginForm());
+                else
+                    Application.Run(new Form1());
+#endif
+            }
+            catch (Exception ex)
+            {
+                var logP = @"C:\temp\musictemp\log.txt";
+                var msg = string.Format("{0} - {1} Trace = {2}", DateTime.Now,ex.Message,ex.StackTrace);
+                File.AppendAllLines(logP, new string[] { msg });
+            }
         }
 
         private static void HandleDbMigration()
