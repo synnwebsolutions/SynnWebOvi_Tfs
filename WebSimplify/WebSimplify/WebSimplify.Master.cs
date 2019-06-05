@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynnWebOvi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,12 @@ namespace WebSimplify
         protected void btnMessageBoxOk_Click(object sender, EventArgs e)
         {
             messageBoxx.Hide();
+        }
+
+        protected void nvLogout_ServerClick(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session[SynNavigation.SignOutKey] = 1;
+            SynNavigation.Goto(Pages.Login);
         }
     }
 }

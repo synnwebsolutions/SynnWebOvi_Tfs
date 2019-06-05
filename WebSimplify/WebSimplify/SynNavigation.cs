@@ -8,7 +8,7 @@ namespace SynnWebOvi
 {
     public class SynNavigation
     {
-  
+        public const string SignOutKey = "_siof";
 
         public static void Goto(string url)
         {

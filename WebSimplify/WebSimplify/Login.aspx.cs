@@ -12,6 +12,16 @@ namespace WebSimplify
 {
     public partial class Login : SynnWebFormBase
     {
+        protected override void OnPreLoad(EventArgs e)
+        {
+            base.OnPreLoad(e);
+            var res = GetFromSession(SynNavigation.SignOutKey);
+            if (res != null)
+            {
+                CurrentUser = null;
+                StoreInSession(SynNavigation.SignOutKey, null);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -37,7 +47,7 @@ namespace WebSimplify
         protected override void OnLoadComplete(EventArgs e)
         {
             base.OnLoadComplete(e);
-            if (CurrentUser != null && Request.QueryString["so"] == null)
+            if (CurrentUser != null)
                 SynNavigation.Goto(Pages.Main);
         }
 
