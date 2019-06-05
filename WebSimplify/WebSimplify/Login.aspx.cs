@@ -15,15 +15,51 @@ namespace WebSimplify
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {            
+            {
+                if (!string.IsNullOrEmpty(UserAlias))
+                {
+                    try
+                    {
+                        string msg = $"Performin Direct Acces For Alias : {UserAlias}";
+                        DBController.DbLog.AddLog(msg);
+                        CurrentUser = DBController.DbAuth.LoadUserSettings(UserAlias);
+                        StartUpManager.PerformUserStartUp(CurrentUser);
+                    }
+                    catch 
+                    {
+                        
+                    }
+                    SynNavigation.Goto(Pages.Login);
+                }
             }
         }
+
+        protected override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            if (CurrentUser != null && Request.QueryString["so"] == null)
+                SynNavigation.Goto(Pages.Main);
+        }
+
 
         protected override bool LoginProvider
         {
             get
             {
                 return true;
+            }
+        }
+
+        public  string UserAlias
+        {
+            get
+            {
+                var ux = string.Empty;
+                if (Request.QueryString["ux"] != null)
+                {
+                    ux = Request.QueryString["ux"].ToString();
+                }
+                return ux;
             }
         }
 
@@ -56,8 +92,7 @@ namespace WebSimplify
                     return;
                 }
             }
-            if (CurrentUser != null)
-                SynNavigation.Goto(Pages.Main);
+    
         }
     }
 }

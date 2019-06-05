@@ -19,6 +19,7 @@ namespace SynnWebOvi
         void Add(PermissionGroup g);
         void Add(LoggedUser u);
         List<LoggedUser> GetUsers(UserSearchParameters lp);
+        LoggedUser LoadUserSettings(string userAlias);
         void Update(LoggedUser u);
         LoggedUser GetUser(int ownerId);
         void UpdatePreferences(LoggedUser u);

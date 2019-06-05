@@ -19,6 +19,11 @@ namespace WebSimplify
         public LoggedUser LoadUserSettings(string userName, string passwword)
         {
             List<LoggedUser> lst = GetUsersEx(new UserSearchParameters { UserName = userName, Password = passwword });
+            return GetUser(lst);
+        }
+
+        private LoggedUser GetUser(List<LoggedUser> lst)
+        {
             var u = lst.FirstOrDefault();
             if (u != null)
             {
@@ -27,8 +32,6 @@ namespace WebSimplify
                     u.Preferences.CurrentWorkHoursData = new WorkHoursData();
             }
             return u;
-
-            
         }
 
         private List<LoggedUser> GetUsersEx(UserSearchParameters lp)
@@ -180,6 +183,12 @@ namespace WebSimplify
             var wItems = new SqlItemList { new SqlItem("Id", d.Id) };
             SetUpdateSql(SynnDataProvider.TableNames.DevTasks, sqlItems, wItems);
             ExecuteSql();
+        }
+
+        public LoggedUser LoadUserSettings(string userAlias)
+        {
+            List<LoggedUser> lst = GetUsersEx(new UserSearchParameters { UserName = userAlias });
+            return GetUser(lst);
         }
     }
 
