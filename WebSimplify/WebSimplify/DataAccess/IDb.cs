@@ -166,7 +166,8 @@ namespace SynnWebOvi
         public DateTime? ToDate { get; set; }
 
         public ShiftDayData ItemForAction { get; set; }
-
+        public ShiftTime? DaylyShiftTime { get; internal set; }
+        public DateTime? IDate { get; internal set; }
     }
     
         public class DevTaskItemSearchParameters : BaseSearchParameters

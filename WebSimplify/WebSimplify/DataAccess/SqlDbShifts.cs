@@ -53,6 +53,12 @@ namespace WebSimplify
                 if (lsp.ToDate.HasValue)
                     AddSqlWhereField("Date", lsp.ToDate, "<");
             }
+            if (lsp.IDate.HasValue)
+                AddSqlWhereField("Date", lsp.IDate);
+
+            if (lsp.DaylyShiftTime.HasValue)
+                AddSqlWhereField("DaylyShift", (int)lsp.DaylyShiftTime.Value);
+
             var lst = new List<ShiftDayData>();
             FillList(lst, typeof(ShiftDayData));
             return lst;

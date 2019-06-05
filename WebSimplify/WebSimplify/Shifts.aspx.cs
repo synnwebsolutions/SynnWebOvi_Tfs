@@ -109,8 +109,13 @@ namespace WebSimplify
                 d.OwnerId = CurrentUser.Id;
                 d.UserGroupId = CurrentUser.AllowedSharedPermissions[0];
 
-                DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
-                AlertMessage("פעולה זו בוצעה בהצלחה");
+
+                var exsistingShifts = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { IDate = d.Date, DaylyShiftTime = d.DaylyShift });
+                if (exsistingShifts.IsEmptyOrNull())
+                {
+                    DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
+                    AlertMessage("פעולה זו בוצעה בהצלחה");
+                }
                 RefreshView();
             }
             else
