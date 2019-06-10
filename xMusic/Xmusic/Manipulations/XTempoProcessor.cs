@@ -10,58 +10,58 @@ using TLongSampleType = System.Double;
 using SoundTouch;
 using NAudio.Wave;
 using System.IO;
+using Xmusic.Manipulations;
 
 namespace Xmusic
 {
     public class XTempoProcessor : IDisposable
     {
         private const int BUFF_SIZE = 2048;
-   
 
-        public void Process(XConverter xConverter,XSoundActionParameters mainParameters)
+        public void Process(XConverter xConverter, XJob mainParameters)
         {
             switch (mainParameters.SourceFileType)
             {
                 case XFileType.Wav:
-                    mainParameters.InitParameters(XFileType.Wav, mainParameters.SourceFileName);
-                    ProcessWav(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Wav, mainParameters.SourceFileName);
+                    //ProcessWav(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
                     break;
                 case XFileType.Mp3:
 
-                    mainParameters.InitParameters(XFileType.Wav, mainParameters.SourceFileName);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Wav, mainParameters.SourceFileName);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
-                    ProcessWav(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
+                    //ProcessWav(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
                     break;
                 case XFileType.Wma:
 
-                    mainParameters.InitParameters(XFileType.Mp3, mainParameters.SourceFileName);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Mp3, mainParameters.SourceFileName);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
-                    ProcessWav(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Wav, mainParameters.InnerParameters.OutputResultFilePath);
+                    //ProcessWav(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
-                    mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
-                    xConverter.DoWork(mainParameters.InnerParameters);
-                    mainParameters.AppendTempParameters();
+                    //mainParameters.InitParameters(XFileType.Mp3, mainParameters.InnerParameters.OutputResultFilePath);
+                    //xConverter.DoWork(mainParameters.InnerParameters);
+                    //mainParameters.AppendTempParameters();
 
                     // convert to Wav
                     // delete Source File
@@ -72,18 +72,8 @@ namespace Xmusic
                 default:
                     break;
             }
-            HandleTemporaryFile(mainParameters);
+            //HandleTemporaryFile(mainParameters);
         } 
-
-        private void HandleTemporaryFile(XSoundActionParameters param)
-        {
-            if (param.DeleteTemporaryFiles)
-            {
-                foreach (var tmpFile in param.TempFiles)
-                    File.Delete(tmpFile);
-            }
-        }
-
         private void Setup(SoundTouch<TSampleType, TLongSampleType> pSoundTouch, int sampleRate, int channels, RunParameters parameters)
         {
             pSoundTouch.SetSampleRate(sampleRate);
@@ -134,7 +124,7 @@ namespace Xmusic
             } while (nSamples != 0);
         }
 
-        private void ProcessWav(XSoundActionParameters param)
+        private void ProcessWav(XJob param)
         {
             string fileName = param.SourceFileName;
             var outFileName = fileName.GenerateOutPutPath();
@@ -142,22 +132,12 @@ namespace Xmusic
             using (var inFile = new WavInFile(fileName))
             using (var outFile = new WavOutFile(outFileName, (inFile).GetSampleRate(), (inFile).GetNumBits(), (inFile).GetNumChannels()))
             {
-                var parameters = new RunParameters(fileName, fileName.GenerateOutPutPath());
-
-                Setup(soundTouch, inFile.GetSampleRate(), inFile.GetNumChannels(), parameters);
+                Setup(soundTouch, inFile.GetSampleRate(), inFile.GetNumChannels(), param.ExecutionParameters);
 
                 Process(soundTouch, inFile, outFile);
             }
-            ReportSucces(param, outFileName);
         }
-
-        private static void ReportSucces(XSoundActionParameters param, object outputResult)
-        {
-            param.LastActionResult = XActionResult.Success;
-            param.OutputResultFilePath = outputResult.ToString();
-            param.TempFiles.Add(param.SourceFileName);
-        }
-
+        
         public void Dispose()
         {
             
