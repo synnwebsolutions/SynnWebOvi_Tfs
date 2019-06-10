@@ -10,12 +10,12 @@ using Xmusic.Extensions;
 
 namespace Xmusic
 {
-    public static class XConverter
+    public class XConverter : IDisposable
     {
         #region From Wav
 
 
-        internal static void FromWav(XSoundActionParameters param)
+        internal void FromWav(XSoundActionParameters param)
         {
             switch (param.DestinationFileType.Value)
             {
@@ -30,20 +30,20 @@ namespace Xmusic
             }
         }
 
-        internal static void DoWork(XSoundActionParameters param)
+        internal void DoWork(XSoundActionParameters param)
         {
             if (param.DestinationFileType.HasValue)
             {
                 switch (param.SourceFileType)
                 {
                     case XFileType.Wav:
-                        XConverter.FromWav(param);
+                        FromWav(param);
                         break;
                     case XFileType.Mp3:
-                        XConverter.FromMp3(param);
+                        FromMp3(param);
                         break;
                     case XFileType.Wma:
-                        XConverter.FromWma(param);
+                        FromWma(param);
                         break;
                     default:
                         break;
@@ -51,12 +51,12 @@ namespace Xmusic
             }
         }
 
-        private static void WavToWma(XSoundActionParameters param)
+        private  void WavToWma(XSoundActionParameters param)
         {
             throw new NotImplementedException();
         }
 
-        private static void WavToMp3(XSoundActionParameters param)
+        private  void WavToMp3(XSoundActionParameters param)
         {
             var savetofilename = param.SourceFileName.ReplaceExtension(XFileType.Mp3);
             using (var rdr = new WaveFileReader(param.SourceFileName))
@@ -72,7 +72,7 @@ namespace Xmusic
         #region From Mp3
 
 
-        internal static void FromMp3(XSoundActionParameters param)
+        internal  void FromMp3(XSoundActionParameters param)
         {
             switch (param.DestinationFileType.Value)
             {
@@ -87,12 +87,12 @@ namespace Xmusic
             }
         }
 
-        private static void Mp3ToWma(XSoundActionParameters param)
+        private  void Mp3ToWma(XSoundActionParameters param)
         {
             throw new NotImplementedException();
         }
 
-        private static void Mp3ToWav(XSoundActionParameters param)
+        private  void Mp3ToWav(XSoundActionParameters param)
         {
             var outputFile = param.SourceFileName.ReplaceExtension(XFileType.Wav);
             using (var fs = new FileStream(outputFile, FileMode.Create))
@@ -111,7 +111,7 @@ namespace Xmusic
 
         #region From Wma
 
-        internal static void FromWma(XSoundActionParameters param)
+        internal  void FromWma(XSoundActionParameters param)
         {
             switch (param.DestinationFileType.Value)
             {
@@ -126,7 +126,7 @@ namespace Xmusic
             }
         }
 
-        private static void WmaToMp3(XSoundActionParameters param)
+        private  void WmaToMp3(XSoundActionParameters param)
         {
             var targetFilename = param.SourceFileName.GenerateOutPutPath(XFileType.Mp3);
             using (var reader = new NAudio.Wave.AudioFileReader(param.SourceFileName))
@@ -137,7 +137,7 @@ namespace Xmusic
             ReportSucces(param, targetFilename);
         }
 
-        private static void WmaToWav(XSoundActionParameters param)
+        private  void WmaToWav(XSoundActionParameters param)
         {
             var outputFile = param.SourceFileName.ReplaceExtension(XFileType.Wav);
             //using (var reader = new NAudio.Wa (param.SourceFileName))
@@ -157,6 +157,11 @@ namespace Xmusic
             param.LastActionResult = XActionResult.Success;
             param.OutputResultFilePath = outputResult.ToString();
             param.TempFiles.Add(param.SourceFileName);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

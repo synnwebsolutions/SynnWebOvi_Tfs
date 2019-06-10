@@ -27,23 +27,32 @@ namespace Xmusic
         Error,
         Other
     }
-    public class XSoundProcessor
+    public class XSoundProcessor : IDisposable
     {
         public static void Process(XSoundActionParameters param)
         {
             param.StartTime = DateTime.Now;
-            switch (param.Action)
+            using (var xConverter = new XConverter())
+            using (var xTempoProcessor = new XTempoProcessor())
             {
-                case XActionType.Convertion:
-                    XConverter.DoWork(param);
-                    break;
-                case XActionType.TempoAdjustment:
-                    XTempoProcessor.Process(param);
-                    break;
-                default:
-                    break;
+                switch (param.Action)
+                {
+                    case XActionType.Convertion:
+                        xConverter.DoWork(param);
+                        break;
+                    case XActionType.TempoAdjustment:
+                        xTempoProcessor.Process(xConverter,param);
+                        break;
+                    default:
+                        break;
+                }
+                param.EndTime = DateTime.Now;
             }
-            param.EndTime = DateTime.Now;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 
@@ -102,7 +111,9 @@ namespace Xmusic
 
         internal void AppendTempParameters()
         {
-            TempFiles.AddRange(InnerParameters.TempFiles);
+            foreach (var tmp in InnerParameters.TempFiles)
+            if(tmp != SourceFileName)
+                TempFiles.Add(tmp);
         }
     }
 }

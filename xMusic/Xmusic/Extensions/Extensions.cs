@@ -39,7 +39,8 @@ namespace Xmusic.Extensions
         public static string GetSpanString(this DateTime d, DateTime rel)
         {
             TimeSpan sp = d.GetSpan(rel);
-            return string.Format("{0}:{1}:{2}",sp.Hours,sp.Minutes,sp.Seconds);
+            return string.Format("{0:c}",sp);
+            //return string.Format("{0}:{1}:{2}",sp.Hours,sp.Minutes,sp.Seconds);
         }
 
         public static TimeSpan GetSpan(this DateTime d, DateTime rel)

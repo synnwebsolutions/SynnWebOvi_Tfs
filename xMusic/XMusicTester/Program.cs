@@ -20,23 +20,24 @@ namespace XMusicTester
     {
         static void Main(string[] args)
         {
+           
+            //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\Aster Aweke - 05. Ayzoh.wma";
+            string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
+            //string file = @"C:\Users\AdelaPc\Desktop\124\Mase - Feel So Good.wav";
+            var p = new XSoundActionParameters
+            {
+                Action = XActionType.TempoAdjustment,
+                SourceFileName = file,
+                DeleteTemporaryFiles = true
+            };
             try
             {
-                string file = @"C:\Users\AdelaPc\Desktop\124\Yinyues - Ylang Ylang.mp3";
-                //string file = @"C:\Users\AdelaPc\Desktop\124\Fkeraddis - Track 10.wma";
-                //string file = @"C:\Users\AdelaPc\Desktop\124\Mase - Feel So Good.wav";
-
-                var p = new XSoundActionParameters
-                {
-                    Action = XActionType.TempoAdjustment,
-                    SourceFileName = file,
-                    //DeleteTemporaryFiles = true
-                };
                 XSoundProcessor.Process(p);
                 Console.WriteLine(p.TotalTimeSpan);
             }
             catch (Exception ex)
             {
+                var trace = ex.StackTrace;
                 Console.WriteLine(ex.Message);
             }
             Console.ReadLine();
