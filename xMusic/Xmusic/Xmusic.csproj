@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF1D15B6-7124-47E7-B81C-4D4B0A7E3DE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xmusic</RootNamespace>
+    <AssemblyName>Xmusic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NAudio, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.1\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NAudio.Lame, Version=1.0.9.26885, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\IInput.cs" />
+    <Compile Include="Core\IOutput.cs" />
+    <Compile Include="Core\IXMusicFileProvider.cs" />
+    <Compile Include="Core\IXmusicPlayer.cs" />
+    <Compile Include="Core\IXSoundComponent.cs" />
+    <Compile Include="Core\XAudioReader.cs" />
+    <Compile Include="Core\XAudioWriter.cs" />
+    <Compile Include="Core\XSoundTouch.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\AntiAliasFilter.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\ArrayPtr.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\BpmDetect.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\Defaults.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\EndianHelper.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FifoProcessor.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FifoSampleBuffer.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FifoSamplePipe.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FirFilter.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FirFilterFloat.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\FirFilterInteger.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\PeakFinder.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\RateTransposer.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\RateTransposerFloat.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\RateTransposerInteger.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\RunParameters.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\SettingId.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\SoundTouch.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\StreamExtensions.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\TimeStretch.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\TimeStretchFloat.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\TimeStretchInteger.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\WavFile.cs" />
+    <Compile Include="Manipulations\ExternalWavTempoData\WavOutFile.cs" />
+    <Compile Include="Manipulations\XConverter.cs" />
+    <Compile Include="Manipulations\XSoundProcessor.cs" />
+    <Compile Include="Manipulations\XTempoProcessor.cs" />
+    <Compile Include="Players\NAudionSoundComponent.cs" />
+    <Compile Include="Players\NAudioWavePlayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utills\SoundTouchInterop32.cs" />
+    <Compile Include="Utills\SoundTouchInterop64.cs" />
+    <Compile Include="Utills\SoundTouchSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\COPYING.TXT" />
+    <Content Include="lib\SoundTouch.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\SoundTouch_x64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
