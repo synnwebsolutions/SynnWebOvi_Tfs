@@ -22,12 +22,30 @@ namespace XMusicTester
         static void Main(string[] args)
         {
 
-            string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\Aster Aweke - 05. Ayzoh.wma";
-            //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
+            //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\Aster Aweke - 05. Ayzoh.wma";
+            string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
             //string file = @"C:\Users\AdelaPc\Desktop\124\Mase - Feel So Good.wav";
             //TestTempo(file);
-            TestPlayer(file);
+            //TestPlayer(file);
+            TestPlayer2(file);
             //Test(file);
+        }
+
+        private static void TestPlayer2(string file)
+        {
+            var player = new XMediaPlayer();
+            player.Play(file);
+            var res = "";
+            while (res != "x")
+            {
+                res = Console.ReadLine();
+                float tempo = player.CurrentTempo();
+                if (float.TryParse(res, out tempo))
+                {
+                    player.SetTempo(tempo);
+                }
+            }
+            player.Stop();
         }
 
         private static void TestPlayer(string file)
@@ -37,10 +55,10 @@ namespace XMusicTester
             {
                 var speedControl = new NAudionSoundComponent(reader);
                 var wPlayer = new WaveOutEvent();
-                //wPlayer.PlaybackStopped += WavePlayerOnPlaybackStopped;
-                wPlayer.Init(speedControl);// --> speedcontrol = IXSoundComponent
+              
+                wPlayer.Init(speedControl);
                 wPlayer.Play();
-                //speedControl.PlaybackRate = 1.20f;
+             
                 var res = "";
                 while (res != "x")
                 {
@@ -52,7 +70,6 @@ namespace XMusicTester
                     }
                 }
                 wPlayer?.Stop();
-                //speedControl.PlaybackRate = 0.5f + trackBarPlaybackRate.Value * 0.1f; -> chang speed
             }
         }
 

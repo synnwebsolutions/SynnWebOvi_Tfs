@@ -92,6 +92,7 @@
     <Compile Include="Manipulations\XWmaConverter.cs" />
     <Compile Include="Players\NAudionSoundComponent.cs" />
     <Compile Include="Players\NAudioWavePlayer.cs" />
+    <Compile Include="Players\XMediaPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
