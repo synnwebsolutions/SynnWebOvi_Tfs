@@ -10,14 +10,20 @@ namespace Xmusic.Manipulations
 {
     public class XJob
     {
+        public XJob()
+        {
+            ExecutionParameters = new RunParameters();
+        }
         public string SourceFileName { get; set; }
         public RunParameters ExecutionParameters { get; set; }
         public string AlternativeOutputPath { get; set; }
 
-        public bool DeleteTemporaryFiles { get; set; }
         public bool UseBackGroundProcess { get; set; }
+        public byte[] OutputData { get;  set; }
 
-        public List<string> TempFiles { get; set; }
+        public bool ReturnData { get; set; }
+        public byte[] SourceData { get; set; }
+
         public XFileType SourceFileType
         {
             get
@@ -25,13 +31,18 @@ namespace Xmusic.Manipulations
                 return SourceFileName.RetrieveExtension();
             }
         }
+        public string ResulFileName { get; set; }
+        public DateTime StartTime { get;  set; }
+        public DateTime EndTime { get;  set; }
     }
 
     public class XConvertJob : XJob
     {
         public XFileType? DestinationFileType { get; set; }
-        public byte[] OutputData { get; internal set; }
-        public string ResulFileName { get;  set; }
-        public bool ReturnData { get;  set; }
+    }
+
+    public class XTempoJob : XJob
+    {
+
     }
 }

@@ -21,7 +21,8 @@ namespace Xmusic
     class SoundTouchInterop32
     {
         //private const string SoundTouchDllName = @"SoundTouch.dll";
-        private const string SoundTouchDllName = @"C:\Users\AdelaPc\Documents\visual studio 2015\Projects\XMusicTester\Xmusic\lib\SoundTouch.dll";
+        //private const string SoundTouchDllName = @"C:\Users\AdelaPc\Documents\visual studio 2015\Projects\XMusicTester\Xmusic\lib\SoundTouch.dll";
+        private const string SoundTouchDllName = @"D:\SynnTfs\SynnWebOvi_Tfs\xMusic\Xmusic\lib\SoundTouch.dll";
 
         /// <summary>
         /// Create a new instance of SoundTouch processor.

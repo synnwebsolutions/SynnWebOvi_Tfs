@@ -73,7 +73,13 @@ namespace Xmusic
                     break;
             }
             //HandleTemporaryFile(mainParameters);
-        } 
+        }
+
+        internal void Process(XTempoJob wavTempoJob)
+        {
+            ProcessWav(wavTempoJob);
+        }
+
         private void Setup(SoundTouch<TSampleType, TLongSampleType> pSoundTouch, int sampleRate, int channels, RunParameters parameters)
         {
             pSoundTouch.SetSampleRate(sampleRate);
@@ -124,17 +130,26 @@ namespace Xmusic
             } while (nSamples != 0);
         }
 
-        private void ProcessWav(XJob param)
+        private void ProcessWav(XTempoJob param)
         {
-            string fileName = param.SourceFileName;
-            var outFileName = fileName.GenerateOutPutPath();
+            var outFileName = param.SourceFileName.GenerateOutPutPath();
             var soundTouch = new SoundTouch<TSampleType, TLongSampleType>();
-            using (var inFile = new WavInFile(fileName))
+            if (param.SourceData != null)
+            {
+                File.WriteAllBytes(param.SourceFileName, param.SourceData);
+            }
+
+            using (var inFile = new WavInFile(param.SourceFileName))
             using (var outFile = new WavOutFile(outFileName, (inFile).GetSampleRate(), (inFile).GetNumBits(), (inFile).GetNumChannels()))
             {
                 Setup(soundTouch, inFile.GetSampleRate(), inFile.GetNumChannels(), param.ExecutionParameters);
-
                 Process(soundTouch, inFile, outFile);
+            }
+            param.ResulFileName = outFileName;
+            if (param.ReturnData)
+            {
+                param.OutputData = File.ReadAllBytes(outFileName);
+                File.Delete(outFileName);
             }
         }
         

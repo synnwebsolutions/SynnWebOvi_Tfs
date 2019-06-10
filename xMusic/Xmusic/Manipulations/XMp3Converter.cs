@@ -26,6 +26,7 @@ namespace Xmusic.Manipulations
             }
         }
 
+   
         private static void Mp3ToWma(XConvertJob param)
         {
             throw new NotImplementedException();
@@ -34,9 +35,16 @@ namespace Xmusic.Manipulations
         private static void Mp3ToWav(XConvertJob param)
         {
             var outputFile = param.SourceFileName.ReplaceExtension(XFileType.Wav);
-            using (var fs = new FileStream(outputFile, FileMode.Create))
-            { }
-            using (var reader = new Mp3FileReader(param.SourceFileName))
+            if (param.SourceData != null)
+            {
+
+            }
+            else
+            {
+                using (var fs = new FileStream(outputFile, FileMode.Create))
+                { }
+            }
+            using (var reader = GetReader(param))
             {
                 using (WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(reader))
                 {
@@ -44,6 +52,16 @@ namespace Xmusic.Manipulations
                 }
             }
             param.ResulFileName = outputFile;
+        }
+
+        private static Mp3FileReader GetReader(XConvertJob param)
+        {
+            if (param.SourceData != null)
+            {
+                var mStream = new MemoryStream(param.SourceData.Length);
+                return new Mp3FileReader(mStream);
+            }
+            return new Mp3FileReader(param.SourceFileName);
         }
     }
 }

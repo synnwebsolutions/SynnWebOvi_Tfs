@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace Xmusic.Manipulations
         private static void WmaToMp3(XConvertJob param)
         {
             var targetFilename = param.SourceFileName.GenerateOutPutPath(XFileType.Mp3);
+            if (param.SourceData != null)
+            {
+                File.WriteAllBytes(param.SourceFileName, param.SourceData);
+            }
             using (var reader = new NAudio.Wave.AudioFileReader(param.SourceFileName))
             using (var writer = new NAudio.Lame.LameMP3FileWriter(targetFilename, reader.WaveFormat, NAudio.Lame.LAMEPreset.STANDARD))
             {

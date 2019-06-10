@@ -2,6 +2,7 @@
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,22 @@ namespace Xmusic.Manipulations
         private static void WavToMp3(XConvertJob param)
         {
             var savetofilename = param.SourceFileName.ReplaceExtension(XFileType.Mp3);
-            using (var rdr = new WaveFileReader(param.SourceFileName))
+            using (var rdr = GetReader(param))
             using (var wtr = new LameMP3FileWriter(savetofilename, rdr.WaveFormat, LAMEPreset.VBR_90))
             {
                 rdr.CopyTo(wtr);
             }
             param.ResulFileName = savetofilename;
+        }
+
+        private static WaveFileReader GetReader(XConvertJob param)
+        {
+            if (param.SourceData != null)
+            {
+                var mStream = new MemoryStream(param.SourceData.Length);
+                return new WaveFileReader(mStream);
+            }
+            return new WaveFileReader(param.SourceFileName);
         }
     }
 }

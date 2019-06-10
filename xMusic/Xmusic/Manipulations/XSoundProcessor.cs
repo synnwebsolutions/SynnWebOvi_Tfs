@@ -36,12 +36,37 @@ namespace Xmusic
             using (var xConverter = new XConverter())
             using (var xTempoProcessor = new XTempoProcessor())
             {
+                job.StartTime = DateTime.Now;
                 if (job.SourceFileType == XFileType.Wma)
                 {
-                    var cJob = new XConvertJob { SourceFileName = job.SourceFileName, DestinationFileType = XFileType.Mp3 , DeleteTemporaryFiles = job.DeleteTemporaryFiles};
-                    xConverter.Convert(cJob);
+                    var wmaToMp3Job = new XConvertJob { SourceFileName = job.SourceFileName, DestinationFileType = XFileType.Mp3, ReturnData = true };
+                    xConverter.Convert(wmaToMp3Job);
+
+                    var mp3ToWavJob = new XConvertJob { SourceData = wmaToMp3Job.OutputData, DestinationFileType = XFileType.Wav, ReturnData = true };
+                    ProccessMp3(xConverter, xTempoProcessor, mp3ToWavJob);
                 }
-                xTempoProcessor.Process(xConverter, job);
+                if (job.SourceFileType == XFileType.Mp3)
+                {
+                    var mp3ToWavJob = new XConvertJob { SourceFileName = job.SourceFileName, DestinationFileType = XFileType.Wav, ReturnData = true };
+                    ProccessMp3(xConverter, xTempoProcessor, mp3ToWavJob);
+                }
+                job.EndTime = DateTime.Now;
+            }
+        }
+
+        private static void ProccessMp3(XConverter xConverter, XTempoProcessor xTempoProcessor, XConvertJob mp3ToWavJob)
+        {
+            xConverter.Convert(mp3ToWavJob);
+
+            var wavTempoJob = new XTempoJob { SourceData = mp3ToWavJob.OutputData, SourceFileName = mp3ToWavJob.ResulFileName, ReturnData = true };
+            xTempoProcessor.Process(wavTempoJob);
+
+            var afterTempoWavToMp3Job = new XConvertJob { SourceData = wavTempoJob.OutputData, DestinationFileType = XFileType.Mp3 };
+            xConverter.Convert(mp3ToWavJob);
+
+            if (afterTempoWavToMp3Job.SourceData != null)
+            {
+                File.WriteAllBytes(afterTempoWavToMp3Job.SourceFileName, afterTempoWavToMp3Job.SourceData);
             }
         }
 
