@@ -38,10 +38,12 @@ namespace Xmusic.Extensions
 
         public static string GenerateGuidPath(this string path, XFileType dst)
         {
-            Guid g = Guid.NewGuid();
-            string GuidString = System.Convert.ToBase64String(g.ToByteArray());
-            GuidString = GuidString.Replace("=", "");
-            GuidString = GuidString.Replace("+", "");
+            //Guid g = Guid.NewGuid();
+            //string GuidString = System.Convert.ToBase64String(g.ToByteArray());
+            //GuidString = GuidString.Replace("=", "");
+            //GuidString = GuidString.Replace("+", "");
+
+            string GuidString = (new Random()).Next(1000000).ToString();
             var dir = Path.GetDirectoryName(path);
             var file = $"{GuidString}{dst.GetExtensionType()}";
             return Path.Combine(dir, file);

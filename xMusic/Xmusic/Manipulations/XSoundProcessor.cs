@@ -83,4 +83,25 @@ namespace Xmusic
             
         }
     }
+
+    public static class XMusicLogger
+    {
+        static List<string> Logs;
+        public static void AddLog(string l)
+        {
+            if (Logs == null)
+                Logs = new List<string>();
+
+            Logs.Add(l);
+            Console.WriteLine($"{ DateTime.Now} : {l}");
+        }
+        public static void Init()
+        {
+            Logs = new List<string>();
+        }
+        public static string GetLogs()
+        {
+            return string.Join(Environment.NewLine, Logs);
+        }
+    }
  }

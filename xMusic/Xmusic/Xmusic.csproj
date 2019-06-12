@@ -83,6 +83,7 @@
     <Compile Include="Manipulations\ExternalWavTempoData\TimeStretchInteger.cs" />
     <Compile Include="Manipulations\ExternalWavTempoData\WavFile.cs" />
     <Compile Include="Manipulations\ExternalWavTempoData\WavOutFile.cs" />
+    <Compile Include="Manipulations\MusicServiceProvider.cs" />
     <Compile Include="Manipulations\XConverter.cs" />
     <Compile Include="Manipulations\XJob.cs" />
     <Compile Include="Manipulations\XMp3Converter.cs" />

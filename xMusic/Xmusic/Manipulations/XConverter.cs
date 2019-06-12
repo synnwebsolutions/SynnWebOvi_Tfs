@@ -21,8 +21,10 @@ namespace Xmusic
             p.ISourceFileType = srcPath.RetrieveExtension();
             p.AlternativeOutputPath = srcPath.GenerateGuidPath(dst);
             p.DestinationFileType = dst;
+            p.SourceFileName = srcPath;
             res.EndTime = DateTime.Now;
             Convert(p);
+            XMusicLogger.AddLog($"{DateTime.Now} : Converting {srcPath} to {p.AlternativeOutputPath}");
             res.OutputData = File.ReadAllBytes(p.AlternativeOutputPath);
             File.Delete(p.AlternativeOutputPath);
             res.TempFileName = p.AlternativeOutputPath;
@@ -31,7 +33,12 @@ namespace Xmusic
 
         private void Convert(XConvertJob param)
         {
-            switch (param.ISourceFileType)
+            DoWork(param);
+        }
+
+        private static void DoWork(XConvertJob param)
+        {
+            switch (param.SourceFileType)
             {
                 case XFileType.Wav:
                     switch (param.DestinationFileType.Value)
@@ -75,16 +82,21 @@ namespace Xmusic
                 default:
                     break;
             }
-            //if (param.ReturnData)
-            //{
-            //    param.OutputData = File.ReadAllBytes(param.ResulFileName);
-            //    File.Delete(param.ResulFileName);
-            //}
+        }
+
+        internal void Convert(MusicService job)
+        {
+            var convertJob = new XConvertJob();
+            convertJob.SourceFileName = job.SourceFile;
+            convertJob.AlternativeOutputPath = job.DestinationFile;
+            convertJob.DestinationFileType = job.DestinationFileType;
+            DoWork(convertJob);
         }
 
         private static void WmaToMp3(XConvertJob param)
         {
-            var targetFilename = param.SourceFileName.GenerateOutPutPath(XFileType.Mp3);
+            var targetFilename = string.IsNullOrEmpty(param.AlternativeOutputPath) ? param.SourceFileName.GenerateOutPutPath(XFileType.Mp3) :
+                param.AlternativeOutputPath;
             if (param.SourceData != null)
             {
                 File.WriteAllBytes(param.SourceFileName, param.SourceData);
@@ -99,8 +111,8 @@ namespace Xmusic
 
         private static void Mp3ToWav(XConvertJob param)
         {
-            using (var fs = new FileStream(param.AlternativeOutputPath, FileMode.Create))
-            { }
+            //using (var fs = new FileStream(param.AlternativeOutputPath, FileMode.Create))
+            //{ }
             using (var reader = GetMp3Reader(param))
             {
                 using (WaveStream pcmStream = WaveFormatConversionStream.CreatePcmStream(reader))
@@ -122,7 +134,8 @@ namespace Xmusic
 
         private static void WavToMp3(XConvertJob param)
         {
-            var savetofilename = param.SourceFileName.ReplaceExtension(XFileType.Mp3);
+            var savetofilename = string.IsNullOrEmpty(param.AlternativeOutputPath) ? param.SourceFileName.ReplaceExtension(XFileType.Mp3) :
+                param.AlternativeOutputPath;
             using (var rdr = GetWavReader(param))
             using (var wtr = new LameMP3FileWriter(savetofilename, rdr.WaveFormat, LAMEPreset.VBR_90))
             {

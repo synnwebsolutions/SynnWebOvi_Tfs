@@ -21,14 +21,33 @@ namespace XMusicTester
     {
         static void Main(string[] args)
         {
-
+            XMusicLogger.Init();
             //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\Aster Aweke - 05. Ayzoh.wma";
-            string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
-            //string file = @"C:\Users\AdelaPc\Desktop\124\Mase - Feel So Good.wav";
+            //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
+            string file = @"C:\Users\AdelaPc\Desktop\124\Fkeraddis - Track 10.wma";
+            //string file = @"C:\Users\AdelaPc\Desktop\124\Yinyues - Ylang Ylang.mp3";
             //TestTempo(file);
             //TestPlayer(file);
-            TestTempo(file);
+            TestMusicServiceProvider(file);
             //Test(file);
+            //Console.WriteLine(XMusicLogger.GetLogs());
+            Console.ReadLine();
+        }
+
+        private static void TestMusicServiceProvider(string file)
+        {
+            var x = new MusicServiceProvider();
+            try
+            {
+                x.ProcessTempoJob(file);
+                //Console.WriteLine($"Start : { p.StartTime.ToShortTimeString()}  End At : { p.EndTime.ToShortTimeString()}");
+            }
+            catch (Exception ex)
+            {
+                var trace = ex.StackTrace;
+                XMusicLogger.AddLog(ex.Message);
+                XMusicLogger.AddLog(trace);
+            }
         }
 
         private static void TestPlayer2(string file)
@@ -87,12 +106,9 @@ namespace XMusicTester
             catch (Exception ex)
             {
                 var trace = ex.StackTrace;
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("___________________________________________________________");
-                Console.WriteLine();
-                Console.WriteLine(ex.StackTrace);
+                XMusicLogger.AddLog(ex.Message);
+                XMusicLogger.AddLog(trace);
             }
-            Console.ReadLine();
         }
 
         private static void test5(string file)

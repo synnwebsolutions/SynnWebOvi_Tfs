@@ -75,6 +75,14 @@ namespace Xmusic
             //HandleTemporaryFile(mainParameters);
         }
 
+        internal void Process(MusicService job)
+        {
+            var xj = new XTempoJob();
+            xj.SourceFileName = job.SourceFile;
+            xj.AlternativeOutputPath = job.DestinationFile;
+            ProcessWav(xj);
+        }
+
         internal void Process(XTempoJob wavTempoJob)
         {
             ProcessWav(wavTempoJob);
@@ -132,7 +140,8 @@ namespace Xmusic
 
         private void ProcessWav(XTempoJob param)
         {
-            var outFileName = param.SourceFileName.GenerateOutPutPath();
+            var outFileName = string.IsNullOrEmpty(param.AlternativeOutputPath) ? param.SourceFileName.GenerateOutPutPath() :
+                param.AlternativeOutputPath;
             var soundTouch = new SoundTouch<TSampleType, TLongSampleType>();
             if (param.SourceData != null)
             {
