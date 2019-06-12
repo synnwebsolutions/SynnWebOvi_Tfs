@@ -27,7 +27,7 @@ namespace XMusicTester
             //string file = @"C:\Users\AdelaPc\Desktop\124\Mase - Feel So Good.wav";
             //TestTempo(file);
             //TestPlayer(file);
-            TestPlayer2(file);
+            TestTempo(file);
             //Test(file);
         }
 

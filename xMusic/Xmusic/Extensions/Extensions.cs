@@ -18,6 +18,13 @@ namespace Xmusic.Extensions
             return str.Replace(Path.GetExtension(str), destinatinFileType.GetExtensionType());
         }
 
+        public static string GenerateFileTempoAlteredName(this string str)
+        {
+            var nameWithoutExtension = Path.GetFileNameWithoutExtension(str);
+            var extension = Path.GetExtension(str);
+            return str.Replace(nameWithoutExtension, $"{nameWithoutExtension}_tempo").Replace(extension,Mp3Extension);
+        }
+
         public static XFileType RetrieveExtension(this string str)
         {
             var ext = Path.GetExtension(str);
