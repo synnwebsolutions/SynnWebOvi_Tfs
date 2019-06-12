@@ -24,6 +24,7 @@ namespace Xmusic.Manipulations
         public bool ReturnData { get; set; }
         public byte[] SourceData { get; set; }
 
+        public XFileType ISourceFileType { get; set; }
         public XFileType SourceFileType
         {
             get
@@ -44,5 +45,18 @@ namespace Xmusic.Manipulations
     public class XTempoJob : XJob
     {
 
+    }
+
+    public class XJobResult
+    {
+        public string TempFileName { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public byte[] OutputData { get; set; }
+
+        public XJobResult()
+        {
+            StartTime = DateTime.Now;
+        }
     }
 }

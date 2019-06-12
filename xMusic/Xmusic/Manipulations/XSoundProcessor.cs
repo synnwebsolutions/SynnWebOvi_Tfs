@@ -39,35 +39,43 @@ namespace Xmusic
                 job.StartTime = DateTime.Now;
                 if (job.SourceFileType == XFileType.Wma)
                 {
-                    var wmaToMp3Job = new XConvertJob { SourceFileName = job.SourceFileName, DestinationFileType = XFileType.Mp3, ReturnData = true };
-                    xConverter.Convert(wmaToMp3Job);
+                    XJobResult res = xConverter.Convert(job.SourceFileName, XFileType.Mp3);
+                    SaveTempFile(res.TempFileName,res.OutputData);
 
-                    var mp3ToWavJob = new XConvertJob { SourceData = wmaToMp3Job.OutputData, DestinationFileType = XFileType.Wav, ReturnData = true };
-                    ProccessMp3(xConverter, xTempoProcessor, mp3ToWavJob);
+                    ProccessMp3(xConverter, xTempoProcessor, res.TempFileName, job.SourceFileName);
                 }
                 if (job.SourceFileType == XFileType.Mp3)
                 {
-                    var mp3ToWavJob = new XConvertJob { SourceFileName = job.SourceFileName, DestinationFileType = XFileType.Wav, ReturnData = true };
-                    ProccessMp3(xConverter, xTempoProcessor, mp3ToWavJob);
+                    ProccessMp3(xConverter, xTempoProcessor, job.SourceFileName, job.SourceFileName);
                 }
                 job.EndTime = DateTime.Now;
             }
         }
 
-        private static void ProccessMp3(XConverter xConverter, XTempoProcessor xTempoProcessor, XConvertJob mp3ToWavJob)
+        private void SaveTempFile(string tmpPath, byte[] outputData)
         {
-            xConverter.Convert(mp3ToWavJob);
+            if (outputData != null)
+            {
+                File.WriteAllBytes(tmpPath, outputData);
+            }
+        }
 
-            var wavTempoJob = new XTempoJob { SourceData = mp3ToWavJob.OutputData, SourceFileName = mp3ToWavJob.ResulFileName, ReturnData = true };
+        private  void ProccessMp3(XConverter xConverter, XTempoProcessor xTempoProcessor, string  mp3Path, string mainSourceFileName)
+        {
+            XJobResult res = xConverter.Convert(mp3Path, XFileType.Wav);
+            SaveTempFile(res.TempFileName, res.OutputData);
+
+            var wavTempoJob = new XTempoJob { SourceFileName = res.TempFileName, ReturnData = true };
             xTempoProcessor.Process(wavTempoJob);
 
-            var afterTempoWavToMp3Job = new XConvertJob { SourceData = wavTempoJob.OutputData, DestinationFileType = XFileType.Mp3 };
-            xConverter.Convert(mp3ToWavJob);
+            //var afterTempoWavToMp3Job = new XConvertJob { SourceData = wavTempoJob.OutputData, DestinationFileType = XFileType.Mp3 };
+            SaveTempFile(mainSourceFileName.GenerateGuidPath(XFileType.Mp3), wavTempoJob.OutputData);
+            //xConverter.Convert(mp3ToWavJob);
 
-            if (afterTempoWavToMp3Job.SourceData != null)
-            {
-                File.WriteAllBytes(afterTempoWavToMp3Job.SourceFileName, afterTempoWavToMp3Job.SourceData);
-            }
+            //if (afterTempoWavToMp3Job.SourceData != null)
+            //{
+            //    File.WriteAllBytes(afterTempoWavToMp3Job.SourceFileName, afterTempoWavToMp3Job.SourceData);
+            //}
         }
 
         public void Dispose()

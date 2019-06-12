@@ -18,11 +18,33 @@ namespace Xmusic.Extensions
             return str.Replace(Path.GetExtension(str), destinatinFileType.GetExtensionType());
         }
 
+        public static string GetDirectory(this string str)
+        {
+            return Path.GetDirectoryName(str);
+        }
+
         public static string GenerateFileTempoAlteredName(this string str)
         {
             var nameWithoutExtension = Path.GetFileNameWithoutExtension(str);
             var extension = Path.GetExtension(str);
             return str.Replace(nameWithoutExtension, $"{nameWithoutExtension}_tempo").Replace(extension,Mp3Extension);
+        }
+
+        public static DateTime Stamp(this DateTime d)
+        {
+            d = DateTime.Now;
+            return d;
+        }
+
+        public static string GenerateGuidPath(this string path, XFileType dst)
+        {
+            Guid g = Guid.NewGuid();
+            string GuidString = System.Convert.ToBase64String(g.ToByteArray());
+            GuidString = GuidString.Replace("=", "");
+            GuidString = GuidString.Replace("+", "");
+            var dir = Path.GetDirectoryName(path);
+            var file = $"{GuidString}{dst.GetExtensionType()}";
+            return Path.Combine(dir, file);
         }
 
         public static XFileType RetrieveExtension(this string str)
