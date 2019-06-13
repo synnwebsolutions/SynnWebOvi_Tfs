@@ -24,14 +24,36 @@ namespace XMusicTester
             XMusicLogger.Init();
             //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\Aster Aweke - 05. Ayzoh.wma";
             //string file = @"C:\Users\adelasm\Desktop\M-Overhaul\tests\r. kelly - down low feat ronald and ernie isley.mp3";
-            string file = @"C:\Users\AdelaPc\Desktop\124\Fkeraddis - Track 10.wma";
+            //string file = @"C:\Users\AdelaPc\Desktop\124\Fkeraddis - Track 10.wma";
             //string file = @"C:\Users\AdelaPc\Desktop\124\Yinyues - Ylang Ylang.mp3";
+            string file = @"D:\SmachData\Andreas B";
             //TestTempo(file);
             //TestPlayer(file);
-            TestMusicServiceProvider(file);
+            //TestMusicServiceProvider(file);
+            TestMusicServiceProviderDirectory(file);
             //Test(file);
             //Console.WriteLine(XMusicLogger.GetLogs());
             Console.ReadLine();
+        }
+
+        private static void TestMusicServiceProviderDirectory(string dir)
+        {
+            var x = new MusicServiceProvider();
+            var allFiles = Directory.GetFiles(dir);
+            foreach (var file in allFiles)
+            {
+                try
+                {
+                    x.ProcessTempoJob(file, 14f);
+                    //Console.WriteLine($"Start : { p.StartTime.ToShortTimeString()}  End At : { p.EndTime.ToShortTimeString()}");
+                }
+                catch (Exception ex)
+                {
+                    var trace = ex.StackTrace;
+                    XMusicLogger.AddLog(ex.Message);
+                    XMusicLogger.AddLog(trace);
+                }
+            }
         }
 
         private static void TestMusicServiceProvider(string file)
@@ -39,7 +61,7 @@ namespace XMusicTester
             var x = new MusicServiceProvider();
             try
             {
-                x.ProcessTempoJob(file);
+                x.ProcessTempoJob(file,14f);
                 //Console.WriteLine($"Start : { p.StartTime.ToShortTimeString()}  End At : { p.EndTime.ToShortTimeString()}");
             }
             catch (Exception ex)

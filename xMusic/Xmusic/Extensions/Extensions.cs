@@ -36,7 +36,7 @@ namespace Xmusic.Extensions
             return d;
         }
 
-        public static string GenerateGuidPath(this string path, XFileType dst)
+        public static string GenerateGuidPath(this string path, XFileType dst, string extraText = null)
         {
             //Guid g = Guid.NewGuid();
             //string GuidString = System.Convert.ToBase64String(g.ToByteArray());
@@ -45,7 +45,7 @@ namespace Xmusic.Extensions
 
             string GuidString = (new Random()).Next(1000000).ToString();
             var dir = Path.GetDirectoryName(path);
-            var file = $"{GuidString}{dst.GetExtensionType()}";
+            var file = $"{GuidString} [{extraText ?? string.Empty}]{dst.GetExtensionType()}";
             return Path.Combine(dir, file);
         }
 
@@ -61,10 +61,10 @@ namespace Xmusic.Extensions
             return XFileType.Wav;
         }
 
-        public static string GenerateOutPutPath(this string str)
+        public static string GenerateOutPutPath(this string str, string extraText = null)
         {
             var ext = Path.GetFileNameWithoutExtension(str);
-            return str.Replace(ext, $"{ext}_out");
+            return str.Replace(ext, $"{ext}[{extraText ?? string.Empty}]_out");
         }
 
         public static string GetSpanString(this DateTime d, DateTime rel)
@@ -88,12 +88,12 @@ namespace Xmusic.Extensions
             return sp;
         }
 
-        public static string GenerateOutPutPath(this string str, XFileType destinationType)
+        public static string GenerateOutPutPath(this string str, XFileType destinationType, string extraText = null)
         {
             var name = Path.GetFileNameWithoutExtension(str);
             var extension = Path.GetExtension(str);
             str = str.Replace(extension, destinationType.GetExtensionType());
-            return str.Replace(name, $"{name}_out");
+            return str.Replace(name, $"{name}[{extraText ?? string.Empty}]_out");
         }
 
         public static string GetExtensionType(this XFileType f)

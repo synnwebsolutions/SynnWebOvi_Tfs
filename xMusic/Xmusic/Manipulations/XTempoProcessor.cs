@@ -80,6 +80,7 @@ namespace Xmusic
             var xj = new XTempoJob();
             xj.SourceFileName = job.SourceFile;
             xj.AlternativeOutputPath = job.DestinationFile;
+            xj.ExecutionParameters = job.ExecutionParameters;
             ProcessWav(xj);
         }
 

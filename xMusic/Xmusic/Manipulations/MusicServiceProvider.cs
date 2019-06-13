@@ -4,20 +4,25 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SoundStretch;
 using Xmusic.Extensions;
 
 namespace Xmusic.Manipulations
 {
-    public class MusicServiceProvider
+    public class MusicServiceProvider 
     {
         private List<MusicService>  Actions;
-        XJobResult Result;
+        //XJobResult Result;
         private List<string> tempFiles;
         private XConverter xConverter;
         private XTempoProcessor xTempoProcessor;
+        public float? TempoDelta { get; set; }
+        public float? PitchDelta { get; set; }
 
-        public void ProcessTempoJob(string sourceFileName)
+        public void ProcessTempoJob(string sourceFileName, float? tempo = null, float? pitch = null)
         {
+            TempoDelta = tempo;
+            PitchDelta = pitch;
             XMusicLogger.Init();
             GenerateWorkFlow(sourceFileName);
             using (xConverter = new XConverter())
@@ -75,7 +80,8 @@ namespace Xmusic.Manipulations
             }
             XMusicLogger.AddLog(msg);
         }
-
+        private string ConvertionKey = "Converted";
+        private string TempoKey = "Tempo Adjusted";
         private void GenerateWorkFlow(string sourceFileName)
         {
             tempFiles = new List<string>();
@@ -86,7 +92,7 @@ namespace Xmusic.Manipulations
 
             if (sourceType == XFileType.Wma)
             {
-                var wmaToMp3File = tmp.GenerateGuidPath(XFileType.Mp3);
+                var wmaToMp3File = tmp.GenerateGuidPath(XFileType.Mp3, ConvertionKey);
                 Actions.Add(new MusicService(tmp, wmaToMp3File, XActionType.Convertion));
                 sourceType = XFileType.Mp3;
                 tmp = wmaToMp3File;
@@ -94,17 +100,23 @@ namespace Xmusic.Manipulations
             }
             if (sourceType == XFileType.Mp3)
             {
-                var mp3ToWaveFile = tmp.GenerateGuidPath(XFileType.Wav);
+                var mp3ToWaveFile = tmp.GenerateGuidPath(XFileType.Wav, ConvertionKey);
                 Actions.Add(new MusicService(tmp, mp3ToWaveFile,XActionType.Convertion));
                 mixWavFile = mp3ToWaveFile;
                 tempFiles.Add(mp3ToWaveFile);
             }
-            var mixOutFile = mixWavFile.GenerateOutPutPath();
-            Actions.Add(new MusicService(mixWavFile, mixOutFile, XActionType.TempoAdjustment));
+            var mixOutFile = mixWavFile.GenerateOutPutPath(TempoKey);
+            var mixJob = new MusicService(mixWavFile, mixOutFile, XActionType.TempoAdjustment);
+            if (this.TempoDelta.HasValue)
+            {
+                mixJob.ExecutionParameters.TempoDelta = TempoDelta.Value;
+                mixJob.ExecutionParameters.PitchDelta = this.PitchDelta ?? TempoDelta.Value / 10;
+            }
+            Actions.Add(mixJob);
             tempFiles.Add(mixWavFile);
             tempFiles.Add(mixOutFile);
 
-            var finalFile = sourceFileName.GenerateOutPutPath(XFileType.Mp3);
+            var finalFile = sourceFileName.GenerateOutPutPath(XFileType.Mp3,ConvertionKey);
             Actions.Add(new MusicService(mixOutFile, finalFile, XActionType.Convertion));
 
         }
@@ -121,6 +133,7 @@ namespace Xmusic.Manipulations
             this.SourceFile = srcFile;
             this.DestinationFile = destinationFile;
             this.Action = action;
+            ExecutionParameters = new RunParameters();
         }
 
         public XFileType SourceFileType
@@ -138,5 +151,7 @@ namespace Xmusic.Manipulations
                 return DestinationFile.RetrieveExtension();
             }
         }
+
+        public RunParameters ExecutionParameters { get;  set; }
     }
 }
