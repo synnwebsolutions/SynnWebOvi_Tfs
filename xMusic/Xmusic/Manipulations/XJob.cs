@@ -12,10 +12,9 @@ namespace Xmusic.Manipulations
     {
         public XJob()
         {
-            ExecutionParameters = new RunParameters();
+            
         }
         public string SourceFileName { get; set; }
-        public RunParameters ExecutionParameters { get; set; }
         public string AlternativeOutputPath { get; set; }
 
         public bool UseBackGroundProcess { get; set; }
@@ -44,7 +43,8 @@ namespace Xmusic.Manipulations
 
     public class XTempoJob : XJob
     {
-
+        public float TempoDelta { get; set; }
+        public float PitchDelta { get; set; }
     }
 
     public class XJobResult

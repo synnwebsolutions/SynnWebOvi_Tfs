@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xmusic.Extensions;
 
 namespace Xmusic.Players
 {
@@ -22,5 +23,43 @@ namespace Xmusic.Players
     /// </summary>
     public class NAudioWavePlayer : WaveOutEvent
     {
+        private List<string> Playlist;
+        //private string current;
+        private int currentIndex;
+
+        public string Current
+        {
+            get
+            {
+                return Playlist[currentIndex];
+            }
+        }
+
+        public NAudioWavePlayer(List<string> playlist)
+        {
+            Playlist = playlist;
+            currentIndex = 0;
+        }
+
+        public void Next()
+        {
+            Stop();
+            currentIndex++;
+            Play();
+        }
+
+        public void Previous()
+        {
+            Stop();
+            currentIndex--;
+            Play();
+        }
+
+        public void Shuffle()
+        {
+            var ci = Current;
+            Playlist.Shuffle();
+            currentIndex = Playlist.IndexOf(ci);
+        }
     }
 }

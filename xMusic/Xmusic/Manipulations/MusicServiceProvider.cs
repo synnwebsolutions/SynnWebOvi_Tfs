@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using SoundStretch;
 using Xmusic.Extensions;
 
-namespace Xmusic.Manipulations
+namespace Xmusic
 {
     public class MusicServiceProvider 
     {
@@ -18,8 +18,31 @@ namespace Xmusic.Manipulations
         private XTempoProcessor xTempoProcessor;
         public float? TempoDelta { get; set; }
         public float? PitchDelta { get; set; }
+        private int totalFiles = 1;
+        private int currentFileIndex = 0;
 
-        public void ProcessTempoJob(string sourceFileName, float? tempo = null, float? pitch = null)
+        public void ProcessDirectoryTempoJob(string dir, float? tempo = null, float? pitch = null)
+        {
+            var allFiles = Directory.GetFiles(dir);
+            totalFiles = allFiles.Count();
+            foreach (var file in allFiles)
+            {
+                try
+                {
+                    currentFileIndex++;
+                    ProcessSingleTempoJob(file, tempo,pitch);
+                }
+                catch (Exception ex)
+                {
+                    var trace = ex.StackTrace;
+                    XMusicLogger.AddLog(ex.Message);
+                    XMusicLogger.AddLog(trace);
+                    RemoveTempFiles();
+                    throw ex;
+                }
+            }
+        }
+        public void ProcessSingleTempoJob(string sourceFileName, float? tempo = null, float? pitch = null)
         {
             TempoDelta = tempo;
             PitchDelta = pitch;
@@ -78,6 +101,10 @@ namespace Xmusic.Manipulations
             {
                 msg = $"Processing Tempo Adjustment ....";
             }
+            if (totalFiles > 1)
+            {
+                msg = $"Processing ({currentFileIndex}) Out Of ({totalFiles}) : {msg}";
+            }
             XMusicLogger.AddLog(msg);
         }
         private string ConvertionKey = "Converted";
@@ -88,8 +115,8 @@ namespace Xmusic.Manipulations
             var sourceType = sourceFileName.RetrieveExtension();
             string tmp = sourceFileName;
             Actions = new List<MusicService>();
-            string mixWavFile = string.Empty;
-
+            string mixWavInFile = string.Empty;
+            string mixWavOutFile = string.Empty;
             if (sourceType == XFileType.Wma)
             {
                 var wmaToMp3File = tmp.GenerateGuidPath(XFileType.Mp3, ConvertionKey);
@@ -102,22 +129,27 @@ namespace Xmusic.Manipulations
             {
                 var mp3ToWaveFile = tmp.GenerateGuidPath(XFileType.Wav, ConvertionKey);
                 Actions.Add(new MusicService(tmp, mp3ToWaveFile,XActionType.Convertion));
-                mixWavFile = mp3ToWaveFile;
+                mixWavInFile = mp3ToWaveFile;
                 tempFiles.Add(mp3ToWaveFile);
             }
-            var mixOutFile = mixWavFile.GenerateOutPutPath(TempoKey);
-            var mixJob = new MusicService(mixWavFile, mixOutFile, XActionType.TempoAdjustment);
+            if (sourceType == XFileType.Wav)
+            {
+                mixWavInFile = sourceFileName;
+            }
+            mixWavOutFile = mixWavInFile.GenerateOutPutPath(TempoKey);
+            var mixJob = new MusicService(mixWavInFile, mixWavOutFile, XActionType.TempoAdjustment);
             if (this.TempoDelta.HasValue)
             {
-                mixJob.ExecutionParameters.TempoDelta = TempoDelta.Value;
-                mixJob.ExecutionParameters.PitchDelta = this.PitchDelta ?? TempoDelta.Value / 10;
+                mixJob.TempoDelta = TempoDelta.Value;
+                mixJob.PitchDelta = this.PitchDelta ?? TempoDelta.Value / 10;
             }
             Actions.Add(mixJob);
-            tempFiles.Add(mixWavFile);
-            tempFiles.Add(mixOutFile);
+            if (sourceType != XFileType.Wav)
+                tempFiles.Add(mixWavInFile);
+            tempFiles.Add(mixWavOutFile);
 
             var finalFile = sourceFileName.GenerateOutPutPath(XFileType.Mp3,ConvertionKey);
-            Actions.Add(new MusicService(mixOutFile, finalFile, XActionType.Convertion));
+            Actions.Add(new MusicService(mixWavOutFile, finalFile, XActionType.Convertion));
 
         }
     }
@@ -127,13 +159,14 @@ namespace Xmusic.Manipulations
         public XActionType Action;
         public string SourceFile;
         public string DestinationFile;
-
+        public float TempoDelta { get; set; }
+        public float PitchDelta { get; set; }
+        public float RateDelta { get; set; }
         public MusicService(string srcFile, string destinationFile, XActionType action)
         {
             this.SourceFile = srcFile;
             this.DestinationFile = destinationFile;
             this.Action = action;
-            ExecutionParameters = new RunParameters();
         }
 
         public XFileType SourceFileType
@@ -151,7 +184,5 @@ namespace Xmusic.Manipulations
                 return DestinationFile.RetrieveExtension();
             }
         }
-
-        public RunParameters ExecutionParameters { get;  set; }
     }
 }

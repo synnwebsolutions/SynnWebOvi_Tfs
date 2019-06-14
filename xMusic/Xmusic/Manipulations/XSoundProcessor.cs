@@ -93,7 +93,9 @@ namespace Xmusic
                 Logs = new List<string>();
 
             Logs.Add(l);
+# if DEBUG
             Console.WriteLine($"{ DateTime.Now} : {l}");
+# endif
         }
         public static void Init()
         {

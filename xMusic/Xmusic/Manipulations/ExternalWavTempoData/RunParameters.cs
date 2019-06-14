@@ -26,53 +26,54 @@ using System;
 
 namespace SoundStretch
 {
-    public class RunParameters
-    {
-        private void CheckLimits()
-        {
-            if (TempoDelta < -95.0f)
-            {
-                TempoDelta = -95.0f;
-            }
-            else if (TempoDelta > 5000.0f)
-            {
-                TempoDelta = 5000.0f;
-            }
+    //public class RunParameters
+    //{
+    //    private void CheckLimits()
+    //    {
+    //        if (TempoDelta < -95.0f)
+    //        {
+    //            TempoDelta = -95.0f;
+    //        }
+    //        else if (TempoDelta > 5000.0f)
+    //        {
+    //            TempoDelta = 5000.0f;
+    //        }
 
-            if (PitchDelta < -60.0f)
-            {
-                PitchDelta = -60.0f;
-            }
-            else if (PitchDelta > 60.0f)
-            {
-                PitchDelta = 60.0f;
-            }
+    //        if (PitchDelta < -60.0f)
+    //        {
+    //            PitchDelta = -60.0f;
+    //        }
+    //        else if (PitchDelta > 60.0f)
+    //        {
+    //            PitchDelta = 60.0f;
+    //        }
 
-            if (RateDelta < -95.0f)
-            {
-                RateDelta = -95.0f;
-            }
-            else if (RateDelta > 5000.0f)
-            {
-                RateDelta = 5000.0f;
-            }
-        }
+    //        if (RateDelta < -95.0f)
+    //        {
+    //            RateDelta = -95.0f;
+    //        }
+    //        else if (RateDelta > 5000.0f)
+    //        {
+    //            RateDelta = 5000.0f;
+    //        }
+    //    }
 
-        public float TempoDelta { get; set; }
-        public float PitchDelta { get; set; }
-        public float RateDelta { get; set; }
+    //    public float TempoDelta { get; set; }
+    //    public float PitchDelta { get; set; }
+    //    public float RateDelta { get; set; }
 
-        public int Quick = 0;
-        public int NoAntiAlias = 0;
+    //    public int Quick = 0;
+    //    public int NoAntiAlias = 0;
 
-        public RunParameters()
-        {
-            TempoDelta = 0;
-            PitchDelta = 0;
-            RateDelta = 0;
-            Quick = 0;
-            NoAntiAlias = 0;
-            CheckLimits();
-        }
-    }
+    //    public RunParameters()
+    //    {
+    //        TempoDelta = 0;
+    //        PitchDelta = 0;
+    //        RateDelta = 0;
+    //        Quick = 0;
+    //        NoAntiAlias = 0;
+    //        CheckLimits();
+    //    }
+    //}
+
 }

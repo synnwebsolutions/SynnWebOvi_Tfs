@@ -12,6 +12,43 @@ namespace Xmusic.Extensions
         public const string Mp3Extension = ".mp3";
         public const string WavExtension = ".wav";
         public const string WmaExtension = ".wma";
+
+        private static Random rng = new Random();
+
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+        public static bool ValidMusicItem(this string str)
+        {
+            var ex = Path.GetExtension(str);
+            return ex.Contains(Mp3Extension) || ex.Contains(WmaExtension) || ex.Contains(WavExtension);
+        }
+        public static List<string> FilterMusicItems(this IList<string> list)
+        {
+            return list.Where(x => x.ValidMusicItem()).ToList();
+        }
+
+        public static bool NotContaineIndex<T>(this IList<T> list, int newIndex)
+        {
+
+            try
+            {
+                var val = list[newIndex];
+            }
+            catch (Exception)
+            { return true; }
+            return false;
+        }
         public static string ReplaceExtension(this string str, XFileType destinatinFileType)
         {
             var ext = Path.GetExtension(str);
@@ -21,6 +58,12 @@ namespace Xmusic.Extensions
         public static string GetDirectory(this string str)
         {
             return Path.GetDirectoryName(str);
+        }
+
+        public static bool IsDirectory(this string str)
+        {
+            FileAttributes attr = File.GetAttributes(str);
+            return (attr & FileAttributes.Directory) == FileAttributes.Directory;
         }
 
         public static string GenerateFileTempoAlteredName(this string str)
