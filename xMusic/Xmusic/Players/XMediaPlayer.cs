@@ -42,10 +42,10 @@ namespace Xmusic.Players
 
         private void PlayerComponent_PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            //if (!initiatedStop)
-            //{
-            //    Next();
-            //}
+            if (!initiatedStop)
+            {
+                Next();
+            }
         }
 
         public void Next()
@@ -87,7 +87,7 @@ namespace Xmusic.Players
             //writer = new XAudioWriter(reader);
             speedControl = new NAudionSoundComponent(reader);
             playerComponent = new WaveOutEvent();
-            playerComponent.PlaybackStopped += PlayerComponent_PlaybackStopped;
+            speedControl.PlaybackEnded += PlayerComponent_PlaybackStopped;
             playerComponent.Init(speedControl);
             if(lastTempo.HasValue)
                 SetTempo(lastTempo.Value); 
@@ -123,8 +123,6 @@ namespace Xmusic.Players
         {
             initiatedStop = true;
             playerComponent?.Stop();
-            var pos = position.ToString();
-            var psdfos = reader.Position;
         }
 
         public void Pause()
