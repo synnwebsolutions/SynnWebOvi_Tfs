@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XmusicCore;
 
 namespace XTempoPlayer
 {
@@ -16,7 +19,25 @@ namespace XTempoPlayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var appcfg = LoadStationConfigurations();
+            //if (appcfg.RequireAuthentication)
+            //{
+            //    Application.Run(new LoginForm());
+            //}
+            //else
+            //{
+            //    GlobalAppData.SetUser(new LoggedUser { Id = 0, Password = "", UserName = "Generic User" });
+            //    Application.Run(new Form1());
+            //}
             Application.Run(new Form1());
+        }
+
+        private static AppConfiguration LoadStationConfigurations()
+        {
+            var configFilePath = ConfigurationSettings.AppSettings["configFilePath"];
+            AppConfiguration appCfg = SynnCore.Generics.XmlHelper.CreateFromXml<AppConfiguration>(File.ReadAllText(configFilePath));
+            GlobalAppData.SetConfigs(appCfg);
+            return appCfg;
         }
     }
 }

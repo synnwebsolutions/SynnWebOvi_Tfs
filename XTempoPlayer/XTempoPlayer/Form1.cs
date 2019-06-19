@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynnCore.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,21 +9,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xmusic.Players;
+using XmusicCore;
 
 namespace XTempoPlayer
 {
     public partial class Form1 : Form
     {
         XMediaPlayer player;
+        IDatabaseProvider DbController;
+        List<MusicItem> plst;
         public Form1()
         {
             InitializeComponent();
             CenterToScreen();
-            player = new XMediaPlayer(list);
+            DbController = this.InitDataProvider();
+            plst = DbController.GetMusicItems(new MusicSearchParameters { });
+            player = new XMediaPlayer(plst.Select(x => x.FullFileName).ToList());
+            dgvPlaylist.RefreshGrid(plst);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            player.Dispose();
+            this.Dispose();
             Application.Exit();
         }
 
@@ -34,25 +43,39 @@ namespace XTempoPlayer
         private void btnPrev_Click(object sender, EventArgs e)
         {
             player.Previous();
+            SetGridSelection();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+           Play();
+        }
+
+        private void Play()
+        {
             player.Play();
+            SetGridSelection();
+        }
+
+        private void SetGridSelection()
+        {
+            //dgvPlaylist.Rows[dgvPlaylist.SelectedRow.Index].Selected = false;
+            dgvPlaylist.Rows[player.currentIndex].Selected = true;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
             player.Next();
+            SetGridSelection();
         }
 
         private void btnShuffle_Click(object sender, EventArgs e)
         {
-            player.Shuffle();
-            RefreshList();
+            plst.Shuffle();
+            dgvPlaylist.RefreshGrid(plst);
+            player.Playlist = plst.Select(x => x.FullFileName).ToList();
+            //Play();
         }
-
-
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
@@ -70,9 +93,14 @@ namespace XTempoPlayer
             player.SetTempo(val);
         }
 
-        private void RefreshList()
+        private void dgvPlaylist_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            throw new NotImplementedException();
+            var si = dgvPlaylist.Rows[e.RowIndex].DataBoundItem as MusicItem;
+            if (si != null)
+            {
+                player.currentIndex = e.RowIndex;
+                player.Play();
+            }
         }
     }
 }

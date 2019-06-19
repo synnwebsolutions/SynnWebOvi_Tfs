@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SynnCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +47,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="Xmusic">
       <HintPath>C:\Synn Data\Xmusic.dll</HintPath>
+    </Reference>
+    <Reference Include="XmusicCore">
+      <HintPath>C:\Synn Data\XmusicCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -38,8 +38,10 @@
             this.dgvPlaylist = new System.Windows.Forms.DataGridView();
             this.tempoTrackBar = new System.Windows.Forms.TrackBar();
             this.btnSycDataBase = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaylist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempoTrackBar)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -56,7 +58,7 @@
             // 
             this.btnStop.Location = new System.Drawing.Point(47, 30);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(45, 23);
+            this.btnStop.Size = new System.Drawing.Size(50, 28);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -64,9 +66,9 @@
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(509, 30);
+            this.btnRecord.Location = new System.Drawing.Point(465, 30);
             this.btnRecord.Name = "btnRecord";
-            this.btnRecord.Size = new System.Drawing.Size(45, 23);
+            this.btnRecord.Size = new System.Drawing.Size(70, 23);
             this.btnRecord.TabIndex = 2;
             this.btnRecord.Text = "Record";
             this.btnRecord.UseVisualStyleBackColor = true;
@@ -74,9 +76,9 @@
             // 
             // btnShuffle
             // 
-            this.btnShuffle.Location = new System.Drawing.Point(458, 30);
+            this.btnShuffle.Location = new System.Drawing.Point(395, 30);
             this.btnShuffle.Name = "btnShuffle";
-            this.btnShuffle.Size = new System.Drawing.Size(45, 23);
+            this.btnShuffle.Size = new System.Drawing.Size(70, 23);
             this.btnShuffle.TabIndex = 3;
             this.btnShuffle.Text = "Shuffle";
             this.btnShuffle.UseVisualStyleBackColor = true;
@@ -84,9 +86,9 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(231, 30);
+            this.btnNext.Location = new System.Drawing.Point(223, 30);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 23);
+            this.btnNext.Size = new System.Drawing.Size(50, 28);
             this.btnNext.TabIndex = 4;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -94,7 +96,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(149, 18);
+            this.btnPlay.Location = new System.Drawing.Point(147, 18);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(76, 47);
             this.btnPlay.TabIndex = 5;
@@ -104,21 +106,23 @@
             // 
             // btnPrev
             // 
-            this.btnPrev.Location = new System.Drawing.Point(98, 30);
+            this.btnPrev.Location = new System.Drawing.Point(97, 30);
             this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(45, 23);
+            this.btnPrev.Size = new System.Drawing.Size(50, 28);
             this.btnPrev.TabIndex = 6;
-            this.btnPrev.Text = "Previous";
+            this.btnPrev.Text = "Prev";
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // dgvPlaylist
             // 
             this.dgvPlaylist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlaylist.Location = new System.Drawing.Point(47, 71);
+            this.dgvPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPlaylist.Location = new System.Drawing.Point(0, 0);
             this.dgvPlaylist.Name = "dgvPlaylist";
-            this.dgvPlaylist.Size = new System.Drawing.Size(559, 330);
+            this.dgvPlaylist.Size = new System.Drawing.Size(558, 330);
             this.dgvPlaylist.TabIndex = 7;
+            this.dgvPlaylist.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlaylist_CellContentClick);
             // 
             // tempoTrackBar
             // 
@@ -126,29 +130,37 @@
             this.tempoTrackBar.Maximum = 20;
             this.tempoTrackBar.Name = "tempoTrackBar";
             this.tempoTrackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tempoTrackBar.Size = new System.Drawing.Size(45, 157);
+            this.tempoTrackBar.Size = new System.Drawing.Size(45, 330);
             this.tempoTrackBar.TabIndex = 8;
             this.tempoTrackBar.Value = 10;
             this.tempoTrackBar.Scroll += new System.EventHandler(this.tempoTrackBar_Scroll);
             // 
             // btnSycDataBase
             // 
-            this.btnSycDataBase.Location = new System.Drawing.Point(560, 30);
+            this.btnSycDataBase.Location = new System.Drawing.Point(535, 30);
             this.btnSycDataBase.Name = "btnSycDataBase";
-            this.btnSycDataBase.Size = new System.Drawing.Size(45, 23);
+            this.btnSycDataBase.Size = new System.Drawing.Size(70, 23);
             this.btnSycDataBase.TabIndex = 9;
             this.btnSycDataBase.Text = "Sync";
             this.btnSycDataBase.UseVisualStyleBackColor = true;
             this.btnSycDataBase.Click += new System.EventHandler(this.btnSycDataBase_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgvPlaylist);
+            this.panel1.Location = new System.Drawing.Point(47, 71);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(558, 330);
+            this.panel1.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 478);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSycDataBase);
             this.Controls.Add(this.tempoTrackBar);
-            this.Controls.Add(this.dgvPlaylist);
             this.Controls.Add(this.btnPrev);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.btnNext);
@@ -160,6 +172,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaylist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempoTrackBar)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,6 +190,7 @@
         private System.Windows.Forms.DataGridView dgvPlaylist;
         private System.Windows.Forms.TrackBar tempoTrackBar;
         private System.Windows.Forms.Button btnSycDataBase;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
