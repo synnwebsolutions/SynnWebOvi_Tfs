@@ -17,9 +17,9 @@ namespace Xmusic.Players
         //private XAudioWriter writer;
         private  XAudioReader reader;
         
-        private List<string> Playlist;
+        public List<string> Playlist;
         
-        private int currentIndex;
+        public int currentIndex;
         private bool initiatedStop;
         private TimeSpan position;
 
@@ -37,7 +37,6 @@ namespace Xmusic.Players
         {
             Playlist = playlist.FilterMusicItems();
             currentIndex = 0;
-           
         }
 
         private void PlayerComponent_PlaybackStopped(object sender, StoppedEventArgs e)

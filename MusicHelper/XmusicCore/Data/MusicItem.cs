@@ -7,7 +7,7 @@ using HundredMilesSoftware.UltraID3Lib;
 using System.IO;
 using System.Data;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     [Serializable]
     public class MusicItem : DbMusicItem

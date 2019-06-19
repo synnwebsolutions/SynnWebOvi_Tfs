@@ -7,12 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XmusicCore;
 
 namespace MusicHelper
 {
     public static class MusicListManager
     {
-        internal static void PlayUsbList(List<MusicItem> m)
+        public static void PlayUsbList(List<MusicItem> m)
         {
             M3uContent content = new M3uContent();
             M3uPlaylist lst = Generate(m);
@@ -63,7 +64,7 @@ namespace MusicHelper
             return l; 
         }
 
-        internal static void PlayPlayList(List<MusicItem> m)
+        public static void PlayPlayList(List<MusicItem> m)
         {
             M3uContent content = new M3uContent();
             M3uPlaylist lst = Generate(m);

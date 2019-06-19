@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     public class DirectoryHandler
     {
@@ -106,7 +106,7 @@ namespace MusicHelper
             }
         }
 
-        internal static void OpenContaingFolder(string dir)
+        public static void OpenContaingFolder(string dir)
         {
             if (!string.IsNullOrEmpty(dir))
             {

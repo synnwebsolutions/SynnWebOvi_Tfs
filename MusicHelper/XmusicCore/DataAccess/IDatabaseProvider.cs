@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicHelper
+
+namespace XmusicCore
 {
     public interface IDatabaseProvider
     {
@@ -22,8 +23,8 @@ namespace MusicHelper
 
     public class MusicSearchParameters
     {
-        public bool? InPlayList { get; internal set; }
-        public bool? InUsbList { get; internal set; }
+        public bool? InPlayList { get;  set; }
+        public bool? InUsbList { get;  set; }
         public string SearchText { get; set; }
     }
 }

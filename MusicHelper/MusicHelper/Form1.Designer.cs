@@ -1,4 +1,6 @@
-﻿namespace MusicHelper
+﻿using XmusicCore;
+
+namespace MusicHelper
 {
     partial class Form1
     {
@@ -86,7 +88,7 @@
             this.tbYoutube = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvYoutube = new System.Windows.Forms.DataGridView();
-            this.synnMPlayer1 = new MusicHelper.SynnMPlayer();
+            this.synnMPlayer1 = new XmusicCore.SynnMPlayer();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txYoutubeFromSeconds = new System.Windows.Forms.TextBox();

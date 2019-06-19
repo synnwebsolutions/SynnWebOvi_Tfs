@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     public partial class SynnMPlayer : UserControl
     {
@@ -238,12 +238,12 @@ namespace MusicHelper
             btnNext.Tag = btnPause.Tag = btnPlay.Tag = btnPrevious.Tag = btnStop.Tag = ThemeTag.MusicPlayerAction;
         }
 
-        internal void Play(int track)
+        public void Play(int track)
         {
             play(track);
         }
 
-        internal void InitListAndPlay(List<MusicItem> list)
+        public void InitListAndPlay(List<MusicItem> list)
         {
             InitList(list);
             play(0);

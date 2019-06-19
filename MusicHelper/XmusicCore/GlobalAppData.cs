@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     public static class GlobalAppData
     {

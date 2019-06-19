@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VideoLibrary;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     public static class YouTubeManager
     {
@@ -54,7 +54,7 @@ namespace MusicHelper
             return ti;
         }
 
-        internal static MusicItem DownloadAndConvert(string text, TimeSpan? begin, TimeSpan? endAt)
+        public static MusicItem DownloadAndConvert(string text, TimeSpan? begin, TimeSpan? endAt)
         {
             var mi = DownloadAndConvert(text);
             if (begin.HasValue || endAt.HasValue)

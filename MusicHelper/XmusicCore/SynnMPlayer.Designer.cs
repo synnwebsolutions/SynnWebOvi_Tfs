@@ -1,4 +1,4 @@
-﻿namespace MusicHelper
+﻿namespace XmusicCore
 {
     partial class SynnMPlayer
     {
@@ -136,51 +136,51 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.BackgroundImage = global::MusicHelper.Properties.Resources.play_on;
             this.btnPlay.Location = new System.Drawing.Point(24, 3);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(25, 25);
+            this.btnPlay.Size = new System.Drawing.Size(35, 25);
             this.btnPlay.TabIndex = 32;
+            this.btnPlay.Text = "PL";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnPause
             // 
-            this.btnPause.BackgroundImage = global::MusicHelper.Properties.Resources.pause_on;
             this.btnPause.Location = new System.Drawing.Point(55, 3);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(25, 25);
+            this.btnPause.Size = new System.Drawing.Size(35, 25);
             this.btnPause.TabIndex = 33;
+            this.btnPause.Text = "Pa";
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStop
             // 
-            this.btnStop.BackgroundImage = global::MusicHelper.Properties.Resources.stop_on;
             this.btnStop.Location = new System.Drawing.Point(86, 3);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(25, 25);
+            this.btnStop.Size = new System.Drawing.Size(35, 25);
             this.btnStop.TabIndex = 34;
+            this.btnStop.Text = "S";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnNext
             // 
-            this.btnNext.BackgroundImage = global::MusicHelper.Properties.Resources.next_on;
             this.btnNext.Location = new System.Drawing.Point(148, 3);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(25, 25);
+            this.btnNext.Size = new System.Drawing.Size(35, 25);
             this.btnNext.TabIndex = 36;
+            this.btnNext.Text = "N";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
-            this.btnPrevious.BackgroundImage = global::MusicHelper.Properties.Resources.previus_on;
             this.btnPrevious.Location = new System.Drawing.Point(117, 3);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(25, 25);
+            this.btnPrevious.Size = new System.Drawing.Size(35, 25);
             this.btnPrevious.TabIndex = 35;
+            this.btnPrevious.Text = "P";
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 

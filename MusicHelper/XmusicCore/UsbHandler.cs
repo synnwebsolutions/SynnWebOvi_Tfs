@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicHelper
+namespace XmusicCore
 {
     public static class UsbHandler
     {
 
-        internal static void Sync(DriveInfo currentDrive, List<MusicItem> m)
+        public static void Sync(DriveInfo currentDrive, List<MusicItem> m)
         {
             string destDir = Path.Combine(currentDrive.Name,  (new Random()).Next(0, 15214).ToString());
             Directory.CreateDirectory(destDir);
