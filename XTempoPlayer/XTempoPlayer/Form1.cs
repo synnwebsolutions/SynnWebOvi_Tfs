@@ -18,12 +18,20 @@ namespace XTempoPlayer
         XMediaPlayer player;
         IDatabaseProvider DbController;
         List<MusicItem> plst;
+        private float currentTempo = 1;
         public Form1()
         {
             InitializeComponent();
+            txTempo.Text = currentTempo.ToString();
+            dgvPlaylist.Dock = DockStyle.Fill;
             CenterToScreen();
             DbController = this.InitDataProvider();
-            plst = DbController.GetMusicItems(new MusicSearchParameters { });
+            RefreshView();
+        }
+
+        private void RefreshView()
+        {
+            plst = DbController.GetMusicItems(new MusicSearchParameters { SearchText = txFilter.Text });
             player = new XMediaPlayer(plst.Select(x => x.FullFileName).ToList());
             dgvPlaylist.RefreshGrid(plst);
         }
@@ -32,7 +40,7 @@ namespace XTempoPlayer
         {
             player.Dispose();
             this.Dispose();
-            Application.Exit();
+            
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -42,6 +50,7 @@ namespace XTempoPlayer
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
+            ClearGridSelection();
             player.Previous();
             SetGridSelection();
         }
@@ -53,18 +62,28 @@ namespace XTempoPlayer
 
         private void Play()
         {
+            ClearGridSelection();
             player.Play();
             SetGridSelection();
         }
+
+
+        private void ClearGridSelection()
+        {
+            dgvPlaylist.Rows[player.currentIndex].Selected = false;
+        }
+
 
         private void SetGridSelection()
         {
             //dgvPlaylist.Rows[dgvPlaylist.SelectedRow.Index].Selected = false;
             dgvPlaylist.Rows[player.currentIndex].Selected = true;
+            this.Name = $" X Tempo : Playing - { plst[player.currentIndex].FileName}";
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            ClearGridSelection();
             player.Next();
             SetGridSelection();
         }
@@ -73,6 +92,7 @@ namespace XTempoPlayer
         {
             plst.Shuffle();
             dgvPlaylist.RefreshGrid(plst);
+            player.Stop();
             player.Playlist = plst.Select(x => x.FullFileName).ToList();
             //Play();
         }
@@ -89,8 +109,10 @@ namespace XTempoPlayer
 
         private void tempoTrackBar_Scroll(object sender, EventArgs e)
         {
-            var val = ((float)tempoTrackBar.Value / (float)10);
-            player.SetTempo(val);
+            if (float.TryParse(txTempo.Text, out currentTempo))
+            {
+                player.SetTempo(currentTempo);
+            }
         }
 
         private void dgvPlaylist_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -100,6 +122,19 @@ namespace XTempoPlayer
             {
                 player.currentIndex = e.RowIndex;
                 player.Play();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+        private void btnSetTempo_Click(object sender, EventArgs e)
+        {
+            if (float.TryParse(txTempo.Text, out currentTempo))
+            {
+                player.SetTempo(currentTempo);
             }
         }
     }

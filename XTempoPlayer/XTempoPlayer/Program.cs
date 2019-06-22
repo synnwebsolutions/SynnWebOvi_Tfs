@@ -30,6 +30,11 @@ namespace XTempoPlayer
             //    Application.Run(new Form1());
             //}
             Application.Run(new Form1());
+          
+            if (Application.MessageLoop)
+                Application.Exit();
+            else
+                Environment.Exit(1);
         }
 
         private static AppConfiguration LoadStationConfigurations()
