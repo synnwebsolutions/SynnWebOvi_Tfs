@@ -67,6 +67,12 @@
     <Compile Include="XPlaylist.Designer.cs">
       <DependentUpon>XPlaylist.cs</DependentUpon>
     </Compile>
+    <Compile Include="XSongItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XSongItem.Designer.cs">
+      <DependentUpon>XSongItem.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +87,9 @@
     </Compile>
     <EmbeddedResource Include="XPlaylist.resx">
       <DependentUpon>XPlaylist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XSongItem.resx">
+      <DependentUpon>XSongItem.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

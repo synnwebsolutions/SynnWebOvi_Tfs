@@ -23,7 +23,7 @@ namespace XTempoPlayer
         {
             InitializeComponent();
             txTempo.Text = currentTempo.ToString();
-            dgvPlaylist.Dock = DockStyle.Fill;
+            //dgvPlaylist.Dock = DockStyle.Fill;
             CenterToScreen();
             DbController = this.InitDataProvider();
             RefreshView();
@@ -31,9 +31,11 @@ namespace XTempoPlayer
 
         private void RefreshView()
         {
-            plst = DbController.GetMusicItems(new MusicSearchParameters { SearchText = txFilter.Text });
+            plst = DbController.GetMusicItems(new MusicSearchParameters {/* SearchText = txFilter.Text */});
             player = new XMediaPlayer(plst.Select(x => x.FullFileName).ToList());
-            dgvPlaylist.RefreshGrid(plst);
+            xPlaylist1.Plist = plst;
+            xPlaylist1.CurrentIndex = 1;
+            //dgvPlaylist.RefreshGrid(plst);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -70,14 +72,14 @@ namespace XTempoPlayer
 
         private void ClearGridSelection()
         {
-            dgvPlaylist.Rows[player.currentIndex].Selected = false;
+            //dgvPlaylist.Rows[player.currentIndex].Selected = false;
         }
 
 
         private void SetGridSelection()
         {
             //dgvPlaylist.Rows[dgvPlaylist.SelectedRow.Index].Selected = false;
-            dgvPlaylist.Rows[player.currentIndex].Selected = true;
+            //dgvPlaylist.Rows[player.currentIndex].Selected = true;
             this.Name = $" X Tempo : Playing - { plst[player.currentIndex].FileName}";
         }
 
@@ -91,7 +93,7 @@ namespace XTempoPlayer
         private void btnShuffle_Click(object sender, EventArgs e)
         {
             plst.Shuffle();
-            dgvPlaylist.RefreshGrid(plst);
+            //dgvPlaylist.RefreshGrid(plst);
             player.Stop();
             player.Playlist = plst.Select(x => x.FullFileName).ToList();
             //Play();
@@ -117,12 +119,12 @@ namespace XTempoPlayer
 
         private void dgvPlaylist_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var si = dgvPlaylist.Rows[e.RowIndex].DataBoundItem as MusicItem;
-            if (si != null)
-            {
-                player.currentIndex = e.RowIndex;
-                player.Play();
-            }
+            //var si = dgvPlaylist.Rows[e.RowIndex].DataBoundItem as MusicItem;
+            //if (si != null)
+            //{
+            //    player.currentIndex = e.RowIndex;
+            //    player.Play();
+            //}
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
