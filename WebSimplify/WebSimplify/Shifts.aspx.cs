@@ -107,7 +107,6 @@ namespace WebSimplify
                 Enum.TryParse(cmbShifts.SelectedValue, out es);
                 d.DaylyShift = es;
                 d.OwnerId = CurrentUser.Id;
-                d.UserGroupId = CurrentUser.AllowedSharedPermissions[0];
 
 
                 var exsistingShifts = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { IDate = d.Date, DaylyShiftTime = d.DaylyShift });

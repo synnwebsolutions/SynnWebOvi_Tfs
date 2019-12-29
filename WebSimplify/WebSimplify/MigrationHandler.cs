@@ -343,6 +343,8 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "UserName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             t.Fields.Add(new TableMigrationField { FieldName = "DisplayName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 12 });
+            t.Fields.Add(new TableMigrationField { FieldName = "AllowedClientPagePermissions", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+            
 
             db.ExecurteCreateTable(t.ToString());
         }
@@ -375,6 +377,22 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "Message", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Trace", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Date", FieldType = TableMigrationFieldType.Date });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void UserPreferencesTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.UserPreferences
+            };
+
+
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "pdata", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "UserId", FieldType = TableMigrationFieldType.Integer });
 
             db.ExecurteCreateTable(t.ToString());
         }

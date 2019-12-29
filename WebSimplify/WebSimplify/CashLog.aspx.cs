@@ -143,7 +143,6 @@ namespace WebSimplify
                     Date = DateTime.Now,
                     Description = Idesc,
                     TotalSpent = spent.ToInteger(),
-                    UserGroupId = CurrentUser.AllowedSharedPermissions[0]
                 };
                 DBController.DbMoney.Add(i);
                 var current = DBController.DbMoney.Get(new CashSearchParameters { Month = DateTime.Now }).FirstOrDefault();

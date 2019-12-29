@@ -43,7 +43,6 @@ namespace WebSimplify
                                 Amount = tmpl.Amount,
                                 Month = startdate,
                                 TemplateId = tmpl.Id,
-                                UserGroupId = u.AllowedSharedPermissions[0],
                                 Closed = tmpl.Auto
                             };
                             DBController.DbMoney.Add(trnForMonth);
@@ -57,30 +56,33 @@ namespace WebSimplify
         internal static List<MonthBalanceItem> GetBalances(MonthlyMoneyTransactionSearchParameters mp)
         {
             List<MonthBalanceItem> lst = new List<MonthBalanceItem>();
-            var toDate = mp.CurrentUser.Preferences.BalanceLogStartDate;
-            var curent = DateTime.Now.StartOfMonth();
-            if (toDate != DateTime.MinValue)
+            if (!mp.CurrentUser.IsAdmin && mp.CurrentUser.Allowed(ClientPagePermissions.MoneyBalance))
             {
-                while (curent.StartOfMonth() >= toDate)
+                var toDate = mp.CurrentUser.Preferences.BalanceLogStartDate;
+                var curent = DateTime.Now.StartOfMonth();
+                if (toDate != DateTime.MinValue)
                 {
-                    var d = new MonthBalanceItem
+                    while (curent.StartOfMonth() >= toDate)
                     {
-                        Month = curent,
-                        Active = curent == DateTime.Now.StartOfMonth()
-                    };
-                    mp.Closed = true;
-                    mp.Month = curent;
-                    mp.TranType = MonthlyTransactionType.Debit;
-                    List<MonthlyMoneyTransaction> monthdebtItems = DBController.DbMoney.GetMoneyTransactions(mp);
-                    d.TotalExpenses = monthdebtItems.Sum(x => x.Amount);
+                        var d = new MonthBalanceItem
+                        {
+                            Month = curent,
+                            Active = curent == DateTime.Now.StartOfMonth()
+                        };
+                        mp.Closed = true;
+                        mp.Month = curent;
+                        mp.TranType = MonthlyTransactionType.Debit;
+                        List<MonthlyMoneyTransaction> monthdebtItems = DBController.DbMoney.GetMoneyTransactions(mp);
+                        d.TotalExpenses = monthdebtItems.Sum(x => x.Amount);
 
-                    mp.TranType = MonthlyTransactionType.Credit;
-                    List<MonthlyMoneyTransaction> monthincItems = DBController.DbMoney.GetMoneyTransactions(mp);
-                    d.TotalIncomes = monthincItems.Sum(x => x.Amount);
+                        mp.TranType = MonthlyTransactionType.Credit;
+                        List<MonthlyMoneyTransaction> monthincItems = DBController.DbMoney.GetMoneyTransactions(mp);
+                        d.TotalIncomes = monthincItems.Sum(x => x.Amount);
 
-                    d.Balance = d.TotalIncomes - d.TotalExpenses;
-                    lst.Add(d);
-                    curent = curent.AddMonths(-1);
+                        d.Balance = d.TotalIncomes - d.TotalExpenses;
+                        lst.Add(d);
+                        curent = curent.AddMonths(-1);
+                    }
                 }
             }
             return lst;

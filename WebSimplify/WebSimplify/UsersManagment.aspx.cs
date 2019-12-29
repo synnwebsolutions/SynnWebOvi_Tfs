@@ -46,8 +46,7 @@ namespace WebSimplify
         {
             if (gridId == gvClientPagePermissions.ID)
                 return "GetClientPagePermissions";
-            if (gridId == gvGroupPermissions.ID)
-                return "GetGroupPermissions";
+  
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -71,15 +70,7 @@ namespace WebSimplify
                 u.UserName = txNewUserName.Value;
                 u.Password = txNewFirstPassword.Value;
                 u.DisplayName = txDisplay.Value;
-                foreach (GridViewRow gvr in gvGroupPermissions.Rows)
-                {
-                    if (((CheckBox)gvr.FindControl("chkGroup")).Checked)
-                    {
-                        int grouppId = int.Parse(((HiddenField)gvr.FindControl("hfgid")).Value);
-                        u.AllowedSharedPermissions.Add(grouppId);
-                        
-                    }
-                }
+           
                 foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
                 {
                     if (((CheckBox)gvr.FindControl("chk")).Checked)
@@ -88,11 +79,7 @@ namespace WebSimplify
                         u.AllowedClientPagePermissions.Add((ClientPagePermissions)pageid);
                     }
                 }
-                if (u.AllowedSharedPermissions.Count > 2)
-                {
-                    AlertMessage("יותר מדי קבוצות הרשאה");
-                    return;
-                }
+               
                 if (EditedUser == null)
                     DBController.DbAuth.Add(u);
                 else
@@ -157,7 +144,6 @@ namespace WebSimplify
                 cmbusers.Items.Add(new ListItem { Text = u.UserName, Value = u.Id.ToString() });
 
             RefreshGrid(gvClientPagePermissions);
-            RefreshGrid(gvGroupPermissions);
         }
 
         protected void cmbusers_SelectedIndexChanged(object sender, EventArgs e)
@@ -175,11 +161,7 @@ namespace WebSimplify
             txNewFirstPassword.Value = EditedUser != null ? EditedUser.Password : string.Empty;
             txNewUserName.Value = EditedUser != null ? EditedUser.UserName : string.Empty;
             txDisplay.Value = EditedUser != null ? EditedUser.DisplayName : string.Empty;
-            foreach (GridViewRow gvr in gvGroupPermissions.Rows)
-            {
-                int grouppId = int.Parse(((HiddenField)gvr.FindControl("hfgid")).Value);
-                ((CheckBox)gvr.FindControl("chkGroup")).Checked = EditedUser != null && EditedUser.AllowedSharedPermissions.Contains(grouppId);
-            }
+    
             foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
             {
                 int pageid = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);

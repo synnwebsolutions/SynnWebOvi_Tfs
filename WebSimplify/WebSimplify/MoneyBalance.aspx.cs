@@ -199,7 +199,6 @@ namespace WebSimplify
                     Name = txTempName,
                     TransactionType = cmbTemtType == "1" ? MonthlyTransactionType.Credit : MonthlyTransactionType.Debit,
                     ToDate = txTempToDate.NotEmpty() ? txTempToDate.ToDateTime() : (DateTime?)null,
-                    UserGroupId = CurrentUser.AllowedSharedPermissions[0]
                 };
 
                 DBController.DbMoney.Add(i);

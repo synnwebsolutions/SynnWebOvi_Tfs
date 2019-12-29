@@ -17,23 +17,11 @@ namespace WebSimplify
 
         }
 
-        private void SetPermissions(BaseSearchParameters sp)
-        {
-            if (!sp.CurrentUser.IsAdmin)
-            {
-                StartORGroup();
-                foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
-                    AddOREqualField("UserGroupId", gid);
-                EndORGroup();
-            }
-        }
-
         public void Save(ShiftsSearchParameters sp)
         {
             var i = sp.ItemForAction;
             var sqlItems = new SqlItemList();
             sqlItems.Add(new SqlItem("Date",i.Date));
-            sqlItems.Add(new SqlItem("UserGroupId", sp.CurrentUser.AllowedSharedPermissions[0]));
             sqlItems.Add(new SqlItem("OwnerId", sp.CurrentUser.Id));
             sqlItems.Add(new SqlItem("DaylyShift", (int)i.DaylyShift));
             SetInsertIntoSql(SynnDataProvider.TableNames.ShiftsData, sqlItems);
@@ -47,7 +35,6 @@ namespace WebSimplify
             ClearParameters();
             if (!lsp.FromWs)
             {
-                SetPermissions(lsp);
                 if (lsp.FromDate.HasValue)
                     AddSqlWhereField("Date", lsp.FromDate, ">=");
                 if (lsp.ToDate.HasValue)
@@ -76,7 +63,6 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.WorkHoursData);
             ClearParameters();
-            SetPermissions(lsp);
             if (lsp.Month.HasValue)
             {
                 var d = lsp.Month.Value;

@@ -30,8 +30,6 @@
                 <li><a class="xpage" href="Shifts.aspx" id="navshifts" runat="server">משמרות</a></li>
                 <li><a class="xpage" href="Wedding.aspx" id="navwed" runat="server">חתונה</a></li>
                 <li><a class="xpage" href="Shopping.aspx" id="navshop" runat="server">קניות</a></li>
-                <li><a class="xpage" href="LottoPoles.aspx" id="navlot" runat="server">הגרלות לוטו</a></li>
-                <li><a class="xpage" href="LottoRows.aspx" id="navlotro" runat="server">טפסי לוטו</a></li>
                 <li><a class="xpage" href="AppSettingsPage.aspx" id="navsys" runat="server">הגדרות מערכת</a></li>
                 <li><a class="xpage" href="UsersManagment.aspx" id="navusers" runat="server">הגדרות משתמשים</a></li>
                 <li><a class="xpage" href="Log.aspx" id="navlog" runat="server">יומן מערכת</a></li>

@@ -3,6 +3,7 @@ using SynnCore.Generics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -227,10 +228,25 @@ namespace SynnWebOvi
                 {
                     foreach (var navlink in attribute.NavLinks)
                     {
-                        Master.FindControl(navlink).Visible = CurrentUser.Allowed(ep);
+                        Master.FindControl(navlink).Visible = !CheckIsAdminBlock(ep) && CurrentUser.Allowed(ep);
                     }
                 }
             }
+        }
+
+        private bool CheckIsAdminBlock(ClientPagePermissions ep)
+        {
+            var blockedPages = ConfigurationManager.AppSettings["adminBlockedPages"].Split(',').Where(x => x.Length > 0).ToList();
+            foreach (var blockedPage in blockedPages)
+            {
+                ClientPagePermissions value = (ClientPagePermissions)Enum.Parse(typeof(ClientPagePermissions), blockedPage);
+                if (value == ep)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public PageLinkAttribute GetPageLink(ClientPagePermissions pageP)

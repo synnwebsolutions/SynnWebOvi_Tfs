@@ -46,7 +46,6 @@ namespace WebSimplify
                     CurrentShiftStart = new WorkTime { Hour = 0, Minute = 0 },
                     CurrentShiftEnd = new WorkTime { Hour = 0, Minute = 0 },
                     Month = DateTime.Now.StartOfMonth(),
-                    UserGroupId = u.AllowedSharedPermissions[0]
                 };
                 DBController.DbShifts.AddWorkMonthlyData(wh);
             }

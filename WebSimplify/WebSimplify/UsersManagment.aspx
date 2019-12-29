@@ -36,7 +36,7 @@
                     <input type="text" name="name" id="txNewFirstPassword" placeholder=" סיסמה ראשונית" runat="server" disabled="disabled" />
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-8">
                 <div class="spanelHeader">הרשאות משתמש  <i class="fa fa-address-book"></i></div>
 
                 <div class="sgridcontainer">
@@ -65,34 +65,7 @@
                     </asp:GridView>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="spanelHeader">קבוצות הרשאה  <i class="fa fa-address-book"></i></div>
-                <div class="sgridcontainer">
-                    <asp:GridView ID="gvGroupPermissions" runat="server"
-                        OnRowDataBound="gvGroupPermissions_RowDataBound" AllowPaging="False"
-                        CssClass="synngridstyled" ItemStyle-Width="100%" ControlStyle-Width="100%"
-                        PagerSettings-Mode="NumericFirstLast" AutoGenerateColumns="false"
-                        PagerSettings-FirstPageText="ראשון"
-                        PagerSettings-NextPageText=">"
-                        PagerSettings-LastPageText="אחרון"
-                        PagerSettings-PreviousPageText="<">
-                        <PagerStyle CssClass="synngridpagination" />
-                        <Columns>
-                            <asp:TemplateField HeaderText=" ">
-                                <ItemTemplate>
-                                    <asp:CheckBox runat="server" ID="chkGroup"></asp:CheckBox>
-                                    <asp:HiddenField ID="hfgid" runat="server" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText=" קבוצה ">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="LblGroupName"></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
+      
 
 
         </div>

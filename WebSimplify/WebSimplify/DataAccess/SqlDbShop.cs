@@ -13,13 +13,6 @@ namespace SynnWebOvi
         public SqlDbShop(string _connectionString) : base(new SynnSqlDataProvider(_connectionString))
         {
         }
-        private void SetPermissions(ShopSearchParameters sp)
-        {
-            StartORGroup();
-            foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
-                AddOREqualField("UserGroupId", gid);
-            EndORGroup();
-        }
 
         public List<ShopItem> Get(ShopSearchParameters lsp)
         {
@@ -28,22 +21,8 @@ namespace SynnWebOvi
                 AddSqlText(string.Format("inner join {0} usi on usi.ItemId = si.Id", SynnDataProvider.TableNames.User_ShoppingItems)); // join
      
             ClearParameters();
-            if (!lsp.FromWs)
-            {
-                if (!lsp.CurrentUser.IsAdmin)
-                {
-                    if (lsp.Active.HasValue)
-                    {
-                        StartORGroup();
-                        foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
-                            AddOREqualField("usi.UserGroupId", gid);
-                        EndORGroup();
-                    }
-                }
-                if (!string.IsNullOrEmpty(lsp.ItemName))
-                    AddSqlWhereField("Name", lsp.ItemName);
-
-            }
+            if (!string.IsNullOrEmpty(lsp.ItemName))
+                AddSqlWhereField("Name", lsp.ItemName);
 
             var lst = new List<ShopItem>();
             FillList(lst, typeof(ShopItem));
@@ -57,7 +36,6 @@ namespace SynnWebOvi
             {
                 var sqlItems = new SqlItemList();
                 sqlItems.Add(new SqlItem("ItemId", sp.IdToActivate.Value));
-                sqlItems.Add(new SqlItem("UserGroupId", sp.CurrentUser.AllowedSharedPermissions[0]));
                 SetInsertIntoSql(SynnDataProvider.TableNames.User_ShoppingItems, sqlItems);
                 ExecuteSql();
             }
@@ -68,7 +46,6 @@ namespace SynnWebOvi
             SetSqlFormat("select count(*) from {0} ", SynnDataProvider.TableNames.User_ShoppingItems);
             ClearParameters();
             AddSqlWhereField("ItemId", sp.IdToActivate.Value);
-            AddSqlWhereField("UserGroupId", sp.CurrentUser.AllowedSharedPermissions[0]);
             int res = (int)GetSingleRecordFirstValue();
             return res > 0;
         }
@@ -80,7 +57,6 @@ namespace SynnWebOvi
                 SetSqlFormat("delete {0}", SynnDataProvider.TableNames.User_ShoppingItems);
                 ClearParameters();
                 AddSqlWhereField("ItemId", lsp.IdToDeactivate.Value);
-                AddSqlWhereField("UserGroupId", lsp.CurrentUser.AllowedSharedPermissions[0]);
                 ExecuteSql();
             }
         }

@@ -10,24 +10,11 @@ namespace SynnWebOvi
         public SqlDbWedd(string _connectionString) : base(new SynnSqlDataProvider(_connectionString))
         {
         }
-
-        private void SetPermissions(WeddSearchParameters sp)
-        {
-            if (!sp.CurrentUser.IsAdmin)
-            {
-                StartORGroup();
-                foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
-                    AddOREqualField("UserGroupId", gid);
-                EndORGroup();
-            }
-        }
-
         public List<WeddingGuest> GetGuests(WeddSearchParameters sp)
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.WeddingItems);
             ClearParameters();
-            if(!sp.FromWs)
-                SetPermissions(sp);
+      
 
             if (!string.IsNullOrEmpty(sp.SearchText))
             {

@@ -16,7 +16,6 @@ namespace SynnWebOvi
         public LoggedUser()
         {
             AllowedClientPagePermissions = new List<ClientPagePermissions>();
-            AllowedSharedPermissions = new List<int>();
         }
         public LoggedUser(IDataReader data)
         {
@@ -30,7 +29,7 @@ namespace SynnWebOvi
 
         public UserAppPreferences Preferences { get; set; }
         public List<ClientPagePermissions> AllowedClientPagePermissions { get; set; }
-        public List<int> AllowedSharedPermissions { get; set; }
+        
         public bool IsAdmin { get; set; }
 
         public LoggedUser(string u, int i)
@@ -52,12 +51,7 @@ namespace SynnWebOvi
                 AllowedClientPagePermissions = new List<ClientPagePermissions>();
             else
                 AllowedClientPagePermissions = XmlHelper.CreateFromXml<List<ClientPagePermissions>>(cper);
-
-            string shaper = DataAccessUtility.LoadNullable<string>(reader, "AllowedSharedPermissions");
-            if (string.IsNullOrEmpty(shaper))
-                AllowedSharedPermissions = new List<int>();
-            else
-                AllowedSharedPermissions = XmlHelper.CreateFromXml<List<int>>(shaper);
+            
         }
 
         internal bool Allowed(ClientPagePermissions p)
