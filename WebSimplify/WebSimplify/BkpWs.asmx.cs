@@ -50,8 +50,6 @@ namespace WebSimplify
                         QuickTasks = DBController.DbCalendar.Get(new QuickTasksSearchParameters { FromWs = true }),
                         MigrationFinishedSteps = DBController.DbMigration.GetAlreadyFinishedSteps(),
                         PermissionGroups = DBController.DbAuth.GetPermissionGroup(),
-                        LottoRows = DBController.DbLotto.Get(new LottoRowsSearchParameters { FromWs = true }),
-                        LottoPoles = DBController.DbLotto.Get(new LottoPolesSearchParameters { FromWs = true })
                     };
                 }
                 catch (Exception ex)

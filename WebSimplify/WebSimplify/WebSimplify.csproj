@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,8 +115,6 @@
     <Content Include="js\synnJavaScripts.js" />
     <Content Include="Log.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="LottoPoles.aspx" />
-    <Content Include="LottoRows.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="MoneyBalance.aspx" />
     <Content Include="packages.config" />
@@ -197,7 +196,6 @@
     <Compile Include="CultureHelper.cs" />
     <Compile Include="DataAccess\SqlDbCalendar.cs" />
     <Compile Include="DataAccess\SqlDbCredit.cs" />
-    <Compile Include="DataAccess\SqlDbLotto.cs" />
     <Compile Include="DataAccess\SqlDbMigration.cs" />
     <Compile Include="DataAccess\TableMigrationItem.cs" />
     <Compile Include="Data\AccountData.cs">
@@ -279,22 +277,6 @@
     </Compile>
     <Compile Include="Data\LogItem.cs" />
     <Compile Include="Data\LottoRow.cs" />
-    <Compile Include="LottoChecker.cs" />
-    <Compile Include="LottoPoles.aspx.cs">
-      <DependentUpon>LottoPoles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LottoPoles.aspx.designer.cs">
-      <DependentUpon>LottoPoles.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LottoRows.aspx.cs">
-      <DependentUpon>LottoRows.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LottoRows.aspx.designer.cs">
-      <DependentUpon>LottoRows.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LottoStatsHelper.cs" />
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

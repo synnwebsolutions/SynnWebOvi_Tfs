@@ -34,7 +34,7 @@ namespace WebSimplify
                             SpecialNumber = Convert.ToInt32(vals[8]),
                         };
                         lis.Add(lp);
-                        dB.DbLotto.AddLottoPole(lp);
+                        //dB.DbLotto.AddLottoPole(lp);
                     }
                 }
 

@@ -53,17 +53,6 @@ namespace SynnWebOvi
         void AddNewShopItem(ShopItem n);
     }
 
-    public interface IDbLotto
-    {
-        void AddLottoPole(LottoPole lp);
-        void AddLottoRow(LottoRow lr);
-
-        List<LottoPole> Get(LottoPolesSearchParameters polesSearchParameters);
-        List<LottoRow> Get(LottoRowsSearchParameters rowsSearchParameters);
-        void Update(LottoRow row);
-        void Update(LottoPole cp);
-    }
-
     public interface IDbMoney
     {
         #region Credit

@@ -65,7 +65,6 @@ namespace SynnWebOvi
          IDbLog DbLog { get; }
         IDbWedd DbWedd { get; }
 
-        IDbLotto DbLotto { get; }
 
         IDbShop DbShop { get; }
         IDbMoney DbMoney { get; }
@@ -174,14 +173,6 @@ namespace SynnWebOvi
         }
 
         public IDbMoney DbMoney
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IDbLotto DbLotto
         {
             get
             {
