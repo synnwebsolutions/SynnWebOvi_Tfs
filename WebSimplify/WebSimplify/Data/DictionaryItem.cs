@@ -24,7 +24,6 @@ namespace SynnWebOvi
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
             DictionaryKey = DataAccessUtility.LoadNullable<string>(reader, "dKey");
             DictionaryValue = DataAccessUtility.LoadNullable<string>(reader, "Value");
         }

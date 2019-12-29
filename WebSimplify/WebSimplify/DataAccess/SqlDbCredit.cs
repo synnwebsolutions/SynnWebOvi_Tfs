@@ -31,7 +31,6 @@ namespace WebSimplify
         private static SqlItemList Get(MoneyMonthlyData p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
             sqlItems.Add(new SqlItem("Date", p.Date));
             sqlItems.Add(new SqlItem("TotalSpent", p.TotalSpent));
             sqlItems.Add(new SqlItem("Active", p.Active));
@@ -44,7 +43,6 @@ namespace WebSimplify
             ClearParameters();
             if (!lsp.FromWs)
             {
-                SetPermissions(lsp);
                 if (lsp.Month.HasValue)
                 {
                     var d = lsp.Month.Value;
@@ -65,16 +63,6 @@ namespace WebSimplify
             FillList(lst, typeof(CreditCardMonthlyData));
             return lst;
         }
-        private void SetPermissions(BaseSearchParameters sp, string tablePrefix = "")
-        {
-            if (!sp.CurrentUser.IsAdmin)
-            {
-                StartORGroup();
-                foreach (int gid in sp.CurrentUser.AllowedSharedPermissions)
-                    AddOREqualField(tablePrefix + "UserGroupId", gid);
-                EndORGroup();
-            }
-        }
 
         public void Add(CashMonthlyData i)
         {
@@ -89,7 +77,6 @@ namespace WebSimplify
             ClearParameters();
             if (!lsp.FromWs)
             {
-                SetPermissions(lsp);
                 if (lsp.Month.HasValue)
                 {
                     var d = lsp.Month.Value;
@@ -118,7 +105,6 @@ namespace WebSimplify
             ClearParameters();
             if (!lsp.FromWs)
             {
-                SetPermissions(lsp);
                 if (lsp.Month.HasValue)
                 {
                     var d = lsp.Month.Value;
@@ -137,7 +123,6 @@ namespace WebSimplify
         public void Add(CashMoneyItem p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
             sqlItems.Add(new SqlItem("Date", p.Date));
             sqlItems.Add(new SqlItem("TotalSpent", p.TotalSpent));
             sqlItems.Add(new SqlItem("Description", p.Description));
@@ -151,7 +136,6 @@ namespace WebSimplify
             ClearParameters();
             if (!mp.FromWs)
             {
-                SetPermissions(mp);
                 if (mp.Id.HasValue)
                     AddSqlWhereField("Id", mp.Id.Value);
             }
@@ -170,7 +154,6 @@ namespace WebSimplify
         private static SqlItemList GetFrom(MonthlyMoneyTransaction p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
             sqlItems.Add(new SqlItem("Amount", p.Amount));
             sqlItems.Add(new SqlItem("Closed", p.Closed));
             sqlItems.Add(new SqlItem("Month", p.Month));
@@ -191,7 +174,6 @@ namespace WebSimplify
             ClearParameters();
             if (!mp.FromWs)
             {
-                SetPermissions(mp, string.Format("{0}.", SynnDataProvider.TableNames.MoneyTransactionItems));
                 if (mp.Id.HasValue)
                     AddSqlWhereField("Id", mp.Id.Value);
                 if (mp.Closed.HasValue)
@@ -227,7 +209,6 @@ namespace WebSimplify
         private SqlItemList Get(MoneyTransactionTemplate p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
             sqlItems.Add(new SqlItem("Amount", p.Amount));
             sqlItems.Add(new SqlItem("Active", p.Active));
             sqlItems.Add(new SqlItem("Auto", p.Auto));

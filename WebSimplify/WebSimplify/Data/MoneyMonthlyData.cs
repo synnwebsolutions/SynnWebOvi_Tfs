@@ -41,7 +41,6 @@ namespace WebSimplify
             }
         }
 
-        public int UserGroupId { get; set; }
 
         public void Load(IDataReader reader)
         {
@@ -49,7 +48,6 @@ namespace WebSimplify
             TotalSpent = DataAccessUtility.LoadNullable<int>(reader, "TotalSpent");
             Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
         }
     }
 }

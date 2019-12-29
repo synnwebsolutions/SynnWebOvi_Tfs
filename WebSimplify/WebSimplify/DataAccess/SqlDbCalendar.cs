@@ -22,7 +22,6 @@ namespace SynnWebOvi
         private static SqlItemList Get(QuickTask p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.UserGroupId));
             sqlItems.Add(new SqlItem("Name", p.Name));
             sqlItems.Add(new SqlItem("Description", p.Description));
             sqlItems.Add(new SqlItem("CreationDate", p.CreationDate));
@@ -33,7 +32,6 @@ namespace SynnWebOvi
         public void Add(CalendarSearchParameters p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.CurrentUser.AllowedSharedPermissions[0].ToString()));
             sqlItems.Add(new SqlItem("title", p.InsertItem.title));
             sqlItems.Add(new SqlItem("description", p.InsertItem.Description));
             sqlItems.Add(new SqlItem("date", p.InsertItem.Date));
@@ -47,8 +45,6 @@ namespace SynnWebOvi
             ClearParameters();
             if (!lsp.FromWs)
             {
-                AddSqlWhereField("UserGroupId", lsp.CurrentUser.Id);
-
                 if (lsp.Active.HasValue)
                     AddSqlWhereField("Active", lsp.Active);
                 if (lsp.Id.HasValue)
@@ -65,14 +61,6 @@ namespace SynnWebOvi
             ClearParameters();
             if (!lsp.FromWs)
             {
-
-                if (!lsp.CurrentUser.IsAdmin)
-                {
-                    StartORGroup();
-                    foreach (int gid in lsp.CurrentUser.AllowedSharedPermissions)
-                        AddOREqualField("UserGroupId", gid);
-                    EndORGroup();
-                }
 
                 if (lsp.FromDate.HasValue)
                     AddSqlWhereField("Date", lsp.FromDate, ">=");

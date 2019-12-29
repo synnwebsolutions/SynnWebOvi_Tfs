@@ -53,7 +53,6 @@ namespace WebSimplify
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
             Name = DataAccessUtility.LoadNullable<string>(reader, "Name");
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             CreationDate = DataAccessUtility.LoadNullable<DateTime>(reader, "CreationDate");

@@ -16,7 +16,6 @@ namespace WebSimplify
         public void Add(DictionarySearchParameters p)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", p.CurrentUser.Id));
             sqlItems.Add(new SqlItem("dKey", p.Key));
             sqlItems.Add(new SqlItem("Value", p.Value));
             SetInsertIntoSql(SynnDataProvider.TableNames.UserDictionary, sqlItems);
@@ -27,8 +26,6 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserDictionary);
             ClearParameters();
-            if(!p.FromWs)
-                AddSqlWhereField("UserGroupId", p.CurrentUser.Id);
             if (!string.IsNullOrEmpty(p.SearchText))
             {
                 StartORGroup();

@@ -67,7 +67,6 @@ namespace WebSimplify
                     Active = true,
                     Date = new DateTime(date.Year, date.Month, 1),
                     TotalSpent = 0,
-                    UserGroupId = u.AllowedSharedPermissions[0]
                 };
                 DBController.DbMoney.Add(i);
             }
@@ -90,7 +89,6 @@ namespace WebSimplify
                             Active = true,
                             Date = new DateTime(date.Year, date.Month, p.CreditCardPaymentDay),
                             TotalSpent = 0,
-                            UserGroupId = u.AllowedSharedPermissions[0]
                         };
                         DBController.DbMoney.Add(i);
                     }
