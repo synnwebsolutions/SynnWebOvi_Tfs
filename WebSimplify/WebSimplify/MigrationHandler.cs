@@ -309,24 +309,11 @@ namespace SynnWebOvi
                 TableName = SynnDataProvider.TableNames.ShoppingItems
             };
 
-
             t.Fields = new List<TableMigrationField>();
             t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
-
-            db.ExecurteCreateTable(t.ToString());
-        }
-
-        public static void User_ShoppingItemsTable(IDbMigration db)
-        {
-            var t = new TableMigration
-            {
-                HasIdentity = true,
-                TableName = SynnDataProvider.TableNames.User_ShoppingItems
-            };
-
-
-            t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "LastBought", FieldType = TableMigrationFieldType.Date , IsNullAble = true});
+            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });
+            t.Fields.Add(new TableMigrationField { FieldName = "CategoryId", FieldType = TableMigrationFieldType.Bit, IsNullAble = true });
 
             db.ExecurteCreateTable(t.ToString());
         }
@@ -344,7 +331,6 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "DisplayName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 12 });
             t.Fields.Add(new TableMigrationField { FieldName = "AllowedClientPagePermissions", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
-            
 
             db.ExecurteCreateTable(t.ToString());
         }

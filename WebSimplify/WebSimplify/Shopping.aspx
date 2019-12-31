@@ -22,7 +22,7 @@
                             <ItemTemplate>
                                 <asp:TextBox runat="server" ID="txProductName" CssClass="gridtextinput"></asp:TextBox>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>           
                         <asp:TemplateField HeaderText=" הוספה ">
                             <ItemTemplate>
                                 <asp:ImageButton runat="server" ID="btnAdd" OnCommand="btnAdd_Command" CssClass="gridbutton" ImageUrl="Img/add.png"></asp:ImageButton>

@@ -11,6 +11,7 @@ namespace WebSimplify
     public class ShopItem : IDbLoadable 
     {
         public string Name { get; set; }
+        public bool Active { get; set; }
         public DateTime? LastBought { get; set; }
         public int Id { get;  set; }
         public int? CategoryId { get;  set; }
@@ -28,6 +29,7 @@ namespace WebSimplify
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
+            Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             CategoryId = DataAccessUtility.LoadNullable<int?>(reader, "CategoryId");
             LastBought = DataAccessUtility.LoadNullable<DateTime?>(reader, "LastBought");
             Name = DataAccessUtility.LoadNullable<string>(reader, "Name");

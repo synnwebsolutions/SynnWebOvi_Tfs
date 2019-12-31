@@ -39,7 +39,6 @@ namespace SynnWebOvi
             public static string ThemeLog = "ThemeLog";
             public static string WeddingItems = "WeddingItems"; // group
             public static string ShoppingItems = "ShoppingItems";  // group
-            public static string User_ShoppingItems = "User_ShoppingItems";  // group
             public static string ShiftsData = "ShiftsData"; // group
             public static string WorkHoursData = "WorkHoursData";
             public static string CreditData = "CreditData"; // group

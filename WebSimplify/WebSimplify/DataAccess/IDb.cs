@@ -50,7 +50,7 @@ namespace SynnWebOvi
         List<ShopItem> Get(ShopSearchParameters shopSearchParameters);
         void ActivateShopItem(ShopSearchParameters shopSearchParameters);
         void DeActivateShopItem(ShopSearchParameters shopSearchParameters);
-        void AddNewShopItem(ShopItem n);
+        void AddNewShopItem(ref ShopItem n);
     }
 
     public interface IDbMoney
@@ -176,9 +176,9 @@ namespace SynnWebOvi
         }
 
         public bool? Active { get; internal set; }
-        public int? IdToActivate { get; internal set; }
-        public int? IdToDeactivate { get; internal set; }
+        public int? Id { get; internal set; }
         public string ItemName { get; internal set; }
+        public DateTime? LastBought { get; internal set; }
     }
 
     public class LottoSearchParameters : BaseSearchParameters

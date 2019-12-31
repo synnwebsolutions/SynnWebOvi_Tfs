@@ -23,7 +23,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                gv.Columns[1].Visible = false;
+                //gv.Columns[2].Visible = GMode;
                 RefreshView();
             }
         }
@@ -74,9 +74,19 @@ namespace WebSimplify
             {
                 var d = (ShopItem)e.Row.DataItem;
                 ((Label)e.Row.FindControl("lblItemName")).Text = d.Name;
-                ((Label)e.Row.FindControl("lblLastValue")).Text = d.LastBought.HasValue ? d.LastBought.Value.ToShortDateString() : string.Empty;
+                ((Label)e.Row.FindControl("lblLastValue")).Text = GetDateDifrenceText(d.LastBought);
                 ((ImageButton)e.Row.FindControl("btnClose")).CommandArgument = d.Id.ToString();
             }
+        }
+
+        private string GetDateDifrenceText(DateTime? d)
+        {
+            if (d.HasValue)
+            {
+                var days = (DateTime.Now - d.Value).Days;
+                return $"נקנה לפני {days} ימים";
+            }
+            return string.Empty;
         }
 
         protected void gv_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -87,7 +97,12 @@ namespace WebSimplify
 
         protected void btnClose_Command(object sender, CommandEventArgs e)
         {
-            DBController.DbShop.DeActivateShopItem(new ShopSearchParameters { IdToDeactivate = Convert.ToInt32(e.CommandArgument) });
+            var i = new ShopSearchParameters { Id = Convert.ToInt32(e.CommandArgument)};
+            if (GMode)
+            {
+                i.LastBought = DateTime.Now;
+            }
+            DBController.DbShop.DeActivateShopItem(i);
             RefreshGrid(gv);
         }
 
@@ -115,14 +130,13 @@ namespace WebSimplify
                 ShopItem ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txProductName }).FirstOrDefault();
                 if (ul == null)
                 {
-                    ShopItem n = new ShopItem
+                    ul = new ShopItem
                     {
                         Name = txProductName
                     };
-                    DBController.DbShop.AddNewShopItem(n);
+                    DBController.DbShop.AddNewShopItem(ref ul);
                 }
-                ul = DBController.DbShop.Get(new ShopSearchParameters { ItemName = txProductName }).FirstOrDefault();
-                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { IdToActivate = ul.Id });
+                DBController.DbShop.ActivateShopItem(new ShopSearchParameters { Id = ul.Id });
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 RefreshView();
             }
