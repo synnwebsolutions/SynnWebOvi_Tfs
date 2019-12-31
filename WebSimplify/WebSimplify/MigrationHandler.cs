@@ -382,5 +382,22 @@ namespace SynnWebOvi
 
             db.ExecurteCreateTable(t.ToString());
         }
+
+        public static void WorkHoursDataTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.WorkHoursData
+            };
+
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "Month", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });
+            t.Fields.Add(new TableMigrationField { FieldName = "CurrentMonthTotal", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "CurrentShiftStart", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "CurrentShiftEnd", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 }

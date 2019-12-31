@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WebSimplify.Data;
+using WebSimplify.Helpers;
 
 namespace WebSimplify
 {
@@ -23,6 +24,7 @@ namespace WebSimplify
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
                 dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
+                dtShops.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
                 FillData();
             }
         }
@@ -48,6 +50,13 @@ namespace WebSimplify
                 List<QuickTask> items = DBController.DbCalendar.Get(new QuickTasksSearchParameters {Active = true});
                 rpTasks.DataSource = items;
                 rpTasks.DataBind();
+            }
+            if (CurrentUser.Allowed(ClientPagePermissions.Shopping))
+            {
+                List<ShopItem> ul = DBController.DbShop.Get(new ShopSearchParameters { Active = true });
+                List<ShopItemsInfo> sl = new List<ShopItemsInfo> { new ShopItemsInfo(ul) };
+                rpShops.DataSource = sl;
+                rpShops.DataBind();
             }
         }
         
@@ -100,6 +109,27 @@ namespace WebSimplify
         {
             SynNavigation.Redirect("DevTasks.aspx");
         }
+
+        protected void rpShops_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ShopItemsInfo im = (ShopItemsInfo)e.Item.DataItem;
+                Label lblDesc = (Label)e.Item.FindControl("lblDesc");
+                lblDesc.Text = im.TextInfo;
+            }
+        }
     }
-    
+
+    public class ShopItemsInfo
+    {
+        public ShopItemsInfo(List<ShopItem> ul)
+        {
+            TextInfo = string.Join(HtmlStringHelper.LineBreak, ul.Select(x => x.Name).ToList());
+        }
+
+        public string TextInfo { get; set; }
+    }
+
+
 }

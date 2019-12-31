@@ -18,7 +18,6 @@ namespace WebSimplify
         public WorkTime CurrentShiftEnd { get; set; }
 
         public int Id { get; set; }
-        public int UserGroupId { get; set; }
         public bool Active { get; set; }
 
         public WorkHoursData()
@@ -34,7 +33,6 @@ namespace WebSimplify
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
             Month = DataAccessUtility.LoadNullable<DateTime>(reader, "Month");
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             var currentMonthTotal =  DataAccessUtility.LoadNullable<string>(reader, "CurrentMonthTotal");
@@ -45,7 +43,7 @@ namespace WebSimplify
 
             var cfs = DataAccessUtility.LoadNullable<string>(reader, "CurrentShiftStart");
             if (cfs.IsEmpty())
-                CurrentShiftStart = new WorkTime();
+                CurrentShiftStart = new WorkTime(); 
             else
                 CurrentShiftStart = XmlHelper.CreateFromXml<WorkTime>(cfs);
 

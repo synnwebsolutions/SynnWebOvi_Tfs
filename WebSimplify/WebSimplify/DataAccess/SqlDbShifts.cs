@@ -81,7 +81,6 @@ namespace WebSimplify
         public void AddWorkMonthlyData(WorkHoursData w)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", w.UserGroupId));
             sqlItems.Add(new SqlItem("Month",w.Month));
             sqlItems.Add(new SqlItem("Active", w.Active));
             sqlItems.Add(new SqlItem("CurrentMonthTotal", w.CurrentMonthTotal.ToXml()));
@@ -94,7 +93,6 @@ namespace WebSimplify
         public void UpdateWorkMonthlyData(WorkHoursData w)
         {
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("UserGroupId", w.UserGroupId));
             sqlItems.Add(new SqlItem("Month", w.Month));
             sqlItems.Add(new SqlItem("Active", w.Active));
             sqlItems.Add(new SqlItem("CurrentMonthTotal", w.CurrentMonthTotal.ToXml()));

@@ -58,6 +58,24 @@ namespace WebSimplify {
         protected global::System.Web.UI.WebControls.Repeater rpCalendar;
         
         /// <summary>
+        /// dtShops control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dtShops;
+        
+        /// <summary>
+        /// rpShops control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpShops;
+        
+        /// <summary>
         /// dtTasks control.
         /// </summary>
         /// <remarks>

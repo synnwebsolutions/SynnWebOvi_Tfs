@@ -46,6 +46,26 @@
                 </asp:Repeater>
             </fieldset>
         </div>
+        <div class="col-6 marktable" id="dtShops" runat="server">
+            <fieldset class="row ">
+                <legend>רשימת קניות</legend>
+                <asp:Repeater ID="rpShops" runat="server" OnItemDataBound="rpShops_ItemDataBound">
+                                    <HeaderTemplate>
+                        <table>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblDesc" runat="server"/>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </fieldset>
+        </div>
 
         <div class="col-6 marktable" id="dtTasks" runat="server">
             <fieldset class="row ">
