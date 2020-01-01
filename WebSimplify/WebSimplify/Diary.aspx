@@ -11,6 +11,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader">יומן</div>
+     <div class="menubuttoncontainer">
+        <button class="menubutton" type="button" id="btnSendCalenadr" runat="server" onserverclick="btnSendCalenadr_ServerClick">שלח יומן</button>
+         <button class="menubutton" type="button" id="btnDownloadCal" runat="server" onserverclick="btnDownloadCal_ServerClick">הורד יומן</button>
+    </div>
 
     <div class="row">
         <div class="col-3"></div>

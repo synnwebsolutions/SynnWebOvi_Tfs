@@ -13,6 +13,24 @@ namespace WebSimplify {
     public partial class Diary {
         
         /// <summary>
+        /// btnSendCalenadr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSendCalenadr;
+        
+        /// <summary>
+        /// btnDownloadCal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadCal;
+        
+        /// <summary>
         /// txadddiarydate control.
         /// </summary>
         /// <remarks>

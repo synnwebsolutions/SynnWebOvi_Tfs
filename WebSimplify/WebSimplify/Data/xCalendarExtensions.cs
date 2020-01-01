@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalendarUtilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,6 +129,26 @@ namespace WebSimplify
         public static bool NotEmpty(this IDictionary lst)
         {
             return lst != null && lst.Count > 0;
+        }
+
+        public static List<MyCalendarEvent> ToCalendarEvents(this List<MemoItem> lst)
+        {
+            var li = new List<MyCalendarEvent>();
+            foreach (var item in lst)
+                li.Add(item.ToCalendarEvent());
+            return li;
+        }
+
+        public static MyCalendarEvent ToCalendarEvent(this MemoItem memo)
+        {
+            return new MyCalendarEvent
+            {
+                BeginDate = memo.Date,
+                Details = memo.Description,
+                EndDate = memo.Date.AddHours(1),
+                SummaryText = memo.title,
+                LocationText = memo.Description
+            };
         }
     }
 

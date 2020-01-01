@@ -12,7 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSimplify.Helpers;
 using WebSimplify.Controls;
-
+using CalendarUtilities;
 
 namespace WebSimplify
 {
@@ -44,7 +44,7 @@ namespace WebSimplify
             var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
                 ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date }).Select(x => x as ICalendarItem).ToList();
             foreach (var dbitem in dbData)
-                d.Add(new XCalendarItem { Date =dbitem.Date, Text = dbitem.Display });
+                d.Add(new XCalendarItem { Date = dbitem.Date, Text = dbitem.Display });
             return d;
         }
 
@@ -93,5 +93,36 @@ namespace WebSimplify
         }
 
         List<MemoItem> cm;
+
+        protected void btnSendCalenadr_ServerClick(object sender, EventArgs e)
+        {
+            var mm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth, ToDate = ActionMonth.AddMonths(1) });
+            mm = new List<MemoItem>
+            {
+                new MemoItem
+                {
+                    Date = DateTime.Now.AddMinutes(16),
+                    Description = "Alarm Test",
+                    title = "Testing The alarm"
+                }
+            };
+            var mr = new CalendarMailRequest
+            { 
+                FromEmail = "synnwebsolutions@gmail.com",
+                FromName = "Synmn Web Solutions",
+                HtmlBody = "",
+                Subject = "Calendar File",
+                To = new List<string> { "smachew.adela@weizmann.ac.il", "samadela@gmail.com" },
+                NetworkCredential = new System.Net.NetworkCredential("synnwebsolutions@gmail.com", "ns120315")
+            };
+            CalendarEventManager.SendCalendarByMail(mr, mm.ToCalendarEvents());
+            AlertMessage("פעולה זו בוצעה בהצלחה");
+        }
+
+        protected void btnDownloadCal_ServerClick(object sender, EventArgs e)
+        {
+            var mm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth, ToDate = ActionMonth.AddMonths(1) });
+            CalendarEventManager.DownloadCalendarFile(HttpContext.Current, mm.ToCalendarEvents());
+        }
     }
 }
