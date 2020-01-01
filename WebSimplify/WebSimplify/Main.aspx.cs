@@ -23,8 +23,9 @@ namespace WebSimplify
                 dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
-                dvWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
+                btnWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
                 dtShops.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
+
                 FillData();
             }
         }

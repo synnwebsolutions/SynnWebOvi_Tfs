@@ -8,6 +8,7 @@ using System.Data;
 using WebSimplify;
 using SynnCore.Generics;
 using WebSimplify.Data;
+using System.Configuration;
 
 namespace SynnWebOvi
 {
@@ -56,7 +57,22 @@ namespace SynnWebOvi
 
         internal bool Allowed(ClientPagePermissions p)
         {
-            return IsAdmin || AllowedClientPagePermissions.Contains(p);
+            return !(CheckIsAdminBlock(p)) && ( IsAdmin || AllowedClientPagePermissions.Contains(p));
+        }
+
+        private bool CheckIsAdminBlock(ClientPagePermissions ep)
+        {
+            var blockedPages = ConfigurationManager.AppSettings["adminBlockedPages"].Split(',').Where(x => x.Length > 0).ToList();
+            foreach (var blockedPage in blockedPages)
+            {
+                ClientPagePermissions value = (ClientPagePermissions)Enum.Parse(typeof(ClientPagePermissions), blockedPage);
+                if (value == ep)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
