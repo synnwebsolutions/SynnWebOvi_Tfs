@@ -16,6 +16,7 @@ namespace SynnWebOvi
             try
             {
                 var methods = typeof(MigrationItems).GetMethods(BindingFlags.Static | BindingFlags.Public);
+                CheckSAndPerformFirstInit();
                 var finishedSteps = _DBr.DbMigration.GetAlreadyFinishedSteps();
                 var steps = methods.Where(x => !finishedSteps.Contains(x.Name)).ToList();
                 var dbaction = _DBr.DbMigration;
@@ -31,33 +32,95 @@ namespace SynnWebOvi
                 string rd = ex.StackTrace;
             }
         }
+
+        private static void CheckSAndPerformFirstInit()
+        {
+            var methods = typeof(MigrationInitItems).GetMethods(BindingFlags.Static | BindingFlags.Public);
+            foreach (var m in methods)
+            {
+                if(!_DBr.DbMigration.CheckTableExistence(m.Name.Replace("Table", string.Empty)))
+                    m.Invoke(null, new object[] { _DBr.DbMigration });
+            }            
+        }
+    }
+
+    public class MigrationInitItems
+    {
+        public static void MigrationItemsTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.MigrationItems
+            };
+            t.Fields = new List<TableMigrationField>();
+
+            t.Fields.Add(new TableMigrationField { FieldName = "Name", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "Date", FieldType = TableMigrationFieldType.Date });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void UsersTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.Users
+            };
+
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "UserName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "DisplayName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 12 });
+            t.Fields.Add(new TableMigrationField { FieldName = "AllowedClientPagePermissions", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
+        public static void LogTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.Log
+            };
+
+
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "Message", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "Trace", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
+            t.Fields.Add(new TableMigrationField { FieldName = "Date", FieldType = TableMigrationFieldType.Date });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 
     public class MigrationItems
     {
-        public static void T3(IDbMigration db)
-        {
-            //var t = new TableMigration
-            //{
-            //    HasIdentity = true,
-            //    TableName = "testmigration3"
-            //};
-            //t.Fields = new List<TableMigrationField>();
-            //t.Fields.Add(new TableMigrationField { FieldName = "col1", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-            //t.Fields.Add(new TableMigrationField { FieldName = "col2", FieldType = TableMigrationFieldType.Decimal, IsNullAble = true });
-            //t.Fields.Add(new TableMigrationField { FieldName = "col3", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
-            //t.Fields.Add(new TableMigrationField { FieldName = "col4", FieldType = TableMigrationFieldType.Text, IsNullAble = true });
-            //t.Fields.Add(new TableMigrationField { FieldName = "col5", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
+        //public static void T3(IDbMigration db)
+        //{
+        //var t = new TableMigration
+        //{
+        //    HasIdentity = true,
+        //    TableName = "testmigration3"
+        //};
+        //t.Fields = new List<TableMigrationField>();
+        //t.Fields.Add(new TableMigrationField { FieldName = "col1", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
+        //t.Fields.Add(new TableMigrationField { FieldName = "col2", FieldType = TableMigrationFieldType.Decimal, IsNullAble = true });
+        //t.Fields.Add(new TableMigrationField { FieldName = "col3", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
+        //t.Fields.Add(new TableMigrationField { FieldName = "col4", FieldType = TableMigrationFieldType.Text, IsNullAble = true });
+        //t.Fields.Add(new TableMigrationField { FieldName = "col5", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 500, IsNullAble = true });
 
-            //db.ExecurteCreateTable(t.ToString());
-        }
+        //db.ExecurteCreateTable(t.ToString());
+        //}
 
         public static void DevTasksTable(IDbMigration db)
         {
             var t = new TableMigration
             {
                 HasIdentity = true,
-                TableName = "DevTasks"
+                TableName = SynnDataProvider.TableNames.DevTasks
             };
             t.Fields = new List<TableMigrationField>();
             t.Fields.Add(new TableMigrationField { FieldName = "Status", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
@@ -66,7 +129,6 @@ namespace SynnWebOvi
 
             db.ExecurteCreateTable(t.ToString());
         }
-
 
         public static void MoneyTransactionsTemplatesTable(IDbMigration db)
         {
@@ -318,24 +380,6 @@ namespace SynnWebOvi
             db.ExecurteCreateTable(t.ToString());
         }
 
-        public static void UsersTable(IDbMigration db)
-        {
-            var t = new TableMigration
-            {
-                HasIdentity = true,
-                TableName = SynnDataProvider.TableNames.Users
-            };
-
-            t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "UserName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
-            t.Fields.Add(new TableMigrationField { FieldName = "DisplayName", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
-            t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 12 });
-            t.Fields.Add(new TableMigrationField { FieldName = "AllowedClientPagePermissions", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
-
-            db.ExecurteCreateTable(t.ToString());
-        }
-
-
         public static void PermissionGroupsTable(IDbMigration db)
         {
             var t = new TableMigration
@@ -350,23 +394,6 @@ namespace SynnWebOvi
             db.ExecurteCreateTable(t.ToString());
         }
 
-        public static void LogsTable(IDbMigration db)
-        {
-            var t = new TableMigration
-            {
-                HasIdentity = true,
-                TableName = SynnDataProvider.TableNames.Log
-            };
-
-
-            t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "Message", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
-            t.Fields.Add(new TableMigrationField { FieldName = "Trace", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
-            t.Fields.Add(new TableMigrationField { FieldName = "Date", FieldType = TableMigrationFieldType.Date });
-
-            db.ExecurteCreateTable(t.ToString());
-        }
-
         public static void UserPreferencesTable(IDbMigration db)
         {
             var t = new TableMigration
@@ -374,7 +401,6 @@ namespace SynnWebOvi
                 HasIdentity = true,
                 TableName = SynnDataProvider.TableNames.UserPreferences
             };
-
 
             t.Fields = new List<TableMigrationField>();
             t.Fields.Add(new TableMigrationField { FieldName = "pdata", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });

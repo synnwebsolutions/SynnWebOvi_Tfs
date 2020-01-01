@@ -14,6 +14,15 @@ namespace WebSimplify
         {
         }
 
+        public bool CheckTableExistence(string tableName)
+        {
+            SetSqlFormat("SELECT CASE WHEN EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{0}') THEN 1  ELSE 0 END AS tableCheck", tableName);
+            ClearParameters();
+
+            var res = (int)GetSingleRecordFirstValue();
+            return res == 1;
+        }
+
         public void ExecurteCreateTable(string tsql)
         {
             ClearParameters();

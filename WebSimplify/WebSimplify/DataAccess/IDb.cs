@@ -115,6 +115,7 @@ namespace SynnWebOvi
     {
         void ExecurteCreateTable(string v);
         void FinishMethod(string stepName);
+        bool CheckTableExistence(string tableName);
         List<string> GetAlreadyFinishedSteps();
     }
 
