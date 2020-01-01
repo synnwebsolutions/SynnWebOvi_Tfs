@@ -93,7 +93,7 @@ body {
 /*theme*/
 .scontainer {
     width: 80%;
-    border: 1px solid #8080ff;
+    border: 1px solid #f50a12;
     background-color: rgba(79,78,76, 0.3);
     margin: auto;
 }
@@ -124,7 +124,7 @@ myselect::-ms-expand {
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, #8080ff 0%, rgba(79,78,76,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, black 0%, #f50a12 100%);
 }
 
     .snav ul {
@@ -188,7 +188,7 @@ textarea {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5em;
-    background-color: #8080ff;
+    background-color: #f50a12;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #1D1D1D;
     border: 1px solid white;
@@ -241,7 +241,7 @@ textarea {
 }
     /*theme*/
     .sbutton:hover {
-        background-color: #8080ff;
+        background-color: #f50a12;
         color: white;
     }
 
@@ -255,7 +255,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #8080ff;
+        background: #f50a12;
         color: white;
         border: 0;
     }
@@ -330,7 +330,7 @@ textarea {
         text-align: center;
         font-weight: 600;
         padding: 8px 8px 8px 8px;
-        background: #8080FF;
+        background: #f50a12;
         color: white;
         border: 0;
     }
@@ -380,7 +380,7 @@ textarea {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 14px;
-    background-image: -webkit-linear-gradient(0deg, #8080ff 0%, rgba(204, 204, 204,0.5) 100%);
+    background-image: -webkit-linear-gradient(0deg, #f50a12 0%, black 100%);
 }
 
 .content {
@@ -548,9 +548,9 @@ legend {
 /*theme*/
 .editor {
     border-color: white;
-    border: 1px solid #8080ff;
+    border: 1px solid #f50a12;
     z-index: 10;
-    background-color:#7A7979;
+    background-color: #7A7979;
 }
 
     .editor .header {
@@ -688,7 +688,7 @@ legend {
       /*theme*/
     .scontainer {
         width: 100%;
-        border: 1px solid #8080ff;
+        border: 1px solid #f50a12;
         margin: auto;
     }
 
@@ -762,7 +762,7 @@ legend {
     .synngridstyled th {
         text-align: center;
         font-weight: 600;
-        background: #8080ff;
+        background: #f50a12;
         color: white;
         border: 0;
     }
