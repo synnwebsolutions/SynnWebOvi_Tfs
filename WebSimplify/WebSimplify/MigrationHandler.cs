@@ -240,6 +240,7 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "title", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "description", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "date", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "RepeatEvery", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
 
             db.ExecurteCreateTable(t.ToString());
         }

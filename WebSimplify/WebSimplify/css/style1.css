@@ -216,7 +216,7 @@ textarea {
         text-shadow: 2px 2px 4px #1D1D1D;
     }
 
-    .spanel input[type=text], input[type=date], input[type=number], input[type=password], select {
+    .spanel input[type=text], input[type=date], input[type=time], input[type=number], input[type=password], select {
         width: 100%;
         display: inline-block;
         border: 1px solid #ccc;
@@ -224,14 +224,14 @@ textarea {
         padding: 12px;
         text-align: center;
     }
-       input[type=text], input[type=date], input[type=number], input[type=password], select {
-        width: 100%;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        padding: 12px;
-        text-align: center;
-    }
+input[type=text], input[type=date], input[type=time], input[type=number], input[type=password], select {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 12px;
+    text-align: center;
+}
 
 .sbutton {
     width: 100%;

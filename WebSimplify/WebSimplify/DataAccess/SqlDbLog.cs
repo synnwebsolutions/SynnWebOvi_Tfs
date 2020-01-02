@@ -16,12 +16,7 @@ namespace WebSimplify
 
         public void AddLog(string message)
         {
-            var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("Date", DateTime.Now));
-            sqlItems.Add(new SqlItem("Trace", string.Empty));
-            sqlItems.Add(new SqlItem("Message", message));
-            SetInsertIntoSql(SynnDataProvider.TableNames.Log, sqlItems);
-            ExecuteSql();
+            AddLog(new Exception(message));
         }
 
         public string AddLog(Exception l)
@@ -32,6 +27,8 @@ namespace WebSimplify
             sqlItems.Add(new SqlItem("Message", l.Message));
             SetInsertIntoSql(SynnDataProvider.TableNames.Log, sqlItems);
             ExecuteSql();
+            Logger.Instance.Error(l);
+
             return "GetMsSqlLastIdentityValue()".ToString();
         }
 

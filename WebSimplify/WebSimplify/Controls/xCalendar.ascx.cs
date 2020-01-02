@@ -127,7 +127,7 @@ namespace WebSimplify.Controls
                         if (tmpDate.Value.IsSameMonth(startMonth))
                         {
                             var xd = new xCalendarDay(tmpDate.Value);
-                            xd.DateInfos = Items.Where(x => x.Date == tmpDate.Value.Date).ToList();
+                            xd.DateInfos = Items.Where(x => x.Date.Date == tmpDate.Value.Date).ToList();
                             var innerTable = xd.GetDay();
                             innerTable.SetStyles(cssDayItemHeaderClass ?? xCalendarConsts.cssDayItemHeaderClass, cssDayItemClass ?? xCalendarConsts.cssDayItemClass);
                             innerTable.CssClass = cssDayItemContainerClass ?? xCalendarConsts.cssDayItemContainerClass;

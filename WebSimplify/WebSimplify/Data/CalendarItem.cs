@@ -1,6 +1,7 @@
 ﻿using SynnCore.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,21 @@ using WebSimplify.Data;
 
 namespace WebSimplify
 {
+    public enum RepeatEvery
+    {
+        [Description("ללא חזרות")]
+        None,
+        [Description("שעה")]
+        Hour,
+        [Description("יום")]
+        Day,
+        [Description("שבוע")]
+        Week,
+        [Description("חודש")]
+        Month,
+        [Description("שנה")]
+        Year
+    }
     public class CalendarHtmlItem
     {
         public int Day { get; set; }
@@ -130,13 +146,15 @@ namespace WebSimplify
 
 
         public DateTime Date { get; set; }
+        public RepeatEvery? RepeatEvery { get; set; }
         public string Description { get; set; }
 
         public string Display
         {
             get
             {
-                return string.Format("{0} - {1}", title, Description);
+                var time = $"[{Date.Hour}:{Date.Minute}]";
+                return string.Format(time + "{0} - {1}", title, Description);
             }
         }
 
@@ -190,6 +208,9 @@ namespace WebSimplify
             Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
             title = DataAccessUtility.LoadNullable<string>(reader, "title");
+            var rEvery = DataAccessUtility.LoadNullable<int?>(reader, "RepeatEvery");
+            if (rEvery.HasValue)
+                RepeatEvery = (RepeatEvery)rEvery.Value;
         }
     }
 

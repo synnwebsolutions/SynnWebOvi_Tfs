@@ -35,6 +35,7 @@ namespace SynnWebOvi
             sqlItems.Add(new SqlItem("title", p.InsertItem.title));
             sqlItems.Add(new SqlItem("description", p.InsertItem.Description));
             sqlItems.Add(new SqlItem("date", p.InsertItem.Date));
+            sqlItems.Add(new SqlItem("RepeatEvery", p.InsertItem.RepeatEvery));
             SetInsertIntoSql(SynnDataProvider.TableNames.DiaryData, sqlItems);
             ExecuteSql();
         }

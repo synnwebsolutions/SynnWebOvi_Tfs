@@ -51,13 +51,13 @@ namespace WebSimplify
 
         protected void btnadddiary_ServerClick(object sender, EventArgs e)
         {
-            if (ValidateInputs(txadddiaryname, txadddiarydesc, txadddiarydate))
+            if (ValidateInputs(txadddiaryname, txadddiarydesc, txadddiarydate, txadddiaryHour))
             {
                 var c = new MemoItem
                 {
                     title = txadddiaryname.Value,
                     Description = txadddiarydesc.Value,
-                    Date = Convert.ToDateTime(txadddiarydate.Value)
+                    Date = Convert.ToDateTime(txadddiarydate.Value).AddHours(txadddiaryHour.GetHours()?? 0).AddMinutes(txadddiaryHour.GetMinutes() ?? 0)
                 };
                 var sp = new CalendarSearchParameters { InsertItem = c };
                 DBController.DbCalendar.Add(sp);
@@ -82,7 +82,7 @@ namespace WebSimplify
             {
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 //WsCalendar.StartDate = ActionMonth;
-                //xCalendar cal= 
+                FillEnum(cmbRepeatEvery, typeof(RepeatEvery));
                 RefreshView();
             }
         }
