@@ -33,23 +33,33 @@ namespace WebSimplify
 
         private void PerformTest()
         {
-            var r = new CalendarPreferences
-            {
-                CalendarItemsGenericSubject = "Synmn Web Solutions : Calendar File",
-                SystemName = "Synmn Web Solutions",
-                SystemEmailAddress = "synnwebsolutions@gmail.com",
-                SystemEmailPassword = "ns120315",
-                UserSharingEmails = new List<string> { "samadela@gmail.com", "noae1705@gmail.com" },
-                Alarms = new List<MyCalendarAlarm>
-                {
-                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromMinutes(-15).TotalMinutes },
-                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromHours(-3).TotalMinutes },
-                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromDays(-1).TotalMinutes },
-                }
-            };
+            //var r = new CalendarPreferences
+            //{
+            //    CalendarItemsGenericSubject = "Synmn Web Solutions : Calendar File",
+            //    SystemName = "Synmn Web Solutions",
+            //    SystemEmailAddress = "synnwebsolutions@gmail.com",
+            //    SystemEmailPassword = "ns120315",
+            //    UserSharingEmails = new List<string> { "samadela@gmail.com", "noae1705@gmail.com" },
+            //    Alarms = new List<MyCalendarAlarm>
+            //    {
+            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromMinutes(-15).TotalMinutes },
+            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromHours(-3).TotalMinutes },
+            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromDays(-1).TotalMinutes },
+            //    }
+            //};
 
-            var jstr = JSonUtills.ToJSonString(r);
-            var rr = JSonUtills.ParseJson<CalendarPreferences>(jstr);
+            //var jstr = JSonUtills.ToJSonString(r);
+            //var rr = JSonUtills.ParseJson<CalendarPreferences>(jstr);
+
+            try
+            {
+               var irs =  GoogleCalendarExecuter.ListEvents(null);
+                var jstr = JSonUtills.ToJSonString(irs);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
         }
 
         private void FillData()
