@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using SynnCore.Generics;
+using CalendarUtilities;
 
 namespace WebSimplify.Data
 {
@@ -37,5 +38,18 @@ namespace WebSimplify.Data
         public WorkHoursData CurrentWorkHoursData { get; set; }
         public WorkTime DailyRequiredWorkHours { get; set; }
         public bool UseCharts { get;  set; }
+
+        public CalendarPreferences CalendarPrefs { get; set; }
+    }
+
+    [Serializable]
+    public class CalendarPreferences
+    {
+        public string CalendarItemsGenericSubject { get;  set; }
+        public string SystemName { get;  set; }
+        public string SystemEmailAddress { get;  set; }
+        public string SystemEmailPassword { get;  set; }
+        public List<string> UserSharingEmails { get;  set; }
+        public List<MyCalendarAlarm> Alarms { get;  set; }
     }
 }

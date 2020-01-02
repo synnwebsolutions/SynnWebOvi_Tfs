@@ -15,8 +15,9 @@ namespace CalendarUtilities
 {
     public static class CalendarEventManager
     {
-        public static void SendCalendarByMail(CalendarMailRequest mailRequest, List<MyCalendarEvent> calendarEvents)
+        public static void SendCalendarByMail(CalendarRequest mailRequest)
         {
+            var calendarEvents = mailRequest.CalendarEvents;
             MailMessage message = new MailMessage();
             foreach (string item in mailRequest.To)
                 message.To.Add(item);
@@ -37,8 +38,9 @@ namespace CalendarUtilities
             MailClient.Send(message);
         }
 
-        public static void DownloadCalendarFile(HttpContext httpContext, List<MyCalendarEvent> calendarEvents)
+        public static void DownloadCalendarFile(HttpContext httpContext, CalendarRequest cRequest)
         {
+            var calendarEvents = cRequest.CalendarEvents;
             var Response = httpContext.Response;
             var CalendarItemAsString = generateCalendarFile(calendarEvents);
             Response.ClearHeaders();
@@ -55,30 +57,35 @@ namespace CalendarUtilities
         private static string generateCalendarFile(List<MyCalendarEvent> calendarEvents)
         {
             var calendar = new Ical.Net.Calendar();
-            //calendar.Name = "Smach - Calendar";
-            foreach (MyCalendarEvent res in calendarEvents)
+            foreach (MyCalendarEvent calendarEvent in calendarEvents)
             {
                 var ca = new CalendarEvent
                 {
                     Class = "PUBLIC",
-                    //Name = "Smach - Calendar",
-                    Summary = res.SummaryText,
+                    Summary = calendarEvent.SummaryText,
                     Created = new CalDateTime(DateTime.Now),
-                    Description = res.Details,
-                    Start = new CalDateTime(Convert.ToDateTime(res.BeginDate)),
-                    End = new CalDateTime(Convert.ToDateTime(res.EndDate)),
+                    Description = calendarEvent.Details,
+                    Start = new CalDateTime(Convert.ToDateTime(calendarEvent.BeginDate)),
+                    End = new CalDateTime(Convert.ToDateTime(calendarEvent.EndDate)),
                     Sequence = 0,
                     Uid = Guid.NewGuid().ToString(),
-                    Location = res.LocationText,
-
+                    Location = calendarEvent.LocationText,
                 };
-                var alarm = new Alarm()
+                //var alarm = new Alarm()
+                //{
+                //    Summary = res.SummaryText,
+                //    Trigger = new Trigger(TimeSpan.FromMinutes(-15)),
+                //    Action = AlarmAction.Display
+                //};
+                foreach (MyCalendarAlarm alarm in calendarEvent.CalendarAlarms)
                 {
-                    Summary = res.SummaryText,
-                    Trigger = new Trigger(TimeSpan.FromMinutes(-15)),
-                    Action = AlarmAction.Display
-                };
-
+                    ca.Alarms.Add(new Alarm
+                    {
+                        Summary = alarm.Summary,
+                        Trigger = new Trigger(TimeSpan.FromMinutes(alarm.FromMinutes)),
+                        Action = AlarmAction.Display
+                    });
+                }
                 calendar.Events.Add(ca);
             }
             var serializer = new CalendarSerializer(new SerializationContext());

@@ -1,4 +1,5 @@
-﻿using SynnWebOvi;
+﻿using CalendarUtilities;
+using SynnWebOvi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,9 +26,30 @@ namespace WebSimplify
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
                 btnWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
                 dtShops.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
-
+                PerformTest();
                 FillData();
             }
+        }
+
+        private void PerformTest()
+        {
+            var r = new CalendarPreferences
+            {
+                CalendarItemsGenericSubject = "Synmn Web Solutions : Calendar File",
+                SystemName = "Synmn Web Solutions",
+                SystemEmailAddress = "synnwebsolutions@gmail.com",
+                SystemEmailPassword = "ns120315",
+                UserSharingEmails = new List<string> { "samadela@gmail.com", "noae1705@gmail.com" },
+                Alarms = new List<MyCalendarAlarm>
+                {
+                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromMinutes(-15).TotalMinutes },
+                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromHours(-3).TotalMinutes },
+                    new MyCalendarAlarm { FromMinutes = TimeSpan.FromDays(-1).TotalMinutes },
+                }
+            };
+
+            var jstr = JSonUtills.ToJSonString(r);
+            var rr = JSonUtills.ParseJson<CalendarPreferences>(jstr);
         }
 
         private void FillData()
