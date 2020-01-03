@@ -78,7 +78,7 @@ namespace CalendarUtilities
                 //    Action = AlarmAction.Display
                 //};
                 foreach (MyCalendarAlarm alarm in calendarEvent.CalendarAlarms)
-                {
+                { 
                     ca.Alarms.Add(new Alarm
                     {
                         Summary = alarm.Summary,

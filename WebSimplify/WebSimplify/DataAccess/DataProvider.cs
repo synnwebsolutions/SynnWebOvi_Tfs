@@ -15,13 +15,7 @@ namespace SynnWebOvi
             {
                 if (dbc == null)
                 {
-                    string _connectionString = string.Empty;
-#if DEBUG
-                    _connectionString = ConfigurationSettings.AppSettings["testconnectionString"];
-#else
-            _connectionString = ConfigurationSettings.AppSettings["prodConnectionString"];
-#endif
-
+                    string  _connectionString = ConfigurationSettings.AppSettings["connectionString"];
                     if (ConfigurationSettings.AppSettings["dbtype"] == "sql")
                         dbc = new SqlDatabaseProvider(_connectionString);
                 }
@@ -35,6 +29,7 @@ namespace SynnWebOvi
             public static string Users = "Users";
             public static string UserPreferences = "UserPreferences";
             public static string DevTasks = "DevTasks";
+            public static string GenericData = "GenericData";
             public static string Log = "Log";
             public static string ThemeLog = "ThemeLog";
             public static string WeddingItems = "WeddingItems"; // group
@@ -75,6 +70,7 @@ namespace SynnWebOvi
 
         IDbMigration DbMigration { get; }
 
+        IDbGenericData DbGenericData { get; }
     }
 
     abstract class BaseDatabaseProvider : IDatabaseProvider
@@ -172,6 +168,14 @@ namespace SynnWebOvi
         }
 
         public IDbMoney DbMoney
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IDbGenericData DbGenericData
         {
             get
             {

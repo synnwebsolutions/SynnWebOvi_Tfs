@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebSimplify;
+using WebSimplify.DataAccess;
 
 namespace SynnWebOvi
 {
@@ -17,7 +18,7 @@ namespace SynnWebOvi
         internal IDbShifts IDbShifts = null;
         internal IDbMoney IDbCredit = null;
         internal IDbMigration IDbMig = null;
-
+        internal IDbGenericData IDbGenericData = null;
 
         internal IDbCalendar IDbCalendar = null;
         
@@ -36,6 +37,16 @@ namespace SynnWebOvi
                 if (IDbAuth == null)
                     IDbAuth = new SqlDbAuth(_connectionString);
                 return IDbAuth;
+            }
+        }
+
+        public IDbGenericData DbGenericData
+        {
+            get
+            {
+                if (IDbGenericData == null)
+                    IDbGenericData = new SqlDbGenericData(_connectionString);
+                return IDbGenericData;
             }
         }
 

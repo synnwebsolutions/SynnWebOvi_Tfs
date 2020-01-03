@@ -426,5 +426,25 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "CurrentShiftEnd", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000 });
             db.ExecurteCreateTable(t.ToString());
         }
+
+        public static void GenericDataTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                HasIdentity = true,
+                TableName = SynnDataProvider.TableNames.GenericData
+            };
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "GenericDataEnum", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
+            t.Fields.Add(new TableMigrationField { FieldName = "UpdateDate", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
+            t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });
+            t.Fields.Add(new TableMigrationField { FieldName = "Description", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+
+            for (int i = 0; i < GenericData.GenericDataExtraFieldCount; i++)
+                t.Fields.Add(new TableMigrationField { FieldName = $"{GenericData.GenericDataExtraFieldPrefix}{i}", FieldType = TableMigrationFieldType.Varchar, FieldLLenght = 8000, IsNullAble = true });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
     }
 }

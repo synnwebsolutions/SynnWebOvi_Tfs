@@ -164,6 +164,7 @@
     <Compile Include="Controls\LottoPoleSelector.ascx.designer.cs">
       <DependentUpon>LottoPoleSelector.ascx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\SqlDbGenericData.cs" />
     <Compile Include="Data\Consts.cs" />
     <Compile Include="Controls\WsCalendar.ascx.cs">
       <DependentUpon>WsCalendar.ascx</DependentUpon>
@@ -223,6 +224,7 @@
     <Compile Include="DataAccess\SqlDbUserDictionary.cs" />
     <Compile Include="DataAccess\SqlDbWedd.cs" />
     <Compile Include="Data\DevTaskItem.cs" />
+    <Compile Include="Data\GenericData.cs" />
     <Compile Include="Data\IMarkAble.cs" />
     <Compile Include="Data\JsonPointItem.cs" />
     <Compile Include="Data\MoneyMonthlyData.cs" />
@@ -388,6 +390,7 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\dp1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Pub.pubxml" />
     <None Include="web.Debug.config">

@@ -119,6 +119,11 @@ namespace SynnWebOvi
         List<string> GetAlreadyFinishedSteps();
     }
 
+    public interface IDbGenericData
+    {
+        
+    }
+
     public interface IDbUserDictionary
     {
         void Add(DictionarySearchParameters p);
@@ -200,6 +205,14 @@ namespace SynnWebOvi
 
     public class LottoPolesSearchParameters : LottoSearchParameters
     {
+    }
+
+    public class GenericDataSearchParameters : LottoSearchParameters
+    {
+        public GenericDataEnum GenericDataEnum { get; set; }
+        public int? Id { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
     }
 
     public class CreditSearchParameters : BaseSearchParameters
