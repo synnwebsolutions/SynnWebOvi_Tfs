@@ -9,8 +9,16 @@ using CalendarUtilities;
 
 namespace WebSimplify.Data
 {
-    public class UserAppPreferencesContainer : IDbLoadable
+    public class UserAppPreferencesContainer : GenericData
     {
+        public override GenericDataEnum GenericDataType
+        {
+            get
+            {
+                return GenericDataEnum.UserAppPreferences;
+            }
+        }
+
         public UserAppPreferences Value { get; set; }
         public UserAppPreferencesContainer()
         {
@@ -19,7 +27,8 @@ namespace WebSimplify.Data
         {
             Load(data);
         }
-        public void Load(IDataReader reader)
+
+        public override void LoadExtraFields(IDataReader reader)
         {
             var xmlData = DataAccessUtility.LoadNullable<string>(reader, "pdata");
             if (xmlData.NotEmpty())

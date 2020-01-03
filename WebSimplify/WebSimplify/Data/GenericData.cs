@@ -9,7 +9,7 @@ namespace WebSimplify
 {
     public enum GenericDataEnum
     {
-
+        UserAppPreferences
     }
 
     public class GenericData : IDbLoadable
@@ -17,7 +17,7 @@ namespace WebSimplify
         public const string GenericDataExtraFieldPrefix = "ExtraField_";
         public const int GenericDataExtraFieldCount = 20;
 
-        public GenericDataEnum GenericDataType { get; set; }
+        public virtual GenericDataEnum GenericDataType { get; }
         public int Id { get;  set; }
         public DateTime? UpdateDate { get;  set; }
         public DateTime CreationDate { get;  set; }
@@ -36,7 +36,7 @@ namespace WebSimplify
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
 
-            GenericDataType = (GenericDataEnum)DataAccessUtility.LoadInt32(reader, "GenericDataType");
+            //GenericDataType = (GenericDataEnum)DataAccessUtility.LoadInt32(reader, "GenericDataType");
             CreationDate = DataAccessUtility.LoadNullable<DateTime>(reader, "CreationDate");
             UpdateDate = DataAccessUtility.LoadNullable<DateTime?>(reader, "UpdateDate");
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
