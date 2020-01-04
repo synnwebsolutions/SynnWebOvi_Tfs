@@ -63,6 +63,7 @@ namespace WebSimplify.DataAccess
 
         public void Update(GenericData g)
         {
+            g.UpdateDate = DateTime.Now;
             SqlItemList sqlItems = Get(g);
 
             SetUpdateSql(SynnDataProvider.TableNames.GenericData, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = g.Id } });

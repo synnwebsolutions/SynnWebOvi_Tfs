@@ -13,32 +13,39 @@
                         עריכת משתמש   <i class="fa fa-address-book"></i>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div>
                         <asp:DropDownList ID="cmbusers" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cmbusers_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-2">
                 </div>
             </div>
         </div>
 
         <div class=" row">
-            <div class="col-4">
-                <div class="spanelHeader">הוספת משתמש  <i class="fa fa-address-book"></i></div>
-                <div>
+            <div class="col-12">
+                <div class="spanelHeader">פרטי משתמש  <i class="fa fa-address-book"></i></div>
+                </div>
+            
+                <div class="col-4">
                     <input type="text" name="name" id="txNewUserName" placeholder="שם משתמש" runat="server" />
                 </div>
-                <div>
+                <div class="col-4">
                     <input type="text" name="name" id="txDisplay" placeholder="שם לתצוגה" runat="server" />
                 </div>
-                <div>
+                <div class="col-4">
                     <input type="text" name="name" id="txNewFirstPassword" placeholder=" סיסמה ראשונית" runat="server" disabled="disabled" />
                 </div>
-            </div>
-            <div class="col-8">
-                <div class="spanelHeader">הרשאות משתמש  <i class="fa fa-address-book"></i></div>
+         
+        </div>
 
+           <div class="row">
+                <div class="spanelHeader">הרשאות משתמש  <i class="fa fa-address-book"></i></div>
+               <div class="col-8">
+                   <textarea name="txUserApiCredsJson" id="txUserApiCredsJson" cols="40" rows="5" runat="server" >Google API Tokens Json</textarea>
+               </div>
+               <div class="col-4">
                 <div class="sgridcontainer">
                     <asp:GridView ID="gvClientPagePermissions" runat="server"
                         OnRowDataBound="gvClientPagePermissions_RowDataBound" AllowPaging="False"
@@ -64,29 +71,21 @@
                         </Columns>
                     </asp:GridView>
                 </div>
+                   </div>
             </div>
-      
-
-
-        </div>
         <div class="row">
             <div class="col-4"></div>
             <div class="col-8">
+            </div>
+        </div>
+  
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
                 <button class="sbutton" type="button" id="btnAddUser" runat="server" onserverclick="btnAddUser_ServerClick">הוסף</button>
             </div>
+            <div class="col-2"></div>
         </div>
-        <div class="spanel">
-            <div class=" row">
-                <div class="col-4">
-                    <div class="spanelHeader">הוספת קבוצת הרשאה  <i class="fa fa-address-book"></i></div>
-                    <div>
-                        <input type="text" name="name" id="txNewGroupName" placeholder="שם קבוצה" runat="server" />
-                    </div>
-                    <div>
-                        <button class="sbutton" type="button" id="abtnAddGroup" runat="server" onserverclick="abtnAddGroup_ServerClick">הוסף</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </asp:Content>

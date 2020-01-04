@@ -22,11 +22,45 @@ namespace SynnWebOvi
         {
             Dbl = DBController.DbLog;
             MigrationHandler.Perform();
+
 #if debug
             ExcelHelper.Perform(DBController);
 #endif
         }
 
+        public static void PerformFirstInserts(IDatabaseProvider _DBr)
+        {
+            try
+            {
+
+                _DBr.DbAuth.Add(new LoggedUser
+                {
+                    AllowedClientPagePermissions = new List<ClientPagePermissions>(),
+                    DisplayName = "Smach",
+                    Password = "sm1234",
+                    UserName = "smach",
+                    Preferences = new WebSimplify.Data.UserAppPreferences
+                    {
+                        CalendarPrefs = new WebSimplify.Data.CalendarPreferences { CredentialsJsonString = "" }
+                    }
+                });
+                _DBr.DbAuth.Add(new LoggedUser
+                {
+                    AllowedClientPagePermissions = new List<ClientPagePermissions>(),
+                    DisplayName = "Noa",
+                    Password = "ns1234",
+                    UserName = "noa",
+                    Preferences = new WebSimplify.Data.UserAppPreferences
+                    {
+                        CalendarPrefs = new WebSimplify.Data.CalendarPreferences { CredentialsJsonString = "" }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                string cc = ex.Message;
+            }
+        }
         protected void Session_Start(object sender, EventArgs e)
         {
             string st = "";

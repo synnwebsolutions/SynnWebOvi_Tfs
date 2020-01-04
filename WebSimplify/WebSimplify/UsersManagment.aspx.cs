@@ -1,4 +1,5 @@
-﻿using SynnCore.Generics;
+﻿using Newtonsoft.Json.Linq;
+using SynnCore.Generics;
 using SynnWebOvi;
 using System;
 using System.Collections;
@@ -58,36 +59,47 @@ namespace WebSimplify
 
         public IEnumerable GetClientPagePermissions()
         {
-            return Enum.GetValues(typeof(ClientPagePermissions));
+            return Enum.GetValues(typeof(ClientPagePermissions)).OfType< ClientPagePermissions>().Where(x => !CurrentUser.CheckIsAdminBlock(x));
         }
 
         protected void btnAddUser_ServerClick(object sender, EventArgs e)
         {
+            bool newUser = EditedUser == null;
+            if (newUser)
+                EditedUser = new LoggedUser();
 
             if (ValidateInputs(txNewUserName))
             {
-                LoggedUser u = new LoggedUser();
-                u.UserName = txNewUserName.Value;
-                u.Password = txNewFirstPassword.Value;
-                u.DisplayName = txDisplay.Value;
+                //LoggedUser u = new LoggedUser();
+                EditedUser.UserName = txNewUserName.Value;
+                EditedUser.Password = txNewFirstPassword.Value;
+                EditedUser.DisplayName = txDisplay.Value;
            
                 foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
                 {
                     if (((CheckBox)gvr.FindControl("chk")).Checked)
                     {
                         int pageid = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);
-                        u.AllowedClientPagePermissions.Add((ClientPagePermissions)pageid);
+                        EditedUser.AllowedClientPagePermissions.Add((ClientPagePermissions)pageid);
                     }
                 }
-               
-                if (EditedUser == null)
-                    DBController.DbAuth.Add(u);
+                if (ValidateInputs(txUserApiCredsJson))
+                {
+                    JObject japi = JObject.Parse(txUserApiCredsJson.InnerText);
+                    if (EditedUser.Preferences == null)
+                        EditedUser.Preferences = new Data.UserAppPreferences();
+                    if (EditedUser.Preferences.CalendarPrefs == null)
+                        EditedUser.Preferences.CalendarPrefs = new Data.CalendarPreferences();
+                    EditedUser.Preferences.CalendarPrefs.CredentialsJsonString = japi.ToString(Newtonsoft.Json.Formatting.Indented);
+                }
+                if (newUser)
+                    DBController.DbAuth.Add(EditedUser);
                 else
                 {
-                    u.Id = EditedUser.Id;
-                    DBController.DbAuth.Update(u); // edit !!!!!!
-                    EditedUser = null;
+                    DBController.DbAuth.Update(EditedUser); // edit !!!!!!
                 }
+                DBController.DbGenericData.Update(EditedUser.Preferences);
+                EditedUser = null;
                 SetInputs();
                 AlertMessage("פעולה זו בוצעה בהצלחה");
             }
@@ -119,21 +131,7 @@ namespace WebSimplify
             }
         }
 
-        protected void abtnAddGroup_ServerClick(object sender, EventArgs e)
-        {
-            if (ValidateInputs(txNewGroupName))
-            {
-                PermissionGroup g = new PermissionGroup {Name = txNewGroupName.Value };
-                DBController.DbAuth.Add(g);
-                AlertMessage("פעולה זו בוצעה בהצלחה");
-                ClearInputs(txNewGroupName);
-                RefreshGridPageGrids();
-            }
-            else
-            {
-                AlertMessage("אחד או יותר מהשדות ריקים");
-            }
-        }
+      
 
         private void RefreshGridPageGrids()
         {
@@ -161,7 +159,7 @@ namespace WebSimplify
             txNewFirstPassword.Value = EditedUser != null ? EditedUser.Password : string.Empty;
             txNewUserName.Value = EditedUser != null ? EditedUser.UserName : string.Empty;
             txDisplay.Value = EditedUser != null ? EditedUser.DisplayName : string.Empty;
-    
+            txUserApiCredsJson.Value = EditedUser != null ? EditedUser.Preferences.CalendarPrefs.CredentialsJsonString : string.Empty;
             foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
             {
                 int pageid = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);

@@ -59,7 +59,7 @@ namespace SynnWebOvi
             return !(CheckIsAdminBlock(p)) && ( IsAdmin || AllowedClientPagePermissions.Contains(p));
         }
 
-        private bool CheckIsAdminBlock(ClientPagePermissions ep)
+        public bool CheckIsAdminBlock(ClientPagePermissions ep)
         {
             var blockedPages = ConfigurationManager.AppSettings["adminBlockedPages"].Split(',').Where(x => x.Length > 0).ToList();
             foreach (var blockedPage in blockedPages)

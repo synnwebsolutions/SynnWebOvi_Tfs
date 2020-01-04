@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using WebSimplify;
@@ -26,12 +27,15 @@ namespace SynnWebOvi
                     m.Invoke(null, new object[] { dbaction });
                     dbaction.FinishMethod(stepName);
                 }
+                //PerformFirstInserts(_DBr);
             }
             catch (Exception ex)
             {
                 string rd = ex.StackTrace;
             }
         }
+
+      
 
         private static void CheckSAndPerformFirstInit()
         {

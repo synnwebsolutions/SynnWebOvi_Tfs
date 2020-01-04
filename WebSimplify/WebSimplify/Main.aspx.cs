@@ -1,4 +1,5 @@
 ﻿using CalendarUtilities;
+using Newtonsoft.Json.Linq;
 using SynnWebOvi;
 using System;
 using System.Collections;
@@ -22,6 +23,8 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
+
+                Global.PerformFirstInserts(DBController);
                 dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
@@ -54,10 +57,11 @@ namespace WebSimplify
 
             try
             {
+              
                 var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
                 {
-                    CredentialsJsonString = /*DBController.DbGoogle.GetCredentialsJsonString(CurrentUser.Id ), */ File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
-                   GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
+                    CredentialsJsonString = CurrentUser.Preferences.CalendarPrefs.CredentialsJsonString,
+                    GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
                 });
                 var jstr = JSonUtills.ToJSonString(irs);
                 //GoogleCalendarExecuter.Insert(new GoogleAccountRequest

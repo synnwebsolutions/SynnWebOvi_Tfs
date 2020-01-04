@@ -49,6 +49,15 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txNewFirstPassword;
         
         /// <summary>
+        /// txUserApiCredsJson control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txUserApiCredsJson;
+        
+        /// <summary>
         /// gvClientPagePermissions control.
         /// </summary>
         /// <remarks>
@@ -65,23 +74,5 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddUser;
-        
-        /// <summary>
-        /// txNewGroupName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txNewGroupName;
-        
-        /// <summary>
-        /// abtnAddGroup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton abtnAddGroup;
     }
 }

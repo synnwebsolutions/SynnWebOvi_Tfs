@@ -71,6 +71,11 @@ namespace WebSimplify
 
         public void Add(LoggedUser u)
         {
+            var exU = GetUsers(new UserSearchParameters { UserName = u.UserName, Password = u.Password });
+            if (exU.NotEmpty())
+            {
+                throw new Exception("User Exists");
+            }
             SqlItemList sqlItems = Get(u);
             SetInsertIntoSql(SynnDataProvider.TableNames.Users, sqlItems);
             ExecuteSql();
