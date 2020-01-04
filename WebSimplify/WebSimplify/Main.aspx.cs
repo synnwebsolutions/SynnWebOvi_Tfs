@@ -60,7 +60,7 @@ namespace WebSimplify
               
                 var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
                 {
-                    CredentialsJsonString = CurrentUser.Preferences.CalendarPrefs.CredentialsJsonString,
+                    CredentialsJsonString = CurrentUser.Preferences.CalendarPrefs.CredentialsJsonString, // check
                     GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
                 });
                 var jstr = JSonUtills.ToJSonString(irs);
