@@ -22,7 +22,7 @@ namespace SynnWebOvi
         LoggedUser LoadUserSettings(string userAlias);
         void Update(LoggedUser u);
         LoggedUser GetUser(int ownerId);
-        void UpdatePreferences(LoggedUser u);
+      
         List<DevTaskItem> Get(DevTaskItemSearchParameters devTaskItemSearchParameters);
         void Add(DevTaskItem d);
         void Update(DevTaskItem d);
@@ -121,7 +121,9 @@ namespace SynnWebOvi
 
     public interface IDbGenericData
     {
-        
+        void Update(GenericData g);
+        List<T> GetGenericData<T>(GenericDataSearchParameters sp);
+        void Add(GenericData g);
     }
 
     public interface IDbGoogle

@@ -1,9 +1,12 @@
-﻿using SynnCore.Generics;
+﻿using SynnCore.DataAccess;
+using SynnCore.Generics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -245,7 +248,32 @@ namespace WebSimplify
 
         public static string ToXml(this object d)
         {
+            if (d == null)
+                return null;
             return XmlHelper.ToXml(d);
+        }
+
+        public static string ApplyGenericDataPrefix(this int d)
+        {
+            return $"{GenericData.GenericDataExtraFieldPrefix}{d}";
+        }
+
+        public static void SetFromDbXmlField<T>(this IDataReader reader,object obj, string dbFieldName, PropertyInfo pinfo)
+        {
+            if (pinfo != null)
+            {
+                var xmlData = DataAccessUtility.LoadNullable<string>(reader, dbFieldName);
+                if (xmlData.NotEmpty())
+                    pinfo.SetValue(obj, XmlHelper.CreateFromXml<T>(xmlData));
+                else
+                    pinfo.SetValue(obj, Activator.CreateInstance<T>());
+            }
+        }
+
+        public static PropertyInfo GetPropertyInfo(this object obj, string propertyName)
+        {
+            PropertyInfo result = obj.GetType().GetProperty(propertyName);
+            return result;
         }
 
         public static void FindControlRecursive(this System.Web.UI.Control c, string cotrolToFind, ref System.Web.UI.Control resp)

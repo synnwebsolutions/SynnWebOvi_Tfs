@@ -49,5 +49,10 @@ namespace WebSimplify
         {
             
         }
+
+        public virtual void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

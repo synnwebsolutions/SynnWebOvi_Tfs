@@ -115,7 +115,7 @@ namespace WebSimplify
                         p.BalanceLogStartDate = txBalanceStartDate.Text.ToDateTime();
                     }
 
-                    DBController.DbAuth.UpdatePreferences(CurrentUser);
+                    DBController.DbGenericData.Update(CurrentUser.Preferences);
                 }
                 catch (Exception ex)
                 {

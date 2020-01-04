@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebSimplify.Data;
 
 namespace WebSimplify
 {
@@ -93,6 +94,17 @@ namespace WebSimplify
                 if (DBController.DbAuth.ValidateUserCredentials(xu, xp))
                 {
                     CurrentUser = DBController.DbAuth.LoadUserSettings(xu, xp);
+                    CurrentUser.Preferences = DBController.DbGenericData.GetGenericData<UserAppPreferences>(new GenericDataSearchParameters { }).FirstOrDefault();
+                    if (CurrentUser.Preferences == null)
+                    {
+                        CurrentUser.Preferences = new UserAppPreferences
+                        {
+                            UserId = CurrentUser.Id,
+                            CreationDate = DateTime.Now,
+                            UpdateDate = DateTime.Now
+                        };
+                        DBController.DbGenericData.Add(CurrentUser.Preferences);
+                    }
                     StartUpManager.PerformUserStartUp(CurrentUser);
                 }
                 else
