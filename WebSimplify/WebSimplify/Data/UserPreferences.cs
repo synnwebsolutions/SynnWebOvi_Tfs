@@ -59,6 +59,5 @@ namespace WebSimplify.Data
         public string SystemEmailAddress { get;  set; }
         public string SystemEmailPassword { get;  set; }
         public List<string> UserSharingEmails { get;  set; }
-        public List<MyCalendarAlarm> Alarms { get;  set; }
     }
 }

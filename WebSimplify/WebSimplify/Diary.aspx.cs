@@ -114,13 +114,12 @@ namespace WebSimplify
                 To = prefs.UserSharingEmails,
                 NetworkCredential = new System.Net.NetworkCredential(prefs.SystemName, prefs.SystemEmailPassword),
                 CalendarEvents = mm.ToCalendarEvents(),
-                Alarms = prefs.Alarms
             };
         }
 
         protected void btnDownloadCal_ServerClick(object sender, EventArgs e)
         {
-            var mm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth, ToDate = ActionMonth.AddMonths(1) });
+            List<MemoItem> mm = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = ActionMonth, ToDate = ActionMonth.AddMonths(1) });
             CalendarEventManager.DownloadCalendarFile(HttpContext.Current, GenerateCalendarRequest(mm));
         }
     }

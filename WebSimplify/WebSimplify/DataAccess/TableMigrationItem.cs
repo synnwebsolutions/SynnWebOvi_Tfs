@@ -55,6 +55,8 @@ namespace WebSimplify
         Integer,
         [Description("varchar")]
         Varchar,
+        [Description("nvarchar")]
+        NVarchar,
         [Description("text")]
         Text,
         [Description("")]

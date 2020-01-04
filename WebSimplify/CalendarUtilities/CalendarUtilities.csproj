@@ -92,9 +92,12 @@
   <ItemGroup>
     <Compile Include="CalendarEventManager.cs" />
     <Compile Include="CalendarMailRequest.cs" />
+    <Compile Include="GoogleAccountRequest.cs" />
     <Compile Include="GoogleCalendarExecuter.cs" />
+    <Compile Include="GoogleDatabaseDataStore.cs" />
     <Compile Include="MyCalendarEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlDatabaseDatastore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

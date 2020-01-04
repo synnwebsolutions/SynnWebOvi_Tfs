@@ -202,9 +202,12 @@ namespace WebSimplify
             }
         }
 
+        public DateTime CreationDate { get; set; }
+
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
+            CreationDate = DataAccessUtility.LoadNullable<DateTime>(reader, "CreationDate");
             Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
             title = DataAccessUtility.LoadNullable<string>(reader, "title");

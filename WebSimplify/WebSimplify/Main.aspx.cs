@@ -3,6 +3,7 @@ using SynnWebOvi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
@@ -53,8 +54,27 @@ namespace WebSimplify
 
             try
             {
-               var irs =  GoogleCalendarExecuter.ListEvents(null);
-                var jstr = JSonUtills.ToJSonString(irs);
+                //var irs =  GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
+                //{
+                //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
+                //    DbConnectionString = SynnDataProvider._connectionString,
+                //    DbTableName = "GoogleTokens"
+                //});
+                // var jstr = JSonUtills.ToJSonString(irs);
+                //GoogleCalendarExecuter.Insert(new GoogleAccountRequest
+                //{
+                //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
+                //    DbConnectionString = SynnDataProvider._connectionString,
+                //    DbTableName = "GoogleTokens",
+                //    CalendarEvent = new MyCalendarEvent
+                //    {
+                //        BeginDate = DateTime.Now.AddMinutes(16),
+                //        EndDate = DateTime.Now.AddMinutes(76),
+                //        Details = "Test google api insert",
+                //        LocationText = "Rehovot,Israel",
+                //        SummaryText = "Hopefully this gonna work"
+                //    }
+                //});
             }
             catch (Exception ex)
             {

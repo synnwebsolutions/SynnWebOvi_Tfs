@@ -9,13 +9,14 @@ namespace SynnWebOvi
     public class SynnDataProvider
     {
         private static IDatabaseProvider dbc;
+        public static string _connectionString;
         public static IDatabaseProvider DbProvider
         {
             get
             {
                 if (dbc == null)
                 {
-                    string  _connectionString = ConfigurationSettings.AppSettings["connectionString"];
+                     _connectionString = ConfigurationSettings.AppSettings["connectionString"];
                     if (ConfigurationSettings.AppSettings["dbtype"] == "sql")
                         dbc = new SqlDatabaseProvider(_connectionString);
                 }
@@ -26,6 +27,7 @@ namespace SynnWebOvi
         public static class TableNames
         {
             public static string UserDictionary = "UserDictionary"; // user only
+            public static string GoogleTokens = "GoogleTokens";
             public static string Users = "Users";
             public static string UserPreferences = "UserPreferences";
             public static string DevTasks = "DevTasks";

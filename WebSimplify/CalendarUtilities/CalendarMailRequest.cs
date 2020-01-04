@@ -18,6 +18,5 @@ namespace CalendarUtilities
         public string HtmlBody { get; set; }
         public ICredentialsByHost NetworkCredential { get; set; }
         public List<MyCalendarEvent> CalendarEvents { get; set; }
-        public IList Alarms { get;  set; }
     }
 }
