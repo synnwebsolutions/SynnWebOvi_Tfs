@@ -128,7 +128,7 @@ namespace SynnWebOvi
 
     public interface IDbGoogle
     {
-        string GetCredentialsJsonString(int userId);
+         int AppUserId { get; set; }
     }
 
     public interface IDbUserDictionary
@@ -214,12 +214,34 @@ namespace SynnWebOvi
     {
     }
 
-    public class GenericDataSearchParameters : LottoSearchParameters
+    public class GenericDataSearchParameters : BaseSearchParameters
     {
         public GenericDataEnum GenericDataEnum { get; set; }
         public int? Id { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+
+        public virtual void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        {
+            if (Id.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>("Id", Id.ToString()));
+        }
+    }
+
+    public class GoogleApDataSearchParameters : GenericDataSearchParameters
+    {
+        public GoogleApDataSearchParameters()
+        {
+            GenericDataEnum = GenericDataEnum.UserGoogleApiSettings;
+        }
+        public int? UserId { get; set; }
+
+        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        {
+            base.AppendExtraFieldsValues(extraFields);
+            if (UserId.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
+        }
     }
 
     public class CreditSearchParameters : BaseSearchParameters

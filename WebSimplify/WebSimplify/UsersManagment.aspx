@@ -39,11 +39,26 @@
                 </div>
          
         </div>
+         <div class=" row" id="rwGApi" runat="server">
+            <div class="col-12">
+                <div class="spanelHeader">Google API  <i class="fa fa-address-book"></i></div>
+                </div>
+            
+                <div class="col-4">
+                    <input type="text" name="name" id="txClientId" placeholder=" Google API - Client Id" runat="server"/>
+                </div>
+                <div class="col-4">
+                    <input type="text" name="name" id="TxClientSecret" placeholder=" Google API - Client Secret" runat="server" />
+                </div>
+                <div class="col-4">
+                    <input type="text" name="name" id="txProjectId" placeholder="  Google API - Project Id" runat="server"  />
+                </div>
+        </div>
 
            <div class="row">
                 <div class="spanelHeader">הרשאות משתמש  <i class="fa fa-address-book"></i></div>
                <div class="col-8">
-                   <textarea name="txUserApiCredsJson" id="txUserApiCredsJson" cols="40" rows="5" runat="server" >Google API Tokens Json</textarea>
+                   
                </div>
                <div class="col-4">
                 <div class="sgridcontainer">

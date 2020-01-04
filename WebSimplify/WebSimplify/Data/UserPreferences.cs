@@ -30,15 +30,12 @@ namespace WebSimplify.Data
         }
 
         public int UserId { get; set; }
-        public int CreditCardPaymentDay { get;  set; }
-        public DateTime CreditLogStartDate { get;  set; }
+        public int CreditCardPaymentDay { get; set; }
+        public DateTime CreditLogStartDate { get; set; }
         public DateTime BalanceLogStartDate { get; set; }
         public WorkHoursData CurrentWorkHoursData { get; set; }
         public WorkTime DailyRequiredWorkHours { get; set; }
-        public bool UseCharts { get;  set; }
-
-        public CalendarPreferences CalendarPrefs { get; set; }
-
+        public bool UseCharts { get; set; }
 
         public override void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
         {
@@ -49,7 +46,6 @@ namespace WebSimplify.Data
             extraFields.Add(new KeyValuePair<int, object>(4, CurrentWorkHoursData.ToXml() ?? new WorkHoursData().ToXml()));
             extraFields.Add(new KeyValuePair<int, object>(5, DailyRequiredWorkHours.ToXml() ?? new WorkTime().ToXml()));
             extraFields.Add(new KeyValuePair<int, object>(6, UseCharts));
-            extraFields.Add(new KeyValuePair<int, object>(7, CalendarPrefs.ToXml() ?? new CalendarPreferences().ToXml()));
         }
 
         public override void LoadExtraFields(IDataReader reader)
@@ -59,24 +55,12 @@ namespace WebSimplify.Data
             CreditLogStartDate = DataAccessUtility.LoadNullable<string>(reader, 2.ApplyGenericDataPrefix()).ToDateTime();
             BalanceLogStartDate = DataAccessUtility.LoadNullable<string>(reader, 3.ApplyGenericDataPrefix()).ToDateTime();
 
-            reader.SetFromDbXmlField<WorkHoursData>(this,4.ApplyGenericDataPrefix(), this.GetPropertyInfo("CurrentWorkHoursData"));
+            reader.SetFromDbXmlField<WorkHoursData>(this, 4.ApplyGenericDataPrefix(), this.GetPropertyInfo("CurrentWorkHoursData"));
             reader.SetFromDbXmlField<WorkTime>(this, 5.ApplyGenericDataPrefix(), this.GetPropertyInfo("DailyRequiredWorkHours"));
 
             var res = DataAccessUtility.LoadNullable<string>(reader, 6.ApplyGenericDataPrefix()).ToInteger();
             UseCharts = Convert.ToBoolean(res);
-            reader.SetFromDbXmlField<CalendarPreferences>(this, 7.ApplyGenericDataPrefix(), this.GetPropertyInfo("CalendarPrefs"));
-
         }
     }
 
-    [Serializable]
-    public class CalendarPreferences
-    {
-        public string CalendarItemsGenericSubject { get;  set; }
-        public string SystemName { get;  set; }
-        public string SystemEmailAddress { get;  set; }
-        public string SystemEmailPassword { get;  set; }
-        public List<string> UserSharingEmails { get;  set; }
-        public string CredentialsJsonString { get;  set; }
-    }
 }

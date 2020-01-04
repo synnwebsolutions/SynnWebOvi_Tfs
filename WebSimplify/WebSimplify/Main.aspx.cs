@@ -57,13 +57,20 @@ namespace WebSimplify
 
             try
             {
-              
-                var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
+                if (!CurrentUser.IsAdmin)
                 {
-                    CredentialsJsonString = CurrentUser.Preferences.CalendarPrefs.CredentialsJsonString, // check
-                    GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
-                });
-                var jstr = JSonUtills.ToJSonString(irs);
+                    var userApi = DBController.DbGenericData.GetGenericData<UserGoogleApiData>(new GoogleApDataSearchParameters { UserId = CurrentUser.Id }).FirstOrDefault() ??
+                                 new UserGoogleApiData();
+
+                    DBController.DbGoogle.AppUserId = CurrentUser.Id;
+
+                    var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
+                    {
+                        CredentialsJsonString = userApi.GenerateJsonString(), 
+                        GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
+                    });
+                    var jstr = JSonUtills.ToJSonString(irs);
+                }
                 //GoogleCalendarExecuter.Insert(new GoogleAccountRequest
                 //{
                 //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),

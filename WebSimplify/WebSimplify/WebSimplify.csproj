@@ -235,6 +235,7 @@
     <Compile Include="Data\ShiftData.cs" />
     <Compile Include="DataAccess\SqlDbShifts.cs" />
     <Compile Include="Data\UiTemplate.cs" />
+    <Compile Include="Data\UserGoogleApiData.cs" />
     <Compile Include="Data\UserPreferences.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\DictionaryItem.cs" />

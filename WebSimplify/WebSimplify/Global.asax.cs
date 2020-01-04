@@ -41,7 +41,6 @@ namespace SynnWebOvi
                     UserName = "smach",
                     Preferences = new WebSimplify.Data.UserAppPreferences
                     {
-                        CalendarPrefs = new WebSimplify.Data.CalendarPreferences { CredentialsJsonString = "" }
                     }
                 });
                 _DBr.DbAuth.Add(new LoggedUser
@@ -52,7 +51,6 @@ namespace SynnWebOvi
                     UserName = "noa",
                     Preferences = new WebSimplify.Data.UserAppPreferences
                     {
-                        CalendarPrefs = new WebSimplify.Data.CalendarPreferences { CredentialsJsonString = "" }
                     }
                 });
             }

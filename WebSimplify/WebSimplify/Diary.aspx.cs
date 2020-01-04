@@ -104,17 +104,18 @@ namespace WebSimplify
 
         private CalendarRequest GenerateCalendarRequest(List<MemoItem> mm)
         {
-            var prefs = CurrentUser.Preferences.CalendarPrefs;
-            return new CalendarRequest
-            {
-                FromEmail = prefs.SystemName,
-                FromName = prefs.SystemEmailAddress,
-                HtmlBody = "",
-                Subject = prefs.CalendarItemsGenericSubject,
-                To = prefs.UserSharingEmails,
-                NetworkCredential = new System.Net.NetworkCredential(prefs.SystemName, prefs.SystemEmailPassword),
-                CalendarEvents = mm.ToCalendarEvents(),
-            };
+            //var prefs = CurrentUser.Preferences.CalendarPrefs;
+            //return new CalendarRequest
+            //{
+            //    FromEmail = prefs.SystemName,
+            //    FromName = prefs.SystemEmailAddress,
+            //    HtmlBody = "",
+            //    Subject = prefs.CalendarItemsGenericSubject,
+            //    To = prefs.UserSharingEmails,
+            //    NetworkCredential = new System.Net.NetworkCredential(prefs.SystemName, prefs.SystemEmailPassword),
+            //    CalendarEvents = mm.ToCalendarEvents(),
+            //};
+            return null;
         }
 
         protected void btnDownloadCal_ServerClick(object sender, EventArgs e)

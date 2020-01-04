@@ -9,7 +9,8 @@ namespace WebSimplify
 {
     public enum GenericDataEnum
     {
-        UserAppPreferences
+        UserAppPreferences,
+        UserGoogleApiSettings
     }
 
     public class GenericData : IDbLoadable

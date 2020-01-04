@@ -22,8 +22,11 @@ namespace WebSimplify.DataAccess
 
             AddSqlWhereField("GenericDataEnum", (int)sp.GenericDataEnum);
 
-            if (sp.Id.HasValue)
-                AddSqlWhereField("Id", sp.Id);
+
+            List<KeyValuePair<string, object>> extraFields = new List<KeyValuePair<string, object>>();
+            sp.AppendExtraFieldsValues(extraFields);
+            foreach (var item in extraFields)
+                AddSqlWhereField(item.Key, item.Value);
 
             IList lst = (IList)Activator.CreateInstance(GetListType(typeof(T)));
             FillList(lst, typeof(T));
@@ -39,6 +42,8 @@ namespace WebSimplify.DataAccess
 
         public void Add(GenericData u)
         {
+            u.CreationDate = DateTime.Now;
+            u.UpdateDate = DateTime.Now;
             SqlItemList sqlItems = Get(u);
 
             SetInsertIntoSql(SynnDataProvider.TableNames.GenericData, sqlItems);

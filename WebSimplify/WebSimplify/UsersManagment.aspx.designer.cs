@@ -49,13 +49,40 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txNewFirstPassword;
         
         /// <summary>
-        /// txUserApiCredsJson control.
+        /// rwGApi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea txUserApiCredsJson;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rwGApi;
+        
+        /// <summary>
+        /// txClientId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txClientId;
+        
+        /// <summary>
+        /// TxClientSecret control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxClientSecret;
+        
+        /// <summary>
+        /// txProjectId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txProjectId;
         
         /// <summary>
         /// gvClientPagePermissions control.

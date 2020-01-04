@@ -43,6 +43,12 @@ namespace WebSimplify
             }
         }
 
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            rwGApi.Visible = EditedUser != null && EditedUser.Id > 0;
+        }
+
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gvClientPagePermissions.ID)
@@ -83,22 +89,25 @@ namespace WebSimplify
                         EditedUser.AllowedClientPagePermissions.Add((ClientPagePermissions)pageid);
                     }
                 }
-                if (ValidateInputs(txUserApiCredsJson))
-                {
-                    JObject japi = JObject.Parse(txUserApiCredsJson.InnerText);
-                    if (EditedUser.Preferences == null)
-                        EditedUser.Preferences = new Data.UserAppPreferences();
-                    if (EditedUser.Preferences.CalendarPrefs == null)
-                        EditedUser.Preferences.CalendarPrefs = new Data.CalendarPreferences();
-                    EditedUser.Preferences.CalendarPrefs.CredentialsJsonString = japi.ToString(Newtonsoft.Json.Formatting.Indented);
-                }
+                
                 if (newUser)
                     DBController.DbAuth.Add(EditedUser);
                 else
                 {
                     DBController.DbAuth.Update(EditedUser); // edit !!!!!!
                 }
-                DBController.DbGenericData.Update(EditedUser.Preferences);
+                if (ValidateInputs(txProjectId, TxClientSecret, txClientId) && !newUser)
+                {
+                    UserGoogleApiData apiData = GetUserGoogleApiData(EditedUser.Id);
+                    apiData.installed.project_id = txProjectId.Value;
+                    apiData.installed.client_secret = TxClientSecret.Value;
+                    apiData.installed.client_id = txClientId.Value;
+                    apiData.UserId = EditedUser.Id;
+                    if (apiData.Id > 0)
+                        DBController.DbGenericData.Update(apiData);
+                    else
+                        DBController.DbGenericData.Add(apiData);
+                }
                 EditedUser = null;
                 SetInputs();
                 AlertMessage("פעולה זו בוצעה בהצלחה");
@@ -131,8 +140,6 @@ namespace WebSimplify
             }
         }
 
-      
-
         private void RefreshGridPageGrids()
         {
             cmbusers.Items.Clear();
@@ -159,7 +166,7 @@ namespace WebSimplify
             txNewFirstPassword.Value = EditedUser != null ? EditedUser.Password : string.Empty;
             txNewUserName.Value = EditedUser != null ? EditedUser.UserName : string.Empty;
             txDisplay.Value = EditedUser != null ? EditedUser.DisplayName : string.Empty;
-            txUserApiCredsJson.Value = EditedUser != null ? EditedUser.Preferences.CalendarPrefs.CredentialsJsonString : string.Empty;
+            
             foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
             {
                 int pageid = int.Parse(((HiddenField)gvr.FindControl("hfpid")).Value);
@@ -167,6 +174,21 @@ namespace WebSimplify
             }
             btnAddUser.InnerText = EditedUser != null ? "עדכן" : "הוסף";
             cmbusers.SelectedValue = EditedUser != null ? EditedUser.Id.ToString() : "-1";
+            UserGoogleApiData apiData = new UserGoogleApiData();
+            if (EditedUser != null)
+            {
+                apiData = GetUserGoogleApiData(EditedUser.Id);
+            }
+
+            txClientId.Value = EditedUser != null ? apiData.installed.client_id : string.Empty;
+            TxClientSecret.Value = EditedUser != null ? apiData.installed.client_secret : string.Empty;
+            txProjectId.Value = EditedUser != null ? apiData.installed.project_id : string.Empty;
+        }
+
+        private UserGoogleApiData GetUserGoogleApiData(int userId)
+        {
+            return DBController.DbGenericData.GetGenericData<UserGoogleApiData>(new GoogleApDataSearchParameters { UserId = userId }).FirstOrDefault() ??
+                new UserGoogleApiData(); 
         }
     }
 }

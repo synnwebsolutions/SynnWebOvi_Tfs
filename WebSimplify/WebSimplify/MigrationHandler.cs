@@ -127,6 +127,7 @@ namespace SynnWebOvi
             };
 
             t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "appuserid", FieldType = TableMigrationFieldType.Integer });
             t.Fields.Add(new TableMigrationField { FieldName = "userid", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Credentials", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000 });
 
