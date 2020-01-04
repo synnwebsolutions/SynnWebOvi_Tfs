@@ -10,7 +10,6 @@ namespace CalendarUtilities
     {
         public MyCalendarEvent CalendarEvent { get; set; }
         public string CredentialsJsonString { get; set; }
-        public string DbConnectionString { get; set; }
-        public string DbTableName { get; set; }
+        public IGoogleDataStore GoogleDataStore { get; set; }
     }
 }

@@ -124,6 +124,11 @@ namespace SynnWebOvi
         
     }
 
+    public interface IDbGoogle
+    {
+        string GetCredentialsJsonString(int userId);
+    }
+
     public interface IDbUserDictionary
     {
         void Add(DictionarySearchParameters p);

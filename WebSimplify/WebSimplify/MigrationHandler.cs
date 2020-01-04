@@ -129,6 +129,20 @@ namespace SynnWebOvi
             db.ExecurteCreateTable(t.ToString());
         }
 
+        public static void GoogleAPICredentialsTable(IDbMigration db)
+        {
+            var t = new TableMigration
+            {
+                TableName = SynnDataProvider.TableNames.GoogleAPICredentials
+            };
+
+            t.Fields = new List<TableMigrationField>();
+            t.Fields.Add(new TableMigrationField { FieldName = "userid", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "Credentials", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000 });
+
+            db.ExecurteCreateTable(t.ToString());
+        }
+
         public static void DevTasksTable(IDbMigration db)
         {
             var t = new TableMigration

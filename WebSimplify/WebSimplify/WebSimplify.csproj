@@ -165,6 +165,7 @@
       <DependentUpon>LottoPoleSelector.ascx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\SqlDbGenericData.cs" />
+    <Compile Include="DataAccess\SqlDbGoogle.cs" />
     <Compile Include="Data\Consts.cs" />
     <Compile Include="Controls\WsCalendar.ascx.cs">
       <DependentUpon>WsCalendar.ascx</DependentUpon>

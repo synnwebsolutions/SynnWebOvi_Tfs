@@ -54,18 +54,17 @@ namespace WebSimplify
 
             try
             {
-                //var irs =  GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
-                //{
-                //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
-                //    DbConnectionString = SynnDataProvider._connectionString,
-                //    DbTableName = "GoogleTokens"
-                //});
-                // var jstr = JSonUtills.ToJSonString(irs);
+                var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
+                {
+                    CredentialsJsonString = /*DBController.DbGoogle.GetCredentialsJsonString(CurrentUser.Id ), */ File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
+                   GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
+                });
+                var jstr = JSonUtills.ToJSonString(irs);
                 //GoogleCalendarExecuter.Insert(new GoogleAccountRequest
                 //{
                 //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
-                //    DbConnectionString = SynnDataProvider._connectionString,
-                //    DbTableName = "GoogleTokens",
+                //    //DbConnectionString = SynnDataProvider._connectionString,
+                //    //DbTableName = "GoogleTokens",
                 //    CalendarEvent = new MyCalendarEvent
                 //    {
                 //        BeginDate = DateTime.Now.AddMinutes(16),

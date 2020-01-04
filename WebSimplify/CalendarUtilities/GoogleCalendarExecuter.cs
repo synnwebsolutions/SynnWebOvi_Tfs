@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Json;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
@@ -108,8 +109,9 @@ namespace CalendarUtilities
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
                     "user",
-                    CancellationToken.None, new SqlDatabaseDatastore(info.DbConnectionString, info.DbTableName)).Result;
+                    CancellationToken.None, new GoogleDatabaseDataStore(info.GoogleDataStore)).Result;
             }
         }
     }
+
 }

@@ -19,7 +19,7 @@ namespace SynnWebOvi
         internal IDbMoney IDbCredit = null;
         internal IDbMigration IDbMig = null;
         internal IDbGenericData IDbGenericData = null;
-
+        internal IDbGoogle IDbGoogle = null;
         internal IDbCalendar IDbCalendar = null;
         
 
@@ -28,6 +28,16 @@ namespace SynnWebOvi
         public SqlDatabaseProvider(string _connectionString)
         {
             this._connectionString = _connectionString;
+        }
+
+        public IDbGoogle DbGoogle
+        {
+            get
+            {
+                if (IDbGoogle == null)
+                    IDbGoogle = new SqlDbGoogle(_connectionString);
+                return IDbGoogle;
+            }
         }
 
         public IDbAuth DbAuth

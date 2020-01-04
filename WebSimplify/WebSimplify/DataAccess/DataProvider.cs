@@ -28,6 +28,7 @@ namespace SynnWebOvi
         {
             public static string UserDictionary = "UserDictionary"; // user only
             public static string GoogleTokens = "GoogleTokens";
+            public static string GoogleAPICredentials = "GoogleAPICredentials";
             public static string Users = "Users";
             public static string UserPreferences = "UserPreferences";
             public static string DevTasks = "DevTasks";
@@ -73,6 +74,8 @@ namespace SynnWebOvi
         IDbMigration DbMigration { get; }
 
         IDbGenericData DbGenericData { get; }
+
+        IDbGoogle DbGoogle { get; }
     }
 
     abstract class BaseDatabaseProvider : IDatabaseProvider
@@ -82,6 +85,14 @@ namespace SynnWebOvi
         public BaseDatabaseProvider(string connectionString)
         {
             this.connString = connectionString;
+        }
+
+        public virtual IDbGoogle DbGoogle
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public virtual IDbAuth DbAuth

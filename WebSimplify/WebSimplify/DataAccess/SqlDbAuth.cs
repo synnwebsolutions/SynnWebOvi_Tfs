@@ -124,9 +124,10 @@ namespace WebSimplify
         {
             UserAppPreferences p = new UserAppPreferences();
 
-            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.UserPreferences);
+            SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.GenericData);
             ClearParameters();
-            AddSqlWhereField("UserId", userid);
+            AddSqlWhereField("GenericDataEnum", GenericDataEnum.UserAppPreferences);
+            //AddSqlWhereField("UserId", userid);
             var lst = new List<UserAppPreferencesContainer>();
             FillList(lst, typeof(UserAppPreferencesContainer));
             if (lst.NotEmpty())
