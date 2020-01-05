@@ -61,7 +61,7 @@ namespace CalendarUtilities
             });
         }
 
-        public static void Insert(GoogleAccountRequest googleRequest)
+        public static void InsertGoogleAPIEvent(GoogleAccountRequest googleRequest)
         {
             Authenticate(googleRequest);
             CalendarService service = InitService();
@@ -82,8 +82,8 @@ namespace CalendarUtilities
                     DateTime = myEvent.EndDate,
                     TimeZone = IsraelDefaultTimeZone,
                 },
-                //Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" },
-             
+                
+
                 Reminders = new Event.RemindersData()
                 {
                     UseDefault = false,
@@ -95,6 +95,8 @@ namespace CalendarUtilities
                     }
                 }
             };
+            if (!string.IsNullOrEmpty(myEvent.Frequency) && myEvent.FrequencyCount > 0)
+                newEvent.Recurrence = new String[] { $"RRULE:FREQ={myEvent.Frequency};COUNT={myEvent.FrequencyCount}" };
 
             String calendarId = "primary";
             EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);

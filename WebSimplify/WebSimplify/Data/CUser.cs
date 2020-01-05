@@ -31,6 +31,7 @@ namespace SynnWebOvi
         public List<ClientPagePermissions> AllowedClientPagePermissions { get; set; }
         
         public bool IsAdmin { get; set; }
+        public string EmailAdress { get; internal set; }
 
         public LoggedUser(string u, int i)
         {
@@ -46,6 +47,7 @@ namespace SynnWebOvi
             UserName = DataAccessUtility.LoadNullable<string>(reader, "UserName");
             Password = DataAccessUtility.LoadNullable<string>(reader, "Password");
             DisplayName = DataAccessUtility.LoadNullable<string>(reader, "DisplayName");
+            EmailAdress = DataAccessUtility.LoadNullable<string>(reader, "EmailAdress");
             string cper = DataAccessUtility.LoadNullable<string>(reader, "AllowedClientPagePermissions");
             if (string.IsNullOrEmpty(cper))
                 AllowedClientPagePermissions = new List<ClientPagePermissions>();

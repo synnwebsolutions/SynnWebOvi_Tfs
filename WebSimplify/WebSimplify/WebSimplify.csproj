@@ -146,6 +146,9 @@
     <Compile Include="AppSettingsPage.aspx.designer.cs">
       <DependentUpon>AppSettingsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BackGroundData\BackgroundWorkerBase.cs" />
+    <Compile Include="BackGroundData\BackgroundWorkerDispatcher.cs" />
+    <Compile Include="BackGroundData\CalendarItemsBackgroundWorker.cs" />
     <Compile Include="BkpWs.asmx.cs">
       <DependentUpon>BkpWs.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -166,6 +169,9 @@
     </Compile>
     <Compile Include="DataAccess\SqlDbGenericData.cs" />
     <Compile Include="DataAccess\SqlDbGoogle.cs" />
+    <Compile Include="Data\CalendarBackgroundWorkerLog.cs" />
+    <Compile Include="Data\CalendarJob.cs" />
+    <Compile Include="Data\CalendarJobsHelper.cs" />
     <Compile Include="Data\Consts.cs" />
     <Compile Include="Controls\WsCalendar.ascx.cs">
       <DependentUpon>WsCalendar.ascx</DependentUpon>
@@ -234,6 +240,7 @@
     <Compile Include="Data\Permissions.cs" />
     <Compile Include="Data\ShiftData.cs" />
     <Compile Include="DataAccess\SqlDbShifts.cs" />
+    <Compile Include="Data\SystemMailingSettings.cs" />
     <Compile Include="Data\UiTemplate.cs" />
     <Compile Include="Data\UserGoogleApiData.cs" />
     <Compile Include="Data\UserPreferences.cs" />
@@ -330,6 +337,7 @@
       <DependentUpon>Shopping.aspx</DependentUpon>
     </Compile>
     <Compile Include="StartUpManager.cs" />
+    <Compile Include="StringCipher.cs" />
     <Compile Include="SynNavigation.cs" />
     <Compile Include="SynnWebFormBase.cs">
       <SubType>ASPXCodeBehind</SubType>

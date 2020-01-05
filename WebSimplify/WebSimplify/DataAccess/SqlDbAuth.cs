@@ -100,6 +100,7 @@ namespace WebSimplify
             sqlItems.Add(new SqlItem("UserName", u.UserName));
             sqlItems.Add(new SqlItem("Password", u.Password));
             sqlItems.Add(new SqlItem("DisplayName", u.DisplayName));
+            sqlItems.Add(new SqlItem("EmailAdress", u.EmailAdress));
             sqlItems.Add(new SqlItem("AllowedClientPagePermissions", XmlHelper.ToXml(u.AllowedClientPagePermissions)));
             return sqlItems;
         }

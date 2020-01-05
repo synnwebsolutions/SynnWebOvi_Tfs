@@ -95,7 +95,7 @@ namespace WebSimplify
                 var d = (DevTaskItem)e.Row.DataItem;
                 ((Label)e.Row.FindControl("lblItemName")).Text = d.Name;
                 ((Label)e.Row.FindControl("lbltaskdesc")).Text = d.Description;
-                ((Label)e.Row.FindControl("lblStatus")).Text = d.Status.GedDescription();
+                ((Label)e.Row.FindControl("lblStatus")).Text = d.Status.GetDescription();
                 ((ImageButton)e.Row.FindControl("btnClose")).CommandArgument = d.Id.ToString();
                 ((ImageButton)e.Row.FindControl("btnEdit")).CommandArgument = d.Id.ToString();
             }

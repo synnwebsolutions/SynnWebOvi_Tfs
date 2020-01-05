@@ -10,7 +10,10 @@ namespace WebSimplify
     public enum GenericDataEnum
     {
         UserAppPreferences,
-        UserGoogleApiSettings
+        UserGoogleApiSettings,
+        CalendarBackgroundWorkerLog,
+        CalendarJob,
+        SystemMailingSettings
     }
 
     public class GenericData : IDbLoadable
@@ -37,23 +40,40 @@ namespace WebSimplify
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
 
-            //GenericDataType = (GenericDataEnum)DataAccessUtility.LoadInt32(reader, "GenericDataType");
             CreationDate = DataAccessUtility.LoadNullable<DateTime>(reader, "CreationDate");
             UpdateDate = DataAccessUtility.LoadNullable<DateTime?>(reader, "UpdateDate");
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
 
-            LoadExtraFields(reader);
+            for (int i = 0; i < GenericDataExtraFieldCount; i++)
+            {
+                var key = i.ApplyGenericDataPrefix();
+                var genericFieldValue = DataAccessUtility.LoadNullable<string>(reader, key);
+                LoadGenericFieldValue(i, genericFieldValue);
+            }
         }
 
-        public virtual void LoadExtraFields(IDataReader reader)
+        public virtual void LoadGenericFieldValue(int index, string genericFieldDbValue)
         {
             
         }
 
-        public virtual void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
+        public void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < GenericDataExtraFieldCount; i++)
+            {
+                bool addEmpty = false;
+                string genericFieldValue = GetGenericFieldValue(i, ref addEmpty);
+                if (genericFieldValue != null || addEmpty)
+                {
+                    extraFields.Add(new KeyValuePair<int, object>(i, genericFieldValue ?? string.Empty));
+                }
+            }
+        }
+
+        public virtual string GetGenericFieldValue(int i, ref bool addEmpty)
+        {
+            return null;
         }
     }
 }

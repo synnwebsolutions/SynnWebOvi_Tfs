@@ -52,7 +52,7 @@ namespace WebSimplify
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (LottoWin item in Wins)
-                    sb.AppendLine(item.GedDescription());
+                    sb.AppendLine(item.GetDescription());
                 return sb.ToString();
             }
         }
@@ -109,7 +109,7 @@ namespace WebSimplify
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (LottoWin item in Wins)
-                    sb.AppendLine(item.GedDescription());
+                    sb.AppendLine(item.GetDescription());
                 return sb.ToString();
             }
         }

@@ -30,66 +30,17 @@ namespace WebSimplify
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);
                 btnWorkHours.Visible = CurrentUser.Allowed(ClientPagePermissions.WorkHours);
                 dtShops.Visible = CurrentUser.Allowed(ClientPagePermissions.Shopping);
-                PerformTest();
+                CheckPendingJobs();
                 FillData();
             }
         }
 
-        private void PerformTest()
+        private void CheckPendingJobs()
         {
-            //var r = new CalendarPreferences
-            //{
-            //    CalendarItemsGenericSubject = "Synmn Web Solutions : Calendar File",
-            //    SystemName = "Synmn Web Solutions",
-            //    SystemEmailAddress = "synnwebsolutions@gmail.com",
-            //    SystemEmailPassword = "ns120315",
-            //    UserSharingEmails = new List<string> { "samadela@gmail.com", "noae1705@gmail.com" },
-            //    Alarms = new List<MyCalendarAlarm>
-            //    {
-            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromMinutes(-15).TotalMinutes },
-            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromHours(-3).TotalMinutes },
-            //        new MyCalendarAlarm { FromMinutes = TimeSpan.FromDays(-1).TotalMinutes },
-            //    }
-            //};
-
-            //var jstr = JSonUtills.ToJSonString(r);
-            //var rr = JSonUtills.ParseJson<CalendarPreferences>(jstr);
-
-            try
-            {
-                if (!CurrentUser.IsAdmin)
-                {
-                    var userApi = DBController.DbGenericData.GetGenericData<UserGoogleApiData>(new GoogleApDataSearchParameters { UserId = CurrentUser.Id }).FirstOrDefault() ??
-                                 new UserGoogleApiData();
-
-                    DBController.DbGoogle.AppUserId = CurrentUser.Id;
-
-                    var irs = GoogleCalendarExecuter.ListEvents(new GoogleAccountRequest
-                    {
-                        CredentialsJsonString = userApi.GenerateJsonString(), 
-                        GoogleDataStore = (IGoogleDataStore)DBController.DbGoogle
-                    });
-                    var jstr = JSonUtills.ToJSonString(irs);
-                }
-                //GoogleCalendarExecuter.Insert(new GoogleAccountRequest
-                //{
-                //    CredentialsJsonString = File.ReadAllText(@"D:\GOOGLE-PHOTOS-DATA\ACCOUNTCREDENTIALS\Accounts\Smach\credentials.json"),
-                //    //DbConnectionString = SynnDataProvider._connectionString,
-                //    //DbTableName = "GoogleTokens",
-                //    CalendarEvent = new MyCalendarEvent
-                //    {
-                //        BeginDate = DateTime.Now.AddMinutes(16),
-                //        EndDate = DateTime.Now.AddMinutes(76),
-                //        Details = "Test google api insert",
-                //        LocationText = "Rehovot,Israel",
-                //        SummaryText = "Hopefully this gonna work"
-                //    }
-                //});
-            }
-            catch (Exception ex)
-            {
-                Logger.Instance.Error(ex);
-            }
+            if (!CurrentUser.IsAdmin)
+                CalendarJobsHelper.CheckPendingJobs(DBController, CurrentUser.Id);
+           
+            
         }
 
         private void FillData()

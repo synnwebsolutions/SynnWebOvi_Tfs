@@ -19,26 +19,53 @@ namespace WebSimplify
                 return GenericDataEnum.UserGoogleApiSettings;
             }
         }
-
-        public override void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
-        {
-            extraFields.Add(new KeyValuePair<int, object>(0, UserId.ToString()));
-            if (installed == null)
-                installed = new Installed();
-            extraFields.Add(new KeyValuePair<int, object>(1, installed.project_id));
-            extraFields.Add(new KeyValuePair<int, object>(2, installed.client_id));
-            extraFields.Add(new KeyValuePair<int, object>(3, installed.client_secret));
-        }
-
-        public override void LoadExtraFields(IDataReader reader)
+        public override string GetGenericFieldValue(int i, ref bool addEmpty)
         {
             if (installed == null)
                 installed = new Installed();
-            UserId = DataAccessUtility.LoadNullable<string>(reader, 0.ApplyGenericDataPrefix()).ToInteger();
-            installed.project_id = DataAccessUtility.LoadNullable<string>(reader, 1.ApplyGenericDataPrefix());
-            installed.client_id = DataAccessUtility.LoadNullable<string>(reader, 2.ApplyGenericDataPrefix());
-            installed.client_secret = DataAccessUtility.LoadNullable<string>(reader, 3.ApplyGenericDataPrefix());
+            if (i == 0)
+            {
+                return UserId.ToString();
+            }
+            if (i == 1)
+            {
+                return installed.project_id;
+            }
+            if (i == 2)
+            {
+                return installed.client_id;
+            }
+            if (i == 3)
+            {
+                return installed.client_secret;
+            }
+            return base.GetGenericFieldValue(i, ref addEmpty);
         }
+
+        public override void LoadGenericFieldValue(int i, string genericFieldDbValue)
+        {
+            if (installed == null)
+                installed = new Installed();
+            if (i == 0)
+            {
+                UserId = genericFieldDbValue.ToInteger();
+            }
+            if (i == 1)
+            {
+                installed.project_id = genericFieldDbValue;
+            }
+            if (i == 2)
+            {
+                installed.client_id = genericFieldDbValue;
+            }
+            if (i == 3)
+            {
+                installed.client_secret = genericFieldDbValue;
+            }
+            
+            base.LoadGenericFieldValue(i, genericFieldDbValue);
+        }
+      
         public UserGoogleApiData(IDataReader data)
         {
             Load(data);
@@ -53,7 +80,7 @@ namespace WebSimplify
                 auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
                 auth_uri = "https://accounts.google.com/o/oauth2/auth",
                 token_uri = "https://oauth2.googleapis.com/token",
-                redirect_uris = new string[] { "urn:ietf:wg:oauth:2.0:oob", "http://localhost" }
+                redirect_uris = new string[] { "urn:ietf:wg:oauth:2.0:oob", "http://localhost//Diary.aspx" }
             };
         }
 

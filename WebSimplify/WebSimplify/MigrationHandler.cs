@@ -78,7 +78,7 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "DisplayName", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000 });
             t.Fields.Add(new TableMigrationField { FieldName = "Password", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 12 });
             t.Fields.Add(new TableMigrationField { FieldName = "AllowedClientPagePermissions", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000, IsNullAble = true });
-
+            t.Fields.Add(new TableMigrationField { FieldName = "EmailAdress", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000, IsNullAble = true });
             db.ExecurteCreateTable(t.ToString());
         }
 
@@ -274,9 +274,10 @@ namespace SynnWebOvi
             t.Fields.Add(new TableMigrationField { FieldName = "description", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "date", FieldType = TableMigrationFieldType.Date });
             t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
-
+            t.Fields.Add(new TableMigrationField { FieldName = "Shared", FieldType = TableMigrationFieldType.Bit });
             t.Fields.Add(new TableMigrationField { FieldName = "RepeatEvery", FieldType = TableMigrationFieldType.Integer, IsNullAble = true });
-
+            t.Fields.Add(new TableMigrationField { FieldName = "UserId", FieldType = TableMigrationFieldType.Integer });
+            
             db.ExecurteCreateTable(t.ToString());
         }
 

@@ -31,12 +31,14 @@ namespace SynnWebOvi
 
         public void Add(CalendarSearchParameters p)
         {
+            p.InsertItem.CreationDate = DateTime.Now;
             var sqlItems = new SqlItemList();
             sqlItems.Add(new SqlItem("title", p.InsertItem.title));
             sqlItems.Add(new SqlItem("description", p.InsertItem.Description));
             sqlItems.Add(new SqlItem("CreationDate", p.InsertItem.CreationDate));
             sqlItems.Add(new SqlItem("date", p.InsertItem.Date));
             sqlItems.Add(new SqlItem("RepeatEvery", p.InsertItem.RepeatEvery));
+            sqlItems.Add(new SqlItem("Shared", p.InsertItem.Shared));
             SetInsertIntoSql(SynnDataProvider.TableNames.DiaryData, sqlItems);
             ExecuteSql();
         }
@@ -61,14 +63,13 @@ namespace SynnWebOvi
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.DiaryData);
             ClearParameters();
-            if (!lsp.FromWs)
-            {
 
-                if (lsp.FromDate.HasValue)
-                    AddSqlWhereField("Date", lsp.FromDate, ">=");
-                if (lsp.ToDate.HasValue)
-                    AddSqlWhereField("Date", lsp.ToDate, "<=");
-            }
+            if (lsp.FromDate.HasValue)
+                AddSqlWhereField("Date", lsp.FromDate, ">=");
+            if (lsp.ToDate.HasValue)
+                AddSqlWhereField("Date", lsp.ToDate, "<=");
+            if (lsp.ID.HasValue)
+                AddSqlWhereField("Id", lsp.ID);
             var lst = new List<MemoItem>();
             FillList(lst, typeof(MemoItem));
             return lst;

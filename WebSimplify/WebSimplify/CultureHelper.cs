@@ -3,6 +3,7 @@ using SynnCore.Generics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -158,6 +159,12 @@ namespace WebSimplify
             return Convert.ToInt32(dd);
         }
 
+        public static bool ToBoolean(this string d)
+        {
+            var dd = d.ToInteger();
+            return Convert.ToBoolean(dd);
+        }
+
         public static bool IsInteger(this string d)
         {
             var dd = 0;
@@ -230,7 +237,7 @@ namespace WebSimplify
             return d != 0;
         }
 
-        public static string GedDescription(this Enum e)
+        public static string GetDescription(this Enum e)
         {
             return GenericFormatter.GetEnumDescription(e);
         }
@@ -270,11 +277,24 @@ namespace WebSimplify
             }
         }
 
+        public static T ParseXml<T>(this string str)
+        {
+            if (str == null)
+                throw new Exception("No Xml string to parse");
+            return XmlHelper.CreateFromXml<T>(str);
+        }
+
         public static PropertyInfo GetPropertyInfo(this object obj, string propertyName)
         {
             PropertyInfo result = obj.GetType().GetProperty(propertyName);
             return result;
         }
+
+        //public static string GetDescription(this Enum e)
+        //{
+        //    DescriptionAttribute attribute = (DescriptionAttribute)e.GetType().GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
+        //    return attribute != null ? attribute.Description : string.Empty; ;
+        //}
 
         public static void FindControlRecursive(this System.Web.UI.Control c, string cotrolToFind, ref System.Web.UI.Control resp)
         {

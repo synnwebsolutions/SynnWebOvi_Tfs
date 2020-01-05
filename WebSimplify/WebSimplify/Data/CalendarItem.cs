@@ -15,15 +15,15 @@ namespace WebSimplify
     {
         [Description("ללא חזרות")]
         None,
-        [Description("שעה")]
+        [Description("HOUR")]
         Hour,
-        [Description("יום")]
+        [Description("DAYLY")]
         Day,
-        [Description("שבוע")]
+        [Description("WEEKLY")]
         Week,
-        [Description("חודש")]
+        [Description("MONTHLY")]
         Month,
-        [Description("שנה")]
+        [Description("YEARLY")]
         Year
     }
     public class CalendarHtmlItem
@@ -148,6 +148,8 @@ namespace WebSimplify
         public DateTime Date { get; set; }
         public RepeatEvery? RepeatEvery { get; set; }
         public string Description { get; set; }
+        public bool Shared { get; set; }
+        public int UserId { get; set; }
 
         public string Display
         {
@@ -207,6 +209,8 @@ namespace WebSimplify
         public void Load(IDataReader reader)
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
+            UserId = DataAccessUtility.LoadInt32(reader, "UserId");
+            Shared = DataAccessUtility.LoadNullable<bool>(reader, "Shared");
             CreationDate = DataAccessUtility.LoadNullable<DateTime>(reader, "CreationDate");
             Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");

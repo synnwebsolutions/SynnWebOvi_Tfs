@@ -16,7 +16,9 @@ namespace CalendarUtilities
         public string FromName { get; set; }
         public string Subject { get; set; }
         public string HtmlBody { get; set; }
-        public ICredentialsByHost NetworkCredential { get; set; }
+        
         public List<MyCalendarEvent> CalendarEvents { get; set; }
+        public string NetworkCredentialUserName { get;  set; }
+        public string NetworkCredentialPassword { get;  set; }
     }
 }

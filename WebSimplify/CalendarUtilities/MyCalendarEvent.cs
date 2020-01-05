@@ -13,6 +13,9 @@ namespace CalendarUtilities
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
 
+        public string Frequency { get; set; }
+        public int FrequencyCount { get; set; }
+
         public string SummaryText
         {
             get { return Summary; }

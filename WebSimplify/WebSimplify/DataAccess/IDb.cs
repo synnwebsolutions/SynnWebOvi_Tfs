@@ -144,7 +144,6 @@ namespace SynnWebOvi
         public bool RequirePrivateKeyOnly { get; set; }
         public BaseSearchParameters()
         {
-            CurrentUser = AccountData.GetCurrentUser();
         }
     }
     public class LogSearchParameters: BaseSearchParameters
@@ -220,11 +219,14 @@ namespace SynnWebOvi
         public int? Id { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public bool? Active { get; set; }
 
         public virtual void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
         {
             if (Id.HasValue)
                 extraFields.Add(new KeyValuePair<string, object>("Id", Id.ToString()));
+            if (Active.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>("Active", Active.Value));
         }
     }
 
@@ -241,6 +243,25 @@ namespace SynnWebOvi
             base.AppendExtraFieldsValues(extraFields);
             if (UserId.HasValue)
                 extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
+        }
+    }
+
+    public class CalendarJobSearchParameters : GenericDataSearchParameters
+    {
+        public CalendarJobSearchParameters()
+        {
+            GenericDataEnum = GenericDataEnum.CalendarJob;
+        }
+        public int? UserId { get; set; }
+        public CalendarJobStatusEnum? CalendarJobStatus { get; set; }
+
+        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        {
+            base.AppendExtraFieldsValues(extraFields);
+            if (UserId.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
+            if (CalendarJobStatus.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>(1.ApplyGenericDataPrefix(), (CalendarJobStatus.Value).ToString()));
         }
     }
 
@@ -355,7 +376,7 @@ namespace SynnWebOvi
 
         public DateTime? FromDate { get;  set; }
         public DateTime? ToDate { get; set; }
-        
+        public int? ID { get; internal set; }
         internal MemoItem InsertItem { get; set; }
     }
 

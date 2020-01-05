@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace CalendarUtilities
 
             SmtpClient MailClient = new SmtpClient("smtp.gmail.com");
             MailClient.EnableSsl = true;
-            MailClient.Credentials = mailRequest.NetworkCredential;
+            MailClient.Credentials = new NetworkCredential(mailRequest.NetworkCredentialUserName, mailRequest.NetworkCredentialPassword);
             MailClient.Send(message);
         }
 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using WebSimplify;
+using WebSimplify.BackGroundData;
 
 namespace SynnWebOvi
 {
@@ -22,23 +23,33 @@ namespace SynnWebOvi
         {
             Dbl = DBController.DbLog;
             MigrationHandler.Perform();
-
+            StartBackgroundWorkers();
 #if debug
             ExcelHelper.Perform(DBController);
 #endif
+        }
+
+        BackgroundWorkerDispatcher backgroundWorker;
+        private void StartBackgroundWorkers()
+        {
+            backgroundWorker = new BackgroundWorkerDispatcher();
+            backgroundWorker.Workers.Add(new CalendarItemsBackgroundWorker { DBController = DBController });
+
+            backgroundWorker.Start();
         }
 
         public static void PerformFirstInserts(IDatabaseProvider _DBr)
         {
             try
             {
-
+                string gCf = "sdgfdsgsdw";
                 _DBr.DbAuth.Add(new LoggedUser
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions>(),
                     DisplayName = "Smach",
                     Password = "sm1234",
                     UserName = "smach",
+                    EmailAdress = "samadela@gmail.com",
                     Preferences = new WebSimplify.Data.UserAppPreferences
                     {
                     }
@@ -49,9 +60,19 @@ namespace SynnWebOvi
                     DisplayName = "Noa",
                     Password = "ns1234",
                     UserName = "noa",
+                    EmailAdress = "noae1705@gmail.com",
                     Preferences = new WebSimplify.Data.UserAppPreferences
                     {
                     }
+                });
+
+                DBController.DbGenericData.Add(new SystemMailingSettings
+                {
+                    EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
+                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315", gCf),
+                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com", gCf),
+                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com", gCf),
+                    SystemName = "מערכת העזר של אדלה"
                 });
             }
             catch (Exception ex)
@@ -104,7 +125,8 @@ namespace SynnWebOvi
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            if(backgroundWorker != null)
+                backgroundWorker.Stop();
         }
     }
 }

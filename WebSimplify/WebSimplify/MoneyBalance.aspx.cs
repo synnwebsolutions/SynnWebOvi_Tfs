@@ -95,7 +95,7 @@ namespace WebSimplify
 
                 ((Label)e.Row.FindControl("lblMonthName")).Text = d.Month.HebrewMonthName();
                 ((Label)e.Row.FindControl("lblTemplateName")).Text = t.Name;
-                ((Label)e.Row.FindControl("lblTranType")).Text = t.TransactionType.GedDescription();
+                ((Label)e.Row.FindControl("lblTranType")).Text = t.TransactionType.GetDescription();
                 var txCurrentTotal = (TextBox)e.Row.FindControl("txCurrentTotal");
                 var lblAmount = ((Label)e.Row.FindControl("lblAmount"));
                 txCurrentTotal.Text = lblAmount.Text = d.Amount.ToString();
@@ -213,7 +213,7 @@ namespace WebSimplify
                 var bal = (MoneyTransactionTemplate)e.Row.DataItem;
 
                 ((Label)e.Row.FindControl("lblTempNName")).Text = bal.Name;
-                ((Label)e.Row.FindControl("lblTempType")).Text = bal.TransactionType.GedDescription();
+                ((Label)e.Row.FindControl("lblTempType")).Text = bal.TransactionType.GetDescription();
                 ((Label)e.Row.FindControl("lblTempAmount")).Text = bal.Amount.NotZero() ? bal.Amount.FormattedString() : string.Empty;
                 ((Label)e.Row.FindControl("lblTempStartDate")).Text = bal.FromDate.IsDefault() ? string.Empty : bal.FromDate.ToShortDateString();
                 ((Label)e.Row.FindControl("lblTempEndDate")).Text = !bal.ToDate.HasValue || bal.ToDate.Value.IsDefault() ? string.Empty : bal.ToDate.Value.ToShortDateString();
