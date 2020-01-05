@@ -29,16 +29,17 @@ namespace SynnWebOvi
             return sqlItems;
         }
 
-        public void Add(CalendarSearchParameters p)
+        public void Add(MemoItem pInsertItem)
         {
-            p.InsertItem.CreationDate = DateTime.Now;
+            pInsertItem.CreationDate = DateTime.Now;
             var sqlItems = new SqlItemList();
-            sqlItems.Add(new SqlItem("title", p.InsertItem.title));
-            sqlItems.Add(new SqlItem("description", p.InsertItem.Description));
-            sqlItems.Add(new SqlItem("CreationDate", p.InsertItem.CreationDate));
-            sqlItems.Add(new SqlItem("date", p.InsertItem.Date));
-            sqlItems.Add(new SqlItem("RepeatEvery", p.InsertItem.RepeatEvery));
-            sqlItems.Add(new SqlItem("Shared", p.InsertItem.Shared));
+            sqlItems.Add(new SqlItem("title", pInsertItem.title));
+            sqlItems.Add(new SqlItem("description", pInsertItem.Description));
+            sqlItems.Add(new SqlItem("CreationDate", pInsertItem.CreationDate));
+            sqlItems.Add(new SqlItem("date", pInsertItem.Date));
+            sqlItems.Add(new SqlItem("RepeatEvery", pInsertItem.RepeatEvery));
+            sqlItems.Add(new SqlItem("Shared", pInsertItem.Shared));
+            sqlItems.Add(new SqlItem("UserId", pInsertItem.UserId));
             SetInsertIntoSql(SynnDataProvider.TableNames.DiaryData, sqlItems);
             ExecuteSql();
         }

@@ -161,8 +161,7 @@ namespace WebSimplify
 
         public static bool ToBoolean(this string d)
         {
-            var dd = d.ToInteger();
-            return Convert.ToBoolean(dd);
+            return Boolean.Parse(d);
         }
 
         public static bool IsInteger(this string d)

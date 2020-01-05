@@ -104,7 +104,7 @@ namespace SynnWebOvi
 
     public interface IDbCalendar
     {
-        void Add(CalendarSearchParameters sp);
+        void Add(MemoItem sp);
         List<QuickTask> Get(QuickTasksSearchParameters quickTasksSearchParameters);
         List<MemoItem> Get(CalendarSearchParameters sp);
         void Update(QuickTask item);
@@ -394,7 +394,6 @@ namespace SynnWebOvi
         public DateTime? FromDate { get;  set; }
         public DateTime? ToDate { get; set; }
         public int? ID { get; internal set; }
-        internal MemoItem InsertItem { get; set; }
     }
 
 }

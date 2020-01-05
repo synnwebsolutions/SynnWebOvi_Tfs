@@ -26,6 +26,15 @@ namespace WebSimplify
         [Description("YEARLY")]
         Year
     }
+
+    public enum MemoSharingEnum
+    {
+        [Description("פרטי")]
+        NO,
+        [Description("שתף")]
+        YES,
+    }
+
     public class CalendarHtmlItem
     {
         public int Day { get; set; }

@@ -13,24 +13,6 @@ namespace WebSimplify {
     public partial class Diary {
         
         /// <summary>
-        /// btnSendCalenadr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnSendCalenadr;
-        
-        /// <summary>
-        /// btnDownloadCal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadCal;
-        
-        /// <summary>
         /// txadddiarydate control.
         /// </summary>
         /// <remarks>
@@ -49,15 +31,6 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txadddiaryHour;
         
         /// <summary>
-        /// cmbRepeatEvery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbRepeatEvery;
-        
-        /// <summary>
         /// txadddiaryname control.
         /// </summary>
         /// <remarks>
@@ -74,6 +47,24 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txadddiarydesc;
+        
+        /// <summary>
+        /// cmbRepeatEvery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbRepeatEvery;
+        
+        /// <summary>
+        /// cmbShareVals control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbShareVals;
         
         /// <summary>
         /// btnadddiary control.

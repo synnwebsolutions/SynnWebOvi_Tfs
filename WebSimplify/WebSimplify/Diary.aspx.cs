@@ -55,12 +55,15 @@ namespace WebSimplify
             {
                 var c = new MemoItem
                 {
+                    UserId = CurrentUser.Id,
+                    CreationDate = DateTime.Now,
                     title = txadddiaryname.Value,
                     Description = txadddiarydesc.Value,
-                    Date = Convert.ToDateTime(txadddiarydate.Value).AddHours(txadddiaryHour.GetHours()?? 0).AddMinutes(txadddiaryHour.GetMinutes() ?? 0)
+                    Date = Convert.ToDateTime(txadddiarydate.Value).AddHours(txadddiaryHour.GetHours()?? 0).AddMinutes(txadddiaryHour.GetMinutes() ?? 0),
+                    RepeatEvery = (RepeatEvery)cmbRepeatEvery.SelectedValue.ToInteger(),
+                    Shared = cmbShareVals.SelectedValue.ToInteger() == (int)MemoSharingEnum.YES
                 };
-                var sp = new CalendarSearchParameters { InsertItem = c };
-                DBController.DbCalendar.Add(sp);
+                DBController.DbCalendar.Add(c);
                 AlertMessage("פעולה זו בוצעה בהצלחה");
                 ClearInputs(txadddiaryname, txadddiarydesc, txadddiarydate);
                 RefreshView();
@@ -82,7 +85,9 @@ namespace WebSimplify
             {
                 ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 //WsCalendar.StartDate = ActionMonth;
-                FillEnum(cmbRepeatEvery, typeof(RepeatEvery));
+                FillEnum(cmbRepeatEvery, typeof(RepeatEvery),false);
+                FillEnum(cmbShareVals, typeof(MemoSharingEnum),false);
+                btnadddiary.Disabled = CurrentUser.IsAdmin;
                 RefreshView();
             }
         }
