@@ -13,7 +13,8 @@ namespace WebSimplify
         UserGoogleApiSettings,
         CalendarBackgroundWorkerLog,
         CalendarJob,
-        SystemMailingSettings
+        SystemMailingSettings,
+        UserMemoSharingSettings
     }
 
     public class GenericData : IDbLoadable

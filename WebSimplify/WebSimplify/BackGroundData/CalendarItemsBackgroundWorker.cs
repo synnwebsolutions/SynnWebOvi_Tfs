@@ -31,8 +31,6 @@ namespace WebSimplify.BackGroundData
             }
         }
 
- 
-
         private void GenerateJobs()
         {
             foreach (var memo in memoItems)
@@ -69,6 +67,19 @@ namespace WebSimplify.BackGroundData
             job.JobStatus = CalendarJobStatusEnum.Pending;
             job.Active = true;
             DBController.DbGenericData.Add(job);
+            if (memo.Shared)
+            {
+                UserMemoSharingSettings sharingSettings = DBController.DbGenericData.GetGenericData<UserMemoSharingSettings>
+                    (new UserMemoSharingSettingsSearchParameters { OwnerUserId = memo.UserId }).FirstOrDefault();
+                if (sharingSettings != null)
+                {
+                    foreach (var sharedUser in sharingSettings.UsersToShare)
+                    {
+                        job.UserId = sharedUser;
+                        DBController.DbGenericData.Add(job);
+                    }
+                }
+            }
         }
 
         private void LoadItems()

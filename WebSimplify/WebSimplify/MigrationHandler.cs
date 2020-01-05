@@ -126,23 +126,6 @@ namespace SynnWebOvi
 
     public class MigrationItems
     {
-        //public static void T3(IDbMigration db)
-        //{
-        //var t = new TableMigration
-        //{
-        //    HasIdentity = true,
-        //    TableName = "testmigration3"
-        //};
-        //t.Fields = new List<TableMigrationField>();
-        //t.Fields.Add(new TableMigrationField { FieldName = "col1", FieldType = TableMigrationFieldType.Integer, IsNullAble = false });
-        //t.Fields.Add(new TableMigrationField { FieldName = "col2", FieldType = TableMigrationFieldType.Decimal, IsNullAble = true });
-        //t.Fields.Add(new TableMigrationField { FieldName = "col3", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
-        //t.Fields.Add(new TableMigrationField { FieldName = "col4", FieldType = TableMigrationFieldType.Text, IsNullAble = true });
-        //t.Fields.Add(new TableMigrationField { FieldName = "col5", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 500, IsNullAble = true });
-
-        //db.ExecurteCreateTable(t.ToString());
-        //}
-
         public static void GoogleTokensTable(IDbMigration db)
         {
             var t = new TableMigration

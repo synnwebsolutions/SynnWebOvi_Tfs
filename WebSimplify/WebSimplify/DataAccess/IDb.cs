@@ -247,6 +247,22 @@ namespace SynnWebOvi
         }
     }
 
+    public class UserMemoSharingSettingsSearchParameters : GenericDataSearchParameters
+    {
+        public int? OwnerUserId { get; set; }
+
+        public UserMemoSharingSettingsSearchParameters()
+        {
+            GenericDataEnum = GenericDataEnum.UserMemoSharingSettings;
+        }
+
+        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        {
+            base.AppendExtraFieldsValues(extraFields);
+            if (OwnerUserId.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), OwnerUserId.ToString()));
+        }
+    }
     public class CalendarJobSearchParameters : GenericDataSearchParameters
     {
         public CalendarJobSearchParameters()

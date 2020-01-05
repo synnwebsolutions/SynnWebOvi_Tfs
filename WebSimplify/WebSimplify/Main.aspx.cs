@@ -23,7 +23,6 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-
                 Global.PerformFirstInserts(DBController);
                 dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
@@ -39,8 +38,6 @@ namespace WebSimplify
         {
             if (!CurrentUser.IsAdmin)
                 CalendarJobsHelper.CheckPendingJobs(DBController, CurrentUser.Id);
-           
-            
         }
 
         private void FillData()

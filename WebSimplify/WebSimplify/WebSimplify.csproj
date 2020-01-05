@@ -243,6 +243,7 @@
     <Compile Include="Data\SystemMailingSettings.cs" />
     <Compile Include="Data\UiTemplate.cs" />
     <Compile Include="Data\UserGoogleApiData.cs" />
+    <Compile Include="Data\UserMemoSharingSettings.cs" />
     <Compile Include="Data\UserPreferences.cs" />
     <Compile Include="Data\WeddingGuest.cs" />
     <Compile Include="Data\DictionaryItem.cs" />

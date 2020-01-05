@@ -19,6 +19,7 @@ namespace SynnWebOvi
         public static string AdminUserName = "sami";
         public static string AdminPass = "1xfdahshbdjh]_7gdks";
         public static string FirstLoginPass = "1x2w3e4z";
+        public static string SfcC = "1x2w3e4z";
 
         public static bool ClearDb
         {
@@ -47,7 +48,6 @@ namespace SynnWebOvi
         {
             try
             {
-                string gCf = "sdgfdsgsdw";
                 _DBr.DbAuth.Add(new LoggedUser
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions>(),
@@ -74,11 +74,20 @@ namespace SynnWebOvi
                 DBController.DbGenericData.Add(new SystemMailingSettings
                 {
                     EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
-                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315", gCf),
-                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com", gCf),
-                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com", gCf),
+                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315", SfcC),
+                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com", SfcC),
+                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com", SfcC),
                     SystemName = "מערכת העזר של אדלה"
                 });
+
+                var smachUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "smach", Password = "sm1234" }).FirstOrDefault().Id;
+                var noaUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "noa", Password = "ns1234" }).FirstOrDefault().Id;
+
+                var sharingSetts = new UserMemoSharingSettings { OwnerUserId = smachUserId, UsersToShare = new List<int> { noaUserId } };
+                _DBr.DbGenericData.Add(sharingSetts);
+
+                sharingSetts = new UserMemoSharingSettings { OwnerUserId = noaUserId, UsersToShare = new List<int> { smachUserId } };
+                _DBr.DbGenericData.Add(sharingSetts);
             }
             catch (Exception ex)
             {
