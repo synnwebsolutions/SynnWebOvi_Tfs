@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -19,6 +20,10 @@ namespace SynnWebOvi
         public static string AdminPass = "1xfdahshbdjh]_7gdks";
         public static string FirstLoginPass = "1x2w3e4z";
 
+        public static bool ClearDb
+        {
+            get { return ConfigurationManager.AppSettings["ClearDb"] == "1"; }
+        }
         protected void Application_Start(object sender, EventArgs e)
         {
             Dbl = DBController.DbLog;

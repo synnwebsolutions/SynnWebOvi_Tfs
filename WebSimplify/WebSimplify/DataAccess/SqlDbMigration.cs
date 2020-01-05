@@ -23,6 +23,13 @@ namespace WebSimplify
             return res == 1;
         }
 
+        public void ClearDb(string clearDbScript)
+        {
+            SetSql(clearDbScript);
+            ClearParameters();
+            ExecuteSql();
+        }
+
         public void ExecurteCreateTable(string tsql)
         {
             ClearParameters();

@@ -117,6 +117,7 @@ namespace SynnWebOvi
         void FinishMethod(string stepName);
         bool CheckTableExistence(string tableName);
         List<string> GetAlreadyFinishedSteps();
+        void ClearDb(string clearDbScript);
     }
 
     public interface IDbGenericData
