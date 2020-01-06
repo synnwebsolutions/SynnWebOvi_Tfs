@@ -36,7 +36,7 @@ namespace WebSimplify
 
         private void CheckPendingJobs()
         {
-            if (!CurrentUser.IsAdmin)
+            if (!CurrentUser.IsAdmin &&CurrentUser.Allowed(ClientPagePermissions.Diary))
                 CalendarJobsHelper.CheckPendingJobs(DBController, CurrentUser.Id);
         }
 
