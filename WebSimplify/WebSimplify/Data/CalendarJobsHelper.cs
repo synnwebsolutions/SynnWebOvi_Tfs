@@ -11,7 +11,7 @@ namespace WebSimplify
     {
         private static IDatabaseProvider db;
         private static int uId;
-        private static UserGoogleApiData googleApiData;
+        private static UserGoogleApiData googleApiData; 
 
         internal static void CheckPendingJobs(IDatabaseProvider DBController, int userId)
         {
@@ -23,15 +23,36 @@ namespace WebSimplify
 
             foreach (var userPendingJob in userPendingJobs)
             {
-                if (userPendingJob.JobMethod == CalendarJobMethodEnum.Google)
+                try
                 {
-                    SendViaGoogleApi(userPendingJob);
+                    if (userPendingJob.JobMethod == CalendarJobMethodEnum.GoogleAPI)
+                    {
+                        SendViaGoogleApi(userPendingJob);
+                    }
+                    if (userPendingJob.JobMethod == CalendarJobMethodEnum.EMail)
+                    {
+                        SendICSFileViaEmail(userPendingJob);
+                    }
+                    if (userPendingJob.JobMethod == CalendarJobMethodEnum.DownloadICS)
+                    {
+                        DownloadICS(userPendingJob);
+                    }
                 }
-                if (userPendingJob.JobMethod == CalendarJobMethodEnum.EMail)
+                catch (Exception ex)
                 {
-                    SendICSFileViaEmail(userPendingJob);
+                    Logger.Instance.Error(ex);
+                    userPendingJob.JobStatus = CalendarJobStatusEnum.Failed;
+                    userPendingJob.UpdateDate = DateTime.Now;
+                    db.DbGenericData.Update(userPendingJob);
                 }
             }
+        }
+
+        private static void DownloadICS(CalendarJob userPendingJob)
+        {
+            var request = GenerateCalendarRequest(userPendingJob.MemoItemId);
+            CalendarEventManager.DownloadCalendarFile(HttpContext.Current, request);
+            CloseJob(userPendingJob);
         }
 
         private static void LoadApiSettings()
@@ -42,16 +63,23 @@ namespace WebSimplify
 
         private static void SendICSFileViaEmail(CalendarJob userPendingJob)
         {
-            MemoItem memo = db.DbCalendar.Get(new CalendarSearchParameters { ID = userPendingJob.MemoItemId }).FirstOrDefault();
+            var request = GenerateCalendarRequest(userPendingJob.MemoItemId);
+            CalendarEventManager.SendCalendarByMail(request);
+            CloseJob(userPendingJob);
+        }
+
+        private static CalendarRequest GenerateCalendarRequest(int memoId)
+        {
+            MemoItem memo = db.DbCalendar.Get(new CalendarSearchParameters { ID = memoId }).FirstOrDefault();
             LoggedUser user = db.DbAuth.GetUser(uId);
             var mailingSettings = db.DbGenericData.GetGenericData<SystemMailingSettings>(new GenericDataSearchParameters { GenericDataEnum = GenericDataEnum.SystemMailingSettings }).First();
-            CalendarEventManager.SendCalendarByMail(new CalendarRequest
+            return new CalendarRequest
             {
                 FromEmail = mailingSettings.SystemEmailAddress,
                 FromName = mailingSettings.SystemName,
                 NetworkCredentialPassword = mailingSettings.NetworkCredentialPassword,
                 NetworkCredentialUserName = mailingSettings.NetworkCredentialUserName,
-                Subject = mailingSettings.EmailsGenericSubject ,
+                Subject = mailingSettings.EmailsGenericSubject,
                 To = new List<string> { user.EmailAdress },
                 CalendarEvents = new List<MyCalendarEvent>
                 {
@@ -64,14 +92,15 @@ namespace WebSimplify
                         SummaryText = memo.title,
                     }
                 }
-            });
+            };
         }
 
         private static void SendViaGoogleApi(CalendarJob userPendingJob)
         {
-            try
+            LoadApiSettings();
+
+            if (googleApiData.HasData)
             {
-                LoadApiSettings();
                 MemoItem memo = db.DbCalendar.Get(new CalendarSearchParameters { ID = userPendingJob.MemoItemId }).FirstOrDefault();
                 var gar = new GoogleAccountRequest
                 {
@@ -83,7 +112,8 @@ namespace WebSimplify
                         Details = memo.Description,
                         LocationText = memo.Display,
                         SummaryText = memo.title,
-                    }
+                    },
+                    GoogleDataStore = (IGoogleDataStore)db.DbGoogle
                 };
                 if (memo.RepeatEvery.HasValue && memo.RepeatEvery.Value != RepeatEvery.None)
                 {
@@ -91,15 +121,15 @@ namespace WebSimplify
                     gar.CalendarEvent.FrequencyCount = 10;
                 }
                 GoogleCalendarExecuter.InsertGoogleAPIEvent(gar);
-                userPendingJob.JobStatus = CalendarJobStatusEnum.Closed;
-                db.DbGenericData.Update(userPendingJob);
+                CloseJob(userPendingJob);
             }
-            catch (Exception ex)
-            {
-                Logger.Instance.Error(ex);
-                userPendingJob.JobMethod = CalendarJobMethodEnum.EMail;
-                SendICSFileViaEmail(userPendingJob);
-            }
+        }
+
+        private static void CloseJob(CalendarJob userPendingJob)
+        {
+            userPendingJob.JobStatus = CalendarJobStatusEnum.Closed;
+            userPendingJob.UpdateDate = DateTime.Now;
+            db.DbGenericData.Update(userPendingJob);
         }
 
         private static void ListUserCalendarItemsViaGoogleAPI()

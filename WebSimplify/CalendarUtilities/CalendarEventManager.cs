@@ -72,15 +72,10 @@ namespace CalendarUtilities
                     Uid = Guid.NewGuid().ToString(),
                     Location = calendarEvent.LocationText,
                 };
-                foreach (MyCalendarAlarm alarm in calendarEvent.CalendarAlarms)
-                { 
-                    ca.Alarms.Add(new Alarm
-                    {
-                        Summary = alarm.Summary,
-                        Trigger = new Trigger(TimeSpan.FromMinutes(alarm.FromMinutes)),
-                        Action = AlarmAction.Display
-                    });
-                }
+                ca.Alarms.Add(new Alarm {Summary = calendarEvent.SummaryText, Trigger = new Trigger(TimeSpan.FromMinutes(-15)), Action = AlarmAction.Display });
+                ca.Alarms.Add(new Alarm { Summary = calendarEvent.SummaryText, Trigger = new Trigger(TimeSpan.FromMinutes(-180)), Action = AlarmAction.Display });
+                ca.Alarms.Add(new Alarm { Summary = calendarEvent.SummaryText, Trigger = new Trigger(TimeSpan.FromMinutes(-1440)), Action = AlarmAction.Display });
+
                 calendar.Events.Add(ca);
             }
             var serializer = new CalendarSerializer(new SerializationContext());

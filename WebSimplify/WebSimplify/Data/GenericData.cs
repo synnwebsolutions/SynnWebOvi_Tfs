@@ -23,6 +23,7 @@ namespace WebSimplify
         public const int GenericDataExtraFieldCount = 20;
 
         public virtual GenericDataEnum GenericDataType { get; }
+        
         public int Id { get;  set; }
         public DateTime? UpdateDate { get;  set; }
         public DateTime CreationDate { get;  set; }

@@ -270,6 +270,7 @@ namespace SynnWebOvi
             GenericDataEnum = GenericDataEnum.CalendarJob;
         }
         public int? UserId { get; set; }
+        public int? MemoId { get; set; }
         public CalendarJobStatusEnum? CalendarJobStatus { get; set; }
 
         public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
@@ -278,7 +279,9 @@ namespace SynnWebOvi
             if (UserId.HasValue)
                 extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
             if (CalendarJobStatus.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(1.ApplyGenericDataPrefix(), (CalendarJobStatus.Value).ToString()));
+                extraFields.Add(new KeyValuePair<string, object>(1.ApplyGenericDataPrefix(), ((int)CalendarJobStatus.Value).ToString()));
+            if (MemoId.HasValue)
+                extraFields.Add(new KeyValuePair<string, object>(3.ApplyGenericDataPrefix(), MemoId.ToString()));
         }
     }
 
@@ -392,6 +395,8 @@ namespace SynnWebOvi
         }
 
         public DateTime? FromDate { get;  set; }
+        public DateTime? FromCreationDate { get;  set; }
+        public DateTime? ToCreationDate { get; set; }
         public DateTime? ToDate { get; set; }
         public int? ID { get; internal set; }
     }

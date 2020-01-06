@@ -63,44 +63,51 @@ namespace CalendarUtilities
 
         public static void InsertGoogleAPIEvent(GoogleAccountRequest googleRequest)
         {
-            Authenticate(googleRequest);
-            CalendarService service = InitService();
-
-            MyCalendarEvent myEvent = googleRequest.CalendarEvent;
-            Event newEvent = new Event()
+            try
             {
-                Summary = myEvent.SummaryText,
-                Location = myEvent.LocationText,
-                Description = myEvent.Description,
-                Start = new EventDateTime()
-                {
-                    DateTime = myEvent.BeginDate,
-                    TimeZone = IsraelDefaultTimeZone,
-                },
-                End = new EventDateTime()
-                {
-                    DateTime = myEvent.EndDate,
-                    TimeZone = IsraelDefaultTimeZone,
-                },
-                
+                Authenticate(googleRequest);
+                CalendarService service = InitService();
 
-                Reminders = new Event.RemindersData()
+                MyCalendarEvent myEvent = googleRequest.CalendarEvent;
+                Event newEvent = new Event()
                 {
-                    UseDefault = false,
-                    Overrides = new EventReminder[] 
+                    Summary = myEvent.SummaryText,
+                    Location = myEvent.LocationText,
+                    Description = myEvent.Description,
+                    Start = new EventDateTime()
                     {
+                        DateTime = myEvent.BeginDate,
+                        TimeZone = IsraelDefaultTimeZone,
+                    },
+                    End = new EventDateTime()
+                    {
+                        DateTime = myEvent.EndDate,
+                        TimeZone = IsraelDefaultTimeZone,
+                    },
+
+
+                    Reminders = new Event.RemindersData()
+                    {
+                        UseDefault = false,
+                        Overrides = new EventReminder[]
+                        {
                         new EventReminder() { Method = "popup", Minutes = 24 * 60 },
                         new EventReminder() { Method = "popup", Minutes = 15 },
                         new EventReminder() { Method = "popup", Minutes = 3 * 60 },
+                        }
                     }
-                }
-            };
-            if (!string.IsNullOrEmpty(myEvent.Frequency) && myEvent.FrequencyCount > 0)
-                newEvent.Recurrence = new String[] { $"RRULE:FREQ={myEvent.Frequency};COUNT={myEvent.FrequencyCount}" };
+                };
+                if (!string.IsNullOrEmpty(myEvent.Frequency) && myEvent.FrequencyCount > 0)
+                    newEvent.Recurrence = new String[] { $"RRULE:FREQ={myEvent.Frequency};COUNT={myEvent.FrequencyCount}" };
 
-            String calendarId = "primary";
-            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-            Event createdEvent = request.Execute();
+                String calendarId = "primary";
+                EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                Event createdEvent = request.Execute();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private static void Authenticate(GoogleAccountRequest info)

@@ -17,8 +17,9 @@ namespace WebSimplify
 
     public enum CalendarJobMethodEnum
     {
-        Google,
-        EMail
+        GoogleAPI,
+        EMail,
+        DownloadICS
     }
 
     public class CalendarJob : GenericData

@@ -69,6 +69,12 @@ namespace SynnWebOvi
                 AddSqlWhereField("Date", lsp.FromDate, ">=");
             if (lsp.ToDate.HasValue)
                 AddSqlWhereField("Date", lsp.ToDate, "<=");
+
+            if (lsp.FromCreationDate.HasValue)
+                AddSqlWhereField("CreationDate", lsp.FromCreationDate, ">=");
+            if (lsp.ToCreationDate.HasValue)
+                AddSqlWhereField("CreationDate", lsp.ToCreationDate, "<=");
+
             if (lsp.ID.HasValue)
                 AddSqlWhereField("Id", lsp.ID);
             var lst = new List<MemoItem>();

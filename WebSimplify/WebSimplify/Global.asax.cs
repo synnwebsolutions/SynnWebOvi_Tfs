@@ -74,9 +74,9 @@ namespace SynnWebOvi
                 DBController.DbGenericData.Add(new SystemMailingSettings
                 {
                     EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
-                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315", SfcC),
-                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com", SfcC),
-                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com", SfcC),
+                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315"),
+                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
+                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
                     SystemName = "מערכת העזר של אדלה"
                 });
 

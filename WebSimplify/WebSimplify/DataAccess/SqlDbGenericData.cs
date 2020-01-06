@@ -59,6 +59,7 @@ namespace WebSimplify.DataAccess
             sqlItems.Add(new SqlItem("Description", u.Description));
             sqlItems.Add(new SqlItem("GenericDataEnum", u.GenericDataType));
             sqlItems.Add(new SqlItem("UpdateDate", u.UpdateDate));
+            sqlItems.Add(new SqlItem("GenericDataName", u.GenericDataType.ToString()));
 
             List<KeyValuePair<int, object>> extraFields = new List<KeyValuePair<int, object>>();
             u.AppendExtraFieldsValues(extraFields);

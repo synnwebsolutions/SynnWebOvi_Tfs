@@ -11,7 +11,17 @@ namespace WebSimplify.BackGroundData
 {
     public class CalendarItemsBackgroundWorker : BackgroundWorkerBase
     {
-        public override int RepeatEvery => 60000 * 15 ; // in milliseconds - 1 minute * X
+        public override int RepeatEvery //=> 60000 * 15 ; // in milliseconds - 1 minute * X
+        {
+            get
+            {
+                var minutes = 15;
+#if DEBUG
+                minutes = 1;
+#endif
+                return 60000 * minutes;
+            }
+        }
         private CalendarBackgroundWorkerLog workerLog;
         public IDatabaseProvider DBController { get; set; }
         private List<MemoItem> memoItems;
@@ -22,7 +32,8 @@ namespace WebSimplify.BackGroundData
             {
                 LoadLog();
                 LoadItems();
-                GenerateJobs();
+                GenerateNewJobs();
+                HandleExistingJobs();
                 CloseLog();
             }
             catch (Exception ex)
@@ -31,29 +42,36 @@ namespace WebSimplify.BackGroundData
             }
         }
 
-        private void GenerateJobs()
+        private void HandleExistingJobs()
+        {
+            var memoJobs = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters {});
+            foreach (var job in memoJobs)
+            {
+                if (job.JobStatus == CalendarJobStatusEnum.Failed)
+                {
+                    if (job.JobMethod == CalendarJobMethodEnum.GoogleAPI)
+                    {
+                        job.JobMethod = CalendarJobMethodEnum.EMail;
+                    }
+                    if (job.JobMethod == CalendarJobMethodEnum.EMail)
+                    {
+                        job.JobMethod = CalendarJobMethodEnum.DownloadICS;
+                    }
+                    job.JobStatus = CalendarJobStatusEnum.Pending;
+                    job.UpdateDate = DateTime.Now;
+                    DBController.DbGenericData.Update(job);
+                }
+            }
+        }
+
+        private void GenerateNewJobs()
         {
             foreach (var memo in memoItems)
             {
-                var memoJobs = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { UserId = memo.UserId });
+                var memoJobs = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { MemoId = memo.Id });
                 if (memoJobs.IsEmpty())
                 {
                     CreateNewJob(memo);
-                }
-                else
-                {
-                    foreach (var job in memoJobs)
-                    {
-                        if (job.JobStatus == CalendarJobStatusEnum.Failed)
-                        {
-                            if (job.JobMethod == CalendarJobMethodEnum.Google)
-                            {
-                                job.JobMethod = CalendarJobMethodEnum.EMail;
-                                job.JobStatus = CalendarJobStatusEnum.Pending;
-                                DBController.DbGenericData.Update(job);
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -63,10 +81,15 @@ namespace WebSimplify.BackGroundData
             CalendarJob job = new CalendarJob();
             job.UserId = memo.UserId;
             job.MemoItemId = memo.Id;
-            job.JobMethod = CalendarJobMethodEnum.Google;
+            job.JobMethod = CalendarJobMethodEnum.GoogleAPI;
             job.JobStatus = CalendarJobStatusEnum.Pending;
             job.Active = true;
             DBController.DbGenericData.Add(job);
+            ShareMemo(memo, job);
+        }
+
+        private void ShareMemo(MemoItem memo, CalendarJob job)
+        {
             if (memo.Shared)
             {
                 UserMemoSharingSettings sharingSettings = DBController.DbGenericData.GetGenericData<UserMemoSharingSettings>
@@ -84,7 +107,7 @@ namespace WebSimplify.BackGroundData
 
         private void LoadItems()
         {
-            memoItems = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = workerLog.LastRunTime });
+            memoItems = DBController.DbCalendar.Get(new CalendarSearchParameters { FromCreationDate = workerLog.LastRunTime });
         }
 
         private void LoadLog()

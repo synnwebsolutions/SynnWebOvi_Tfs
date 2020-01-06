@@ -29,15 +29,15 @@ namespace WebSimplify
             }
             if (i == 1)
             {
-                return installed.project_id;
+                return StringCipher.Encrypt(installed.project_id);
             }
             if (i == 2)
             {
-                return installed.client_id;
+                return StringCipher.Encrypt(installed.client_id);
             }
             if (i == 3)
             {
-                return installed.client_secret;
+                return StringCipher.Encrypt(installed.client_secret);
             }
             return base.GetGenericFieldValue(i, ref addEmpty);
         }
@@ -52,15 +52,18 @@ namespace WebSimplify
             }
             if (i == 1)
             {
-                installed.project_id = genericFieldDbValue;
+                if(!string.IsNullOrEmpty(genericFieldDbValue))
+                    installed.project_id = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 2)
             {
-                installed.client_id = genericFieldDbValue;
+                if (!string.IsNullOrEmpty(genericFieldDbValue))
+                    installed.client_id = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 3)
             {
-                installed.client_secret = genericFieldDbValue;
+                if (!string.IsNullOrEmpty(genericFieldDbValue))
+                    installed.client_secret = StringCipher.Decrypt(genericFieldDbValue);
             }
             
             base.LoadGenericFieldValue(i, genericFieldDbValue);
@@ -68,20 +71,34 @@ namespace WebSimplify
       
         public UserGoogleApiData(IDataReader data)
         {
+            Init();
             Load(data);
         }
 
         public int UserId { get; set; }
+        public bool HasData
+        {
+            get
+            {
+                return true;
+            }
+        }
 
         public UserGoogleApiData()
         {
-            installed = new Installed
-            {
-                auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
-                auth_uri = "https://accounts.google.com/o/oauth2/auth",
-                token_uri = "https://oauth2.googleapis.com/token",
-                redirect_uris = new string[] { "urn:ietf:wg:oauth:2.0:oob", "http://localhost//Diary.aspx" }
-            };
+            Init();
+        }
+
+        private void Init()
+        {
+            if (installed == null)
+                installed = new Installed
+                {
+                    auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
+                    auth_uri = "https://accounts.google.com/o/oauth2/auth",
+                    token_uri = "https://oauth2.googleapis.com/token",
+                    redirect_uris = new string[] { "urn:ietf:wg:oauth:2.0:oob", "http://localhost//Diary.aspx" }
+                };
         }
 
         internal string GenerateJsonString()

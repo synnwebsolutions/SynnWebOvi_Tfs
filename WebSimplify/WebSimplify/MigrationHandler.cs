@@ -479,6 +479,7 @@ namespace SynnWebOvi
             };
             t.Fields = new List<TableMigrationField>();
             t.Fields.Add(new TableMigrationField { FieldName = "GenericDataEnum", FieldType = TableMigrationFieldType.Integer });
+            t.Fields.Add(new TableMigrationField { FieldName = "GenericDataName", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 4000, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
             t.Fields.Add(new TableMigrationField { FieldName = "UpdateDate", FieldType = TableMigrationFieldType.Date, IsNullAble = true });
             t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });

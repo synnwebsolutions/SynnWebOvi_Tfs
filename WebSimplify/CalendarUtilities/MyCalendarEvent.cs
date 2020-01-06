@@ -28,13 +28,5 @@ namespace CalendarUtilities
             set { Location = value; }
         }
 
-        public List<MyCalendarAlarm> CalendarAlarms { get; set; }
-    }
-
-    public class MyCalendarAlarm 
-    {
-        //public TimeSpan FromTimeSpan { get;  set; }
-        public string Summary { get;  set; }
-        public double FromMinutes { get; set; }
     }
 }
