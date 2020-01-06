@@ -118,13 +118,16 @@ myselect::-ms-expand {
     display: none;
 }
 
+.gradient-bg{
+    background-image: -webkit-linear-gradient(0deg, black 0%, #f50a12 100%);
+
+}
 /*theme*/
 .snav {
     margin: auto;
     margin-bottom: 10px;
     width: 80%;
     align-content: center;
-    background-image: -webkit-linear-gradient(0deg, black 0%, #f50a12 100%);
 }
 
     .snav ul {
@@ -648,11 +651,11 @@ legend {
     }
 
 
-    .version-display{
+    .info-display{
         color: azure;
         /*font-style: oblique;*/
         font-weight: 100;
-        font-size: 14px;
+        font-size: 10px;
     }
 
 

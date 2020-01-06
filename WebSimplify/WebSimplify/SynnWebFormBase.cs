@@ -164,6 +164,9 @@ namespace SynnWebOvi
                     if(!navSelected)
                         ((HtmlAnchor)Master.FindControl(DefaultNavItem)).Attributes.Add("class", "active");
 
+                    (Master as WebSimplify.WebSimplify).CurrentUserName = CurrentUser.DisplayName ?? CurrentUser.UserName;
+                    (Master as WebSimplify.WebSimplify).IsAdmin = CurrentUser.IsAdmin;
+
                 }
 
                 foreach (ClientPagePermissions en in RequiredPermissions)
@@ -171,6 +174,7 @@ namespace SynnWebOvi
                     if (!CurrentUser.Allowed(en))
                         SynNavigation.Goto(Pages.Main);
                 }
+
             }
         }
 

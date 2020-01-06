@@ -50,7 +50,8 @@ namespace WebSimplify
         {
             if (i == 0)
             {
-                SystemEmailAddress = StringCipher.Decrypt(genericFieldDbValue);
+                if (genericFieldDbValue.NotEmpty())
+                    SystemEmailAddress = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 1)
             {
@@ -58,11 +59,13 @@ namespace WebSimplify
             }
             if (i == 2)
             {
-                NetworkCredentialPassword = StringCipher.Decrypt(genericFieldDbValue);
+                if (genericFieldDbValue.NotEmpty())
+                    NetworkCredentialPassword = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 3)
             {
-                NetworkCredentialUserName = StringCipher.Decrypt(genericFieldDbValue);
+                if (genericFieldDbValue.NotEmpty())
+                    NetworkCredentialUserName = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 4)
             {

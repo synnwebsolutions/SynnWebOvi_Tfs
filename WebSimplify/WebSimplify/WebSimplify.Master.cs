@@ -12,13 +12,37 @@ namespace WebSimplify
 {
     public partial class WebSimplify : System.Web.UI.MasterPage
     {
+        public string CurrentUserName
+        {
+            get;
+            set;
+        }
+
+        public bool IsAdmin { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
+           
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            SetInfoBar();
+        }
+
+        private void SetInfoBar()
+        {
             try
             {
-                //dvVrs.InnerText = $"| V. :  { Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0,5)} |";
                 dvVrs.InnerText = string.Format(dvVrs.InnerText, Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 5));
+                dvurs.InnerText = string.Format(dvurs.InnerText, CurrentUserName);
+                if (!IsAdmin)
+                {
+                    navBarR.Attributes["class"] = navBarR.Attributes["class"].ToString() + " gradient-bg";
+                }
+                //infoBar.Attributes["class"] = infoBar.Attributes["class"].ToString() + " gradient-bg";
             }
             catch (Exception ex)
             {
