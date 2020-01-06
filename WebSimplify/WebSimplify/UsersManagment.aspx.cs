@@ -80,7 +80,7 @@ namespace WebSimplify
                 EditedUser.UserName = txNewUserName.Value;
                 EditedUser.Password = txNewFirstPassword.Value;
                 EditedUser.DisplayName = txDisplay.Value;
-           
+                EditedUser.AllowedClientPagePermissions = new List<ClientPagePermissions>();
                 foreach (GridViewRow gvr in gvClientPagePermissions.Rows)
                 {
                     if (((CheckBox)gvr.FindControl("chk")).Checked)
