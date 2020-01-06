@@ -221,6 +221,8 @@ namespace SynnWebOvi
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public bool? Active { get; set; }
+        public int? FieldIndex { get; set; }
+        public string FieldIndexValue { get; set; }
 
         public virtual void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
         {

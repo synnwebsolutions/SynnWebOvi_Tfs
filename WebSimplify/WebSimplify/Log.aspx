@@ -17,19 +17,34 @@
                 CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
                 AutoGenerateColumns="false" >
                 <Columns>
-                    <asp:TemplateField HeaderText="Date">
+                      <asp:TemplateField HeaderText="מזהה משימה">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblDate"></asp:Label>
+                            <asp:Label runat="server" ID="lblId"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Message" ControlStyle-CssClass="textverrysamll">
+                    <asp:TemplateField HeaderText="משתמש">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblUser"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="כותרת" ControlStyle-CssClass="">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="lblMessage"  ></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Trace ">
+                    <asp:TemplateField HeaderText="מצב ">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblTrace" CssClass="textverrysamll"></asp:Label>
+                            <asp:Label runat="server" ID="lblStatus" CssClass=""></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                       <asp:TemplateField HeaderText="סוג ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblAction" CssClass=""></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                             <asp:TemplateField HeaderText="ת.עדכון ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblUpdate" CssClass=""></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

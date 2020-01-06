@@ -1,6 +1,7 @@
 ﻿using SynnCore.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,13 @@ namespace WebSimplify
 {
     public enum CalendarJobStatusEnum
     {
+        [Description("ממתין")]
         Pending,
+        [Description("בוטל")]
         Canceled,
+        [Description("נכשל")]
         Failed,
+        [Description("הסתיים")]
         Closed
     }
 

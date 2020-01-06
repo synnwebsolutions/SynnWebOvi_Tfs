@@ -23,6 +23,9 @@ namespace WebSimplify.DataAccess
             AddSqlWhereField("GenericDataEnum", (int)sp.GenericDataEnum);
 
 
+            if(sp.FieldIndex.HasValue)
+                AddSqlWhereField(sp.FieldIndex.Value.ApplyGenericDataPrefix(), sp.FieldIndex.Value);
+
             List<KeyValuePair<string, object>> extraFields = new List<KeyValuePair<string, object>>();
             sp.AppendExtraFieldsValues(extraFields);
             foreach (var item in extraFields)

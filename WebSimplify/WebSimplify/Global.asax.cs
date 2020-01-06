@@ -71,27 +71,42 @@ namespace SynnWebOvi
                     }
                 });
 
-                DBController.DbGenericData.Add(new SystemMailingSettings
-                {
-                    EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
-                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315"),
-                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
-                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
-                    SystemName = "מערכת העזר של אדלה"
-                });
-
-                var smachUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "smach", Password = "sm1234" }).FirstOrDefault().Id;
-                var noaUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "noa", Password = "ns1234" }).FirstOrDefault().Id;
-
-                var sharingSetts = new UserMemoSharingSettings { OwnerUserId = smachUserId, UsersToShare = new List<int> { noaUserId } };
-                _DBr.DbGenericData.Add(sharingSetts);
-
-                sharingSetts = new UserMemoSharingSettings { OwnerUserId = noaUserId, UsersToShare = new List<int> { smachUserId } };
-                _DBr.DbGenericData.Add(sharingSetts);
             }
             catch (Exception ex)
             {
                 string cc = ex.Message;
+            }
+
+            try
+            {
+                var mailingSettings = DBController.DbGenericData.GetGenericData<SystemMailingSettings>
+                    (new GenericDataSearchParameters { GenericDataEnum = GenericDataEnum.SystemMailingSettings }).FirstOrDefault();
+
+                if (mailingSettings == null)
+                {
+                    DBController.DbGenericData.Add(new SystemMailingSettings
+                    {
+                        EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
+                        NetworkCredentialPassword = StringCipher.Encrypt("ns120315"),
+                        NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
+                        SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
+                        SystemName = "מערכת העזר של אדלה"
+                    });
+
+                    var smachUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "smach", Password = "sm1234" }).FirstOrDefault().Id;
+                    var noaUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "noa", Password = "ns1234" }).FirstOrDefault().Id;
+
+                    var sharingSetts = new UserMemoSharingSettings { OwnerUserId = smachUserId, UsersToShare = new List<int> { noaUserId } };
+                    _DBr.DbGenericData.Add(sharingSetts);
+
+                    sharingSetts = new UserMemoSharingSettings { OwnerUserId = noaUserId, UsersToShare = new List<int> { smachUserId } };
+                    _DBr.DbGenericData.Add(sharingSetts);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         protected void Session_Start(object sender, EventArgs e)

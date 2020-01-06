@@ -10,6 +10,7 @@ namespace WebSimplify
     {
         public override GenericDataEnum GenericDataType => GenericDataEnum.SystemMailingSettings;
 
+        public bool Exists { get; set; }
         public string SystemEmailAddress { get; internal set; }
         public string SystemName { get; internal set; }
         public string NetworkCredentialPassword { get; internal set; }
@@ -20,7 +21,7 @@ namespace WebSimplify
         {
             if (i == 0)
             {
-                return SystemEmailAddress;
+                return StringCipher.Encrypt(SystemEmailAddress);
             }
             if (i == 1)
             {
@@ -28,15 +29,19 @@ namespace WebSimplify
             }
             if (i == 2)
             {
-                return NetworkCredentialPassword;
+                return StringCipher.Encrypt(NetworkCredentialPassword);
             }
             if (i == 3)
             {
-                return NetworkCredentialUserName;
+                return StringCipher.Encrypt(NetworkCredentialUserName);
             }
             if (i == 4)
             {
                 return EmailsGenericSubject;
+            }
+            if (i == 5)
+            {
+                return Exists.ToString();
             }
             return base.GetGenericFieldValue(i, ref addEmpty);
         }
@@ -45,7 +50,7 @@ namespace WebSimplify
         {
             if (i == 0)
             {
-                SystemEmailAddress = genericFieldDbValue;
+                SystemEmailAddress = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 1)
             {
@@ -53,15 +58,20 @@ namespace WebSimplify
             }
             if (i == 2)
             {
-                NetworkCredentialPassword = genericFieldDbValue;
+                NetworkCredentialPassword = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 3)
             {
-                NetworkCredentialUserName = genericFieldDbValue;
+                NetworkCredentialUserName = StringCipher.Decrypt(genericFieldDbValue);
             }
             if (i == 4)
             {
                 EmailsGenericSubject = genericFieldDbValue;
+            }
+            if (i == 5)
+            {
+                if(genericFieldDbValue.NotEmpty())
+                Exists = genericFieldDbValue.ToBoolean();
             }
             base.LoadGenericFieldValue(i, genericFieldDbValue);
         }

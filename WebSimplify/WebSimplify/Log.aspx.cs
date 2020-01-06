@@ -38,19 +38,28 @@ namespace WebSimplify
 
         public IEnumerable GetData()
         {
-            var lp = new LogSearchParameters() {  };
-            List<LogItem> items = DBController.DbLog.GetLogs(lp).OrderByDescending(x => x.Date).ToList();
-            return items;
+            //var lp = new LogSearchParameters() {  };
+            //List<LogItem> items = DBController.DbLog.GetLogs(lp).OrderByDescending(x => x.Date).ToList();
+            //return items;
+
+            return DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { }).OrderBy(x => x.CreationDate).ToList();
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var d = (LogItem)e.Row.DataItem;
-                ((Label)e.Row.FindControl("lblDate")).Text = d.Date.ToString(); ;
-                ((Label)e.Row.FindControl("lblMessage")).Text = d.Message.ToString();
-                ((Label)e.Row.FindControl("lblTrace")).Text = d.Trace.ToString();
+                //var d = (LogItem)e.Row.DataItem;
+                var job = (CalendarJob)e.Row.DataItem;
+                var memoItem = DBController.DbCalendar.Get(new CalendarSearchParameters { ID = job.MemoItemId }).First();
+                LoggedUser u = DBController.DbAuth.GetUser(job.UserId);
+
+                ((Label)e.Row.FindControl("lblUser")).Text = u.DisplayName;
+                ((Label)e.Row.FindControl("lblMessage")).Text = memoItem.title;
+                ((Label)e.Row.FindControl("lblStatus")).Text = job.JobStatus.GetDescription();
+                ((Label)e.Row.FindControl("lblAction")).Text = job.JobMethod.GetDescription();
+                ((Label)e.Row.FindControl("lblUpdate")).Text = job.UpdateDate.ToString();
+                ((Label)e.Row.FindControl("lblId")).Text = job.Id.ToString();
             }
         }
     }
