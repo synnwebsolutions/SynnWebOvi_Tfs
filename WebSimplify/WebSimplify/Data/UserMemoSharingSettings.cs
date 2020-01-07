@@ -8,42 +8,28 @@ namespace WebSimplify
 {
     public class UserMemoSharingSettings : GenericData
     {
-        public override GenericDataEnum GenericDataType
+        public int OwnerUserId { get; set; }
+        [GenericDataField("OwnerUserIdText", "OwnerUserId")]
+        public string OwnerUserIdText
         {
-            get
-            {
-                return GenericDataEnum.UserMemoSharingSettings;
-            }
+            get { return OwnerUserId.ToString(); }
+            set { OwnerUserId = value.ToInteger(); }
         }
 
-        public int OwnerUserId { get; set; }
         public List<int> UsersToShare { get; set; }
-        public override string GetGenericFieldValue(int i, ref bool addEmpty)
+        [GenericDataField("UsersToShareText", "UsersToShare")]
+        public string UsersToShareText
         {
-            if (i == 0)
-            {
-                return OwnerUserId.ToString();
-            }
-            if (i == 1)
+            get
             {
                 if (UsersToShare.IsEmpty())
                     UsersToShare = new List<int>();
                 return UsersToShare.ToXml();
             }
-            return base.GetGenericFieldValue(i, ref addEmpty);
-        }
-
-        public override void LoadGenericFieldValue(int i, string genericFieldDbValue)
-        {
-            if (i == 0)
+            set
             {
-                OwnerUserId = genericFieldDbValue.ToInteger();
+                UsersToShare = value.ParseXml<List<int>>();
             }
-            if (i == 1)
-            {
-                UsersToShare = genericFieldDbValue.ParseXml<List<int>>();
-            }
-            base.LoadGenericFieldValue(i, genericFieldDbValue);
         }
 
         public UserMemoSharingSettings(IDataReader data)

@@ -82,8 +82,7 @@ namespace SynnWebOvi
 
             try
             {
-                var mailingSettings = DBController.DbGenericData.GetGenericData<SystemMailingSettings>
-                    (new GenericDataSearchParameters { GenericDataEnum = GenericDataEnum.SystemMailingSettings }).FirstOrDefault();
+                var mailingSettings = DBController.DbGenericData.GetGenericData<SystemMailingSettings> (new GenericDataSearchParameters { }).FirstOrDefault();
 
                 if (mailingSettings == null)
                 {

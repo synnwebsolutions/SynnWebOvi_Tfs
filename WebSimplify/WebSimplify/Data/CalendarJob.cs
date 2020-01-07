@@ -29,54 +29,39 @@ namespace WebSimplify
 
     public class CalendarJob : GenericData
     {
-        public override GenericDataEnum GenericDataType => GenericDataEnum.CalendarJob;
 
         public int UserId { get; set; }
+        [GenericDataField("UserIdText", "UserId")]
+        public string UserIdText
+        {
+            get { return UserId.ToString(); }
+            set { UserId = value.ToInteger(); }
+        }
+
         public CalendarJobStatusEnum JobStatus { get; set; }
+        [GenericDataField("JobStatusText", "JobStatus")]
+        public string JobStatusText
+        {
+            get { return ((int)JobStatus).ToString(); }
+            set { UserId = value.ToInteger(); }
+        }
+
         public CalendarJobMethodEnum JobMethod { get; set; }
+        [GenericDataField("JobMethodText", "JobMethod")]
+        public string JobMethodText
+        {
+            get { return ((int)JobMethod).ToString(); }
+            set { JobMethod = value.ToEnum<CalendarJobMethodEnum>(); }
+        }
+
         public int MemoItemId { get; set; }
-
-        public override string GetGenericFieldValue(int i, ref bool addEmpty)
+        [GenericDataField("MemoItemIdText", "MemoItemId")]
+        public string MemoItemIdText
         {
-            if (i == 0)
-            {
-                return UserId.ToString();
-            }
-            if (i == 1)
-            {
-                return ((int)JobStatus).ToString();
-            }
-            if (i == 2)
-            {
-                return ((int)JobMethod).ToString();
-            }
-            if (i == 3)
-            {
-                return MemoItemId.ToString();
-            }
-            return base.GetGenericFieldValue(i, ref addEmpty);
+            get { return MemoItemId.ToString(); }
+            set { MemoItemId = value.ToInteger(); }
         }
 
-        public override void LoadGenericFieldValue(int i, string genericFieldDbValue)
-        {
-            if (i == 0)
-            {
-                UserId = genericFieldDbValue.ToInteger();
-            }
-            if (i == 1)
-            {
-                JobStatus = (CalendarJobStatusEnum)genericFieldDbValue.ToInteger();
-            }
-            if (i == 2)
-            {
-                JobMethod = (CalendarJobMethodEnum)genericFieldDbValue.ToInteger();
-            }
-            if (i == 3)
-            {
-                MemoItemId = genericFieldDbValue.ToInteger();
-            }
-            base.LoadGenericFieldValue(i, genericFieldDbValue);
-        }
 
         public CalendarJob(IDataReader data)
         {

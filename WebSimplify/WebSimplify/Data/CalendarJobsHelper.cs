@@ -72,7 +72,7 @@ namespace WebSimplify
         {
             MemoItem memo = db.DbCalendar.Get(new CalendarSearchParameters { ID = memoId }).FirstOrDefault();
             LoggedUser user = db.DbAuth.GetUser(uId);
-            var mailingSettings = db.DbGenericData.GetGenericData<SystemMailingSettings>(new GenericDataSearchParameters { GenericDataEnum = GenericDataEnum.SystemMailingSettings }).First();
+            var mailingSettings = db.DbGenericData.GetGenericData<SystemMailingSettings>(new GenericDataSearchParameters { }).First();
             return new CalendarRequest
             {
                 FromEmail = mailingSettings.SystemEmailAddress,

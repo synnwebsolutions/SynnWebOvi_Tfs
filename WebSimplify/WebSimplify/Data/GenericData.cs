@@ -3,27 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace WebSimplify
 {
-    public enum GenericDataEnum
-    {
-        UserAppPreferences,
-        UserGoogleApiSettings,
-        CalendarBackgroundWorkerLog,
-        CalendarJob,
-        SystemMailingSettings,
-        UserMemoSharingSettings
-    }
-
     public class GenericData : IDbLoadable
     {
-        public const string GenericDataExtraFieldPrefix = "ExtraField_";
-        public const int GenericDataExtraFieldCount = 20;
-
-        public virtual GenericDataEnum GenericDataType { get; }
-        
         public int Id { get;  set; }
         public DateTime? UpdateDate { get;  set; }
         public DateTime CreationDate { get;  set; }
@@ -47,35 +33,24 @@ namespace WebSimplify
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
 
-            for (int i = 0; i < GenericDataExtraFieldCount; i++)
+            var attribute = GetType().GetAttributes<GenericDataFieldAttribute>();
+            foreach (var item in attribute)
             {
-                var key = i.ApplyGenericDataPrefix();
-                var genericFieldValue = DataAccessUtility.LoadNullable<string>(reader, key);
-                LoadGenericFieldValue(i, genericFieldValue);
+                PropertyInfo pinfo = GetType().GetProperty(item.PropertyName);
+                var dbValue = DataAccessUtility.LoadNullable<string>(reader, item.FieldName);
+                pinfo.SetValue(this, dbValue ?? string.Empty);
             }
         }
+    }
 
-        public virtual void LoadGenericFieldValue(int index, string genericFieldDbValue)
+    public class GenericDataFieldAttribute: Attribute
+    {
+        public string FieldName { get; set; }
+        public string PropertyName { get; set; }
+        public GenericDataFieldAttribute(string propName, string fieldName)
         {
-            
-        }
-
-        public void AppendExtraFieldsValues(List<KeyValuePair<int, object>> extraFields)
-        {
-            for (int i = 0; i < GenericDataExtraFieldCount; i++)
-            {
-                bool addEmpty = false;
-                string genericFieldValue = GetGenericFieldValue(i, ref addEmpty);
-                if (genericFieldValue != null || addEmpty)
-                {
-                    extraFields.Add(new KeyValuePair<int, object>(i, genericFieldValue ?? string.Empty));
-                }
-            }
-        }
-
-        public virtual string GetGenericFieldValue(int i, ref bool addEmpty)
-        {
-            return null;
+            FieldName = fieldName;
+            PropertyName = propName;
         }
     }
 }

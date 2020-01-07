@@ -32,7 +32,7 @@ namespace SynnWebOvi
             public static string Users = "Users";
             public static string UserPreferences = "UserPreferences";
             public static string DevTasks = "DevTasks";
-            public static string GenericData = "GenericData";
+            //public static string GenericData = "GenericData";
             public static string Log = "Log";
             public static string ThemeLog = "ThemeLog";
             public static string WeddingItems = "WeddingItems"; // group

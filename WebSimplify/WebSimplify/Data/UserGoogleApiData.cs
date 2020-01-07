@@ -12,63 +12,34 @@ namespace WebSimplify
     {
         public Installed installed { get; set; }
 
-        public override GenericDataEnum GenericDataType
+        [GenericDataField("UserIdText", "UserId")]
+        public string UserIdText
         {
-            get
-            {
-                return GenericDataEnum.UserGoogleApiSettings;
-            }
-        }
-        public override string GetGenericFieldValue(int i, ref bool addEmpty)
-        {
-            if (installed == null)
-                installed = new Installed();
-            if (i == 0)
-            {
-                return UserId.ToString();
-            }
-            if (i == 1)
-            {
-                return StringCipher.Encrypt(installed.project_id);
-            }
-            if (i == 2)
-            {
-                return StringCipher.Encrypt(installed.client_id);
-            }
-            if (i == 3)
-            {
-                return StringCipher.Encrypt(installed.client_secret);
-            }
-            return base.GetGenericFieldValue(i, ref addEmpty);
+            get { return UserId.ToString(); }
+            set { UserId = value.ToInteger(); }
         }
 
-        public override void LoadGenericFieldValue(int i, string genericFieldDbValue)
+        [GenericDataField("ProjectIdText", "ProjectId")]
+        public string ProjectIdText
         {
-            if (installed == null)
-                installed = new Installed();
-            if (i == 0)
-            {
-                UserId = genericFieldDbValue.ToInteger();
-            }
-            if (i == 1)
-            {
-                if(!string.IsNullOrEmpty(genericFieldDbValue))
-                    installed.project_id = StringCipher.Decrypt(genericFieldDbValue);
-            }
-            if (i == 2)
-            {
-                if (!string.IsNullOrEmpty(genericFieldDbValue))
-                    installed.client_id = StringCipher.Decrypt(genericFieldDbValue);
-            }
-            if (i == 3)
-            {
-                if (!string.IsNullOrEmpty(genericFieldDbValue))
-                    installed.client_secret = StringCipher.Decrypt(genericFieldDbValue);
-            }
-            
-            base.LoadGenericFieldValue(i, genericFieldDbValue);
+            get { return  StringCipher.Encrypt(installed.project_id); }
+            set { installed.project_id = StringCipher.Decrypt(value); }
         }
-      
+
+        [GenericDataField("ClientSecretText", "ClientSecret")]
+        public string ClientSecretText
+        {
+            get { return StringCipher.Encrypt(installed.client_secret); }
+            set { installed.client_secret = StringCipher.Decrypt(value); }
+        }
+
+        [GenericDataField("ClientIdText", "ClientId")]
+        public string ClientIdText
+        {
+            get { return StringCipher.Encrypt(installed.client_id); }
+            set { installed.client_id = StringCipher.Decrypt(value); }
+        }
+        
         public UserGoogleApiData(IDataReader data)
         {
             Init();

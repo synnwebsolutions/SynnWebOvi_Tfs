@@ -13,13 +13,6 @@ namespace WebSimplify.Data
     [Serializable]
     public class UserAppPreferences : GenericData
     {
-        public override GenericDataEnum GenericDataType
-        {
-            get
-            {
-                return GenericDataEnum.UserAppPreferences;
-            }
-        }
 
         public UserAppPreferences()
         {
@@ -30,82 +23,59 @@ namespace WebSimplify.Data
         }
 
         public int UserId { get; set; }
-        public int CreditCardPaymentDay { get; set; }
-        public DateTime CreditLogStartDate { get; set; }
-        public DateTime BalanceLogStartDate { get; set; }
-        public WorkHoursData CurrentWorkHoursData { get; set; }
-        public WorkTime DailyRequiredWorkHours { get; set; }
-        public bool UseCharts { get; set; }
-
-        public override void LoadGenericFieldValue(int i, string genericFieldDbValue)
+        [GenericDataField("UserIdText", "UserId")]
+        public string UserIdText
         {
-            if (i == 0)
-            {
-                UserId = genericFieldDbValue.ToInteger();
-            }
-            if (i == 1)
-            {
-                CreditCardPaymentDay = genericFieldDbValue.ToInteger();
-            }
-            if (i == 2)
-            {
-                CreditLogStartDate = genericFieldDbValue.ToDateTime();
-            }
-            if (i == 3)
-            {
-                BalanceLogStartDate = genericFieldDbValue.ToDateTime();
-            }
-            if (i == 4)
-            {
-                if (genericFieldDbValue.NotEmpty())
-                {
-                    CurrentWorkHoursData = genericFieldDbValue.ParseXml<WorkHoursData>();
-                }
-            }
-            if (i == 5)
-            {
-                if (genericFieldDbValue.NotEmpty())
-                {
-                    DailyRequiredWorkHours = genericFieldDbValue.ParseXml<WorkTime>();
-                }
-            }
-            if (i == 6)
-            {
-                UseCharts = genericFieldDbValue.ToBoolean();
-            }
-            base.LoadGenericFieldValue(i, genericFieldDbValue);
+            get { return UserId.ToString(); }
+            set { UserId = value.ToInteger(); }
         }
-        public override string GetGenericFieldValue(int i, ref bool addEmpty)
+
+        public int CreditCardPaymentDay { get; set; }
+        [GenericDataField("CreditCardPaymentDayText", "CreditCardPaymentDay")]
+        public string CreditCardPaymentDayText
         {
-            if (i == 0)
-            {
-                return UserId.ToString();
-            }
-            if (i == 1)
-            {
-                return CreditCardPaymentDay.ToString();
-            }
-            if (i == 2)
-            {
-                return CreditLogStartDate.ToString();
-            }
-            if (i == 3)
-            {
-                return BalanceLogStartDate.ToString();
-            }
-            if (i == 4)
-            {
-                return CurrentWorkHoursData.ToXml() ?? new WorkHoursData().ToXml();
-            }
-            if (i == 5)
-            {
-                return DailyRequiredWorkHours.ToXml() ?? new WorkTime().ToXml();
-            }
-            if (i == 6)
-            {
-                return UseCharts.ToString();
-            }
-            return base.GetGenericFieldValue(i, ref addEmpty);
+            get { return CreditCardPaymentDay.ToString(); }
+            set { CreditCardPaymentDay = value.ToInteger(); }
+        }
+
+        public DateTime CreditLogStartDate { get; set; }
+        [GenericDataField("CreditLogStartDateText", "CreditLogStartDate")]
+        public string CreditLogStartDateText
+        {
+            get { return CreditLogStartDate.ToString(); }
+            set { CreditLogStartDate = value.ToDateTime(); }
+        }
+
+        public DateTime BalanceLogStartDate { get; set; }
+        [GenericDataField("BalanceLogStartDateText", "BalanceLogStartDate")]
+        public string BalanceLogStartDateText
+        {
+            get { return BalanceLogStartDate.ToString(); }
+            set { BalanceLogStartDate = value.ToDateTime(); }
+        }
+
+        public WorkHoursData CurrentWorkHoursData { get; set; }
+        [GenericDataField("CurrentWorkHoursDataText", "CurrentWorkHoursData")]
+        public string CurrentWorkHoursDataText
+        {
+            get { return CurrentWorkHoursData.ToXml() ?? new WorkHoursData().ToXml(); }
+            set { CurrentWorkHoursData = value.ParseXml<WorkHoursData>();  }
+        }
+
+        public WorkTime DailyRequiredWorkHours { get; set; }
+        [GenericDataField("DailyRequiredWorkHoursText", "DailyRequiredWorkHours")]
+        public string DailyRequiredWorkHoursText
+        {
+            get { return DailyRequiredWorkHours.ToXml() ?? new WorkTime().ToXml(); }
+            set { DailyRequiredWorkHours = value.ParseXml<WorkTime>(); }
+        }
+
+        public bool UseCharts { get; set; }
+        [GenericDataField("UseChartsText", "UseCharts")]
+        public string UseChartsText
+        {
+            get { return UseCharts.ToString(); }
+            set { UseCharts = value.ToBoolean(); }
         }
     }
 }

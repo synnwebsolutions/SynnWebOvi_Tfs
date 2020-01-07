@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebSimplify;
 using WebSimplify.Data;
+using WebSimplify.DataAccess;
 
 namespace SynnWebOvi
 {
@@ -216,20 +217,25 @@ namespace SynnWebOvi
 
     public class GenericDataSearchParameters : BaseSearchParameters
     {
-        public GenericDataEnum GenericDataEnum { get; set; }
         public int? Id { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public bool? Active { get; set; }
         public int? FieldIndex { get; set; }
         public string FieldIndexValue { get; set; }
+        public List<GenericDataDbFilter> Filters { get; set; }
 
-        public virtual void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        public GenericDataSearchParameters()
+        {
+            Filters = new List<GenericDataDbFilter>();
+        }
+
+        public virtual void AppendExtraFieldsValues()
         {
             if (Id.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>("Id", Id.ToString()));
+                Filters.Add(new GenericDataDbFilter("Id", Id.ToString()));
             if (Active.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>("Active", Active.Value));
+                Filters.Add(new GenericDataDbFilter("Active", Active.Value));
         }
     }
 
@@ -237,15 +243,15 @@ namespace SynnWebOvi
     {
         public GoogleApDataSearchParameters()
         {
-            GenericDataEnum = GenericDataEnum.UserGoogleApiSettings;
+            
         }
         public int? UserId { get; set; }
 
-        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        public override void AppendExtraFieldsValues()
         {
-            base.AppendExtraFieldsValues(extraFields);
+            base.AppendExtraFieldsValues();
             if (UserId.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
+                Filters.Add(new GenericDataDbFilter("UserId", UserId.ToString()));
         }
     }
 
@@ -255,35 +261,35 @@ namespace SynnWebOvi
 
         public UserMemoSharingSettingsSearchParameters()
         {
-            GenericDataEnum = GenericDataEnum.UserMemoSharingSettings;
+            
         }
 
-        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        public override void AppendExtraFieldsValues()
         {
-            base.AppendExtraFieldsValues(extraFields);
+            base.AppendExtraFieldsValues();
             if (OwnerUserId.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), OwnerUserId.ToString()));
+                Filters.Add(new GenericDataDbFilter("OwnerUserId", OwnerUserId.ToString()));
         }
     }
     public class CalendarJobSearchParameters : GenericDataSearchParameters
     {
         public CalendarJobSearchParameters()
         {
-            GenericDataEnum = GenericDataEnum.CalendarJob;
+            
         }
         public int? UserId { get; set; }
         public int? MemoId { get; set; }
         public CalendarJobStatusEnum? CalendarJobStatus { get; set; }
 
-        public override void AppendExtraFieldsValues(List<KeyValuePair<string, object>> extraFields)
+        public override void AppendExtraFieldsValues()
         {
-            base.AppendExtraFieldsValues(extraFields);
+            base.AppendExtraFieldsValues();
             if (UserId.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(0.ApplyGenericDataPrefix(), UserId.ToString()));
+                Filters.Add(new GenericDataDbFilter("", UserId.ToString()));
             if (CalendarJobStatus.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(1.ApplyGenericDataPrefix(), ((int)CalendarJobStatus.Value).ToString()));
+                Filters.Add(new GenericDataDbFilter("", ((int)CalendarJobStatus.Value).ToString()));
             if (MemoId.HasValue)
-                extraFields.Add(new KeyValuePair<string, object>(3.ApplyGenericDataPrefix(), MemoId.ToString()));
+                Filters.Add(new GenericDataDbFilter("", MemoId.ToString()));
         }
     }
 

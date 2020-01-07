@@ -159,6 +159,11 @@ namespace WebSimplify
             return Convert.ToInt32(dd);
         }
 
+        public static T ToEnum<T> (this string d) 
+        {
+            return (T)Enum.Parse(typeof(T), d, true);
+        }
+
         public static bool ToBoolean(this string d)
         {
             return Boolean.Parse(d);
@@ -258,11 +263,7 @@ namespace WebSimplify
                 return null;
             return XmlHelper.ToXml(d);
         }
-
-        public static string ApplyGenericDataPrefix(this int d)
-        {
-            return $"{GenericData.GenericDataExtraFieldPrefix}{d}";
-        }
+        
 
         public static void SetFromDbXmlField<T>(this IDataReader reader,object obj, string dbFieldName, PropertyInfo pinfo)
         {
@@ -289,11 +290,32 @@ namespace WebSimplify
             return result;
         }
 
-        //public static string GetDescription(this Enum e)
-        //{
-        //    DescriptionAttribute attribute = (DescriptionAttribute)e.GetType().GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
-        //    return attribute != null ? attribute.Description : string.Empty; ;
-        //}
+        public static List<T> GetAttributes<T>(this object obj, List<PropertyInfo> props = null)
+        {
+            //if (props != null)
+            //{
+            //    var allprops = obj.GetType().GetProperties();
+            //    foreach (var item in allprops)
+            //    {
+            //        var fieldd = item.GetAttributes<T>();
+            //        if (fieldd != null)
+            //        {
+
+            //        }
+            //    }
+            //}
+            //var res = obj.GetType().GetCustomAttributes(typeof(T), false);
+            //return res.NotEmpty() ? res.OfType<T>().ToList() : new List<T>();
+            throw new NotImplementedException();
+        }
+
+        public static List<T> GetAttributes<T>(this object obj)
+        {
+            Type atrType = typeof(T);
+            var allprops = obj.GetType().GetProperties(BindingFlags.Public);
+            var res = allprops.Where(x => x.GetCustomAttributes(atrType) != null).Select(x => x.GetCustomAttributes(atrType).OfType<T>().FirstOrDefault()).ToList();
+            return res.NotEmpty() ? res.OfType<T>().ToList() : new List<T>();
+        }
 
         public static void FindControlRecursive(this System.Web.UI.Control c, string cotrolToFind, ref System.Web.UI.Control resp)
         {

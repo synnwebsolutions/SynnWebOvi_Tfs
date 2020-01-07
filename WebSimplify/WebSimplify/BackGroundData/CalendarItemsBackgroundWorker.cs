@@ -112,7 +112,7 @@ namespace WebSimplify.BackGroundData
 
         private void LoadLog()
         {
-            workerLog = DBController.DbGenericData.GetGenericData<CalendarBackgroundWorkerLog>(new GenericDataSearchParameters { GenericDataEnum = GenericDataEnum.CalendarBackgroundWorkerLog }).FirstOrDefault();
+            workerLog = DBController.DbGenericData.GetGenericData<CalendarBackgroundWorkerLog>(new GenericDataSearchParameters{}).FirstOrDefault();
             if (workerLog == null)
             {
                 DBController.DbGenericData.Add(new CalendarBackgroundWorkerLog { LastRunTime = DateTime.Now.AddYears(-3) });

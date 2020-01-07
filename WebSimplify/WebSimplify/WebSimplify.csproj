@@ -297,6 +297,8 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MigrationHandler.cs" />
+    <Compile Include="MigrationInitItems.cs" />
+    <Compile Include="MigrationItems.cs" />
     <Compile Include="MoneyBalance.aspx.cs">
       <DependentUpon>MoneyBalance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
