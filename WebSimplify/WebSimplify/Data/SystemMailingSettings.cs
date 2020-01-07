@@ -9,14 +9,6 @@ namespace WebSimplify
     public class SystemMailingSettings : GenericData
     {
 
-        public bool Exists { get; set; }
-        [GenericDataField("ExistsText", "Exists")]
-        public string ExistsText
-        {
-            get { return Exists.ToString(); }
-            set { Exists = value.ToBoolean(); }
-        }
-
         [GenericDataField("SystemEmailAddress", "SystemEmailAddress")]
         public string SystemEmailAddress { get;  set; }
         [GenericDataField("SystemName", "SystemName")]

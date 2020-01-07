@@ -54,12 +54,15 @@ namespace WebSimplify.DataAccess
             sqlItems.Add(new SqlItem("Description", u.Description));
             sqlItems.Add(new SqlItem("UpdateDate", u.UpdateDate));
 
-            var attribute = u.GetType().GetAttributes<GenericDataFieldAttribute>();
-            foreach (var item in attribute)
+            var props = u.GetType().GetProperties();
+            foreach (var pinfo in props)
             {
-                PropertyInfo pinfo = u.GetType().GetProperty(item.PropertyName);
-                var val = pinfo.GetValue(u);
-                sqlItems.Add(new SqlItem(item.FieldName, val?? string.Empty));
+                var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
+                if (genericDataField != null)
+                {
+                    var val = pinfo.GetValue(u);
+                    sqlItems.Add(new SqlItem(genericDataField.FieldName, val ?? string.Empty));
+                }
             }
 
             return sqlItems;

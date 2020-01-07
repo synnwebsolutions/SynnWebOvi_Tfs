@@ -76,7 +76,6 @@ namespace WebSimplify
 
             if (ValidateInputs(txNewUserName))
             {
-                //LoggedUser u = new LoggedUser();
                 EditedUser.UserName = txNewUserName.Value;
                 EditedUser.Password = txNewFirstPassword.Value;
                 EditedUser.DisplayName = txDisplay.Value;

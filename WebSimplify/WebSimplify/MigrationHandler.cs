@@ -75,39 +75,49 @@ namespace SynnWebOvi
 
         private static void InitGenericTables()
         {
-            var subclassTypes = Assembly.GetAssembly(typeof(GenericData)).GetTypes().Where(t => t.IsSubclassOf(typeof(GenericData)));
-            var names = subclassTypes.Select(x => x.Name).ToList();
-            foreach (var genericItem in subclassTypes)
+            try
             {
-                if (!_DBr.DbMigration.CheckTableExistence(genericItem.Name))
+                var subclassTypes = Assembly.GetAssembly(typeof(GenericData)).GetTypes().Where(t => t.IsSubclassOf(typeof(GenericData)));
+                var names = subclassTypes.Select(x => x.Name).ToList();
+                foreach (var genericItem in subclassTypes)
                 {
-                    var t = new TableMigration
+                    if (!_DBr.DbMigration.CheckTableExistence(genericItem.Name))
                     {
-                        HasIdentity = true,
-                        TableName = genericItem.Name
-                    };
-                    t.Fields = new List<TableMigrationField>();
-
-                    t.Fields.Add(new TableMigrationField { FieldName = "Description", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 500, IsNullAble = true });
-                    t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
-                    t.Fields.Add(new TableMigrationField { FieldName = "UpdateDate", FieldType = TableMigrationFieldType.Date });
-                    t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });
-
-                    //var attribute = (GenericDataFieldAttribute[])genericItem.GetType().GetCustomAttributes(typeof(GenericDataFieldAttribute), false);
-                    var attribute = genericItem.GetAttributes<GenericDataFieldAttribute>();
-                    if (attribute.NotEmpty())
-                    {
-                        foreach (var gField in attribute)
+                        var t = new TableMigration
                         {
-                            t.Fields.Add(new TableMigrationField { FieldName = gField.FieldName,
-                                FieldType = TableMigrationFieldType.NVarchar,
-                                FieldLLenght = 500,
-                                IsNullAble = true });
-                        }
-                    }
+                            HasIdentity = true,
+                            TableName = genericItem.Name
+                        };
+                        t.Fields = new List<TableMigrationField>();
 
-                    _DBr.DbMigration.ExecurteCreateTable(t.ToString());
+                        t.Fields.Add(new TableMigrationField { FieldName = "Description", FieldType = TableMigrationFieldType.NVarchar, FieldLLenght = 500, IsNullAble = true });
+                        t.Fields.Add(new TableMigrationField { FieldName = "CreationDate", FieldType = TableMigrationFieldType.Date });
+                        t.Fields.Add(new TableMigrationField { FieldName = "UpdateDate", FieldType = TableMigrationFieldType.Date });
+                        t.Fields.Add(new TableMigrationField { FieldName = "Active", FieldType = TableMigrationFieldType.Bit });
+
+                        var properties = genericItem.GetProperties();
+                        foreach (var propertyInfo in properties)
+                        {
+                            var genericDataField = ((GenericDataFieldAttribute[])propertyInfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
+                            if (genericDataField.NotNull())
+                            {
+                                t.Fields.Add(new TableMigrationField
+                                {
+                                    FieldName = genericDataField.FieldName,
+                                    FieldType = TableMigrationFieldType.NVarchar,
+                                    FieldLLenght = 500,
+                                    IsNullAble = true
+                                });
+                            }
+                        }
+
+                        _DBr.DbMigration.ExecurteCreateTable(t.ToString());
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                string exx = ex.Message;
             }
         }
     }

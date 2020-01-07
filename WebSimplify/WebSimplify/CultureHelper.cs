@@ -290,32 +290,11 @@ namespace WebSimplify
             return result;
         }
 
-        public static List<T> GetAttributes<T>(this object obj, List<PropertyInfo> props = null)
-        {
-            //if (props != null)
-            //{
-            //    var allprops = obj.GetType().GetProperties();
-            //    foreach (var item in allprops)
-            //    {
-            //        var fieldd = item.GetAttributes<T>();
-            //        if (fieldd != null)
-            //        {
-
-            //        }
-            //    }
-            //}
-            //var res = obj.GetType().GetCustomAttributes(typeof(T), false);
-            //return res.NotEmpty() ? res.OfType<T>().ToList() : new List<T>();
-            throw new NotImplementedException();
-        }
-
-        public static List<T> GetAttributes<T>(this object obj)
-        {
-            Type atrType = typeof(T);
-            var allprops = obj.GetType().GetProperties(BindingFlags.Public);
-            var res = allprops.Where(x => x.GetCustomAttributes(atrType) != null).Select(x => x.GetCustomAttributes(atrType).OfType<T>().FirstOrDefault()).ToList();
-            return res.NotEmpty() ? res.OfType<T>().ToList() : new List<T>();
-        }
+        //public static T GetAttribute<T>(this PropertyInfo prop)
+        //{
+        //    var genericDataField = prop.GetCustomAttributes(typeof(T), true).FirstOrDefault();
+        //    return genericDataField;
+        //}
 
         public static void FindControlRecursive(this System.Web.UI.Control c, string cotrolToFind, ref System.Web.UI.Control resp)
         {

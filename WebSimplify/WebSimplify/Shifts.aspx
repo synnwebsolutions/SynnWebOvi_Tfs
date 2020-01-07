@@ -48,6 +48,11 @@
                             <asp:Label runat="server" ID="lblDate"  ></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                            <asp:TemplateField HeaderText="יום" ControlStyle-CssClass="">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblDay"  ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                       <asp:TemplateField HeaderText=" משמרת">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="lblShift"></asp:Label>

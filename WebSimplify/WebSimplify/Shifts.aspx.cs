@@ -59,7 +59,7 @@ namespace WebSimplify
                 ToDate =  DateTime.Now.EndOfMonth().Date
             });
     
-            return dbData;
+            return dbData.OrderBy(x => x.Date);
         }
 
         protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -121,6 +121,7 @@ namespace WebSimplify
                 var shift = (ShiftDayData)e.Row.DataItem;
 
                 ((Label)e.Row.FindControl("lblDate")).Text = shift.Date.ToShortDateString();
+                ((Label)e.Row.FindControl("lblDay")).Text = shift.Date.HebrewDay();
                 ((Label)e.Row.FindControl("lblShift")).Text = shift.DaylyShift.GetDescription(); ;
             }
         }

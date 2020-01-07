@@ -33,12 +33,15 @@ namespace WebSimplify
             Active = DataAccessUtility.LoadNullable<bool>(reader, "Active");
             Description = DataAccessUtility.LoadNullable<string>(reader, "Description");
 
-            var attribute = GetType().GetAttributes<GenericDataFieldAttribute>();
-            foreach (var item in attribute)
+            var props = GetType().GetProperties();
+            foreach (var pinfo in props)
             {
-                PropertyInfo pinfo = GetType().GetProperty(item.PropertyName);
-                var dbValue = DataAccessUtility.LoadNullable<string>(reader, item.FieldName);
-                pinfo.SetValue(this, dbValue ?? string.Empty);
+                var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
+                if (genericDataField != null)
+                {
+                    var dbValue = DataAccessUtility.LoadNullable<string>(reader, genericDataField.FieldName);
+                    pinfo.SetValue(this, dbValue ?? string.Empty);
+                }
             }
         }
     }
