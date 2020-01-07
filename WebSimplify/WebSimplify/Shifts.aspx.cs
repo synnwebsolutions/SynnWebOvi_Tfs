@@ -44,38 +44,20 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                //WsCalendar.StartDate = DateTime.Now.StartOfWeek();
                 RefreshView();
             }
         }
 
-        public List<XCalendarItem> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
+        public List<ShiftDayData> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
         {
-            var d = new List<XCalendarItem>();
             var dbData = DBController.DbShifts.GetShifts(new ShiftsSearchParameters
             {
                 FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
                 ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date
-            }).Select(x => x as ICalendarItem).ToList();
-            foreach (var dbitem in dbData)
-                d.Add(new XCalendarItem { Date = dbitem.Date, Text = dbitem.Display });
-            return d;
+            });
+    
+            return dbData;
         }
-
-        //[WebMethod]
-        //[ScriptMethod()]
-        //public static void PerformDelete(string btnidentifier)
-        //{
-        //    try
-        //    {
-        //        var id = Convert.ToInt32(btnidentifier.Replace("btndlt", string.Empty));
-        //        DBController.DbShifts.Delete(id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string msg = ex.Message;
-        //    }
-        //}
 
         protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -126,7 +108,6 @@ namespace WebSimplify
         private void RefreshView()
         {
             RefreshGrid(gvAdd);
-            //WsCalendar.RefreshView();
         }
     }
 }

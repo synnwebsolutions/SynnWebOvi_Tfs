@@ -88,7 +88,7 @@ namespace WebSimplify
             }
 #endif
             if (xu == Global.AdminUserName && xp == Global.AdminPass)
-                CurrentUser = new LoggedUser("Smachew", 0);
+                CurrentUser = new LoggedUser("Smachew", 0) {  DisplayName = "Administrator"};
             else
             {
                 if (DBController.DbAuth.ValidateUserCredentials(xu, xp))

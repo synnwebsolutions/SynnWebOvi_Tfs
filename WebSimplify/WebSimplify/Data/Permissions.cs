@@ -35,6 +35,7 @@ namespace WebSimplify
         [PageLink("navmonbal")]
         [Description(@" מעקב הוצאות\הכנסות")]
         MoneyBalance,
+        [PageLink("navdev")]
         [Description("מנהל משימות פיתוח")]
         SysDev,
         [PageLink("navlog")]

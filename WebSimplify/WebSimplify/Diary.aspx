@@ -1,11 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Diary.aspx.cs" Inherits="WebSimplify.Diary" %>
 
-<%@ Register Src="~/Controls/WsCalendar.ascx" TagPrefix="uc1" TagName="WsCalendar" %>
-<%@ Register Src="~/Controls/xCalendar.ascx" TagPrefix="uc1" TagName="xCalendar" %>
-
-
-<%--<%@ Register Src="~/Controls/WsSlider.ascx" TagPrefix="uc1" TagName="WsSlider" %>--%>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -43,15 +37,5 @@
         <button class="sbutton sbutton-sm" type="button" id="btnadddiary" runat="server" onserverclick="btnadddiary_ServerClick">הוסף</button>
 
     </div>
-
-
-    <div class="spanel">
-        <div class="row">
-            <div class="col-12">
-                <uc1:xCalendar runat="server" ID="xCalendar" DisplayMode="Month" GetDataSourceMethodName="GetCalendarItems" ShowSelector="true" />
-            </div>
-        </div>
-    </div>
-
 
 </asp:Content>

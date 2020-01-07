@@ -36,7 +36,7 @@ namespace WebSimplify
         {
             try
             {
-                dvVrs.InnerText = string.Format(dvVrs.InnerText, Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, 5));
+                dvVrs.InnerText = string.Format(dvVrs.InnerText, Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 dvurs.InnerText = string.Format(dvurs.InnerText, CurrentUserName);
                 if (!IsAdmin)
                 {

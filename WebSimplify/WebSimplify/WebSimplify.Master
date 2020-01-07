@@ -33,6 +33,7 @@
                 <li><a class="xpage" href="Shopping.aspx" id="navshop" runat="server">קניות</a></li>
                 <li><a class="xpage" href="AppSettingsPage.aspx" id="navsys" runat="server">העדפות משתמש</a></li>
                 <li><a class="xpage" href="UsersManagment.aspx" id="navusers" runat="server">משתמשים</a></li>
+                <li><a class="xpage" href="DevTasks.aspx" id="navDev" runat="server"> פיתוח</a></li>
                 <li><a class="xpage" href="Log.aspx" id="navlog" runat="server">יומן מערכת</a></li>
                 <li><a href="#" id="nvLogout" runat="server" onserverclick="nvLogout_ServerClick">יציאה </a></li>
             </ul>

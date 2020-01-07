@@ -32,16 +32,12 @@ namespace WebSimplify
         internal override string GetGridSourceMethodName(string gridId)
         {
             if (gridId == gv.ID)
-                return "GetData";
+                return "GetCalendar";
             return base.GetGridSourceMethodName(gridId);
         }
 
-        public IEnumerable GetData()
+        public IEnumerable GetCalendar()
         {
-            //var lp = new LogSearchParameters() {  };
-            //List<LogItem> items = DBController.DbLog.GetLogs(lp).OrderByDescending(x => x.Date).ToList();
-            //return items;
-
             return DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { }).OrderBy(x => x.CreationDate).ToList();
         }
 
