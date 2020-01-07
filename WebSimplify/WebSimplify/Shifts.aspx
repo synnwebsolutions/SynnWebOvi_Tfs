@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSimplify.Master" AutoEventWireup="true" CodeBehind="Shifts.aspx.cs" Inherits="WebSimplify.Shifts" %>
 
-<%@ Register Src="~/Controls/WsCalendar.ascx" TagPrefix="uc1" TagName="WsCalendar" %>
-<%@ Register Src="~/Controls/xCalendar.ascx" TagPrefix="uc1" TagName="xCalendar" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -11,9 +8,7 @@
 
     <div class="row">
         <div class="col-3"></div>
-
         <div class="spanel spanelmin col-6">
-
             <div class="sgridcontainer spanel">
                 <asp:GridView ID="gvAdd" runat="server"
                     OnRowDataBound="gvAdd_RowDataBound" CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
@@ -39,17 +34,30 @@
                 </asp:GridView>
             </div>
         </div>
-
-
         <div class="col-3"></div>
     </div>
-
      <div class="spanel">
-      
-        <div class="row">
-            <div class="col-12">
-                <uc1:xCalendar runat="server" ID="xCalendar" DisplayMode="TwoWeek" GetDataSourceMethodName="GetCalendarItems" />
-            </div>
+        <div class="sgridcontainer">
+            <asp:GridView ID="gvShifts" runat="server"
+                OnRowDataBound="gvShifts_RowDataBound" 
+                CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                AutoGenerateColumns="false" >
+                <Columns>
+                    <asp:TemplateField HeaderText="תאריך" ControlStyle-CssClass="">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblDate"  ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                      <asp:TemplateField HeaderText=" משמרת">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblShift"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
         </div>
+    </div>
+    <div class="row">
+     
     </div>
 </asp:Content>

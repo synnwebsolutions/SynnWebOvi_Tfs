@@ -17,12 +17,10 @@ namespace WebSimplify
 
         }
 
-        public void Save(ShiftsSearchParameters sp)
+        public void Save(ShiftDayData i)
         {
-            var i = sp.ItemForAction;
             var sqlItems = new SqlItemList();
             sqlItems.Add(new SqlItem("Date",i.Date));
-            sqlItems.Add(new SqlItem("OwnerId", sp.CurrentUser.Id));
             sqlItems.Add(new SqlItem("DaylyShift", (int)i.DaylyShift));
             SetInsertIntoSql(SynnDataProvider.TableNames.ShiftsData, sqlItems);
             ExecuteSql();
@@ -33,13 +31,11 @@ namespace WebSimplify
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.ShiftsData);
             ClearParameters();
-            if (!lsp.FromWs)
-            {
+        
                 if (lsp.FromDate.HasValue)
                     AddSqlWhereField("Date", lsp.FromDate, ">=");
                 if (lsp.ToDate.HasValue)
                     AddSqlWhereField("Date", lsp.ToDate, "<");
-            }
             if (lsp.IDate.HasValue)
                 AddSqlWhereField("Date", lsp.IDate);
 

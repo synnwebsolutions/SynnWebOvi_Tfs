@@ -93,7 +93,7 @@ namespace SynnWebOvi
 
     public interface IDbShifts
     {
-        void Save(ShiftsSearchParameters sp);
+        void Save(ShiftDayData sp);
         List<ShiftDayData> GetShifts(ShiftsSearchParameters shiftsSearchParameters);
         void Delete(int id);
         List<WorkHoursData> GetWorkHoursData(WorkHoursSearchParameters workHoursSearchParameters);

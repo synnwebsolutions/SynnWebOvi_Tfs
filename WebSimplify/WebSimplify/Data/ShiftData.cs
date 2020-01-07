@@ -11,6 +11,16 @@ using WebSimplify.Controls;
 
 namespace WebSimplify.Data
 {
+    public enum ShiftTime
+    {
+        [Description("בוקר")]
+        Morning,
+        [Description("ערב")]
+        Noon,
+        [Description("לילה")]
+        Night
+    }
+
     [Serializable]
     public class ShiftDayData : IDbLoadable, IMarkAble, ICalendarItem
     {
@@ -80,21 +90,7 @@ namespace WebSimplify.Data
         {
             Id = DataAccessUtility.LoadInt32(reader, "Id");
             Date = DataAccessUtility.LoadNullable<DateTime>(reader, "Date");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
-            OwnerId = DataAccessUtility.LoadInt32(reader, "OwnerId");
             DaylyShift = (ShiftTime)DataAccessUtility.LoadInt32(reader, "DaylyShift");
         }
     }
-
-    public enum ShiftTime
-    {
-        [Description("בוקר")]
-        Morning,
-        [Description("ערב")]
-        Noon,
-        [Description("לילה")]
-        Night
-    }
-
-
 }

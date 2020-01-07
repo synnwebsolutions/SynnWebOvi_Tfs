@@ -297,7 +297,6 @@ namespace SynnWebOvi
             };
 
             t.Fields = new List<TableMigrationField>();
-            t.Fields.Add(new TableMigrationField { FieldName = "OwnerId", FieldType = TableMigrationFieldType.Integer });
             t.Fields.Add(new TableMigrationField { FieldName = "DaylyShift", FieldType = TableMigrationFieldType.Integer });
             t.Fields.Add(new TableMigrationField { FieldName = "Date", FieldType = TableMigrationFieldType.Date });
 

@@ -1,6 +1,7 @@
 ﻿using SynnCore.Generics;
 using SynnWebOvi;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,8 @@ namespace WebSimplify
         {
             if (gridId == gvAdd.ID)
                 return DummyMethodName;
+            if (gridId == gvShifts.ID)
+                return "GetShiftItems";
             return base.GetGridSourceMethodName(gridId);
         }
 
@@ -48,12 +51,12 @@ namespace WebSimplify
             }
         }
 
-        public List<ShiftDayData> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
+        public IEnumerable GetShiftItems()
         {
             var dbData = DBController.DbShifts.GetShifts(new ShiftsSearchParameters
             {
-                FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
-                ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date
+                FromDate = DateTime.Now.StartOfMonth().Date,
+                ToDate =  DateTime.Now.EndOfMonth().Date
             });
     
             return dbData;
@@ -94,7 +97,7 @@ namespace WebSimplify
                 var exsistingShifts = DBController.DbShifts.GetShifts(new ShiftsSearchParameters { IDate = d.Date, DaylyShiftTime = d.DaylyShift });
                 if (exsistingShifts.IsEmptyOrNull())
                 {
-                    DBController.DbShifts.Save(new ShiftsSearchParameters { ItemForAction = d });
+                    DBController.DbShifts.Save(d);
                     AlertMessage("פעולה זו בוצעה בהצלחה");
                 }
                 RefreshView();
@@ -108,6 +111,18 @@ namespace WebSimplify
         private void RefreshView()
         {
             RefreshGrid(gvAdd);
+            RefreshGrid(gvShifts);
+        }
+
+        protected void gvShifts_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var shift = (ShiftDayData)e.Row.DataItem;
+
+                ((Label)e.Row.FindControl("lblDate")).Text = shift.Date.ToShortDateString();
+                ((Label)e.Row.FindControl("lblShift")).Text = shift.DaylyShift.GetDescription(); ;
+            }
         }
     }
 }
