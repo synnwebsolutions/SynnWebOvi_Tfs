@@ -5,12 +5,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader">יומן</div>
-    <div class="menubuttoncontainer">
-       <%-- <button class="menubutton" type="button" id="btnSendCalenadr" runat="server" onserverclick="btnSendCalenadr_ServerClick">שלח יומן</button>
-        <button class="menubutton" type="button" id="btnDownloadCal" runat="server" onserverclick="btnDownloadCal_ServerClick">הורד יומן</button>--%>
-    </div>
 
-    <div class="row">
+    <div>
+        <div class="row">
+            <div class="col-2">
+                <button class="menubutton" type="button" id="btnToggleState" runat="server" onserverclick="btnToggleState_ServerClick">  </button>
+            </div>
+            <div class="col-10">
+            </div>
+        </div>
+
+        <div class="row" id="dvInsert" runat="server" visible="false">
         <div class="spanel spanelmin col-12">
             <div class="spanelHeader">הוספה ליומן    <i class="fa fa-address-card"></i></div>
         </div>
@@ -36,6 +41,56 @@
         </div>
         <button class="sbutton sbutton-sm" type="button" id="btnadddiary" runat="server" onserverclick="btnadddiary_ServerClick">הוסף</button>
 
+    </div>
+
+        <div class="row" id="dvDisplay" runat="server">
+    <div class="spanel">
+        <div class="sgridcontainer">
+            <asp:GridView ID="gvDiaryItems" runat="server"
+                OnRowDataBound="gvDiaryItems_RowDataBound" 
+                CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
+                AutoGenerateColumns="false" >
+                <Columns>
+                    <asp:TemplateField HeaderText="כותרת" ControlStyle-CssClass="">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblMessage"  ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                      <asp:TemplateField HeaderText=" תיאור">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblId"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="תאריך יעד">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblDate"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="מצב ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblStatus" CssClass=""></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                       <asp:TemplateField HeaderText="סוג ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblAction" CssClass=""></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                             <asp:TemplateField HeaderText="ת.עדכון ">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblUpdate" CssClass=""></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText=" משתמש">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblUser"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    </div>
+        </div>
     </div>
 
 </asp:Content>

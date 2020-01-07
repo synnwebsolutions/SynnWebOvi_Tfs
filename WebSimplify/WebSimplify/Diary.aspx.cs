@@ -26,25 +26,29 @@ namespace WebSimplify
                 return l;
             }
         }
-        public DateTime ActionMonth
+
+        public IEnumerable GetCalendarItems()
         {
-            get
+            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date });
+            return dbData.OrderBy(x => x.Date).ToList();
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            if (dvDisplay.Visible)
             {
-                return (DateTime)GetFromSession("cMonth");
-            }
-            set
-            {
-                StoreInSession("cMonth", value);
+                RefreshGrid(gvDiaryItems);
+                gvDiaryItems.Columns[gvDiaryItems.Columns.Count - 1].Visible = CurrentUser.IsAdmin;
             }
         }
 
-        public List<MemoItem> GetCalendarItems(DateTime? StartDate = null, DateTime? EndDate = null)
+        internal override string GetGridSourceMethodName(string gridId)
         {
-            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = StartDate.HasValue ? StartDate.Value.Date : DateTime.Now.StartOfMonth().Date,
-                ToDate = EndDate.HasValue ? EndDate.Value.Date : DateTime.Now.EndOfMonth().Date });
-            return dbData;
+            if (gridId == gvDiaryItems.ID)
+                return "GetCalendarItems";
+            return base.GetGridSourceMethodName(gridId);
         }
-
 
         protected void btnadddiary_ServerClick(object sender, EventArgs e)
         {
@@ -75,11 +79,47 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                ActionMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                FillEnum(cmbRepeatEvery, typeof(RepeatEvery),false);
-                FillEnum(cmbShareVals, typeof(MemoSharingEnum),false);
+                FillEnum(cmbRepeatEvery, typeof(RepeatEvery), false);
+                FillEnum(cmbShareVals, typeof(MemoSharingEnum), false);
                 btnadddiary.Disabled = CurrentUser.IsAdmin;
+                SetToggleTitle();
             }
+        }
+
+        private void SetToggleTitle()
+        {
+            btnToggleState.InnerText = !dvInsert.Visible ? "הוספה" : "צפייה";
+        }
+
+        protected void gvDiaryItems_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //var d = (LogItem)e.Row.DataItem;
+                var memoItem = (MemoItem)e.Row.DataItem;
+                var job = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { MemoId = memoItem.Id }).FirstOrDefault();
+                LoggedUser u = DBController.DbAuth.GetUser(job.UserId);
+
+                ((Label)e.Row.FindControl("lblDate")).Text = memoItem.Date.ToString();
+                ((Label)e.Row.FindControl("lblMessage")).Text = memoItem.title;
+                ((Label)e.Row.FindControl("lblStatus")).Text =job != null ?(job.JobStatus == CalendarJobStatusEnum.Closed ? "נרשם בהצלחה" : job?.JobStatus.GetDescription()) : string.Empty;
+                ((Label)e.Row.FindControl("lblAction")).Text = job?.JobMethod.GetDescription();
+                ((Label)e.Row.FindControl("lblUpdate")).Text = job?.UpdateDate.ToString();
+                ((Label)e.Row.FindControl("lblId")).Text = memoItem.Description.ToString();
+                ((Label)e.Row.FindControl("lblUser")).Text = u.DisplayName;
+            }
+        }
+
+        protected void btnToggleState_ServerClick(object sender, EventArgs e)
+        {
+            ChangeView();
+        }
+
+        private void ChangeView()
+        {
+            dvInsert.Visible = !dvInsert.Visible;
+            dvDisplay.Visible = !dvDisplay.Visible;
+            SetToggleTitle();
         }
     }
 }
