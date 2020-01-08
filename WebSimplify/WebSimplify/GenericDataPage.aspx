@@ -28,8 +28,9 @@
 
     <div class="spanel">
         <div class="sgridcontainer">
-            <asp:GridView ID="gv" runat="server"
-                AllowPaging="true"  
+            <asp:GridView ID="gv" runat="server" EmptyDataText="No Record Found" 
+                AllowPaging="true" AutoGenerateEditButton="true" EditRowStyle-BackColor="Tomato" OnRowUpdating="gv_RowUpdating"
+                OnRowEditing="gv_RowEditing" OnRowUpdated="gv_RowUpdated"  OnRowCancelingEdit="gv_RowCancelingEdit"
                 CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%"
                 AutoGenerateColumns="true">
                 <Columns> </Columns>
