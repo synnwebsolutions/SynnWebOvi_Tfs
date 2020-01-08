@@ -107,6 +107,7 @@
     <Content Include="DevTasks.aspx" />
     <Content Include="Diary.aspx" />
     <Content Include="ErrorPage.aspx" />
+    <Content Include="GenericDataPage.aspx" />
     <Content Include="Img\add.png" />
     <Content Include="Img\body-bg.jpeg" />
     <Content Include="Img\edit.png" />
@@ -264,6 +265,13 @@
       <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="GenericDataPage.aspx.cs">
+      <DependentUpon>GenericDataPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GenericDataPage.aspx.designer.cs">
+      <DependentUpon>GenericDataPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -145,6 +145,8 @@ namespace SynnWebOvi
                     Title = GenericFormatter.GetEnumDescription(RequiredPermissions[0]);
                 else
                     Title = "מסך הבית";
+
+
                 if (!LoginProvider)
                 {
                     BuildSiteMapLinks();
@@ -156,7 +158,7 @@ namespace SynnWebOvi
                         PageLinkAttribute HasNavLink = GetPageLink(requiredPermis);
                         if (HasNavLink != null)
                         {
-                            ((HtmlAnchor)Master.FindControl(HasNavLink.NavLinks.FirstOrDefault())).Attributes.Add("class", "active");
+                            ((HtmlAnchor)Master.FindControl(HasNavLink.NavLink)).Attributes.Add("class", "active");
                             navSelected = true;
                         }
                     }
@@ -230,15 +232,10 @@ namespace SynnWebOvi
                 PageLinkAttribute attribute = GetPageLink(ep);
                 if (attribute != null)
                 {
-                    foreach (var navlink in attribute.NavLinks)
-                    {
-                        Master.FindControl(navlink).Visible = CurrentUser.Allowed(ep);
-                    }
+                   Master.FindControl(attribute.NavLink).Visible = CurrentUser.Allowed(ep);
                 }
             }
         }
-
-    
 
         public PageLinkAttribute GetPageLink(ClientPagePermissions pageP)
         {
@@ -338,6 +335,21 @@ namespace SynnWebOvi
             string url = string.Empty;
 
             SynNavigation.Goto(url);
+        }
+
+
+
+        public int GetColumnIndexByName(GridView grid, string name)
+        {
+            foreach (DataControlField col in grid.Columns)
+            {
+                if (col.HeaderText.ToLower().Trim() == name.ToLower().Trim())
+                {
+                    return grid.Columns.IndexOf(col);
+                }
+            }
+
+            return -1;
         }
     }
 

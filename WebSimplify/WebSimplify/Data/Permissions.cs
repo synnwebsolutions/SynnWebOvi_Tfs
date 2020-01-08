@@ -29,35 +29,37 @@ namespace WebSimplify
         [PageLink("navcredit")]
         [Description("אשראי")]
         CreditData,
-        [PageLink("navusers")]
+        [PageLink("navusers", true)]
         [Description("מנהל משתמשים")]
         SysUsers,
         [PageLink("navmonbal")]
         [Description(@" מעקב הוצאות\הכנסות")]
         MoneyBalance,
-        [PageLink("navdev")]
+        [PageLink("navdev", true)]
         [Description("מנהל משימות פיתוח")]
         SysDev,
-        [PageLink("navlog")]
+        [PageLink("navlog", true)]
         [Description("יומן מערכת")]
         SysLog,
         [PageLink("navcash")]
         [Description(" מעקב מזומן")]
         CashLog,
-        [Description("  מעקב שעות עבודה")]
+        [Description("מעקב שעות עבודה")]
         WorkHours,
-
+        [PageLink("navgd", true)]
+        [Description("נתוני טבלאות")]
+        GenericDataItems,
     }
 
     public class PageLinkAttribute : Attribute
     {
-        public List<string> NavLinks { get;  set; }
+        public string NavLink { get;  set; }
+        public bool RequireAdmin { get; set; }
 
-        public PageLinkAttribute(params string[] linkIs)
+        public PageLinkAttribute( string linkIs, bool requireAdmin = false)
         {
-            NavLinks = new List<string>();
-            if (!linkIs.IsEmpty())
-                NavLinks.AddRange(linkIs.ToList());
+            RequireAdmin = requireAdmin;
+            NavLink = linkIs;
         }
     }
 }

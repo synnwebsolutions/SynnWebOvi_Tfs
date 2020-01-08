@@ -98,7 +98,7 @@ namespace WebSimplify
                 //var d = (LogItem)e.Row.DataItem;
                 var memoItem = (MemoItem)e.Row.DataItem;
                 var job = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters { MemoId = memoItem.Id }).FirstOrDefault();
-                LoggedUser u = DBController.DbAuth.GetUser(job.UserId);
+                LoggedUser u = DBController.DbAuth.GetUser(memoItem.UserId);
 
                 ((Label)e.Row.FindControl("lblDate")).Text = memoItem.Date.ToString();
                 ((Label)e.Row.FindControl("lblMessage")).Text = memoItem.title;

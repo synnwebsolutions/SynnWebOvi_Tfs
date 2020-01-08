@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -126,6 +127,7 @@ namespace SynnWebOvi
         void Update(GenericData g);
         List<T> GetGenericData<T>(GenericDataSearchParameters sp);
         void Add(GenericData g);
+        IEnumerable GetGenericData(GenericDataSearchParameters genericDataSearchParameters);
     }
 
     public interface IDbGoogle
@@ -224,6 +226,7 @@ namespace SynnWebOvi
         public int? FieldIndex { get; set; }
         public string FieldIndexValue { get; set; }
         public List<GenericDataDbFilter> Filters { get; set; }
+        public Type FromType { get; set; }
 
         public GenericDataSearchParameters()
         {

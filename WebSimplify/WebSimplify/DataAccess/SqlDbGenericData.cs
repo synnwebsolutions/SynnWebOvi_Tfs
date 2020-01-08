@@ -18,16 +18,8 @@ namespace WebSimplify.DataAccess
 
         public List<T> GetGenericData<T>(GenericDataSearchParameters sp)
         {
-            SetSqlFormat("select * from {0}", typeof(T).Name);
-            ClearParameters();
-
-            sp.AppendExtraFieldsValues();
-            foreach (var item in sp.Filters)
-                AddSqlWhereField(item.FieldName, item.Value);
-
-            IList lst = (IList)Activator.CreateInstance(GetListType(typeof(T)));
-            FillList(lst, typeof(T));
-            return (List<T>)lst;
+            sp.FromType = typeof(T);
+            return GetGenericData(sp) as List<T>;
         }
 
         private Type GetListType(Type sp)
@@ -75,6 +67,22 @@ namespace WebSimplify.DataAccess
 
             SetUpdateSql(g.GetType().Name, sqlItems, new SqlItemList { new SqlItem { FieldName = "Id", FieldValue = g.Id } });
             ExecuteSql();
+        }
+
+        public IEnumerable GetGenericData(GenericDataSearchParameters sp)
+        {
+            var type = sp.FromType;
+
+            SetSqlFormat("select * from {0}", type.Name);
+            ClearParameters();
+
+            sp.AppendExtraFieldsValues();
+            foreach (var item in sp.Filters)
+                AddSqlWhereField(item.FieldName, item.Value);
+
+            IList lst = (IList)Activator.CreateInstance(GetListType(type));
+            FillList(lst, type);
+            return lst;
         }
     }
 
