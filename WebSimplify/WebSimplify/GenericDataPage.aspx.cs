@@ -57,6 +57,21 @@ namespace WebSimplify
             }
         }
 
+        public Dictionary<string,int> FieldsIndexes
+        {
+            get
+            {
+                var i = GetFromSession("xcf")?.ToString();
+                if (i == null)
+                    FieldsIndexes = new Dictionary<string, int>();
+                return (Dictionary<string, int>)GetFromSession("xcf");
+            }
+            set
+            {
+                StoreInSession("xcf", value);
+            }
+        }
+
         protected override List<ClientPagePermissions> RequiredPermissions
         {
             get
@@ -101,8 +116,9 @@ namespace WebSimplify
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var g = (GenericData)e.Row.DataItem;
-              
+                e.Row.AccessKey = g.Id.ToString();
                 var props = g.GetType().GetProperties();
+
                 foreach (var pinfo in props)
                 {
                  
@@ -111,7 +127,9 @@ namespace WebSimplify
                     {
                         var val = pinfo.GetValue(g);
                         var tx = new TextBox();
-                        tx.ID = $"{g.Id}-{genericDataField.FieldName}";
+                        tx.ID = "txD";
+                        tx.AccessKey = g.Id.ToString();
+                        tx.ClientIDMode = ClientIDMode.Static;
                         tx.Text = val?.ToString();
                         e.Row.Cells[GetColumnIndexByName(gv, genericDataField.FieldName)].Controls.Add(tx);
                     }
@@ -121,22 +139,19 @@ namespace WebSimplify
 
         protected void gv_DataBinding(object sender, EventArgs e)
         {
-            var ctrs = gv.Controls;
+            FieldsIndexes.Clear();
             gv.Columns.Clear();
+            
             if (EditedData.NotEmpty())
             {
-          
                 var tp = GTypes.First(x => x.Name == EditedData);
-                var props = tp.GetProperties();
-                foreach (var pinfo in props)
+                var attrs = GenericData.GetGenericDataFieldAttributes(null, tp);
+                foreach (var genericDataField in attrs)
                 {
-                    var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
-                    if (genericDataField != null && !genericDataField.DisableGridEdit)
-                    {
-                        TemplateField col = new TemplateField();
-                        col.HeaderText = genericDataField.FieldName;
-                        gv.Columns.Add(col);
-                    }
+                    TemplateField col = new TemplateField();
+                    col.HeaderText = genericDataField.FieldName;
+                    gv.Columns.Add(col);
+                    FieldsIndexes.Add(genericDataField.FieldName, gv.Columns.Count - 1);
                 }
             }
         }
@@ -145,10 +160,29 @@ namespace WebSimplify
         {
             if (EditedData.NotNull())
             {
+                var tp = GTypes.First(x => x.Name == EditedData);
+
                 foreach (GridViewRow row in gv.Rows)
                 {
-                    var g = row.DataItem;
-                    var id = (g as GenericData).Id;
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        var id = row.AccessKey.ToInteger();
+                        var old = DBController.DbGenericData.GetSingleGenericData(new GenericDataSearchParameters { FromType = tp, Id = id });
+
+                        if (old != null)
+                        {
+                            var props = tp.GetProperties();
+                            foreach (var pinfo in props)
+                            {
+                                var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
+                                if (genericDataField != null && !genericDataField.DisableGridEdit)
+                                {
+                                    var value = ((TextBox)row.FindControl($"txD")).Text;
+                                    pinfo.SetValue(old, value);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

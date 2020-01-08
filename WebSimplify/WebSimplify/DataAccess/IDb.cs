@@ -128,6 +128,7 @@ namespace SynnWebOvi
         List<T> GetGenericData<T>(GenericDataSearchParameters sp);
         void Add(GenericData g);
         IEnumerable GetGenericData(GenericDataSearchParameters genericDataSearchParameters);
+        object GetSingleGenericData(GenericDataSearchParameters genericDataSearchParameters);
     }
 
     public interface IDbGoogle

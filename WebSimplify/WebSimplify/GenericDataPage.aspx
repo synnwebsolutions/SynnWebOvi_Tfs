@@ -32,6 +32,11 @@
                 CssClass="synngridstyled " ItemStyle-Width="100%" ControlStyle-Width="100%" OnDataBound="gv_DataBound"
                 AutoGenerateColumns="false" >
                 <Columns>
+                           <asp:TemplateField HeaderText=" ">
+                                <ItemTemplate>
+                                    <asp:HiddenField ID="hfpid" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                 </Columns>
                 </asp:GridView>
         </div>

@@ -44,6 +44,26 @@ namespace WebSimplify
                 }
             }
         }
+
+        public static List<GenericDataFieldAttribute> GetGenericDataFieldAttributes(GenericData obj = null, Type gtype = null)
+        {
+            var attrs = new List<GenericDataFieldAttribute>();
+            if (obj != null)
+                gtype = obj.GetType();
+            if (gtype != null)
+            {
+                var props = gtype.GetProperties();
+                foreach (var pinfo in props)
+                {
+                    var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
+                    if (genericDataField != null && !genericDataField.DisableGridEdit)
+                    {
+                        attrs.Add(genericDataField);
+                    }
+                }
+            }
+            return attrs;
+        }
     }
 
     public class GenericDataFieldAttribute: Attribute

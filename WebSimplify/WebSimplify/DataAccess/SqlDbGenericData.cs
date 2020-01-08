@@ -71,6 +71,8 @@ namespace WebSimplify.DataAccess
 
         public IEnumerable GetGenericData(GenericDataSearchParameters sp)
         {
+            if (sp.FromType == null)
+                throw new Exception("No Generic Type Detected");
             var type = sp.FromType;
 
             SetSqlFormat("select * from {0}", type.Name);
@@ -83,6 +85,11 @@ namespace WebSimplify.DataAccess
             IList lst = (IList)Activator.CreateInstance(GetListType(type));
             FillList(lst, type);
             return lst;
+        }
+
+        public object GetSingleGenericData(GenericDataSearchParameters genericDataSearchParameters)
+        {
+            return GetGenericData(genericDataSearchParameters).OfType<object>().FirstOrDefault(); 
         }
     }
 
