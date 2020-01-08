@@ -53,7 +53,8 @@ namespace SynnWebOvi
             {
                 _DBr.DbAuth.Add(new LoggedUser
                 {
-                    AllowedClientPagePermissions = new List<ClientPagePermissions>(),
+                    AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
+                    ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
                     DisplayName = "Smach",
                     Password = "sm1234",
                     UserName = "smach",
@@ -64,7 +65,8 @@ namespace SynnWebOvi
                 });
                 _DBr.DbAuth.Add(new LoggedUser
                 {
-                    AllowedClientPagePermissions = new List<ClientPagePermissions>(),
+                    AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
+                    ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
                     DisplayName = "Noa",
                     Password = "ns1234",
                     UserName = "noa",

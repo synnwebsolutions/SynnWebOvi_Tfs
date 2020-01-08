@@ -285,11 +285,11 @@ namespace SynnWebOvi
         {
             base.AppendExtraFieldsValues();
             if (UserId.HasValue)
-                Filters.Add(new GenericDataDbFilter("", UserId.ToString()));
+                Filters.Add(new GenericDataDbFilter("UserId", UserId.ToString()));
             if (CalendarJobStatus.HasValue)
-                Filters.Add(new GenericDataDbFilter("", ((int)CalendarJobStatus.Value).ToString()));
+                Filters.Add(new GenericDataDbFilter("JobStatus", ((int)CalendarJobStatus.Value).ToString()));
             if (MemoId.HasValue)
-                Filters.Add(new GenericDataDbFilter("", MemoId.ToString()));
+                Filters.Add(new GenericDataDbFilter("MemoItemId", MemoId.ToString()));
         }
     }
 
