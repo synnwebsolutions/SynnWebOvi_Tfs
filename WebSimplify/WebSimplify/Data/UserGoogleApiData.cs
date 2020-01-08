@@ -19,21 +19,21 @@ namespace WebSimplify
             set { UserId = value.ToInteger(); }
         }
 
-        [GenericDataField("ProjectIdText", "ProjectId")]
+        [GenericDataField("ProjectIdText", "ProjectId", DisableGridEdit = true)]
         public string ProjectIdText
         {
             get { return  StringCipher.Encrypt(installed.project_id); }
             set { installed.project_id = StringCipher.Decrypt(value); }
         }
 
-        [GenericDataField("ClientSecretText", "ClientSecret")]
+        [GenericDataField("ClientSecretText", "ClientSecret", DisableGridEdit = true)]
         public string ClientSecretText
         {
             get { return StringCipher.Encrypt(installed.client_secret); }
             set { installed.client_secret = StringCipher.Decrypt(value); }
         }
 
-        [GenericDataField("ClientIdText", "ClientId")]
+        [GenericDataField("ClientIdText", "ClientId", DisableGridEdit = true)]
         public string ClientIdText
         {
             get { return StringCipher.Encrypt(installed.client_id); }

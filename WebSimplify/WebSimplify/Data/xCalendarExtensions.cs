@@ -2,7 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -124,6 +126,35 @@ namespace WebSimplify
         public static bool NotEmpty(this IList lst)
         {
             return lst != null && lst.Count > 0;
+        }
+
+        public static DataTable ToDataTable(this IList items)
+        {
+            if (!items.NotEmpty())
+                return new DataTable();
+            var typee = items[0].GetType();
+            var tb = new DataTable(typee.Name);
+
+            PropertyInfo[] props = typee.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => !(x.PropertyType.IsGenericType &&
+        x.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))).ToArray();
+
+            foreach (var prop in props)
+            {
+                tb.Columns.Add(prop.Name, prop.PropertyType);
+            }
+
+            foreach (var item in items)
+            {
+                var values = new object[props.Length];
+                for (var i = 0; i < props.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item, null);
+                }
+
+                tb.Rows.Add(values);
+            }
+
+            return tb;
         }
 
         public static bool NotEmpty(this IDictionary lst)

@@ -45,8 +45,13 @@ namespace WebSimplify
             }
         }
 
-        public static List<GenericDataFieldAttribute> GetGenericDataFieldAttributes(GenericData obj = null, Type gtype = null)
+        public static List<GenericDataFieldAttribute> GetGenericDataFieldAttributes(GenericData obj = null, Type gtype = null, string name = null)
         {
+            if(name != null)
+            {
+                var GTypes = Assembly.GetAssembly(typeof(GenericData)).GetTypes().Where(t => t.IsSubclassOf(typeof(GenericData))).ToList();
+                gtype = GTypes.First(x => x.Name == name);
+            }
             var attrs = new List<GenericDataFieldAttribute>();
             if (obj != null)
                 gtype = obj.GetType();

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -300,14 +301,28 @@ namespace SynnWebOvi
         {
             string methodName = GetGridSourceMethodName(gv.ID);
             MethodInfo m = Page.GetType().GetMethod(methodName, new Type[0]);
-            gv.DataSource = (IEnumerable)m.Invoke(Page, null);
-            gv.DataBind();            
+            object data = null;
+            if (!GetGridSourceIsDataTable(gv.ID))
+            {
+                data = (IEnumerable)m.Invoke(Page, null);
+            }
+            else
+            {
+                data = m.Invoke(Page, null);
+            }
+            gv.DataSource = data;
+            gv.DataBind();
         }
         
 
         internal virtual string GetGridSourceMethodName(string gridId)
         {
             throw new NotImplementedException();
+        }
+
+        internal virtual bool GetGridSourceIsDataTable(string gridId)
+        {
+            return false; ;
         }
 
         public void ShowUserNotification(string messageText)

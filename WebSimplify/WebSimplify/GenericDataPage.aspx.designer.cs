@@ -22,24 +22,6 @@ namespace WebSimplify {
         protected global::System.Web.UI.WebControls.DropDownList cmbTables;
         
         /// <summary>
-        /// dvWorkHours control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvWorkHours;
-        
-        /// <summary>
-        /// btnUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnUpdate;
-        
-        /// <summary>
         /// gv control.
         /// </summary>
         /// <remarks>

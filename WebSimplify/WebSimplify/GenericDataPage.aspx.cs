@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -57,18 +58,18 @@ namespace WebSimplify
             }
         }
 
-        public Dictionary<string,int> FieldsIndexes
+        public int FieldsIndexes
         {
             get
             {
-                var i = GetFromSession("xcf")?.ToString();
+                var i = GetFromSession("xcfx");
                 if (i == null)
-                    FieldsIndexes = new Dictionary<string, int>();
-                return (Dictionary<string, int>)GetFromSession("xcf");
+                    FieldsIndexes = 0;
+                return GetFromSession("xcfx").ToString().ToInteger();
             }
             set
             {
-                StoreInSession("xcf", value);
+                StoreInSession("xcfx", value);
             }
         }
 
@@ -88,12 +89,35 @@ namespace WebSimplify
             return base.GetGridSourceMethodName(gridId);
         }
 
-        public IEnumerable GetGenericItems()
+        internal override bool GetGridSourceIsDataTable(string gridId)
+        {
+            if (gridId == gv.ID)
+                return true;
+            return base.GetGridSourceIsDataTable(gridId);
+        }
+        public object GetGenericItems()
         {
             if (EditedData.NotEmpty())
             {
                 var tp = GTypes.First(x => x.Name == EditedData);
-                return DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType  = tp });
+                var data = (DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType = tp }) as IList).ToDataTable();
+
+                var att = GenericData.GetGenericDataFieldAttributes(null, tp, null);
+                var props = data.Columns.OfType< DataColumn>().Select(x => x.ColumnName).ToList();
+                foreach (var pinfo in props)
+                {
+                    var idx = data.Columns.IndexOf(pinfo);
+                    var gaInfo = att.FirstOrDefault(x => x.PropertyName == pinfo);
+                    if (gaInfo == null || gaInfo.DisableGridEdit)
+                    {
+                        data.Columns.RemoveAt(idx);
+                    }
+                    else
+                    {
+                        data.Columns[idx].ReadOnly = false;
+                    }
+                }
+                return data;
             }
             return null;
         }
@@ -109,87 +133,6 @@ namespace WebSimplify
                 EditedData = string.Empty;
             }
             RefreshGrid(gv);
-        }
-
-        protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                var g = (GenericData)e.Row.DataItem;
-                e.Row.AccessKey = g.Id.ToString();
-                var props = g.GetType().GetProperties();
-
-                foreach (var pinfo in props)
-                {
-                 
-                    var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
-                    if (genericDataField != null && !genericDataField.DisableGridEdit)
-                    {
-                        var val = pinfo.GetValue(g);
-                        var tx = new TextBox();
-                        tx.ID = "txD";
-                        tx.AccessKey = g.Id.ToString();
-                        tx.ClientIDMode = ClientIDMode.Static;
-                        tx.Text = val?.ToString();
-                        e.Row.Cells[GetColumnIndexByName(gv, genericDataField.FieldName)].Controls.Add(tx);
-                    }
-                }
-            }
-        }
-
-        protected void gv_DataBinding(object sender, EventArgs e)
-        {
-            FieldsIndexes.Clear();
-            gv.Columns.Clear();
-            
-            if (EditedData.NotEmpty())
-            {
-                var tp = GTypes.First(x => x.Name == EditedData);
-                var attrs = GenericData.GetGenericDataFieldAttributes(null, tp);
-                foreach (var genericDataField in attrs)
-                {
-                    TemplateField col = new TemplateField();
-                    col.HeaderText = genericDataField.FieldName;
-                    gv.Columns.Add(col);
-                    FieldsIndexes.Add(genericDataField.FieldName, gv.Columns.Count - 1);
-                }
-            }
-        }
-
-        protected void btnUpdate_ServerClick(object sender, EventArgs e)
-        {
-            if (EditedData.NotNull())
-            {
-                var tp = GTypes.First(x => x.Name == EditedData);
-
-                foreach (GridViewRow row in gv.Rows)
-                {
-                    if (row.RowType == DataControlRowType.DataRow)
-                    {
-                        var id = row.AccessKey.ToInteger();
-                        var old = DBController.DbGenericData.GetSingleGenericData(new GenericDataSearchParameters { FromType = tp, Id = id });
-
-                        if (old != null)
-                        {
-                            var props = tp.GetProperties();
-                            foreach (var pinfo in props)
-                            {
-                                var genericDataField = ((GenericDataFieldAttribute[])pinfo.GetCustomAttributes(typeof(GenericDataFieldAttribute), true)).FirstOrDefault();
-                                if (genericDataField != null && !genericDataField.DisableGridEdit)
-                                {
-                                    var value = ((TextBox)row.FindControl($"txD")).Text;
-                                    pinfo.SetValue(old, value);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        protected void gv_DataBound(object sender, EventArgs e)
-        {
-            btnUpdate.Visible = gv.Rows.Count > 0;
         }
     }
 }
