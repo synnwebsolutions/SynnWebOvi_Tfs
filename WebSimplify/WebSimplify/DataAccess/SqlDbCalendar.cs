@@ -48,13 +48,13 @@ namespace SynnWebOvi
         {
             SetSqlFormat("select * from {0}", SynnDataProvider.TableNames.QuickTasks);
             ClearParameters();
-            if (!lsp.FromWs)
-            {
-                if (lsp.Active.HasValue)
-                    AddSqlWhereField("Active", lsp.Active);
-                if (lsp.Id.HasValue)
-                    AddSqlWhereField("Id", lsp.Id);
-            }
+    
+            if (lsp.Active.HasValue)
+                AddSqlWhereField("Active", lsp.Active);
+            if (lsp.Id.HasValue)
+                AddSqlWhereField("Id", lsp.Id);
+
+
             var lst = new List<QuickTask>();
             FillList(lst, typeof(QuickTask));
             return lst;
@@ -74,9 +74,19 @@ namespace SynnWebOvi
                 AddSqlWhereField("CreationDate", lsp.FromCreationDate, ">=");
             if (lsp.ToCreationDate.HasValue)
                 AddSqlWhereField("CreationDate", lsp.ToCreationDate, "<=");
-
+            if (lsp.UserId.HasValue)
+                AddSqlWhereField("UserId", lsp.UserId);
             if (lsp.ID.HasValue)
                 AddSqlWhereField("Id", lsp.ID);
+            if (lsp.IDs.NotEmpty())
+            {
+                StartORGroup();
+                foreach (var id in lsp.IDs)
+                {
+                    AddOREqualField("Id", id);
+                }
+                EndORGroup();
+            }
             var lst = new List<MemoItem>();
             FillList(lst, typeof(MemoItem));
             return lst;

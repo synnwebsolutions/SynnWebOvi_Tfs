@@ -29,7 +29,19 @@ namespace WebSimplify
 
         public IEnumerable GetCalendarItems()
         {
-            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date });
+            if (CurrentUser.IsAdmin) return new List<MemoItem>();
+
+            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date, UserId = CurrentUser.Id });
+            var userJobs = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters {  UserId = CurrentUser.Id });
+            if (userJobs.NotEmpty())
+            {
+                var jobsMemos = DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date, IDs = userJobs.Select(x => x.MemoItemId).ToList() });
+                foreach (var jobsMemo in jobsMemos)
+                {
+                    if (!dbData.Any(x => x.Id == jobsMemo.Id))
+                        dbData.Add(jobsMemo);
+                }
+            }
             return dbData.OrderBy(x => x.Date).ToList();
         }
 

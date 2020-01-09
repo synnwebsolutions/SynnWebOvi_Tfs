@@ -44,6 +44,7 @@ namespace SynnWebOvi
 
     public interface IDbWedd
     {
+        void Add(WeddingGuest w);
         List<WeddingGuest> GetGuests(WeddSearchParameters sp);
     }
 
@@ -412,6 +413,8 @@ namespace SynnWebOvi
         public DateTime? ToCreationDate { get; set; }
         public DateTime? ToDate { get; set; }
         public int? ID { get; internal set; }
+        public int? UserId { get; internal set; }
+        public List<int> IDs { get; internal set; }
     }
 
 }

@@ -50,7 +50,7 @@ namespace WebSimplify
         Canceled,
         [Description("בסביבת פיתוח")]
         OnTfs,
-        [Description("בגרסה נוכחית")]
+        [Description("בגרסה קרובה")]
         OnServer,
         [Description("סגור בשרת ובסביבה")]
         Finalized
