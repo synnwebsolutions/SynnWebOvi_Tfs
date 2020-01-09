@@ -51,10 +51,10 @@
                         </asp:ContentPlaceHolder>
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="z-index: 321; position: relative;">
                         <div class=" col-3">
                         </div>
-                        <asp:Panel ID="messageBoxx" runat="server" Visible="false" CssClass="editor centered col-6">
+                        <asp:Panel ID="messageBoxx" runat="server" Visible="false" CssClass="editor centered col-6 ">
                             <div class="row header" id="editorHaeder" runat="server">
                             </div>
 

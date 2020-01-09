@@ -32,6 +32,11 @@
                             <asp:Label runat="server" ID="lblMessage"  ></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="ת. יעד" ControlStyle-CssClass="">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblDestDate"  ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="מצב ">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="lblStatus" CssClass=""></asp:Label>
@@ -73,7 +78,7 @@
                 <div class="row">
                     <div class="col-6">תיאור</div>
                     <div class="col-6">
-                        <asp:TextBox ID="txJobDesc" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txJobDesc" runat="server" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">

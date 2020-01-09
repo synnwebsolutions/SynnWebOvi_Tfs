@@ -32,7 +32,7 @@ namespace WebSimplify.BackGroundData
             {
                 LoadLog();
                 LoadItems();
-                GenerateNewJobs();
+                GenerateNewAndCloseJobs();
                 HandleExistingJobs();
                 CloseLog();
             }
@@ -64,7 +64,7 @@ namespace WebSimplify.BackGroundData
             }
         }
 
-        private void GenerateNewJobs()
+        private void GenerateNewAndCloseJobs()
         {
             foreach (var memo in memoItems)
             {
@@ -72,6 +72,14 @@ namespace WebSimplify.BackGroundData
                 if (memoJobs.IsEmpty())
                 {
                     CreateNewJob(memo);
+                }
+                else if(memo.Date <= DateTime.Now)
+                {
+                    foreach (var oldJob in memoJobs)
+                    {
+                        oldJob.JobStatus = CalendarJobStatusEnum.Closed;
+                        DBController.DbGenericData.Update(oldJob);
+                    }
                 }
             }
         }

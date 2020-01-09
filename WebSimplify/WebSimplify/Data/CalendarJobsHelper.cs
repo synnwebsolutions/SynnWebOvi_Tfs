@@ -25,6 +25,9 @@ namespace WebSimplify
             {
                 try
                 {
+                    var memoOfCurrentJob = DBController.DbCalendar.Get(new CalendarSearchParameters { ID = userPendingJob.MemoItemId }).FirstOrDefault();
+                    if (memoOfCurrentJob.Date > DateTime.Now)
+                        return;
                     if (userPendingJob.JobMethod == CalendarJobMethodEnum.GoogleAPI)
                     {
                         SendViaGoogleApi(userPendingJob);

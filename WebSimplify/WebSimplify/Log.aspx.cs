@@ -59,6 +59,8 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lblUpdate")).Text = job.UpdateDate.ToString();
                 ((Label)e.Row.FindControl("lblId")).Text = job.Id.ToString();
                 ((ImageButton)e.Row.FindControl("btnEdit")).CommandArgument = job.Id.ToString();
+                ((Label)e.Row.FindControl("lblDestDate")).Text = memoItem.Date.ToString();
+                
             }
         }
 
@@ -82,16 +84,24 @@ namespace WebSimplify
             CloseEdit();
         }
 
+        
         protected void btnOkJobEdit_Click(object sender, EventArgs e)
         {
-            var job = (CalendarJob)DBController.DbGenericData.GetSingleGenericData(new CalendarJobSearchParameters { Id = panelx.GetEditedItemId().Value, FromType = typeof(CalendarJob) });
+            if (cmbXStatus.SelectedIndex > 0 && cmbJobType.SelectedIndex > 0)
+            {
+                var job = (CalendarJob)DBController.DbGenericData.GetSingleGenericData(new CalendarJobSearchParameters { Id = panelx.GetEditedItemId().Value, FromType = typeof(CalendarJob) });
 
-            job.JobMethod = (CalendarJobMethodEnum)cmbJobType.SelectedValue.ToString().ToInteger();
-            job.JobStatus = (CalendarJobStatusEnum)cmbXStatus.SelectedValue.ToString().ToInteger();
-            DBController.DbGenericData.Update(job);
-            panelx.Hide();
-            AlertSuccess();
-            CloseEdit();
+                job.JobMethod = (CalendarJobMethodEnum)cmbJobType.SelectedValue.ToString().ToInteger();
+                job.JobStatus = (CalendarJobStatusEnum)cmbXStatus.SelectedValue.ToString().ToInteger();
+                DBController.DbGenericData.Update(job);
+                panelx.Hide();
+                AlertSuccess();
+                CloseEdit();
+            }
+            else
+            {
+                AlertMessage(@"יש לבחור מצב ו\או סוג");
+            }
         }
 
         private void CloseEdit()
