@@ -1,4 +1,5 @@
 ﻿using SynnCore.DataAccess;
+using SynnWebOvi;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,6 +70,16 @@ namespace WebSimplify
             }
             return attrs;
         }
+
+        internal string GetFormatedValue(Type genericDataType, string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
+        {
+            return FormatedGenericValue(valueToFormat, genericFieldInfo, db);
+        }
+
+        internal virtual string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
+        {
+            return string.Empty;
+        }
     }
 
     public class GenericDataFieldAttribute: Attribute
@@ -76,7 +87,6 @@ namespace WebSimplify
         public string FieldName { get; set; }
         public string PropertyName { get; set; }
         public bool DisableGridEdit { get; set; }
-        public Func<string, string> FormatFromXmlAction { get; set; }
 
         public GenericDataFieldAttribute(string propName, string fieldName)
         {

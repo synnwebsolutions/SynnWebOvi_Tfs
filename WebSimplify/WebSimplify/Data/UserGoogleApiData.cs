@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using SynnCore.DataAccess;
+using SynnWebOvi;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -33,13 +34,30 @@ namespace WebSimplify
             set { installed.client_secret = StringCipher.Decrypt(value); }
         }
 
-        [GenericDataField("ClientIdText", "ClientId", DisableGridEdit = true)]
+        [GenericDataField("ClientIdText", "ClientId")]
         public string ClientIdText
         {
             get { return StringCipher.Encrypt(installed.client_id); }
             set { installed.client_id = StringCipher.Decrypt(value); }
         }
-        
+
+        internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
+        {
+            if (genericFieldInfo.PropertyName == "UserIdText")
+            {
+                if (valueToFormat.IsInteger())
+                {
+                    var u = db.DbAuth.GetUser(valueToFormat.ToInteger());
+                    return u.DisplayName;
+                }
+            }
+            if (genericFieldInfo.PropertyName == "ClientIdText")
+            {
+                return StringCipher.Decrypt(valueToFormat); 
+            }
+            return base.FormatedGenericValue(valueToFormat, genericFieldInfo, db);
+        }
+
         public UserGoogleApiData(IDataReader data)
         {
             Init();

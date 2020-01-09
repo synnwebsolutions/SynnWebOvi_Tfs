@@ -363,6 +363,7 @@ namespace SynnWebOvi
         public string UserName { get; set; }
         public string Password { get; set; }
         public int? Id { get; set; }
+        public List<int> Ids { get; internal set; }
     }
 
     public class ThemeSearchParameters : BaseSearchParameters

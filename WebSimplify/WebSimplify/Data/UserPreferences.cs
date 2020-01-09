@@ -7,6 +7,7 @@ using System.Data;
 using SynnCore.Generics;
 using CalendarUtilities;
 using System.Reflection;
+using SynnWebOvi;
 
 namespace WebSimplify.Data
 {
@@ -68,6 +69,19 @@ namespace WebSimplify.Data
         {
             get { return DailyRequiredWorkHours.ToXml() ?? new WorkTime().ToXml(); }
             set { DailyRequiredWorkHours = value.ParseXml<WorkTime>(); }
+        }
+
+        internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
+        {
+            if (genericFieldInfo.PropertyName == "UserIdText")
+            {
+                if (valueToFormat.IsInteger())
+                {
+                    var u = db.DbAuth.GetUser(valueToFormat.ToInteger());
+                    return u.DisplayName;
+                }
+            }
+            return base.FormatedGenericValue(valueToFormat, genericFieldInfo, db);
         }
 
         public bool UseCharts { get; set; }

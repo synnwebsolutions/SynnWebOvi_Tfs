@@ -99,22 +99,36 @@ namespace WebSimplify
         {
             if (EditedData.NotEmpty())
             {
-                var tp = GTypes.First(x => x.Name == EditedData);
-                GData = (DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType = tp }) as IList).ToDataTable();
+                var genericDataType = GTypes.First(x => x.Name == EditedData);
+                GData = (DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType = genericDataType }) as IList).ToDataTable();
 
-                var att = GenericData.GetGenericDataFieldAttributes(null, tp, null);
-                var props = GData.Columns.OfType< DataColumn>().Select(x => x.ColumnName).ToList();
-                foreach (var pinfo in props)
+                var att = GenericData.GetGenericDataFieldAttributes(null, genericDataType, null);
+                var propertyInfos = GData.Columns.OfType< DataColumn>().Select(x => x.ColumnName).ToList();
+                foreach (var propertyInfo in propertyInfos)
                 {
-                    var idx = GData.Columns.IndexOf(pinfo);
-                    var gaInfo = att.FirstOrDefault(x => x.PropertyName == pinfo);
-                    if (gaInfo == null || gaInfo.DisableGridEdit)
+                    var idx = GData.Columns.IndexOf(propertyInfo);
+                    var genericFieldInfo = att.FirstOrDefault(x => x.PropertyName == propertyInfo);
+                    if (genericFieldInfo == null || genericFieldInfo.DisableGridEdit)
                     {
                         GData.Columns.RemoveAt(idx);
                     }
                     else
                     {
+                        var rowsToFormat = GData.Rows.Count;
+                        var tmpObject = Activator.CreateInstance(genericDataType);
+                        
+                        for (int i = 0; i < rowsToFormat; i++)
+                        {
+                            var valueToFormat = GData.Rows[i][idx].ToString();
+                            if (valueToFormat.NotEmpty())
+                            {
+                                var formatedVal = (tmpObject as GenericData).GetFormatedValue(genericDataType, valueToFormat, genericFieldInfo, DBController);
+                                if (formatedVal.NotEmpty())
+                                    GData.Rows[i][idx] = formatedVal;
+                            }
+                        }
                         GData.Columns[idx].ReadOnly = false;
+                        try { GData.Columns[idx].ColumnName = genericFieldInfo.FieldName;  } catch (Exception) { }
                     }
                 }
                 return GData;

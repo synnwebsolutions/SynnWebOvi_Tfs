@@ -39,6 +39,15 @@ namespace WebSimplify
                 AddSqlWhereLikeField("Password", lp.Password, LikeSelectionStyle.AsIs);
             if (lp.Id.HasValue)
                 AddSqlWhereLikeField("Id", lp.Id.ToString());
+            if (lp.Ids.NotEmpty())
+            {
+                StartORGroup();
+                foreach (var id in lp.Ids)
+                {
+                    AddOREqualField("Id", id);
+                }
+                EndORGroup();
+            }
             var lst = new List<LoggedUser>();
             FillList(lst, typeof(LoggedUser));
             return lst;
