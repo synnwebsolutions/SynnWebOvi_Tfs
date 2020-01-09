@@ -17,6 +17,8 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
+                FillEnum(cmbXStatus, typeof(CalendarJobStatusEnum));
+                FillEnum(cmbJobType, typeof(CalendarJobMethodEnum));
                 RefreshGrid(gv);
             }
         }
@@ -56,7 +58,46 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lblAction")).Text = job.JobMethod.GetDescription();
                 ((Label)e.Row.FindControl("lblUpdate")).Text = job.UpdateDate.ToString();
                 ((Label)e.Row.FindControl("lblId")).Text = job.Id.ToString();
+                ((ImageButton)e.Row.FindControl("btnEdit")).CommandArgument = job.Id.ToString();
             }
+        }
+
+        protected void btnEdit_Command(object sender, CommandEventArgs e)
+        {
+            panelx.SetHeader("עריכה");
+            var dt = (CalendarJob)DBController.DbGenericData.GetSingleGenericData(new CalendarJobSearchParameters {  Id = e.CommandArgument.ToString().ToInteger(), FromType = typeof(CalendarJob)});
+            LoggedUser u = dt.UserId > 0 ? DBController.DbAuth.GetUser(dt.UserId) : null;
+            var memoItem = DBController.DbCalendar.Get(new CalendarSearchParameters { ID = dt.MemoItemId }).First();
+
+            cmbXStatus.SelectedValue = ((int)dt.JobStatus).ToString();
+            cmbJobType.SelectedValue = ((int)dt.JobMethod).ToString();
+            txdUserName.Text = u?.DisplayName;
+            txJobDesc.Text = memoItem.Description;
+            panelx.SetEditedItemId(dt.Id);
+            panelx.Show();
+        }
+
+        protected void btnCancelJobEdit_Click(object sender, EventArgs e)
+        {
+            CloseEdit();
+        }
+
+        protected void btnOkJobEdit_Click(object sender, EventArgs e)
+        {
+            var job = (CalendarJob)DBController.DbGenericData.GetSingleGenericData(new CalendarJobSearchParameters { Id = panelx.GetEditedItemId().Value, FromType = typeof(CalendarJob) });
+
+            job.JobMethod = (CalendarJobMethodEnum)cmbJobType.SelectedValue.ToString().ToInteger();
+            job.JobStatus = (CalendarJobStatusEnum)cmbXStatus.SelectedValue.ToString().ToInteger();
+            DBController.DbGenericData.Update(job);
+            panelx.Hide();
+            AlertSuccess();
+            CloseEdit();
+        }
+
+        private void CloseEdit()
+        {
+            panelx.Hide();
+            RefreshGrid(gv);
         }
     }
 }

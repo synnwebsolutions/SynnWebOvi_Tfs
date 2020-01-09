@@ -39,7 +39,7 @@ namespace WebSimplify
             set { UserId = value.ToInteger(); }
         }
 
-        public CalendarJobStatusEnum JobStatus { get; set; }
+        public CalendarJobStatusEnum JobStatus { get; set; } 
         [GenericDataField("JobStatusText", "JobStatus")]
         public string JobStatusText
         {
