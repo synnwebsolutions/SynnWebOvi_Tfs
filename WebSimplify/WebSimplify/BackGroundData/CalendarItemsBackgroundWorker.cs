@@ -107,7 +107,7 @@ namespace WebSimplify.BackGroundData
 
         private void LoadItems()
         {
-            memoItems = DBController.DbCalendar.Get(new CalendarSearchParameters { FromCreationDate = workerLog.LastRunTime });
+            memoItems = DBController.DbCalendar.Get(new CalendarSearchParameters {  });
         }
 
         private void LoadLog()

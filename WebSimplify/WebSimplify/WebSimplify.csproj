@@ -383,6 +383,7 @@
     <Compile Include="WorkData.aspx.designer.cs">
       <DependentUpon>WorkData.aspx</DependentUpon>
     </Compile>
+    <Compile Include="XFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

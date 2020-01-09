@@ -85,7 +85,7 @@ namespace WebSimplify
 
         protected void btnClose_Command(object sender, CommandEventArgs e)
         {
-
+            AlertMessage("לא ניתן למחוק משימות - יש לשנות סטטוס ל 'בוטל'");
         }
 
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)

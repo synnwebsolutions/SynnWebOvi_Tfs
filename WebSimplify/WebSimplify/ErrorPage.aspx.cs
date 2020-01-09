@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -20,19 +21,40 @@ namespace WebSimplify
                 Exception ex = (Exception)GetFromSession("ex");
                 if (CurrentUser.IsAdmin)
                 {
-                    exTtl.InnerText = ex.Message;
-                    var traceInfo = new StackTrace(ex, true);
-                    var num = traceInfo.FrameCount;
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < num; i++)
+                    var first = true;
+                    do
                     {
-                        int linenumber = traceInfo.GetFrame(i).GetFileLineNumber();
-                        var fileN = traceInfo.GetFrame(i).GetFileName();
-                        sb.AppendLine($"{fileN} At Line - {linenumber}");
+                        if (first) first = false;
+                        else
+                            sb.Append($"=========================== Inner Exception Info =========================== ");
+                        
+                        sb = ExtractExceptionInfo(ex, sb);
+                        ex = ex.InnerException;
                     }
-                    exmsg.InnerText = sb.ToString();
+                    while (ex != null);
+
+
+                    exmsg.InnerHtml = sb.ToString();
                 }
             }
+        }
+
+        private StringBuilder ExtractExceptionInfo(Exception ex, StringBuilder sb)
+        {
+            exTtl.InnerText = ex.Message;
+            var traceInfo = new StackTrace(ex, true);
+            var num = traceInfo.FrameCount;
+            
+            for (int i = 0; i < num; i++)
+            {
+                int linenumber = traceInfo.GetFrame(i).GetFileLineNumber();
+                var fileN = traceInfo.GetFrame(i).GetFileName();
+                var shortFile = Path.GetFileName(fileN);
+                sb.Append($"{shortFile ?? fileN} Line - {linenumber} {Helpers.HtmlStringHelper.LineBreak}");
+            }
+
+            return sb;
         }
     }
 }

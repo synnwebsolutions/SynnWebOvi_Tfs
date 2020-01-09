@@ -17,7 +17,7 @@ namespace WebSimplify
         }
 
         public List<int> UsersToShare { get; set; }
-        [GenericDataField("UsersToShareText", "UsersToShare")]
+        [GenericDataField("UsersToShareText", "UsersToShare", DisableGridEdit = true)]
         public string UsersToShareText
         {
             get

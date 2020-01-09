@@ -43,7 +43,7 @@ namespace WebSimplify
         public string JobStatusText
         {
             get { return ((int)JobStatus).ToString(); }
-            set { UserId = value.ToInteger(); }
+            set { JobStatus = value.ToEnum<CalendarJobStatusEnum>(); }
         }
 
         public CalendarJobMethodEnum JobMethod { get; set; }

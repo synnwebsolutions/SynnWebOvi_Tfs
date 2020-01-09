@@ -55,7 +55,7 @@ namespace WebSimplify.Data
         }
 
         public WorkHoursData CurrentWorkHoursData { get; set; }
-        [GenericDataField("CurrentWorkHoursDataText", "CurrentWorkHoursData")]
+        [GenericDataField("CurrentWorkHoursDataText", "CurrentWorkHoursData", DisableGridEdit = true)]
         public string CurrentWorkHoursDataText
         {
             get { return CurrentWorkHoursData.ToXml() ?? new WorkHoursData().ToXml(); }
@@ -63,7 +63,7 @@ namespace WebSimplify.Data
         }
 
         public WorkTime DailyRequiredWorkHours { get; set; }
-        [GenericDataField("DailyRequiredWorkHoursText", "DailyRequiredWorkHours")]
+        [GenericDataField("DailyRequiredWorkHoursText", "DailyRequiredWorkHours", DisableGridEdit = true)]
         public string DailyRequiredWorkHoursText
         {
             get { return DailyRequiredWorkHours.ToXml() ?? new WorkTime().ToXml(); }

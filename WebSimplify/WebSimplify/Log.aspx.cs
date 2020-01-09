@@ -45,12 +45,12 @@ namespace WebSimplify
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //var d = (LogItem)e.Row.DataItem;
                 var job = (CalendarJob)e.Row.DataItem;
                 var memoItem = DBController.DbCalendar.Get(new CalendarSearchParameters { ID = job.MemoItemId }).First();
-                LoggedUser u = DBController.DbAuth.GetUser(job.UserId);
 
-                ((Label)e.Row.FindControl("lblUser")).Text = u.DisplayName;
+                LoggedUser u = job.UserId > 0 ? DBController.DbAuth.GetUser(job.UserId) : null;
+
+                ((Label)e.Row.FindControl("lblUser")).Text = u?.DisplayName;
                 ((Label)e.Row.FindControl("lblMessage")).Text = memoItem.title;
                 ((Label)e.Row.FindControl("lblStatus")).Text = job.JobStatus.GetDescription();
                 ((Label)e.Row.FindControl("lblAction")).Text = job.JobMethod.GetDescription();

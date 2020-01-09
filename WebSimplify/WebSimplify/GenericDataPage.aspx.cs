@@ -58,18 +58,18 @@ namespace WebSimplify
             }
         }
 
-        public int FieldsIndexes
+        public DataTable GData
         {
             get
             {
-                var i = GetFromSession("xcfx");
+                var i = GetFromSession("fddsf");
                 if (i == null)
-                    FieldsIndexes = 0;
-                return GetFromSession("xcfx").ToString().ToInteger();
+                    GData = new DataTable();
+                return (DataTable)GetFromSession("fddsf");
             }
             set
             {
-                StoreInSession("xcfx", value);
+                StoreInSession("fddsf", value);
             }
         }
 
@@ -100,24 +100,24 @@ namespace WebSimplify
             if (EditedData.NotEmpty())
             {
                 var tp = GTypes.First(x => x.Name == EditedData);
-                var data = (DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType = tp }) as IList).ToDataTable();
+                GData = (DBController.DbGenericData.GetGenericData(new GenericDataSearchParameters { FromType = tp }) as IList).ToDataTable();
 
                 var att = GenericData.GetGenericDataFieldAttributes(null, tp, null);
-                var props = data.Columns.OfType< DataColumn>().Select(x => x.ColumnName).ToList();
+                var props = GData.Columns.OfType< DataColumn>().Select(x => x.ColumnName).ToList();
                 foreach (var pinfo in props)
                 {
-                    var idx = data.Columns.IndexOf(pinfo);
+                    var idx = GData.Columns.IndexOf(pinfo);
                     var gaInfo = att.FirstOrDefault(x => x.PropertyName == pinfo);
                     if (gaInfo == null || gaInfo.DisableGridEdit)
                     {
-                        data.Columns.RemoveAt(idx);
+                        GData.Columns.RemoveAt(idx);
                     }
                     else
                     {
-                        data.Columns[idx].ReadOnly = false;
+                        GData.Columns[idx].ReadOnly = false;
                     }
                 }
-                return data;
+                return GData;
             }
             return null;
         }
@@ -135,53 +135,5 @@ namespace WebSimplify
             RefreshGrid(gv);
         }
 
-        protected void gv_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gv.EditIndex = e.NewEditIndex;
-            RefreshGrid(gv);
-        }
-
-        protected void gv_RowUpdated(object sender, GridViewUpdatedEventArgs e)
-        {
-            var sx = sender.ToString();
-        }
-
-        protected void gv_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            CloseEdit();
-        }
-
-        protected void gv_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            GridViewRow row = gv.Rows[e.RowIndex];
-            var g = row.DataItem;
-            var Cols = row.Cells.Count;
-            
-            for (int i = 1; i <= Cols; i++)
-            {
-                try
-                {
-                    TextBox txtBox = row.Cells[i].Controls[0] as TextBox;
-                    //var prop = e.GetPropertyInfo();
-                    if (txtBox != null)
-                    {
-                        var newValue = txtBox.Text;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var dd = ex.Message;
-                }
-            }
-         
-
-            CloseEdit();
-        }
-
-        private void CloseEdit()
-        {
-            gv.EditIndex = -1;
-            RefreshGrid(gv);
-        }
     }
 }

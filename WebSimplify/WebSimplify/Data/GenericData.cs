@@ -76,6 +76,8 @@ namespace WebSimplify
         public string FieldName { get; set; }
         public string PropertyName { get; set; }
         public bool DisableGridEdit { get; set; }
+        public Func<string, string> FormatFromXmlAction { get; set; }
+
         public GenericDataFieldAttribute(string propName, string fieldName)
         {
             FieldName = fieldName;
