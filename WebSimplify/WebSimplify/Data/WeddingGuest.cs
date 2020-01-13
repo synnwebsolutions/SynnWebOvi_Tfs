@@ -16,7 +16,6 @@ namespace SynnWebOvi
 
         public int Id { get; set; }
         public int Amount { get; set; }
-        public int UserGroupId { get; set; }
         public string Name { get; set; }
 
         public void Load(IDataReader reader)
@@ -24,7 +23,6 @@ namespace SynnWebOvi
             Id = DataAccessUtility.LoadInt32(reader, "Id");
             Amount = DataAccessUtility.LoadInt32(reader, "Payment");
             Name = DataAccessUtility.LoadNullable<string>(reader, "GuestName");
-            UserGroupId = DataAccessUtility.LoadInt32(reader, "UserGroupId");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace WebSimplify
 
         public IEnumerable GetMyDeposits()
         {
-            var ul = DBController.DbGenericData.GetGenericData<UserDeposit>(new GenericDataSearchParameters { });
+            var ul = DBController.DbGenericData.GetGenericData<UserDeposit>(new UserDepositSearchParameters { UserId = CurrentUser.Id });
             return ul.OrderByDescending(x => x.IDate).ToList();
         }
 
