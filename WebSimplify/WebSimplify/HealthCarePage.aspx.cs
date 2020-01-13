@@ -74,7 +74,6 @@ namespace WebSimplify
                 var c = new HealthLog
                 {
                     EscorterId = CurrentUser.Id,
-                    CreationDate = DateTime.Now,
                     Title = txadddiaryname.Value,
                     Description = txadddiarydesc.Value,
                     IDate = Convert.ToDateTime(txadddiarydate.Value),
@@ -95,7 +94,6 @@ namespace WebSimplify
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //var d = (LogItem)e.Row.DataItem;
                 var memoItem = (HealthLog)e.Row.DataItem;
                 LoggedUser u = DBController.DbAuth.GetUser(memoItem.EscorterId);
 

@@ -42,6 +42,7 @@ namespace WebSimplify
             set { Amount = value.ToInteger(); }
         }
 
+
         internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
         {
             if (genericFieldInfo.PropertyName == "UserIdText")

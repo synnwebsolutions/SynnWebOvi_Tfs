@@ -99,14 +99,14 @@ namespace SynnWebOvi
                 DepositName = "החזר לנחום ואלמו",
                 AmountForPerson = 2280,
                 DepositType = DepositTypeEnum.FixedAmount,
-                StartDate = new DateTime(2019, 07, 01)
+                StartDate = new DateTime(2019, 06, 01)
             });
             DBController.DbGenericData.Add(new Account
             {
                 DepositName = "הוראת קבע חודשית",
                 AmountForPerson = 50,
                 DepositType = DepositTypeEnum.MonthlyPayment,
-                StartDate = new DateTime(2019, 07, 01)
+                StartDate = new DateTime(2019, 06, 01)
             });
         }
 

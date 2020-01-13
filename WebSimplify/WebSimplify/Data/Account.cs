@@ -42,6 +42,24 @@ namespace WebSimplify
             set { StartDate = value.ToDateTime(); }
         }
 
+        internal int GetMyBalnace(List<UserDeposit> myDeposits, IDatabaseProvider dBController)
+        {
+            var toBepaid = 0;
+  
+            if (DepositType == DepositTypeEnum.MonthlyPayment)
+            {
+                var numberOfPayments = (((DateTime.Now.Year - StartDate.Year) * 12) + DateTime.Now.Month - StartDate.Month);
+                toBepaid = AmountForPerson * numberOfPayments;
+            }
+            else
+            {
+                toBepaid = AmountForPerson;
+            }
+
+            var totalPaid = myDeposits.Where(x => x.AccountId == this.Id).Sum(x => x.Amount);
+            return toBepaid - totalPaid;
+        }
+
         internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
         {
             if (genericFieldInfo.PropertyName == "DepositTypeText")
