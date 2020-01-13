@@ -121,6 +121,24 @@ namespace WebSimplify {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navshop;
         
         /// <summary>
+        /// navHC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navHC;
+        
+        /// <summary>
+        /// navdepos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navdepos;
+        
+        /// <summary>
         /// navsys control.
         /// </summary>
         /// <remarks>

@@ -175,6 +175,12 @@ namespace WebSimplify
             return int.TryParse(d,out dd);
         }
 
+        public static bool IsDateTime(this string d)
+        {
+            DateTime dd = DateTime.MinValue;
+            return DateTime.TryParse(d, out dd);
+        }
+
         public static bool IsInteger(this char a)
         {
             return a >= '0' && a <= '9';
@@ -210,7 +216,17 @@ namespace WebSimplify
 
         public static DateTime ToDateTime(this string d) 
         {
-            return Convert.ToDateTime(d);
+            DateTime dat = DateTime.MinValue;
+            try
+            {
+                dat = DateTime.Parse(d);
+                return dat;
+            }
+            catch (Exception)
+            {
+
+            }
+            return DateTime.Parse(d, CultureInfo.InvariantCulture);
         }
 
         public static bool IsDefault(this DateTime d)

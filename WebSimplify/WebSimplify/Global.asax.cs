@@ -47,11 +47,12 @@ namespace SynnWebOvi
             backgroundWorker.Start();
         }
 
-        public static void PerformFirstInserts(IDatabaseProvider _DBr)
+        public static void PerformMigrationInserts()
         {
+            bool isInitializing = false;
             try
             {
-                _DBr.DbAuth.Add(new LoggedUser
+                DBController.DbAuth.Add(new LoggedUser
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
                     ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
@@ -63,7 +64,7 @@ namespace SynnWebOvi
                     {
                     }
                 });
-                _DBr.DbAuth.Add(new LoggedUser
+                DBController.DbAuth.Add(new LoggedUser
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
                     ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
@@ -75,44 +76,157 @@ namespace SynnWebOvi
                     {
                     }
                 });
-
+                isInitializing = true;
             }
             catch (Exception ex)
             {
                 string cc = ex.Message;
             }
 
-            try
+            if (isInitializing)
             {
-                var mailingSettings = DBController.DbGenericData.GetGenericData<SystemMailingSettings> (new GenericDataSearchParameters { }).FirstOrDefault();
-
-                if (mailingSettings == null)
-                {
-                    DBController.DbGenericData.Add(new SystemMailingSettings
-                    {
-                        EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
-                        NetworkCredentialPassword = StringCipher.Encrypt("ns120315"),
-                        NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
-                        SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
-                        SystemName = "מערכת העזר של אדלה"
-                    });
-
-                    var smachUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "smach", Password = "sm1234" }).FirstOrDefault().Id;
-                    var noaUserId = _DBr.DbAuth.GetUsers(new UserSearchParameters { UserName = "noa", Password = "ns1234" }).FirstOrDefault().Id;
-
-                    var sharingSetts = new UserMemoSharingSettings { OwnerUserId = smachUserId, UsersToShare = new List<int> { noaUserId } };
-                    _DBr.DbGenericData.Add(sharingSetts);
-
-                    sharingSetts = new UserMemoSharingSettings { OwnerUserId = noaUserId, UsersToShare = new List<int> { smachUserId } };
-                    _DBr.DbGenericData.Add(sharingSetts);
-                }
+                AppendParentInits();
+                AppendDepositAccountsInits();
+                AppendMailingSettingsInits();
             }
-            catch (Exception)
-            {
+           
+        }
 
-                throw;
+        private static void AppendDepositAccountsInits()
+        {
+            DBController.DbGenericData.Add(new Account
+            {
+                DepositName = "החזר לנחום ואלמו",
+                AmountForPerson = 2280,
+                DepositType = DepositTypeEnum.FixedAmount,
+                StartDate = new DateTime(2019, 07, 01)
+            });
+            DBController.DbGenericData.Add(new Account
+            {
+                DepositName = "הוראת קבע חודשית",
+                AmountForPerson = 50,
+                DepositType = DepositTypeEnum.MonthlyPayment,
+                StartDate = new DateTime(2019, 07, 01)
+            });
+        }
+
+        private static void AppendMailingSettingsInits()
+        {
+            var mailingSettings = DBController.DbGenericData.GetGenericData<SystemMailingSettings>(new GenericDataSearchParameters { }).FirstOrDefault();
+
+            if (mailingSettings == null)
+            {
+                DBController.DbGenericData.Add(new SystemMailingSettings
+                {
+                    EmailsGenericSubject = "מנהל היומן האוטומטי של אדלה",
+                    NetworkCredentialPassword = StringCipher.Encrypt("ns120315"),
+                    NetworkCredentialUserName = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
+                    SystemEmailAddress = StringCipher.Encrypt("synnwebsolutions@gmail.com"),
+                    SystemName = "מערכת העזר של אדלה"
+                });
+
+                var smachUserId = DBController.DbAuth.GetUsers(new UserSearchParameters { UserName = "smach", Password = "sm1234" }).FirstOrDefault().Id;
+                var noaUserId = DBController.DbAuth.GetUsers(new UserSearchParameters { UserName = "noa", Password = "ns1234" }).FirstOrDefault().Id;
+
+                var sharingSetts = new UserMemoSharingSettings { OwnerUserId = smachUserId, UsersToShare = new List<int> { noaUserId } };
+                DBController.DbGenericData.Add(sharingSetts);
+
+                sharingSetts = new UserMemoSharingSettings { OwnerUserId = noaUserId, UsersToShare = new List<int> { smachUserId } };
+                DBController.DbGenericData.Add(sharingSetts);
             }
         }
+
+        private static void AppendParentInits()
+        {
+            DBController.DbGenericData.Add(new Parent
+            {
+                ParentName = "אמא"
+            });
+            DBController.DbGenericData.Add(new Parent
+            {
+                ParentName = "אבא"
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare},
+                DisplayName = "Nahoom", Password = "015921182", UserName = "0549393717",
+                Preferences = new WebSimplify.Data.UserAppPreferences {}
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Emevet",
+                Password = "307202408",
+                UserName = "0525100599",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Alemu",
+                Password = "303805287",
+                UserName = "0523761398",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Ora",
+                Password = "304243421",
+                UserName = "0523593840",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Limor",
+                Password = "307202440",
+                UserName = "0522274258",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Tamar",
+                Password = "307202507",
+                UserName = "0526064242",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Tal",
+                Password = "307202515",
+                UserName = "0508494361", 
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Rachel",
+                Password = "307202572",
+                UserName = "0509363013",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+
+            DBController.DbAuth.Add(new LoggedUser
+            {
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
+                DisplayName = "Avraham",
+                Password = "307202598",
+                UserName = "0523691178",
+                Preferences = new WebSimplify.Data.UserAppPreferences { }
+            });
+        }
+
         protected void Session_Start(object sender, EventArgs e)
         {
             string st = "";

@@ -23,7 +23,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
-                Global.PerformFirstInserts(DBController);
+                Global.PerformMigrationInserts();
                 dtDiary.Visible = CurrentUser.Allowed(ClientPagePermissions.Diary);
                 dtShifts.Visible = CurrentUser.Allowed(ClientPagePermissions.Shifts);
                 dtTasks.Visible = CurrentUser.Allowed(ClientPagePermissions.QuickTasks);

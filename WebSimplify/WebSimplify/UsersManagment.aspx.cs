@@ -145,7 +145,7 @@ namespace WebSimplify
             List<LoggedUser> ul = DBController.DbAuth.GetUsers(new UserSearchParameters());
             AddSelectItemForCombo(cmbusers);
             foreach (var u in ul)
-                cmbusers.Items.Add(new ListItem { Text = u.UserName, Value = u.Id.ToString() });
+                cmbusers.Items.Add(new ListItem { Text = u.DisplayName, Value = u.Id.ToString() });
 
             RefreshGrid(gvClientPagePermissions);
         }

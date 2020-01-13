@@ -49,6 +49,12 @@ namespace WebSimplify
         [PageLink("navgd", true)]
         [Description("נתוני טבלאות")]
         GenericDataItems,
+        [PageLink("navHC")]
+        [Description(" יומן בריאות")]
+        HealthCare,
+        [PageLink("navdepos")]
+        [Description("  הפקדות")]
+        Deposits,
     }
 
     public class PageLinkAttribute : Attribute
