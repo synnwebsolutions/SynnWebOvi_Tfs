@@ -49,7 +49,13 @@ namespace WebSimplify
         {
             base.OnLoadComplete(e);
             if (CurrentUser != null)
+            {
+                if (!CurrentUser.IsAdmin)
+                {
+                    Logger.Instance.Info($"{CurrentUser.DisplayName} Last Logged at : {DateTime.Now}");
+                }
                 SynNavigation.Goto(Pages.Main);
+            }
         }
 
 

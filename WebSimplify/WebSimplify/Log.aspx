@@ -5,6 +5,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="spageheader">יומן מערכת</div>
+        <div class="row">
+            <div class="col-2">
+                <button class="menubutton" type="button" id="btnDownloadLog" runat="server" onserverclick="btnDownloadLog_ServerClick"> Get Logs </button>
+            </div>
+            <div class="col-10">
+            </div>
+        </div>
     <div class="spanel">
         <div>
             <input type="text" name="name" id="txlogsearchkey" placeholder="Search Text"  class="tablefilter" />

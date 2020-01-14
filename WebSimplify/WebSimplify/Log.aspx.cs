@@ -1,7 +1,11 @@
-﻿using SynnWebOvi;
+﻿using log4net;
+using log4net.Appender;
+using log4net.Repository.Hierarchy;
+using SynnWebOvi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
@@ -108,6 +112,19 @@ namespace WebSimplify
         {
             panelx.Hide();
             RefreshGrid(gv);
+        }
+
+        protected void btnDownloadLog_ServerClick(object sender, EventArgs e)
+        {
+            var rootAppender = ((Hierarchy)LogManager.GetRepository())
+                                            .Root.Appenders.OfType<FileAppender>()
+                                            .FirstOrDefault();
+
+            string filename = rootAppender != null ? rootAppender.File : string.Empty;
+            if (File.Exists(filename))
+            {
+                DownloadFile("log.txt", File.ReadAllBytes(filename));
+            }
         }
     }
 }

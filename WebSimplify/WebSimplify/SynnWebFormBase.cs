@@ -366,6 +366,19 @@ namespace SynnWebOvi
 
             return -1;
         }
+
+        public void DownloadFile(string fileName, byte[] data)
+        {
+            Response.ClearHeaders();
+            Response.Clear();
+            Response.Buffer = true;
+            Response.ContentType = "text/plain";
+            Response.AddHeader("content-length", data.Length.ToString());
+            Response.AddHeader("content-disposition", $"attachment; filename={fileName}");
+            Response.Write(data);
+            Response.Flush();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
     }
 
 }

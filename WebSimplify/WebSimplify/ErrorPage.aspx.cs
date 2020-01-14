@@ -27,7 +27,7 @@ namespace WebSimplify
                     {
                         if (first) first = false;
                         else
-                            sb.Append($"=========================== Inner Exception Info =========================== ");
+                            sb.Append($"===== Inner Exception Info =====");
                         
                         sb = ExtractExceptionInfo(ex, sb);
                         ex = ex.InnerException;
@@ -51,6 +51,7 @@ namespace WebSimplify
                 int linenumber = traceInfo.GetFrame(i).GetFileLineNumber();
                 var fileN = traceInfo.GetFrame(i).GetFileName();
                 var shortFile = Path.GetFileName(fileN);
+                if(fileN.NotEmpty())
                 sb.Append($"{shortFile ?? fileN} Line - {linenumber} {Helpers.HtmlStringHelper.LineBreak}");
             }
 
