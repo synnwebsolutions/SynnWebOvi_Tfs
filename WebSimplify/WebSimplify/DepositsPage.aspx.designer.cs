@@ -31,6 +31,15 @@ namespace WebSimplify {
         protected global::System.Web.UI.WebControls.TextBox txpBalance;
         
         /// <summary>
+        /// txRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txRequired;
+        
+        /// <summary>
         /// txpUpToDate control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,23 @@ namespace WebSimplify {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMyDeposit;
+        
+        /// <summary>
+        /// dvUserDisplay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvUserDisplay;
+        
+        /// <summary>
+        /// gvUsersDeposits control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvUsersDeposits;
     }
 }

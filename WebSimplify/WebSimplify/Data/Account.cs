@@ -44,8 +44,15 @@ namespace WebSimplify
 
         internal int GetMyBalnace(List<UserDeposit> myDeposits, IDatabaseProvider dBController)
         {
+            var toBepaid = GetTotalToPay();
+            var totalPaid = myDeposits.Where(x => x.AccountId == this.Id).Sum(x => x.Amount);
+            return toBepaid - totalPaid;
+        }
+
+        internal int GetTotalToPay()
+        {
             var toBepaid = 0;
-  
+
             if (DepositType == DepositTypeEnum.MonthlyPayment)
             {
                 var numberOfPayments = (((DateTime.Now.Year - StartDate.Year) * 12) + DateTime.Now.Month - StartDate.Month);
@@ -55,9 +62,7 @@ namespace WebSimplify
             {
                 toBepaid = AmountForPerson;
             }
-
-            var totalPaid = myDeposits.Where(x => x.AccountId == this.Id).Sum(x => x.Amount);
-            return toBepaid - totalPaid;
+            return toBepaid;
         }
 
         internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)

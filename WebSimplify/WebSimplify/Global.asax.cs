@@ -56,7 +56,7 @@ namespace SynnWebOvi
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
                     ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
-                    DisplayName = "Smach",
+                    DisplayName = "סמאץ'",
                     Password = "sm1234",
                     UserName = "smach",
                     EmailAdress = "samadela@gmail.com",
@@ -68,7 +68,7 @@ namespace SynnWebOvi
                 {
                     AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Diary, ClientPagePermissions.QuickTasks, ClientPagePermissions.Shopping,
                     ClientPagePermissions.Wedding, ClientPagePermissions.WorkHours},
-                    DisplayName = "Noa",
+                    DisplayName = "נועה",
                     Password = "ns1234",
                     UserName = "noa",
                     EmailAdress = "noae1705@gmail.com",
@@ -99,14 +99,14 @@ namespace SynnWebOvi
                 DepositName = "החזר לנחום ואלמו",
                 AmountForPerson = 2280,
                 DepositType = DepositTypeEnum.FixedAmount,
-                StartDate = new DateTime(2019, 06, 01)
+                StartDate = new DateTime(2019, 07, 01)
             });
             DBController.DbGenericData.Add(new Account
             {
                 DepositName = "הוראת קבע חודשית",
                 AmountForPerson = 50,
                 DepositType = DepositTypeEnum.MonthlyPayment,
-                StartDate = new DateTime(2019, 06, 01)
+                StartDate = new DateTime(2019, 07, 01)
             });
         }
 
@@ -149,15 +149,15 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare},
-                DisplayName = "Nahoom", Password = "015921182", UserName = "0549393717",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "נחום", Password = "015921182", UserName = "0549393717",
                 Preferences = new WebSimplify.Data.UserAppPreferences {}
             });
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Emevet",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits},
+                DisplayName = "אמבט",
                 Password = "307202408",
                 UserName = "0525100599",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -165,8 +165,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Alemu",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "אלמו",
                 Password = "303805287",
                 UserName = "0523761398",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -174,8 +174,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Ora",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "אורה",
                 Password = "304243421",
                 UserName = "0523593840",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -183,8 +183,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Limor",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "לימור",
                 Password = "307202440",
                 UserName = "0522274258",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -192,8 +192,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Tamar",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "תמר",
                 Password = "307202507",
                 UserName = "0526064242",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -201,8 +201,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Tal",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "טל",
                 Password = "307202515",
                 UserName = "0508494361", 
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -210,8 +210,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Rachel",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "רחל",
                 Password = "307202572",
                 UserName = "0509363013",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }
@@ -219,8 +219,8 @@ namespace SynnWebOvi
 
             DBController.DbAuth.Add(new LoggedUser
             {
-                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits, ClientPagePermissions.HealthCare },
-                DisplayName = "Avraham",
+                AllowedClientPagePermissions = new List<ClientPagePermissions> { ClientPagePermissions.Deposits },
+                DisplayName = "אברהם",
                 Password = "307202598",
                 UserName = "0523691178",
                 Preferences = new WebSimplify.Data.UserAppPreferences { }

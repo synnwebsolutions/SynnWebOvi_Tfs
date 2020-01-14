@@ -42,6 +42,8 @@ namespace WebSimplify
             set { Amount = value.ToInteger(); }
         }
 
+        [GenericDataField("PaymentReferenceNumber", "PaymentReferenceNumber")]
+        public string PaymentReferenceNumber { get; set; }
 
         internal override string FormatedGenericValue(string valueToFormat, GenericDataFieldAttribute genericFieldInfo, IDatabaseProvider db)
         {

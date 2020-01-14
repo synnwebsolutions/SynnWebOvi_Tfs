@@ -136,6 +136,7 @@
     <Content Include="WebSimplify.Master" />
     <Content Include="Wedding.aspx" />
     <Content Include="WorkData.aspx" />
+    <Content Include="Ws\WebSimplifyExternalServices.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -295,6 +296,7 @@
     <Compile Include="HealthCarePage.aspx.designer.cs">
       <DependentUpon>HealthCarePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExcelToJson.cs" />
     <Compile Include="Helpers\HtmlStringHelper.cs" />
     <Compile Include="Helpers\ModalHelper.cs" />
     <Compile Include="Helpers\MoneyBalanceHelper.cs" />
@@ -402,6 +404,10 @@
     </Compile>
     <Compile Include="WorkData.aspx.designer.cs">
       <DependentUpon>WorkData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ws\WebSimplifyExternalServices.asmx.cs">
+      <DependentUpon>WebSimplifyExternalServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="XFormatter.cs" />
   </ItemGroup>
