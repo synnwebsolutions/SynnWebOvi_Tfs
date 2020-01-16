@@ -189,6 +189,22 @@ namespace SynnWebOvi
         protected override void OnLoadComplete(EventArgs e)
         {
             base.OnLoadComplete(e);
+            if (!IsPostBack && CurrentUser != null && !CurrentUser.IsAdmin)
+            {
+                bool newS = false;
+                UserStats stats = (UserStats)DBController.DbGenericData.GetSingleGenericData(new UserStatsSearchParameters { UserId = CurrentUser.Id, FromType = typeof(UserStats) });
+                if (stats == null)
+                {
+                    stats = new UserStats { UserId = CurrentUser.Id };
+                    newS = true;
+                }
+                stats.PageName = GetType().Name;
+                stats.LastLogged = DateTime.Now;
+                if(newS)
+                    DBController.DbGenericData.Add(stats);
+                else
+                    DBController.DbGenericData.Update(stats);
+            }
             ThemeHelper.Apply(this);
         }
         void PagePreRender(object sender, EventArgs e)

@@ -52,7 +52,7 @@ namespace WebSimplify
             {
                 if (!CurrentUser.IsAdmin)
                 {
-                    Logger.Instance.Info($"{CurrentUser.DisplayName} Last Logged at : {DateTime.Now}");
+                    Logger.Instance.Info($"{CurrentUser.UserName} Last Logged at : {DateTime.Now}");
                 }
                 SynNavigation.Goto(Pages.Main);
             }

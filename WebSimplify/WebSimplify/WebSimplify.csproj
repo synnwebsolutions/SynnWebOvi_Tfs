@@ -380,6 +380,7 @@
     <Compile Include="UsersManagment.aspx.designer.cs">
       <DependentUpon>UsersManagment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserStats.cs" />
     <Compile Include="WebSimpl.asmx.cs">
       <DependentUpon>WebSimpl.asmx</DependentUpon>
       <SubType>Component</SubType>

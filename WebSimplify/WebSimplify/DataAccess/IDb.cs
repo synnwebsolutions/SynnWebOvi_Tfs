@@ -260,6 +260,22 @@ namespace SynnWebOvi
         }
     }
 
+    public class UserStatsSearchParameters : GenericDataSearchParameters
+    {
+        public UserStatsSearchParameters()
+        {
+
+        }
+        public int? UserId { get; set; }
+
+        public override void AppendExtraFieldsValues()
+        {
+            base.AppendExtraFieldsValues();
+            if (UserId.HasValue)
+                Filters.Add(new GenericDataDbFilter("UserId", UserId.ToString()));
+        }
+    }
+
     public class GoogleApDataSearchParameters : GenericDataSearchParameters
     {
         public GoogleApDataSearchParameters()

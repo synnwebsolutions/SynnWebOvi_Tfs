@@ -28,6 +28,7 @@ namespace WebSimplify
         {
             if (!IsPostBack)
             {
+                Logger.Instance.Info($"{CurrentUser.UserName} DepositsPage Last Enter at : {DateTime.Now}");
                 RefreshView();
             }
         }
