@@ -31,7 +31,8 @@ namespace WebSimplify
         {
             if (CurrentUser.IsAdmin) return new List<MemoItem>();
 
-            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date, UserId = CurrentUser.Id });
+            var dbData =  DBController.DbCalendar.Get(new CalendarSearchParameters { FromDate = DateTime.Now.Date, UserId = CurrentUser.Id }).Where(x => x.DaysLeft > 0 && x.HoursLeft > 0).ToList();
+            
             var userJobs = DBController.DbGenericData.GetGenericData<CalendarJob>(new CalendarJobSearchParameters {  UserId = CurrentUser.Id });
             if (userJobs.NotEmpty())
             {
@@ -119,6 +120,8 @@ namespace WebSimplify
                 ((Label)e.Row.FindControl("lblUpdate")).Text = job?.UpdateDate.ToString();
                 ((Label)e.Row.FindControl("lblId")).Text = memoItem.Description.ToString();
                 ((Label)e.Row.FindControl("lblUser")).Text = u.DisplayName;
+                ((Label)e.Row.FindControl("lblSpanDate")).Text = $"{memoItem.DaysLeft} ימים ו {memoItem.HoursLeft} שעות";
+                
             }
         }
 

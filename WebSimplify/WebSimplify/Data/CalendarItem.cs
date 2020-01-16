@@ -214,6 +214,24 @@ namespace WebSimplify
         }
 
         public DateTime CreationDate { get; set; }
+        public int DaysLeft
+        {
+            get
+            {
+                var span = (Date - DateTime.Now).Days;
+                return span;
+            }
+        }
+
+        public int HoursLeft
+        {
+            get
+            {
+                var span = (Date - DateTime.Now).Hours;
+                return span;
+            }
+        }
+
 
         public void Load(IDataReader reader)
         {

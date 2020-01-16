@@ -66,6 +66,11 @@
                             <asp:Label runat="server" ID="lblDate"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="  זמן נותר">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblSpanDate"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="מצב ">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="lblStatus" CssClass=""></asp:Label>

@@ -48,7 +48,7 @@ namespace WebSimplify
         public IEnumerable GetCurrentShopItems()
         {
             List<DevTaskItem> ul = DBController.DbAuth.Get(new DevTaskItemSearchParameters { Active = true });
-            return ul.OrderBy(x => (int)x.Status).ToList();
+            return ul.Where(x => x.Status != DevTaskStatus.Finalized).OrderBy(x => (int)x.Status).ToList();
         }
 
         protected void gvAdd_RowDataBound(object sender, GridViewRowEventArgs e)
